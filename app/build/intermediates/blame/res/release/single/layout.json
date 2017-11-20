@@ -1,0 +1,506 @@
+[
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_screen_toolbar.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_online_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_online_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_select_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_select_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/select_upload_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/select_upload_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_lines_media.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_lines_media.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/fragment_uploaded.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/fragment_uploaded.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_main.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_weather_type.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_weather_type.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/register.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/register.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_login.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/camera_item.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/camera_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_person_center.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_person_center.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_select_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_select_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_other_info.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_other_info.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/fragment_wall.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/fragment_wall.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/layout_title.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/layout_title.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/sticky_grid_item.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/sticky_grid_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_select_album_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_select_album_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_guide.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_guide.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_person_info.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_person_info.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_welcome.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_welcome.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_display_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_display_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/my_viewpager_cell.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/my_viewpager_cell.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/switch_resource_cell.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/switch_resource_cell.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/live_success.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/live_success.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/videoview.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/videoview.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/weather_eye_marker.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/weather_eye_marker.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_weather_eye.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_weather_eye.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_response.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_response.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/fragment_guide.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/fragment_guide.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_switch_resource.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_switch_resource.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/upload_success_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/upload_success_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_select_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_select_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/face_beauty_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/face_beauty_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_popup_menu_header_item_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/effect_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/effect_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_my_check.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_my_check.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/dialog_bind_user.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/dialog_bind_user.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/control_bottom_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/control_bottom_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/auto_update_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/auto_update_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_online_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_online_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_my_score.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_my_score.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/live_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/live_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_display_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_display_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_trim.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_trim.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_modify_info.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_modify_info.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_use.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_use.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_title_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/fragment_check.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/fragment_check.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_video_wall.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_video_wall.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/sticky_grid_header.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/sticky_grid_header.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_screen_content_include.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/fragment_not_upload.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/fragment_not_upload.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_select_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_select_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_search_view.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_select_album_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_select_album_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_score_rank.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_score_rank.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_menu_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/upload_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/upload_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_about.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_about.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_select_user.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_select_user.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/eye_thin_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/eye_thin_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/control_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/control_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_score.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_score.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/score_exchange.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/score_exchange.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_select_album_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_select_album_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_check.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_check.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_mode_bar.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_message.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_message.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/dialog_upload.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/dialog_upload.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/dialog_confirm_info.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/dialog_confirm_info.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/layout_video_frame.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/layout_video_frame.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/sticker_layout.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/sticker_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_camera.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_camera.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_setting.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_setting.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_upload.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_upload.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/progress_dialog_view.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/progress_dialog_view.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_media.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/camera_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/camera_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/video_wall_cell.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/video_wall_cell.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/delete_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/delete_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/socialize_share_menu_item.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/socialize_share_menu_item.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/marker_info.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/marker_info.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_media_custom.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_display_picture.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_display_picture.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_action_tombstone.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_score_rank.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_score_rank.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_select_album_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_select_album_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/item_sticker.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/layout/item_sticker.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/live_dialog.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/live_dialog.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_my_about_detail.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_my_about_detail.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/notification_action.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/notification_action.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_main2.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_main2.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_my_message.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_my_message.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/activity_online_video.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/activity_online_video.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/layout_loading.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/layout_loading.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_event_type.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_event_type.xml"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/layout/adapter_video_trim.xml",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/layout/adapter_video_trim.xml"
+    }
+]

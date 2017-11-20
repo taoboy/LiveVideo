@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_mix_audio.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_mix_audio.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_reset.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_reset.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_watermark.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_watermark.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_next.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_next.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_back.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_back.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_unmute.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_unmute.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xhdpi-v4/btn_mute.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xhdpi/btn_mute.png"
+    }
+]

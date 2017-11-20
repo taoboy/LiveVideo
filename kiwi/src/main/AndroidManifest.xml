@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.kiwi.ui">
+
+    <application android:allowBackup="true" android:label="KiWi"
+                 tools:replace="android:label"
+        android:supportsRtl="true">
+
+    </application>
+
+</manifest>

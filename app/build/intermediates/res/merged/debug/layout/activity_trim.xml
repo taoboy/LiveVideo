@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/iv_main_bg"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/reTitle"
+        layout="@layout/layout_title"/>
+
+    <GridView
+        android:layout_below="@+id/reTitle"
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:fadingEdge="none"
+        android:gravity="center"
+        android:horizontalSpacing="2dip"
+        android:listSelector="@color/transparent"
+        android:numColumns="5"
+        android:overScrollMode="never"
+        android:padding="2dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dip"/>
+
+    <LinearLayout
+        android:id="@+id/reVideo"
+        android:layout_below="@+id/gridView"
+        android:gravity="center"
+        android:background="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="202dp">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="wrap_content"
+        android:layout_height="202dp"
+        android:layout_centerInParent="true"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/reTime"
+        android:layout_below="@+id/reVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tvStartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="00:00"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tvRangeTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/red"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/tvEndTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/level_4"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/reTrim"
+        android:layout_below="@id/reTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llContainer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:padding="2dp"
+            android:id="@+id/handler_left"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/iv_video_cut"
+            android:layout_width="30dp"
+            android:layout_height="40dp" />
+
+        <ImageView
+            android:visibility="gone"
+            android:padding="2dp"
+            android:id="@+id/handler_right"
+            android:src="@drawable/iv_video_cut"
+            android:layout_alignParentRight="true"
+            android:layout_width="30dp"
+            android:layout_height="40dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:visibility="invisible"
+        android:layout_below="@+id/reTrim"
+        android:id="@+id/tvTrim"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="裁剪"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:background="@drawable/selector_login"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_4"/>
+
+    <GridView
+        android:layout_below="@+id/tvTrim"
+        android:id="@+id/gridView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:fadingEdge="none"
+        android:gravity="center"
+        android:horizontalSpacing="2dip"
+        android:listSelector="@color/transparent"
+        android:numColumns="5"
+        android:overScrollMode="never"
+        android:padding="2dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dip"/>
+
+</RelativeLayout>
