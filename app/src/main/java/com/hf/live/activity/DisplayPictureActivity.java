@@ -29,6 +29,7 @@ import com.hf.live.adapter.DisplayPictureAdapter;
 import com.hf.live.adapter.EventTypeAdapter;
 import com.hf.live.adapter.WeatherTypeAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.dto.UploadVideoDto;
 import com.hf.live.util.CommonUtil;
@@ -433,7 +434,7 @@ public class DisplayPictureActivity extends BaseActivity implements OnClickListe
 		showDialog();
 		AjaxParams params = new AjaxParams();
 		params.put("appid", CONST.APPID);
-		params.put("token", TOKEN);
+		params.put("token", MyApplication.TOKEN);
 		params.put("workstype", "imgs");
 		params.put("latlon", lat+","+lng);
 		params.put("title", etTitle.getText().toString());

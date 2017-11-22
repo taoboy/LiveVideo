@@ -52,6 +52,7 @@ import com.hf.live.R;
 import com.hf.live.adapter.EventTypeAdapter;
 import com.hf.live.adapter.WeatherTypeAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.dto.UploadVideoDto;
 import com.hf.live.util.CommonUtil;
@@ -71,7 +72,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static com.hf.live.activity.BaseActivity.TOKEN;
 
 /**
  * 预览、上传界面
@@ -769,7 +769,7 @@ OnVideoSizeChangedListener, OnCompletionListener, OnClickListener, AMapLocationL
 					}
 				}
 			});
-        	httpPost.setToken(TOKEN);
+        	httpPost.setToken(MyApplication.TOKEN);
         	httpPost.setWorkstype("video");
         	httpPost.setLocation(tvPositon.getText().toString());
         	httpPost.setTitle(etTitle.getText().toString());

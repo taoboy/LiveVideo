@@ -1,17 +1,8 @@
 package com.hf.live.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -24,9 +15,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hf.live.common.CONST;
 import com.hf.live.R;
-import com.hf.live.util.CustomHttpClient;
+import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
+import com.hf.live.util.OkHttpUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 修改用户信息
@@ -108,145 +112,107 @@ public class ModifyInfoActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 异步请求
 	 */
-	private void asyncQuery(String requestUrl) {
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("POST");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "POST";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-			transParams();
+	private void OkHttpModify(String url) {
+		FormBody.Builder builder = new FormBody.Builder();
+		builder.add("token", MyApplication.TOKEN);
+		if (TextUtils.equals(title, "昵称")) {
+			builder.add("nickname", etContent.getText().toString().trim());
+		}else if (TextUtils.equals(title, "邮箱")) {
+			builder.add("mail", etContent.getText().toString().trim());
+		}else if (TextUtils.equals(title, "单位名称")) {
+			builder.add("department", etContent.getText().toString().trim());
 		}
-		
-		/**
-		 * 传参数
-		 */
-		private void transParams() {
-			NameValuePair pair1 = new BasicNameValuePair("token", TOKEN);
-			NameValuePair pair2 = null;
-			if (TextUtils.equals(title, "昵称")) {
-				pair2 = new BasicNameValuePair("nickname", etContent.getText().toString().trim());
-			}else if (TextUtils.equals(title, "邮箱")) {
-				pair2 = new BasicNameValuePair("mail", etContent.getText().toString().trim());
-			}else if (TextUtils.equals(title, "单位名称")) {
-				pair2 = new BasicNameValuePair("department", etContent.getText().toString().trim());
-			}
-			nvpList.add(pair1);
-			nvpList.add(pair2);
-		}
+		RequestBody body = builder.build();
+		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
 			}
-			return result;
-		}
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("status")) {
-							int status = object.getInt("status");
-							if (status == 1) {//成功
-								if (!object.isNull("info")) {
-									JSONObject obj = new JSONObject(object.getString("info"));
-									if (!obj.isNull("token")) {
-										TOKEN = obj.getString("token");
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				String result = response.body().string();
+				if (result != null) {
+					try {
+						JSONObject object = new JSONObject(result);
+						if (object != null) {
+							if (!object.isNull("status")) {
+								int status = object.getInt("status");
+								if (status == 1) {//成功
+									if (!object.isNull("info")) {
+										JSONObject obj = new JSONObject(object.getString("info"));
+										if (!obj.isNull("token")) {
+											MyApplication.TOKEN = obj.getString("token");
+										}
+										if (!obj.isNull("phonenumber")) {
+											MyApplication.USERNAME = obj.getString("phonenumber");
+										}
+										if (!obj.isNull("username")) {
+											MyApplication.OLDUSERNAME = obj.getString("username");
+										}
+										if (!obj.isNull("nickname")) {
+											MyApplication.NICKNAME = obj.getString("nickname");
+										}
+										if (!obj.isNull("mail")) {
+											MyApplication.MAIL = obj.getString("mail");
+										}
+										if (!obj.isNull("department")) {
+											MyApplication.UNIT = obj.getString("department");
+										}
+										if (!obj.isNull("groupid")) {
+											MyApplication.GROUPID = obj.getString("groupid");
+										}
+										if (!obj.isNull("points")) {
+											MyApplication.POINTS = obj.getString("points");
+										}
+
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												//把用户信息保存在sharedPreferance里
+												SharedPreferences sharedPreferences = getSharedPreferences(MyApplication.USERINFO, Context.MODE_PRIVATE);
+												Editor editor = sharedPreferences.edit();
+												editor.putString(MyApplication.UserInfo.oldUserName, MyApplication.OLDUSERNAME);
+												editor.putString(MyApplication.UserInfo.userName, MyApplication.USERNAME);
+												editor.putString(MyApplication.UserInfo.groupId, MyApplication.GROUPID);
+												editor.putString(MyApplication.UserInfo.token, MyApplication.TOKEN);
+												editor.putString(MyApplication.UserInfo.points, MyApplication.POINTS);
+												editor.putString(MyApplication.UserInfo.photo, MyApplication.PHOTO);
+												editor.putString(MyApplication.UserInfo.nickName, MyApplication.NICKNAME);
+												editor.putString(MyApplication.UserInfo.mail, MyApplication.MAIL);
+												editor.putString(MyApplication.UserInfo.unit, MyApplication.UNIT);
+												editor.commit();
+
+												setResult(RESULT_OK);
+												finish();
+											}
+										});
+
 									}
-									if (!obj.isNull("phonenumber")) {
-										USERNAME = obj.getString("phonenumber");
-									}
-									if (!obj.isNull("username")) {
-										OLDUSERNAME = obj.getString("username");
-									}
-									if (!obj.isNull("nickname")) {
-										NICKNAME = obj.getString("nickname");
-									}
-									if (!obj.isNull("mail")) {
-										MAIL = obj.getString("mail");
-									}
-									if (!obj.isNull("department")) {
-										UNIT = obj.getString("department");
-									}
-									if (!obj.isNull("groupid")) {
-										GROUPID = obj.getString("groupid");
-									}
-									if (!obj.isNull("points")) {
-										POINTS = obj.getString("points");
-									}
-									
-									//把用户信息保存在sharedPreferance里
-									SharedPreferences sharedPreferences = getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
-									Editor editor = sharedPreferences.edit();
-									editor.putString(UserInfo.oldUserName, OLDUSERNAME);
-									editor.putString(UserInfo.userName, USERNAME);
-									editor.putString(UserInfo.groupId, GROUPID);
-									editor.putString(UserInfo.token, TOKEN);
-									editor.putString(UserInfo.points, POINTS);
-									editor.putString(UserInfo.photo, PHOTO);
-									editor.putString(UserInfo.nickName, NICKNAME);
-									editor.putString(UserInfo.mail, MAIL);
-									editor.putString(UserInfo.unit, UNIT);
-									editor.commit();
-									
-									setResult(RESULT_OK);
-									finish();
-								}
-							}else {
-								if (!object.isNull("msg")) {
-									String msg = object.getString("msg");
-									if (msg != null) {
-										Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+								}else {
+									if (!object.isNull("msg")) {
+										final String msg = object.getString("msg");
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												if (msg != null) {
+													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+												}
+											}
+										});
 									}
 								}
 							}
 						}
+					} catch (JSONException e) {
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		});
 	}
 	
 	@Override
@@ -260,7 +226,7 @@ public class ModifyInfoActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.tvControl:
 			if (!TextUtils.isEmpty(etContent.getText().toString().trim())) {
-				asyncQuery(CONST.MODIFY_USERINFO_URL);
+				OkHttpModify(CONST.MODIFY_USERINFO_URL);
 			}else {
 				if (title != null) {
 					Toast.makeText(mContext, "请输入"+title, Toast.LENGTH_SHORT).show();

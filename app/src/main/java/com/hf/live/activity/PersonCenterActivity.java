@@ -105,13 +105,13 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
 	
 	private void refreshUserInfo() {
 		getPortrait();
-		if (!TextUtils.isEmpty(NICKNAME)) {
-			tvUserName.setText(NICKNAME);
+		if (!TextUtils.isEmpty(MyApplication.NICKNAME)) {
+			tvUserName.setText(MyApplication.NICKNAME);
 		}
-		if (!TextUtils.isEmpty(POINTS)) {
-			tvScore.setText(POINTS);
+		if (!TextUtils.isEmpty(MyApplication.POINTS)) {
+			tvScore.setText(MyApplication.POINTS);
 		}
-		if (TextUtils.equals(GROUPID, "100")) {
+		if (TextUtils.equals(MyApplication.GROUPID, "100")) {
 			llCheck.setVisibility(View.VISIBLE);
 		}else {
 			llCheck.setVisibility(View.GONE);
@@ -136,7 +136,7 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
 	 */
 	private void OkHttpNewsCount(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("appid", CONST.APPID);
 		RequestBody body = builder.build();
 		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {

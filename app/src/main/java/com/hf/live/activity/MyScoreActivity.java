@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -22,8 +20,8 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.adapter.MyScoreAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
-import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
 
 import org.json.JSONArray;
@@ -130,7 +128,7 @@ public class MyScoreActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void OkHttpScore(String requestUrl) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("page", page+"");
 		builder.add("pagesize", pageSize+"");
 		builder.add("appid", CONST.APPID);
@@ -331,7 +329,7 @@ public class MyScoreActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void OkHttpAuthority(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("appid", CONST.APPID);
 		RequestBody body = builder.build();
 		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {

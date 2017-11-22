@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.adapter.VideoAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.util.CommonUtil;
 import com.hf.live.util.EmojiMapUtil;
@@ -66,7 +67,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.hf.live.activity.BaseActivity.TOKEN;
 
 /**
  * 在线预览视频
@@ -577,7 +577,7 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 	 */
 	private void OkHttpSubmitComment(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("wid", data.videoId);
 		builder.add("comment", EmojiMapUtil.replaceUnicodeEmojis(etComment.getText().toString()));
 		RequestBody body = builder.build();
@@ -645,7 +645,7 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 	 */
 	private void OkHttpPraise(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("id", data.videoId);
 		RequestBody body = builder.build();
 		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
@@ -820,7 +820,7 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 			}
 			break;
 		case R.id.ivComment:
-			if (TOKEN != null) {
+			if (MyApplication.TOKEN != null) {
 				if (llSubmit.getVisibility() == View.GONE) {
 					commentAnimation(false, llSubmit);
 					llSubmit.setVisibility(View.VISIBLE);

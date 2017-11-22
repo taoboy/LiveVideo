@@ -1,13 +1,5 @@
 package com.hf.live.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -20,12 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.hf.live.activity.BaseActivity.TOKEN;
-
-import com.hf.live.common.CONST;
 import com.hf.live.R;
+import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.util.CustomHttpClient;
 import com.hf.live.view.MyDialog;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ScoreExchangeActivity extends Activity implements OnClickListener{
 	
@@ -122,7 +122,7 @@ public class ScoreExchangeActivity extends Activity implements OnClickListener{
 		 * 传参数
 		 */
 		private void transParams() {
-			NameValuePair pair1 = new BasicNameValuePair("token", TOKEN);
+			NameValuePair pair1 = new BasicNameValuePair("token", MyApplication.TOKEN);
 			NameValuePair pair2 = new BasicNameValuePair("alipay", etUserName.getText().toString());
 			NameValuePair pair3 = new BasicNameValuePair("appid", CONST.APPID);
 			nvpList.add(pair1);

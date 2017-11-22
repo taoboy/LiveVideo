@@ -1,7 +1,0 @@
-#Tue Nov 07 13:03:56 CST 2017
-base.0=/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ee835fd4fc4245297bb96aaf9f94881605b3eab9
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_cdcfa8f273f57acbed957bbdfdc2f715e02d8f7d/classes.dex
-base.1=/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_cdcfa8f273f57acbed957bbdfdc2f715e02d8f7d
-file.0=/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ee835fd4fc4245297bb96aaf9f94881605b3eab9/classes.dex

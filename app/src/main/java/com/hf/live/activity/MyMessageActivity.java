@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.adapter.MyMessageAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.util.OkHttpUtil;
 
@@ -117,7 +118,7 @@ public class MyMessageActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void OkHttpNews(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("page", String.valueOf(page));
 		builder.add("pagesize", String.valueOf(pageSize));
 		builder.add("appid", CONST.APPID);

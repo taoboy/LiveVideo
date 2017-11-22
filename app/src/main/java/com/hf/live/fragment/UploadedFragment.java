@@ -22,6 +22,7 @@ import com.hf.live.activity.OnlinePictureActivity;
 import com.hf.live.activity.OnlineVideoActivity;
 import com.hf.live.adapter.MyUploadedAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.stickygridheaders.StickyGridHeadersGridView;
 import com.hf.live.util.OkHttpUtil;
@@ -44,8 +45,6 @@ import okhttp3.FormBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
-import static com.hf.live.activity.BaseActivity.TOKEN;
 
 /**
  * 已上传
@@ -167,7 +166,7 @@ public class UploadedFragment extends Fragment{
 	 */
 	private void OKHttpUploaded(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("page", page+"");
 		builder.add("pagesize", pageSize+"");
 		builder.add("appid", CONST.APPID);

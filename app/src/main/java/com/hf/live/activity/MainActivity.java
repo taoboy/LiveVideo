@@ -1,13 +1,9 @@
 package com.hf.live.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+/**
+ * 主界面
+ */
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -31,10 +27,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.com.weather.api.WeatherAPI;
-import cn.com.weather.beans.Weather;
-import cn.com.weather.constants.Constants.Language;
-import cn.com.weather.listener.AsyncResponseHandler;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -48,7 +40,18 @@ import com.hf.live.util.AutoUpdateUtil;
 import com.hf.live.util.GetPathFromUri4kitkat;
 import com.hf.live.util.WeatherUtil;
 
-@SuppressLint("SimpleDateFormat")
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.com.weather.api.WeatherAPI;
+import cn.com.weather.beans.Weather;
+import cn.com.weather.constants.Constants.Language;
+import cn.com.weather.listener.AsyncResponseHandler;
+
 public class MainActivity extends BaseActivity implements AMapLocationListener, OnClickListener{
 	
 	private Context mContext = null;
@@ -344,7 +347,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		reCamera.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if (TOKEN != null) {
+				if (MyApplication.TOKEN != null) {
 					startActivity(new Intent(mContext, CameraActivity.class));
 				}else {
 					startActivityForResult(new Intent(mContext, LoginActivity.class), 0);
@@ -356,7 +359,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		reSelect.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if (TOKEN != null) {
+				if (MyApplication.TOKEN != null) {
 //					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //				    intent.setType("video/*");
 //				    startActivityForResult(intent, 1);
@@ -371,7 +374,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		rePicture.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				if (TOKEN != null) {
+				if (MyApplication.TOKEN != null) {
 //					Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //				    intent.setType("image/*");
 //				    startActivityForResult(intent, 3);
@@ -480,7 +483,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 					}
 					
 					//跳转到预览图片界面
-					List<PhotoDto> selectList = new ArrayList<PhotoDto>();
+					List<PhotoDto> selectList = new ArrayList<>();
 					PhotoDto dto = new PhotoDto();
 				    dto.setState(true);
 					dto.setWorkstype("imgs");

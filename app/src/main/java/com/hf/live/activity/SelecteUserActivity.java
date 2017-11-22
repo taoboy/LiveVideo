@@ -1,21 +1,8 @@
 package com.hf.live.activity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
@@ -29,12 +16,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hf.live.common.CONST;
 import com.hf.live.R;
+import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.util.CommonUtil;
-import com.hf.live.util.CustomHttpClient;
+import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.CircleImageView;
-import com.hf.live.view.MyDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 选择新用户或者老用户
@@ -75,150 +77,116 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 	/**
 	 * 登录、绑定账号
 	 */
-	private void asyncQueryLoginBind(String requestUrl) {
-		HttpAsyncTaskLogin task = new HttpAsyncTaskLogin();
-		task.setMethod("POST");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskLogin extends AsyncTask<String, Void, String> {
-		private String method = "POST";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTaskLogin() {
-			transParams();
+	private void OkHttpLoginBind(String url) {
+		FormBody.Builder builder = new FormBody.Builder();
+		builder.add("phonenumber", MyApplication.USERNAME);
+		builder.add("token", MyApplication.TOKEN);
+		if (!TextUtils.isEmpty(oldUserName)) {
+			builder.add("username", oldUserName);
 		}
-		
-		/**
-		 * 传参数
-		 */
-		private void transParams() {
-			NameValuePair pair1 = new BasicNameValuePair("phonenumber", USERNAME);
-	        NameValuePair pair2 = new BasicNameValuePair("token", TOKEN);
-			nvpList.add(pair1);
-			nvpList.add(pair2);
-			
-			if (!TextUtils.isEmpty(oldUserName)) {
-	        	NameValuePair pair3 = new BasicNameValuePair("username", oldUserName);
-	        	nvpList.add(pair3);
-			}
-			if (!TextUtils.isEmpty(oldPwd)) {
-				NameValuePair pair4 = new BasicNameValuePair("passwd", oldPwd);
-				nvpList.add(pair4);
-			}
+		if (!TextUtils.isEmpty(oldPwd)) {
+			builder.add("passwd", oldPwd);
 		}
+		RequestBody body = builder.build();
+		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
 			}
-			return result;
-		}
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			cancelDialog();
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("status")) {
-							int status  = object.getInt("status");
-							if (status == 401) {//401新增账号成功
-								parseUserinfo(object);
-							}else if (status == 403) {//403绑定账号成功
-								parseUserinfo(object);
-								if (!object.isNull("msg")) {
-									String msg = object.getString("msg");
-									if (msg != null) {
-										Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				String result = response.body().string();
+				if (!TextUtils.isEmpty(result)) {
+					try {
+						JSONObject object = new JSONObject(result);
+						if (object != null) {
+							if (!object.isNull("status")) {
+								int status  = object.getInt("status");
+								if (status == 401) {//401新增账号成功
+									parseUserinfo(object);
+								}else if (status == 403) {//403绑定账号成功
+									parseUserinfo(object);
+									if (!object.isNull("msg")) {
+										final String msg = object.getString("msg");
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												if (msg != null) {
+													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+												}
+												cancelDialog();
+											}
+										});
 									}
-								}
-							}else {
-								//失败
-								if (!object.isNull("msg")) {
-									String msg = object.getString("msg");
-									if (msg != null) {
-										Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+								}else {
+									//失败
+									if (!object.isNull("msg")) {
+										final String msg = object.getString("msg");
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												if (msg != null) {
+													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+												}
+												cancelDialog();
+											}
+										});
 									}
 								}
 							}
 						}
+					} catch (JSONException e) {
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		});
 	}
 	
 	/**
 	 * 解析用户数据
 	 */
-	private void parseUserinfo(JSONObject object) {
-		try {
-			if (!object.isNull("info")) {
-				JSONObject obj = new JSONObject(object.getString("info"));
-				if (!obj.isNull("groupid")) {
-					GROUPID = obj.getString("groupid");
-				}
-				if (!obj.isNull("token")) {
-					TOKEN = obj.getString("token");
-				}
-				if (!obj.isNull("phonenumber")) {
-					USERNAME = obj.getString("phonenumber");
-				}
-				if (!obj.isNull("points")) {
-					POINTS = obj.getString("points");
-				}
-				if (!obj.isNull("photo")) {
-					PHOTO = obj.getString("photo");
-					if (!TextUtils.isEmpty(PHOTO)) {
-						downloadPortrait(PHOTO, CONST.PORTRAIT_ADDR, null);
+	private void parseUserinfo(final JSONObject object) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					if (!object.isNull("info")) {
+						JSONObject obj = new JSONObject(object.getString("info"));
+						if (!obj.isNull("groupid")) {
+							MyApplication.GROUPID = obj.getString("groupid");
+						}
+						if (!obj.isNull("token")) {
+							MyApplication.TOKEN = obj.getString("token");
+						}
+						if (!obj.isNull("phonenumber")) {
+							MyApplication.USERNAME = obj.getString("phonenumber");
+						}
+						if (!obj.isNull("points")) {
+							MyApplication.POINTS = obj.getString("points");
+						}
+						if (!obj.isNull("photo")) {
+							MyApplication.PHOTO = obj.getString("photo");
+							if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+								downloadPortrait(MyApplication.PHOTO, CONST.PORTRAIT_ADDR, null);
+							}
+						}
+
+						MyApplication.saveUserInfo(mContext);
+
+						cancelDialog();
+						startActivity(new Intent(mContext, MainActivity.class));
+						finish();
 					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-
-				CommonUtil.saveUserInfo(mContext);
-
-				startActivity(new Intent(mContext, MainActivity.class));
-				finish();
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		});
 	}
 	
 	/**
@@ -232,7 +200,7 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 					imageView.setImageBitmap(bitmap);
 				}
 				
-				FileOutputStream fos = null;
+				FileOutputStream fos;
 				try {
 					File files = new File(CONST.SDCARD_PATH);
 					if (!files.exists()) {
@@ -257,7 +225,7 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 	}
 	
 	private interface AsynLoadCompleteListener {
-		public void loadComplete(Bitmap bitmap);
+		void loadComplete(Bitmap bitmap);
 	}
     
 	private class AsynLoadTask extends AsyncTask<Void, Bitmap, Bitmap> {
@@ -329,7 +297,7 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 				if (checkInfo()) {
 					dialog.dismiss();
 					showDialog();
-					asyncQueryOldLogin("http://channellive2.tianqi.cn/weather/user/Login");
+					OkHttpOldLogin("http://channellive2.tianqi.cn/weather/user/Login");
 				}
 			}
 		});
@@ -338,116 +306,80 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 	/**
 	 * 异步请求
 	 */
-	private void asyncQueryOldLogin(String requestUrl) {
-		HttpAsyncTaskOldLogin task = new HttpAsyncTaskOldLogin();
-		task.setMethod("POST");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTaskOldLogin extends AsyncTask<String, Void, String> {
-		private String method = "POST";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTaskOldLogin() {
-			transParams();
-		}
-		
-		/**
-		 * 传参数
-		 */
-		private void transParams() {
-			NameValuePair pair1 = new BasicNameValuePair("username", oldUserName);
-	        NameValuePair pair2 = new BasicNameValuePair("passwd", oldPwd);
-			nvpList.add(pair1);
-			nvpList.add(pair2);
-		}
+	private void OkHttpOldLogin(String url) {
+		FormBody.Builder builder = new FormBody.Builder();
+		builder.add("username", oldUserName);
+		builder.add("passwd", oldPwd);
+		RequestBody body = builder.build();
+		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
 			}
-			return result;
-		}
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			cancelDialog();
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("status")) {
-							int status  = object.getInt("status");
-							if (status == 1) {//成功
-								if (!object.isNull("info")) {
-									JSONObject obj = new JSONObject(object.getString("info"));
-									if (!obj.isNull("phonenumber")) {
-										phonenumber = obj.getString("phonenumber");
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				String result = response.body().string();
+				if (result != null) {
+					try {
+						JSONObject object = new JSONObject(result);
+						if (object != null) {
+							if (!object.isNull("status")) {
+								int status  = object.getInt("status");
+								if (status == 1) {//成功
+									if (!object.isNull("info")) {
+										JSONObject obj = new JSONObject(object.getString("info"));
+										if (!obj.isNull("phonenumber")) {
+											phonenumber = obj.getString("phonenumber");
+										}
+										if (!obj.isNull("mail")) {
+											mail = obj.getString("mail");
+										}
+										if (!obj.isNull("nickname")) {
+											nickName = obj.getString("nickname");
+										}
+										if (!obj.isNull("username")) {
+											userName = obj.getString("username");
+										}
+										if (!obj.isNull("photo")) {
+											photo = obj.getString("photo");
+										}
+
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												cancelDialog();
+												dialogConfirmInfo();
+											}
+										});
+
 									}
-									if (!obj.isNull("mail")) {
-										mail = obj.getString("mail");
-									}
-									if (!obj.isNull("nickname")) {
-										nickName = obj.getString("nickname");
-									}
-									if (!obj.isNull("username")) {
-										userName = obj.getString("username");
-									}
-									if (!obj.isNull("photo")) {
-										photo = obj.getString("photo");
-									}
-									
-									dialogConfirmInfo();
-								}
-							}else {
-								//失败
-								if (!object.isNull("msg")) {
-									String msg = object.getString("msg");
-									if (msg != null) {
-										Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+								}else {
+									//失败
+									if (!object.isNull("msg")) {
+										final String msg = object.getString("msg");
+										runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												if (msg != null) {
+													cancelDialog();
+													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+												}
+											}
+										});
 									}
 								}
 							}
 						}
+					} catch (JSONException e) {
+						e.printStackTrace();
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
 				}
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		});
 	}
 	
 	/**
@@ -496,7 +428,7 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 			public void onClick(View arg0) {
 				dialog.dismiss();
 				showDialog();
-				asyncQueryLoginBind("http://channellive2.tianqi.cn/Weather/User/Login3Bind");
+				OkHttpLoginBind("http://channellive2.tianqi.cn/Weather/User/Login3Bind");
 			}
 		});
 	}
@@ -509,7 +441,7 @@ public class SelecteUserActivity extends BaseActivity implements OnClickListener
 			break;
 		case R.id.tvNew:
 			showDialog();
-			asyncQueryLoginBind("http://channellive2.tianqi.cn/Weather/User/Login3Bind");
+			OkHttpLoginBind("http://channellive2.tianqi.cn/Weather/User/Login3Bind");
 			break;
 		case R.id.tvOld:
 			dialogBindUser();

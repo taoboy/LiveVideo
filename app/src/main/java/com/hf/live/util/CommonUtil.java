@@ -35,7 +35,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.hf.live.R;
-import com.hf.live.activity.BaseActivity;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
 import com.umeng.socialize.ShareAction;
@@ -54,16 +53,6 @@ import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.hf.live.activity.BaseActivity.GROUPID;
-import static com.hf.live.activity.BaseActivity.MAIL;
-import static com.hf.live.activity.BaseActivity.NICKNAME;
-import static com.hf.live.activity.BaseActivity.OLDUSERNAME;
-import static com.hf.live.activity.BaseActivity.PHOTO;
-import static com.hf.live.activity.BaseActivity.POINTS;
-import static com.hf.live.activity.BaseActivity.TOKEN;
-import static com.hf.live.activity.BaseActivity.UNIT;
-import static com.hf.live.activity.BaseActivity.USERINFO;
-import static com.hf.live.activity.BaseActivity.USERNAME;
 
 public class CommonUtil {
 	
@@ -109,8 +98,7 @@ public class CommonUtil {
 	
 	/**
 	 * 解决ScrollView与GridView共存的问题
-	 * 
-	 * @param listView
+	 *
 	 */
 	public static void setGridViewHeightBasedOnChildren(GridView gridView) {
 		ListAdapter listAdapter = gridView.getAdapter();
@@ -143,8 +131,6 @@ public class CommonUtil {
 
 	/**
 	 * 校验用户名是否正确,只能有字母，数字和下划线
-	 * 
-	 * @param args
 	 */
 	public static boolean isUser(String str) {
 		String format = "^[\\w+s]{6,30}$";
@@ -155,8 +141,6 @@ public class CommonUtil {
 	
 	/**
 	 * 校验密码是否正确,只能有字母，数字和下划线
-	 * 
-	 * @param args
 	 */
 	public static boolean isPwd(String str) {
 		String format = "^[\\w+s]{6,15}$";
@@ -397,7 +381,6 @@ public class CommonUtil {
 	
 	/**
 	 * 转换图片成六边形
-	 * @param scaleBitmapImage
 	 * @return
 	 */
 	public static Bitmap getHexagonShape(Bitmap bitmap) {
@@ -581,40 +564,6 @@ public class CommonUtil {
 			}
 		}
 		return thumbnailFile;
-	}
-
-	/**
-	 * 保存用户信息
-	 */
-	public static void saveUserInfo(Context context) {
-		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = sharedPreferences.edit();
-		editor.putString(BaseActivity.UserInfo.token, TOKEN);
-		editor.putString(BaseActivity.UserInfo.oldUserName, OLDUSERNAME);
-		editor.putString(BaseActivity.UserInfo.userName, USERNAME);
-		editor.putString(BaseActivity.UserInfo.nickName, NICKNAME);
-		editor.putString(BaseActivity.UserInfo.groupId, GROUPID);
-		editor.putString(BaseActivity.UserInfo.points, POINTS);
-		editor.putString(BaseActivity.UserInfo.photo, PHOTO);
-		editor.putString(BaseActivity.UserInfo.mail, MAIL);
-		editor.putString(BaseActivity.UserInfo.unit, UNIT);
-		editor.commit();
-	}
-
-	/**
-	 * 获取用户信息
-	 */
-	public static void getUserInfo(Context context) {
-		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
-		TOKEN = sharedPreferences.getString(BaseActivity.UserInfo.token, null);
-		OLDUSERNAME = sharedPreferences.getString(BaseActivity.UserInfo.oldUserName, null);
-		USERNAME = sharedPreferences.getString(BaseActivity.UserInfo.userName, null);
-		NICKNAME = sharedPreferences.getString(BaseActivity.UserInfo.nickName, null);
-		GROUPID = sharedPreferences.getString(BaseActivity.UserInfo.groupId, null);
-		POINTS = sharedPreferences.getString(BaseActivity.UserInfo.points, null);
-		PHOTO = sharedPreferences.getString(BaseActivity.UserInfo.photo, null);
-		MAIL = sharedPreferences.getString(BaseActivity.UserInfo.mail, null);
-		UNIT = sharedPreferences.getString(BaseActivity.UserInfo.unit, null);
 	}
 
 	/**

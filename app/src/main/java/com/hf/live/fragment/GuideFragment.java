@@ -21,6 +21,7 @@ import com.hf.live.R;
 import com.hf.live.activity.LoginActivity;
 import com.hf.live.activity.MainActivity;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
 
@@ -39,15 +40,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.hf.live.activity.BaseActivity.GROUPID;
-import static com.hf.live.activity.BaseActivity.MAIL;
-import static com.hf.live.activity.BaseActivity.NICKNAME;
-import static com.hf.live.activity.BaseActivity.OLDUSERNAME;
-import static com.hf.live.activity.BaseActivity.PHOTO;
-import static com.hf.live.activity.BaseActivity.POINTS;
-import static com.hf.live.activity.BaseActivity.TOKEN;
-import static com.hf.live.activity.BaseActivity.UNIT;
-import static com.hf.live.activity.BaseActivity.USERNAME;
 
 /**
  * 引导页
@@ -88,7 +80,7 @@ public class GuideFragment extends Fragment implements OnClickListener{
 	 */
 	private void OkHttpUserinfo(String requestUrl) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		RequestBody body = builder.build();
 		OkHttpUtil.enqueue(new Request.Builder().post(body).url(requestUrl).build(), new Callback() {
 			@Override
@@ -112,37 +104,37 @@ public class GuideFragment extends Fragment implements OnClickListener{
 									if (!object.isNull("info")) {
 										JSONObject obj = object.getJSONObject("info");
 										if (!obj.isNull("token")) {
-											TOKEN = obj.getString("token");
+											MyApplication.TOKEN = obj.getString("token");
 										}
 										if (!obj.isNull("phonenumber")) {
-											USERNAME = obj.getString("phonenumber");
+											MyApplication.USERNAME = obj.getString("phonenumber");
 										}
 										if (!obj.isNull("username")) {
-											OLDUSERNAME = obj.getString("username");
+											MyApplication.OLDUSERNAME = obj.getString("username");
 										}
 										if (!obj.isNull("nickname")) {
-											NICKNAME = obj.getString("nickname");
+											MyApplication.NICKNAME = obj.getString("nickname");
 										}
 										if (!obj.isNull("mail")) {
-											MAIL = obj.getString("mail");
+											MyApplication.MAIL = obj.getString("mail");
 										}
 										if (!obj.isNull("department")) {
-											UNIT = obj.getString("department");
+											MyApplication.UNIT = obj.getString("department");
 										}
 										if (!obj.isNull("groupid")) {
-											GROUPID = obj.getString("groupid");
+											MyApplication.GROUPID = obj.getString("groupid");
 										}
 										if (!obj.isNull("points")) {
-											POINTS = obj.getString("points");
+											MyApplication.POINTS = obj.getString("points");
 										}
 										if (!obj.isNull("photo")) {
-											PHOTO = obj.getString("photo");
-											if (!TextUtils.isEmpty(PHOTO)) {
-												downloadPortrait(PHOTO);
+											MyApplication.PHOTO = obj.getString("photo");
+											if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+												downloadPortrait(MyApplication.PHOTO);
 											}
 										}
 
-										CommonUtil.saveUserInfo(getActivity());
+										MyApplication.saveUserInfo(getActivity());
 
 										getActivity().runOnUiThread(new Runnable() {
 											@Override
@@ -262,7 +254,7 @@ public class GuideFragment extends Fragment implements OnClickListener{
 			editor.putString(CONST.VERSION, CommonUtil.getVersion(getActivity()));
 			editor.commit();
 			
-			if (!TextUtils.isEmpty(TOKEN)) {
+			if (!TextUtils.isEmpty(MyApplication.TOKEN)) {
 				OkHttpUserinfo("http://channellive2.tianqi.cn/Weather/User/getUser2");
 			}else {
 				startActivity(new Intent(getActivity(), LoginActivity.class));

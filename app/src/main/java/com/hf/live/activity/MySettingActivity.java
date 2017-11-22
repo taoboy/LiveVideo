@@ -202,7 +202,7 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 			public void onClick(View arg0) {
 				dialog.dismiss();
 				//清除sharedPreferance里保存的用户信息
-				clearUserInfo();
+				MyApplication.clearUserInfo(mContext);
 
 				//删除本地保存的头像
 				File file = new File(CONST.PORTRAIT_ADDR);

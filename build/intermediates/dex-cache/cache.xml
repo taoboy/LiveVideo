@@ -2,33 +2,6 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_cdcfa8f273f57acbed957bbdfdc2f715e02d8f7d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/pldroid-shortvideo-1.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0ab4696de9145d343139c958fcf6f7df46183f11">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/pldroid-shortvideo-1.4.0_18e72c6a3c7065e1767c8d37ca863ae04d66c83a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/AMap_Location_V3.4.1_20170629.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ebe380d6da0d59db86ff68c843b3b8467ab26506">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/AMap_Location_V3.4.1_20170629_060e74c209a8acb184628f10eaf4554bbad15f5b/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/SocialSDK_QQ_Simplify.jar"
         jumboMode="false"
@@ -56,30 +29,12 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/umeng_social_tool_138ccb7d03a52d381144546112db32217c802beb.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_social_tool.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="87ef211d4ef0c257c7d040fbaa411832330eb9aa">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/umeng_social_tool_138ccb7d03a52d381144546112db32217c802beb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/pldroid-player-2.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b3147d4ce00e536c85d8907f7daa0d6d9f5072c1">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/pldroid-player-2.0.1_74c33b3f35ae9ef0de3c7ecd264dcf8f1a69536a/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="668cedd68ec72f3baca22525db2762bab5618769">
+        sha1="2bd29e02cf89623dc4aff8631425428dbd755b08">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/classes_603505bba30eefb3ad072c8461928e8300f8850b.jar" />
     </item>
     <item
@@ -101,40 +56,13 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/ChinaWeatherAPI_a5bda07d732e98f227aa072ff376653d40c73f5e.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/SocialSDK_QQ_Simplify.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="0872b5d9028b4abe5502fdf6808cbe328400a387">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/SocialSDK_QQ_Simplify_a7831702c27abd66333b93fd31d98f9d0fd7af6a/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="55f9a2c0af485b77d4f9a69a586f111fdbdeb06d">
+        sha1="e62737f4bfa3718374c37276da35837004961839">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/classes_a250019d2ed930906215799c5c52a3972cebfbd1.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/ChinaWeatherAPI.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a6e54a22629e98f8e1d4b4e6a5fa8798c0eff574">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/ChinaWeatherAPI_a5bda07d732e98f227aa072ff376653d40c73f5e/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/xstream-1.4.7.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bce3282142b63068260f021fcbe48b72e8d71a1a">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/xstream-1.4.7_50b53e5df919e83d96c49f92bcd7be78a2a82f17/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -146,15 +74,6 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/AMap_Location_V3.4.1_20170629_060e74c209a8acb184628f10eaf4554bbad15f5b.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_shareboard_widget.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4b1a59e4c996ee354c2db160f4b1ad3b0e94aab5">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/umeng_shareboard_widget_0d8e27cfc4f4e59a911338116c4c74aa6c077601/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/pldroid-player-2.0.1.jar"
         jumboMode="false"
@@ -162,33 +81,6 @@
         revision="25.0.2"
         sha1="b3147d4ce00e536c85d8907f7daa0d6d9f5072c1">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/pldroid-player-2.0.1_74c33b3f35ae9ef0de3c7ecd264dcf8f1a69536a.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_social_net.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="7dc09846075b535576671188dda46b968a466dd4">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/umeng_social_net_263320f383b57162856cac6a910c0273ea4d8fc7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/scene-final.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f83bea50820e42e7d186ff9650a299adab7a26ec">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/scene-final_6a1d6dcb021a919d9593014d7ab77ac5d00c672b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/uk-co-senab-photoview.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3746c6e7e5faa897fd6689bfbf19d39b9a4fc0c5">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/uk-co-senab-photoview_c39a8441b960d667d32cc9dd9dd9029f5b90ff54/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -216,24 +108,6 @@
         revision="25.0.2"
         sha1="bce3282142b63068260f021fcbe48b72e8d71a1a">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/xstream-1.4.7_50b53e5df919e83d96c49f92bcd7be78a2a82f17.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_social_api.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="b746609643403fd41d57014af6606db06a39fdb0">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/umeng_social_api_aa3b98ee64955415f86e49093aef53ab2782a899/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/AMap_Search_V5.2.1_20170630.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d724566d4793345f4de3654286ca47492a8b4398">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/AMap_Search_V5.2.1_20170630_5f021f992a5b9bc22ad7ad9f500f83484bba9e4a/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -272,15 +146,6 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/AMap_Search_V5.2.1_20170630_5f021f992a5b9bc22ad7ad9f500f83484bba9e4a.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/Android_Map3D_SDK_V5.2.1_20170630.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="031c03ab465147953d1d9282887e5df2d17768b8">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/Android_Map3D_SDK_V5.2.1_20170630_4a1adb32c31e1e9275dc654ec5f385b5a7dc4552/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/SocialSDK_WeChat_Simplify.jar"
         jumboMode="false"
@@ -288,24 +153,6 @@
         revision="25.0.2"
         sha1="bb1c4e9db2e6c4b41a50bcd7f4f6f1375f783121">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/SocialSDK_WeChat_Simplify_4c79177ad46e2c4582697c3bc387aba47270ed07.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/httpmime-4.1.3.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e70d34d98f7f7f3b2b92105b9f2fe2a7a7184461">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/httpmime-4.1.3_8cd9b740b639a85a1c91e7cf3771d2392a72ea7c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/SocialSDK_WeChat_Simplify.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bb1c4e9db2e6c4b41a50bcd7f4f6f1375f783121">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/SocialSDK_WeChat_Simplify_4c79177ad46e2c4582697c3bc387aba47270ed07/classes.dex" />
     </item>
     <item
         is-multidex="false"
@@ -317,15 +164,6 @@
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/httpmime-4.1.3_8cd9b740b639a85a1c91e7cf3771d2392a72ea7c.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e7f998658f3d7f47dba0972fe1d6e53db704d203">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_ee835fd4fc4245297bb96aaf9f94881605b3eab9/classes.dex" />
-    </item>
-    <item
         is-multidex="false"
         jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_social_shareboard.jar"
         jumboMode="false"
@@ -333,15 +171,6 @@
         revision="25.0.2"
         sha1="c698121d485cc1cd502ff8fad5e4e71f72ad1e9b">
         <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/pre-dexed/release/umeng_social_shareboard_667fb168e776e50854dd447634fdfcd00a79af1b.jar" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng_social_shareboard.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c698121d485cc1cd502ff8fad5e4e71f72ad1e9b">
-        <dex dex="/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/transforms/dex/debug/folders/1000/2/umeng_social_shareboard_667fb168e776e50854dd447634fdfcd00a79af1b/classes.dex" />
     </item>
 
 </items>

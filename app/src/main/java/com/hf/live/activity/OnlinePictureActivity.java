@@ -1,29 +1,9 @@
 package com.hf.live.activity;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.tsz.afinal.FinalBitmap;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import uk.co.senab.photoview.PhotoViewAttacher;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -49,17 +29,35 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hf.live.R;
 import com.hf.live.adapter.MyViewPagerAdapter;
 import com.hf.live.adapter.OnlinePictureAdapter;
 import com.hf.live.adapter.VideoAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
-import com.hf.live.R;
 import com.hf.live.util.CommonUtil;
-import com.hf.live.util.CustomHttpClient;
 import com.hf.live.util.EmojiMapUtil;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.PhotoView;
+
+import net.tsz.afinal.FinalBitmap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 在线预览图片
@@ -353,7 +351,7 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	 */
 	private void OkHttpSubmitComment(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("wid", data.videoId);
 		builder.add("comment", EmojiMapUtil.replaceUnicodeEmojis(etComment.getText().toString()));
 		RequestBody body = builder.build();
@@ -421,7 +419,7 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	 */
 	private void OkHttpPraise(String url) {
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", TOKEN);
+		builder.add("token", MyApplication.TOKEN);
 		builder.add("id", data.videoId);
 		RequestBody body = builder.build();
 		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
@@ -558,7 +556,7 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 			}
 			break;
 		case R.id.ivComment:
-			if (TOKEN != null) {
+			if (MyApplication.TOKEN != null) {
 				if (llSubmit.getVisibility() == View.GONE) {
 					commentAnimation(false, llSubmit);
 					llSubmit.setVisibility(View.VISIBLE);

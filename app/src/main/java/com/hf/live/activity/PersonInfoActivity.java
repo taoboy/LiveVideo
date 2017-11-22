@@ -1,12 +1,5 @@
 package com.hf.live.activity;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import net.tsz.afinal.http.AjaxCallBack;
-import net.tsz.afinal.http.AjaxParams;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,10 +17,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hf.live.common.CONST;
 import com.hf.live.R;
+import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.view.CircleImageView;
 import com.scene.net.Net;
+
+import net.tsz.afinal.http.AjaxCallBack;
+import net.tsz.afinal.http.AjaxParams;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * 修改个人信息
@@ -81,20 +83,20 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener{
 		tvUnit = (TextView) findViewById(R.id.tvUnit);
 		
 		getPortrait();
-		if (!TextUtils.isEmpty(NICKNAME)) {
-			tvNickName.setText(NICKNAME);
+		if (!TextUtils.isEmpty(MyApplication.NICKNAME)) {
+			tvNickName.setText(MyApplication.NICKNAME);
 		}
-		if (!TextUtils.isEmpty(USERNAME)) {
-			tvPhone.setText(USERNAME);
+		if (!TextUtils.isEmpty(MyApplication.USERNAME)) {
+			tvPhone.setText(MyApplication.USERNAME);
 		}
-		if (!TextUtils.isEmpty(MAIL)) {
-			tvMail.setText(MAIL);
+		if (!TextUtils.isEmpty(MyApplication.MAIL)) {
+			tvMail.setText(MyApplication.MAIL);
 		}
-		if (!TextUtils.isEmpty(POINTS)) {
-			tvScore.setText(POINTS);
+		if (!TextUtils.isEmpty(MyApplication.POINTS)) {
+			tvScore.setText(MyApplication.POINTS);
 		}
-		if (!TextUtils.isEmpty(UNIT)) {
-			tvUnit.setText(UNIT);
+		if (!TextUtils.isEmpty(MyApplication.UNIT)) {
+			tvUnit.setText(MyApplication.UNIT);
 		}
 	}
 	
@@ -120,7 +122,7 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void uploadPortrait(String url) {
 		AjaxParams params = new AjaxParams();
-		params.put("token", TOKEN);
+		params.put("token", MyApplication.TOKEN);
 		
 		try {
 			params.put("photo", new File(CONST.PORTRAIT_ADDR));
@@ -180,19 +182,19 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener{
 		case R.id.llNickName:
 			Intent intent = new Intent(mContext, ModifyInfoActivity.class);
 			intent.putExtra("title", "昵称");
-			intent.putExtra("content", NICKNAME);
+			intent.putExtra("content", MyApplication.NICKNAME);
 			startActivityForResult(intent, 1);
 			break;
 		case R.id.llMail:
 			intent = new Intent(mContext, ModifyInfoActivity.class);
 			intent.putExtra("title", "邮箱");
-			intent.putExtra("content", MAIL);
+			intent.putExtra("content", MyApplication.MAIL);
 			startActivityForResult(intent, 2);
 			break;
 		case R.id.llUnit:
 			intent = new Intent(mContext, ModifyInfoActivity.class);
 			intent.putExtra("title", "单位名称");
-			intent.putExtra("content", UNIT);
+			intent.putExtra("content", MyApplication.UNIT);
 			startActivityForResult(intent, 3);
 			break;
 
@@ -251,18 +253,18 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener{
 				}
 				break;
 			case 1:
-				if (!TextUtils.isEmpty(NICKNAME)) {
-					tvNickName.setText(NICKNAME);
+				if (!TextUtils.isEmpty(MyApplication.NICKNAME)) {
+					tvNickName.setText(MyApplication.NICKNAME);
 				}
 				break;
 			case 2:
-				if (!TextUtils.isEmpty(MAIL)) {
-					tvMail.setText(MAIL);
+				if (!TextUtils.isEmpty(MyApplication.MAIL)) {
+					tvMail.setText(MyApplication.MAIL);
 				}
 				break;
 			case 3:
-				if (!TextUtils.isEmpty(UNIT)) {
-					tvUnit.setText(UNIT);
+				if (!TextUtils.isEmpty(MyApplication.UNIT)) {
+					tvUnit.setText(MyApplication.UNIT);
 				}
 				break;
 

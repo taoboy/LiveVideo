@@ -20,10 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.hf.live.activity.BaseActivity.USERNAME;
 
 import com.hf.live.common.CONST;
 import com.hf.live.R;
+import com.hf.live.common.MyApplication;
 import com.hf.live.util.CustomHttpClient;
 import com.hf.live.view.MyDialog;
 
@@ -166,7 +166,7 @@ public class RegisterActivity extends Activity implements OnClickListener{
 						if (!object.isNull("status")) {
 							int status = object.getInt("status");
 							if (status == 1) {//成功
-								USERNAME = etUserName.getText().toString();
+								MyApplication.USERNAME = etUserName.getText().toString();
 //								CONST.PASSWORD = etPwd.getText().toString();
 								
 								setResult(RESULT_OK);

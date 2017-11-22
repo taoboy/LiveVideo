@@ -70,25 +70,7 @@ public class MyAboutActivity extends BaseActivity implements OnClickListener{
 			}
 		}
 		
-		if (getVersion() != null) {
-			tvVersion.setText(getVersion());
-		}
-	}
-	
-	/**
-	 * 获取版本号
-	 * @return 当前应用的版本号
-	 */
-	private String getVersion() {
-	    try {
-	        PackageManager manager = this.getPackageManager();
-	        PackageInfo info = manager.getPackageInfo(this.getPackageName(), 0);
-	        String version = getResources().getString(R.string.version_code) + "V" + info.versionName;
-	        return version;
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return "";
-	    }
+		tvVersion.setText(CommonUtil.getVersion(mContext));
 	}
 	
 	/**

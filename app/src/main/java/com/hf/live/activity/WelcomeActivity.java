@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.hf.live.R;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
 
@@ -33,15 +34,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.hf.live.activity.BaseActivity.PHOTO;
-import static com.hf.live.activity.BaseActivity.TOKEN;
-import static com.hf.live.activity.BaseActivity.USERNAME;
-import static com.hf.live.activity.BaseActivity.OLDUSERNAME;
-import static com.hf.live.activity.BaseActivity.NICKNAME;
-import static com.hf.live.activity.BaseActivity.MAIL;
-import static com.hf.live.activity.BaseActivity.UNIT;
-import static com.hf.live.activity.BaseActivity.GROUPID;
-import static com.hf.live.activity.BaseActivity.POINTS;
 
 /**
  * 欢迎界面
@@ -58,7 +50,7 @@ public class WelcomeActivity extends Activity{
 		mContext = this;
 
 		//获取用户信息
-		CommonUtil.getUserInfo(mContext);
+		MyApplication.getUserInfo(mContext);
 
 		//判断是否显示引导页面
 		new Handler().postDelayed(new Runnable() {
@@ -80,10 +72,10 @@ public class WelcomeActivity extends Activity{
 	 * 刷新用户信息，主要为了刷新token
 	 */
 	private void OkHttpUserinfo() {
-		if (!TextUtils.isEmpty(TOKEN)) {
+		if (!TextUtils.isEmpty(MyApplication.TOKEN)) {
 			String url = "http://channellive2.tianqi.cn/Weather/User/getUser2";//刷新token
 			FormBody.Builder builder = new FormBody.Builder();
-			builder.add("token", TOKEN);
+			builder.add("token", MyApplication.TOKEN);
 			RequestBody requestBody = builder.build();
 			OkHttpUtil.enqueue(new Request.Builder().url(url).post(requestBody).build(), new Callback() {
 				@Override
@@ -107,37 +99,37 @@ public class WelcomeActivity extends Activity{
 										if (!object.isNull("info")) {
 											JSONObject obj = object.getJSONObject("info");
 											if (!obj.isNull("token")) {
-												TOKEN = obj.getString("token");
+												MyApplication.TOKEN = obj.getString("token");
 											}
 											if (!obj.isNull("phonenumber")) {
-												USERNAME = obj.getString("phonenumber");
+												MyApplication.USERNAME = obj.getString("phonenumber");
 											}
 											if (!obj.isNull("username")) {
-												OLDUSERNAME = obj.getString("username");
+												MyApplication.OLDUSERNAME = obj.getString("username");
 											}
 											if (!obj.isNull("nickname")) {
-												NICKNAME = obj.getString("nickname");
+												MyApplication.NICKNAME = obj.getString("nickname");
 											}
 											if (!obj.isNull("mail")) {
-												MAIL = obj.getString("mail");
+												MyApplication.MAIL = obj.getString("mail");
 											}
 											if (!obj.isNull("department")) {
-												UNIT = obj.getString("department");
+												MyApplication.UNIT = obj.getString("department");
 											}
 											if (!obj.isNull("groupid")) {
-												GROUPID = obj.getString("groupid");
+												MyApplication.GROUPID = obj.getString("groupid");
 											}
 											if (!obj.isNull("points")) {
-												POINTS = obj.getString("points");
+												MyApplication.POINTS = obj.getString("points");
 											}
 											if (!obj.isNull("photo")) {
-												PHOTO = obj.getString("photo");
-												if (!TextUtils.isEmpty(PHOTO)) {
-													downloadPortrait(PHOTO);
+												MyApplication.PHOTO = obj.getString("photo");
+												if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+													downloadPortrait(MyApplication.PHOTO);
 												}
 											}
 
-											CommonUtil.saveUserInfo(mContext);
+											MyApplication.saveUserInfo(mContext);
 
 											runOnUiThread(new Runnable() {
 												@Override
@@ -180,8 +172,13 @@ public class WelcomeActivity extends Activity{
 				}
 			});
 		}else {
-			startActivity(new Intent(mContext, LoginActivity.class));
-			finish();
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					startActivity(new Intent(mContext, LoginActivity.class));
+					finish();
+				}
+			});
 		}
 	}
 	
@@ -192,7 +189,7 @@ public class WelcomeActivity extends Activity{
 		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
 			@Override
 			public void loadComplete(Bitmap bitmap) {
-				FileOutputStream fos = null;
+				FileOutputStream fos;
 				try {
 					File files = new File(CONST.SDCARD_PATH);
 					if (!files.exists()) {
