@@ -329,6 +329,12 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 												if (!obj.isNull("status")) {
 													dto.status = obj.getString("status");
 												}
+												if (!obj.isNull("weather_flag")) {
+													dto.weatherFlag = obj.getString("weather_flag");
+												}
+												if (!obj.isNull("et01")) {
+													dto.otherFlag = obj.getString("et01");
+												}
 												if (!obj.isNull("worksinfo")) {
 													JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
 													if (!workObj.isNull("thumbnail")) {

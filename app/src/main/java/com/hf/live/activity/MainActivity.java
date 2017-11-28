@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		AutoUpdateUtil.checkUpdate(MainActivity.this, "51", getString(R.string.app_name), true);
+		AutoUpdateUtil.checkUpdate(MainActivity.this, mContext, "51", getString(R.string.app_name), true);
 		
 		tvAddress = (TextView) findViewById(R.id.tvAddress);
 		tvTime = (TextView) findViewById(R.id.tvTime);

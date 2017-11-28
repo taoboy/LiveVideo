@@ -2,6 +2,7 @@ package com.hf.live.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnVideoSizeChangedListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -53,6 +55,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,6 +101,7 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 	private long delayTime = 5000;//延迟时间
 	private boolean executeOnce = true;//只执行一次
 	private LinearLayout llSurfaceView = null;
+	private TextView tvWeatherFlag, tvOtherFlag;
 	
 	//竖屏布局
 	private TextView tvPositon = null;//地址
@@ -105,13 +109,14 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 	private TextView tvTitle = null;//标题
 	private TextView tvContent = null;//内容
 	private TextView tvCommentCount = null;//评论次数
-	private RelativeLayout reOperate = null;
+	private LinearLayout reOperate = null;
 	private LinearLayout llSubmit = null;
 	private EditText etComment = null;
 	private TextView tvSubmit = null;
 	private ImageView ivComment = null;//评论
 	private ImageView ivPraise = null;//点赞
 	private ImageView ivShare = null;//分享
+	private ImageView ivDownload = null;//下载
 	
 	//横屏布局
 	private ImageView ivBackLand = null;//返回按钮
@@ -169,18 +174,22 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
 		tvContent = (TextView) findViewById(R.id.tvContent);
 		tvCommentCount = (TextView) findViewById(R.id.tvCommentCount);
-		reOperate = (RelativeLayout) findViewById(R.id.reOperate);
+		reOperate = (LinearLayout) findViewById(R.id.reOperate);
 		ivComment = (ImageView) findViewById(R.id.ivComment);
 		ivComment.setOnClickListener(this);
 		ivPraise = (ImageView) findViewById(R.id.ivPraise);
 		ivPraise.setOnClickListener(this);
 		ivShare = (ImageView) findViewById(R.id.ivShare);
 		ivShare.setOnClickListener(this);
+		ivDownload = (ImageView) findViewById(R.id.ivDownload);
+		ivDownload.setOnClickListener(this);
 		llSubmit = (LinearLayout) findViewById(R.id.llSubmit);
 		etComment = (EditText) findViewById(R.id.etComment);
 		tvSubmit = (TextView) findViewById(R.id.tvSubmit);
 		tvSubmit.setOnClickListener(this);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
+		tvWeatherFlag = (TextView) findViewById(R.id.tvWeatherFlag);
+		tvOtherFlag = (TextView) findViewById(R.id.tvOtherFlag);
 		
 		//横屏布局
 		ivBackLand = (ImageView) findViewById(R.id.ivBackLand);
@@ -208,9 +217,23 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 				tvTitle.setText(data.getTitle());
 				if (!TextUtils.isEmpty(data.content)) {
 					tvContent.setText(data.content);
+					tvContent.setVisibility(View.VISIBLE);
 				}
 				tvCommentCount.setText(getString(R.string.comment) + "（"+data.getCommentCount()+"）");
 				tvDate.setText(data.getWorkTime());
+
+				String weatherFlag = CommonUtil.getWeatherFlag(data.weatherFlag);
+				if (!TextUtils.isEmpty(weatherFlag)) {
+					tvWeatherFlag.setText(weatherFlag);
+					tvWeatherFlag.setBackgroundResource(R.drawable.corner_flag);
+					tvWeatherFlag.setVisibility(View.VISIBLE);
+				}
+				String otherFlag = CommonUtil.getWeatherFlag(data.otherFlag);
+				if (!TextUtils.isEmpty(otherFlag)) {
+					tvOtherFlag.setText(otherFlag);
+					tvOtherFlag.setBackgroundResource(R.drawable.corner_flag);
+					tvOtherFlag.setVisibility(View.VISIBLE);
+				}
 				
 				//获取点赞状态
 				SharedPreferences sharedPreferences = getSharedPreferences(data.getVideoId(), Context.MODE_PRIVATE);
@@ -763,7 +786,39 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 			}
 		});
 	}
-	
+
+	/**
+	 * 下载视频
+	 * @param videoUrl
+	 */
+	private void downloadVideo(String videoUrl) {
+		if (TextUtils.isEmpty(videoUrl)) {
+			return;
+		}
+		DownloadManager dManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+		Uri uri = Uri.parse(videoUrl);
+		DownloadManager.Request request = new DownloadManager.Request(uri);
+		// 设置下载路径和文件名
+		String filename = videoUrl.substring(videoUrl.lastIndexOf("/") + 1);//获取文件名称
+		File files = new File(CONST.DOWNLOAD_ADDR);
+		if (!files.exists()) {
+			files.mkdirs();
+		}
+		request.setDestinationInExternalPublicDir(files.getAbsolutePath(), filename);
+		request.setDescription(filename);
+		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		request.setMimeType("application/vnd.android.package-archive");
+		// 设置为可被媒体扫描器找到
+		request.allowScanningByMediaScanner();
+		// 设置为可见和可管理
+		request.setVisibleInDownloadsUi(true);
+		long refernece = dManager.enqueue(request);
+//		// 把当前下载的ID保存起来
+//		SharedPreferences sPreferences = mContext.getSharedPreferences("downloadplato", 0);
+//		sPreferences.edit().putLong("plato", refernece).commit();
+
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -842,6 +897,9 @@ public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callb
 			break;
 		case R.id.ivShare:
 			CommonUtil.share(OnlineVideoActivity.this, data.title, data.title, data.imgUrl, CONST.WEB+data.getVideoId()+CONST.WEB_SUFFIX);
+			break;
+		case R.id.ivDownload:
+			downloadVideo(data.videoUrl);
 			break;
 
 		default:

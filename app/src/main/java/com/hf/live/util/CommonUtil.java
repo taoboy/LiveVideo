@@ -609,5 +609,55 @@ public class CommonUtil {
 		}
 		return null;
 	}
+
+	/**
+	 * 获取天气标签
+	 * @param f
+	 * @return
+	 */
+	public static String getWeatherFlag(String f) {
+		String flag = "";
+		if (TextUtils.isEmpty(f)) {
+			return flag;
+		}
+		if (TextUtils.equals(f, "wt01")) {
+			flag = "雪";
+		}else if (TextUtils.equals(f, "wt02")) {
+			flag = "雨";
+		}else if (TextUtils.equals(f, "wt03")) {
+			flag = "冰雹";
+		}else if (TextUtils.equals(f, "wt04")) {
+			flag = "晴";
+		}else if (TextUtils.equals(f, "wt05")) {
+			flag = "霾";
+		}else if (TextUtils.equals(f, "wt06")) {
+			flag = "大风";
+		}else if (TextUtils.equals(f, "wt07")) {
+			flag = "沙尘";
+		}
+		return flag;
+	}
+
+	/**
+	 * 获取其它标签
+	 * @param f
+	 * @return
+	 */
+	public static String getOtherFlag(String f) {
+		String flag = "";
+		if (TextUtils.isEmpty(f)) {
+			return flag;
+		}
+		if (TextUtils.equals(f, "et01")) {
+			flag = "自然灾害";
+		}else if (TextUtils.equals(f, "et02")) {
+			flag = "事故灾害";
+		}else if (TextUtils.equals(f, "et03")) {
+			flag = "公共卫生";
+		}else if (TextUtils.equals(f, "et04")) {
+			flag = "社会安全";
+		}
+		return flag;
+	}
 	
 }

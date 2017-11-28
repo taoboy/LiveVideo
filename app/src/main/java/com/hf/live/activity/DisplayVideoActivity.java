@@ -129,11 +129,11 @@ OnVideoSizeChangedListener, OnCompletionListener, OnClickListener, AMapLocationL
 	
 	private GridView gridView1 = null;
 	private WeatherTypeAdapter adapter1 = null;
-	private List<UploadVideoDto> list1 = new ArrayList<UploadVideoDto>();
+	private List<UploadVideoDto> list1 = new ArrayList<>();
 	private String weatherType = "";//天气类型
 	private GridView gridView2 = null;
 	private EventTypeAdapter adapter2 = null;
-	private List<UploadVideoDto> list2 = new ArrayList<UploadVideoDto>();
+	private List<UploadVideoDto> list2 = new ArrayList<>();
 	private String eventType = "";//事件类型
 	
 	@Override

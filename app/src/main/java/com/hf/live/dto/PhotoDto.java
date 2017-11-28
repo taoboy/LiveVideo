@@ -19,7 +19,7 @@ public class PhotoDto implements Parcelable {
 	public int section;
 	public String location;// 地址信息
 	public String workstype;// 区分imgs或者video
-	public List<String> urlList = new ArrayList<String>();
+	public List<String> urlList = new ArrayList<>();
 	public String userName;// 用户名
 	public String praiseCount;// 点赞次数
 	public String commentCount;// 评论次数
@@ -41,6 +41,8 @@ public class PhotoDto implements Parcelable {
 	public String lng;
 	public String pro,city,dis,street;
 	public int selectSequnce = 0;//选择视频的顺序，数越大，优先级越高
+	public String weatherFlag;//天气标签
+	public String otherFlag;//其它标签
 	
 	//获取本地所有视频文件
 	public String fileName;//文件名称
@@ -259,6 +261,8 @@ public class PhotoDto implements Parcelable {
 		dest.writeString(this.dis);
 		dest.writeString(this.street);
 		dest.writeInt(this.selectSequnce);
+		dest.writeString(this.weatherFlag);
+		dest.writeString(this.otherFlag);
 		dest.writeString(this.fileName);
 		dest.writeString(this.filePath);
 		dest.writeString(this.albumName);
@@ -303,6 +307,8 @@ public class PhotoDto implements Parcelable {
 		this.dis = in.readString();
 		this.street = in.readString();
 		this.selectSequnce = in.readInt();
+		this.weatherFlag = in.readString();
+		this.otherFlag = in.readString();
 		this.fileName = in.readString();
 		this.filePath = in.readString();
 		this.albumName = in.readString();
