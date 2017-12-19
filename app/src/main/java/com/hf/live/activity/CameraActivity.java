@@ -28,6 +28,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.OrientationEventListener;
@@ -68,7 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 拍摄上传、预览
+ * 视频录制
  * @author shawn_sun
  *
  */
@@ -87,11 +88,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 	private int curCameraId = 0;//0是后置摄像头，1是前置摄像头
 	private long mExitTime;//记录点击完返回按钮后的long型时间
 	private boolean isRecorderOrCamera = true;//true为录像，false为拍照
-	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
 	private boolean isFull = false;//判断gridview是否够9张
 	private CameraAdapter mAdapter = null;
-	private List<PhotoDto> mList = new ArrayList<PhotoDto>();
+	private List<PhotoDto> mList = new ArrayList<>();
 	private int displayW = 0;//屏幕宽
 	private int displayH = 0;//屏幕高
 	private int degree = 0;//保存的图片要旋转的角度
@@ -121,6 +121,20 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 		setContentView(R.layout.activity_camera);
 		mContext = this;
 		initWidget();
+
+//		TXUGCRecord mTXCameraRecord = TXUGCRecord.getInstance(this);
+////		mTXCameraRecord.setVideoRecordListener(this);                    //设置录制回调
+//		TXCloudVideoView mVideoView = (TXCloudVideoView) findViewById(R.id.video_view);    //准备一个预览摄像头画面的
+//		mVideoView.enableHardwareDecode(true);
+//		TXRecordCommon.TXUGCSimpleConfig param = new TXRecordCommon.TXUGCSimpleConfig();
+////param.videoQuality = TXRecordCommon.VIDEO_QUALITY_LOW;        // 360p
+//		param.videoQuality = TXRecordCommon.VIDEO_QUALITY_MEDIUM;        // 540p
+////param.videoQuality = TXRecordCommon.VIDEO_QUALITY_HIGH;        // 720p
+//		param.isFront = true;           //是否前置摄像头，使用
+//		param.minDuration = 5000;    //视频录制的最小时长ms
+//		param.maxDuration = 60000;    //视频录制的最大时长ms
+//		mTXCameraRecord.startCameraSimplePreview(param,mVideoView);
+
 		initSurfaceView();
 		initGridView();
 	}

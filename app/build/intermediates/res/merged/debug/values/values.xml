@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr format="reference" name="drawerArrowStyle"/>
+    <attr format="reference" name="gEditTextStyle"/>
+    <attr format="string" name="gFont"/>
     <attr format="dimension" name="height"/>
     <attr format="boolean" name="isLightTheme"/>
     <attr format="string" name="title"/>
@@ -20,7 +22,10 @@
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
     <color name="black">#000000</color>
+    <color name="black_color">#8a000000</color>
     <color name="blue">#027cfe</color>
+    <color name="blue_color">#2D8CFF</color>
+    <color name="blue_tiny">#01579b</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -31,6 +36,13 @@
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="cell_default">#00000000</color>
     <color name="cell_pressed">#30ffffff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="dark_grey">#252525</color>
+    <color name="dialog_left_btn_color">@color/black_color</color>
+    <color name="dialog_right_btn_color">@color/blue_color</color>
+    <color name="dialog_title_color">@color/blue_color</color>
     <color name="dim_foreground_disabled_material_dark">#80bebebe</color>
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
@@ -52,12 +64,15 @@
     <color name="foreground_material_light">@android:color/black</color>
     <color name="gray">#AAAAAA</color>
     <color name="green">#00ff00</color>
+    <color name="green_color">#388e3c</color>
     <color name="half_transparent_black">#44000000</color>
     <color name="half_transparent_white">#44ffffff</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
+    <color name="khb_activity_menu">@color/dark_grey</color>
     <color name="light_blue">#c1e7ff</color>
     <color name="light_gray">#f0eff5</color>
+    <color name="light_grey">#80808080</color>
     <color name="light_pink">#ffd5d5</color>
     <color name="main_color">#353C48</color>
     <color name="material_blue_grey_800">#ff37474f</color>
@@ -85,6 +100,7 @@
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
     <color name="red">#FF3A31</color>
+    <color name="red_color">#e53935</color>
     <color name="refresh_color1">#960c1b</color>
     <color name="refresh_color2">#30960c1b</color>
     <color name="refresh_color3">#960c1b</color>
@@ -100,10 +116,14 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
+    <color name="text_color">#3a3a3a</color>
     <color name="text_color1">#F0F0F0</color>
     <color name="text_color2">#A3A7AC</color>
     <color name="text_color3">#3b3c3d</color>
     <color name="text_color4">#707372</color>
+    <color name="text_color_black">#ff3a3a3a</color>
+    <color name="text_color_white">#e6e6e6</color>
+    <color name="text_tip_color">@color/light_grey</color>
     <color name="translucent">#80000000</color>
     <color name="transparent">#00000000</color>
     <color name="umeng_socialize_color_group">#2c3035</color>
@@ -122,6 +142,7 @@
     <color name="umeng_socialize_text_ucenter">#595959</color>
     <color name="umeng_socialize_ucenter_bg">#EEEEEE</color>
     <color name="umeng_socialize_web_bg">#F4F4F4</color>
+    <color name="weak_grey">#eebdbdbd</color>
     <color name="white">#ffffff</color>
     <color name="yellow">#fff139</color>
     <declare-styleable name="ActionBar"><attr name="navigationMode">
@@ -190,6 +211,10 @@
         </attr><attr format="dimension" name="dividerPadding"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat_Layout"><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_weight"/><attr name="android:layout_gravity"/></declare-styleable>
     <declare-styleable name="ListPopupWindow"><attr name="android:dropDownVerticalOffset"/><attr name="android:dropDownHorizontalOffset"/></declare-styleable>
+    <declare-styleable name="MaterialEdit"><attr name="gFont"/><attr format="dimension" name="gLineSize"/><attr format="reference|color" name="gLineColor"/><attr name="gHintTitle">
+            <enum name="none" value="0"/>
+            <enum name="slide" value="1"/>
+        </attr><attr format="dimension" name="gHintTitleTextSize"/><attr format="dimension" name="gHintTitlePaddingLeft"/><attr format="dimension" name="gHintTitlePaddingTop"/><attr format="dimension" name="gHintTitlePaddingRight"/><attr format="dimension" name="gHintTitlePaddingBottom"/></declare-styleable>
     <declare-styleable name="MenuGroup"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:checkableBehavior"/><attr name="android:visible"/><attr name="android:enabled"/></declare-styleable>
     <declare-styleable name="MenuItem"><attr name="android:id"/><attr name="android:menuCategory"/><attr name="android:orderInCategory"/><attr name="android:title"/><attr name="android:titleCondensed"/><attr name="android:icon"/><attr name="android:alphabeticShortcut"/><attr name="android:numericShortcut"/><attr name="android:checkable"/><attr name="android:checked"/><attr name="android:visible"/><attr name="android:enabled"/><attr name="android:onClick"/><attr name="showAsAction">
             
@@ -258,6 +283,7 @@
             <enum name="screen" value="15"/>
         </attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
+    <declare-styleable name="switchView"><attr format="boolean" name="hasShadow"/><attr format="color" name="primaryColor"/><attr format="color" name="primaryColorDark"/><attr format="boolean" name="isOpened"/></declare-styleable>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -350,6 +376,7 @@
     <dimen name="level_3">16dip</dimen>
     <dimen name="level_4">14dip</dimen>
     <dimen name="level_5">12dip</dimen>
+    <dimen name="menu_height">46dp</dimen>
     <dimen name="notification_action_icon_size">32dp</dimen>
     <dimen name="notification_action_text_size">13sp</dimen>
     <dimen name="notification_big_circle_margin">12dp</dimen>
@@ -383,6 +410,9 @@
     <integer name="abc_config_activityShortDur">150</integer>
     <integer name="cancel_button_image_alpha">127</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <item name="type_child" type="integer"/>
+    <item name="type_footer" type="integer"/>
+    <item name="type_header" type="integer"/>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
     <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
@@ -419,26 +449,36 @@
     <string name="already_select">已选中</string>
     <string name="app_name">风云即拍</string>
     <string name="apply_exchange">申请兑换</string>
+    <string name="apply_master">申请主持人</string>
     <string name="apply_submited">申请已提交</string>
     <string name="aqi">空气质量：</string>
     <string name="at_most_nine">你最多只能拍9张照片</string>
+    <string name="auto_rate">自动调节分辨率</string>
     <string name="auto_update">更新提醒</string>
     <string name="back">返回</string>
     <string name="back_head_page">点击返回首页</string>
     <string name="bd">标清</string>
+    <string name="become_chair">你已成为主持人</string>
     <string name="blog">微博</string>
     <string name="body">体感</string>
+    <string name="broadCast_operator_vd_tips">主持人广播模式下,暂无法操作视频</string>
     <string name="cache_content">删除从网络缓存在本地的视频、图片等</string>
+    <string name="call_sip">呼叫H.323/sip设备</string>
+    <string name="call_sip_activity_title">呼叫</string>
     <string name="camera">拍摄</string>
     <string name="camera_or_select">拍摄或选择视频</string>
     <string name="camera_video">拍摄视频/图片</string>
     <string name="cancel">取消</string>
     <string name="cell_delete">删除</string>
     <string name="cell_upload">上传</string>
+    <string name="chair_pwd_tips">主持人密码</string>
+    <string name="choose_file_from_cloud">选择云端文件</string>
+    <string name="chose_cloud_file">选择云端文件</string>
     <string name="click_login">点击登录</string>
     <string name="close">关闭</string>
     <string name="comment">评论</string>
     <string name="complete">完成</string>
+    <string name="conf_lock">会议加锁</string>
     <string name="confirm_exit">再按一次退出</string>
     <string name="confirm_pwd">确认密码：</string>
     <string name="confirm_stop_broadcast">再按一次停止直播</string>
@@ -462,6 +502,7 @@
     <string name="edit_saturation">饱和度</string>
     <string name="edit_sharpness">锐化</string>
     <string name="edit_vibrance">自然饱和度</string>
+    <string name="end">结束</string>
     <string name="error_pwd">密码错误</string>
     <string name="exchange">兑换</string>
     <string name="expresss_sticker">表情贴纸</string>
@@ -499,8 +540,11 @@
     <string name="filter_warm">温暖</string>
     <string name="filter_whitecat">白猫</string>
     <string name="forgot_pwd">忘记密码？</string>
+    <string name="g_font_file">@null</string>
     <string name="get_information_failed">获取城市信息失败</string>
     <string name="give_gift">赠送礼物</string>
+    <string name="graph_mode">视图方式</string>
+    <string name="h323">H323</string>
     <string name="hd">高清</string>
     <string name="head_page">首页</string>
     <string name="hotline_num">010-68408068</string>
@@ -535,11 +579,14 @@
     <string name="local_content">删除拍摄后存储在本地的视频和照片</string>
     <string name="local_save">本地存储</string>
     <string name="location_failed">定位失败</string>
+    <string name="lock_tips">会议一旦加锁,将不能有新的参与者进入本场会议</string>
     <string name="login">登录</string>
     <string name="login_failed">登录失败</string>
     <string name="logout">退出登录</string>
     <string name="male">男</string>
+    <string name="manual_rate">指定分辨率</string>
     <string name="meet">会商</string>
+    <string name="menu_louder">开</string>
     <string name="mm">mm</string>
     <string name="modify_pwd">修改密码</string>
     <string name="most_hot">最热</string>
@@ -583,11 +630,14 @@
     <string name="score_exchange">积分兑换</string>
     <string name="sd">超清</string>
     <string name="search_menu_title">Search</string>
+    <string name="see_free">自由查看</string>
     <string name="select_all">全选</string>
     <string name="select_pic">本地图片上传</string>
     <string name="select_video">本地视频上传</string>
     <string name="service_hotline">服务热线：</string>
     <string name="service_hotline2">服务热线</string>
+    <string name="sip">SIP</string>
+    <string name="sip_select_protect">选择协议</string>
     <string name="skinPerfection">美白</string>
     <string name="skinRemoveBlemishes">磨皮</string>
     <string name="skinSaturation">饱和</string>
@@ -608,6 +658,9 @@
     <string name="switch_bd">已切换为标清模式</string>
     <string name="switch_hd">已切换为高清模式</string>
     <string name="switch_source">切换数据源</string>
+    <string name="sync_graph">同步视图</string>
+    <string name="sync_graph_tips">主持人视图同步中…</string>
+    <string name="sync_operator_video_tips">主持人视频同步模式下,暂无法操作视频</string>
     <string name="take_photo">拍照</string>
     <string name="temprate_no">暂无</string>
     <string name="third_login">使用第三方登录</string>
@@ -676,6 +729,7 @@
     <string name="version_code">版本号：</string>
     <string name="video">视频</string>
     <string name="video_detail">详情</string>
+    <string name="video_mode">视频方式</string>
     <string name="video_wall">视频墙</string>
     <string name="weather0">晴</string>
     <string name="weather1">多云</string>
@@ -2169,6 +2223,24 @@
         <item name="android:button">@null</item>
         <item name="android:paddingTop">3dp</item>
     </style>
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item><!--背景模糊-->
+        <item name="android:windowAnimationStyle">@style/sheetDialogAnimation</item>
+    </style>
+    <style name="dialogTranslucent" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item><!--模糊-->
+        <item name="android:windowAnimationStyle">@style/sheetDialogAnimation</item>
+    </style>
     <style name="filter_bottom_btn" parent="@android:style/Widget.Button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -2176,12 +2248,51 @@
         <item name="android:scaleType">fitCenter</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+    <style name="khbTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="materialEditText" parent="android:Widget.EditText">
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="gFont">@string/g_font_file</item>
+        <item name="android:textColorHint">@color/blue_color</item>
+        <item name="gLineColor">@color/blue_color</item>
+        <item name="gLineSize">1dp</item>
+        <item name="gHintTitle">slide</item>
+        <item name="gHintTitleTextSize">12sp</item>
+    </style>
+    <style name="popWindow_bottom_style">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+    <style name="pwdDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">true</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">true</item><!--背景模糊-->
+        <!--<item name="android:windowAnimationStyle">@style/pwdDialogAnimation</item>-->
+    </style>
+    <style name="pwdDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/window_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/window_fade_out</item>
+    </style>
     <style name="right_btn">
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:layout_marginTop">20dp</item>
+    </style>
+    <style name="sheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/sheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/sheet_dialog_out</item>
     </style>
     <style name="umeng_socialize_action_bar_item_im">
         <item name="android:layout_width">25dp</item>

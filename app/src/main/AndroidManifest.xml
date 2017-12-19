@@ -75,11 +75,12 @@
            android:name="com.amap.api.v2.apikey"
            android:value="01f99224a6594c739f0a260a67b4f146"/>
 
+
         <!--会商版
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="2b765eb17bb448071c91b4e44a83be36"/>
-	     -->
+        -->
 	        
         <activity
             android:name="com.hf.live.activity.WelcomeActivity"
@@ -287,6 +288,15 @@
         <service android:name="com.cinlan.xview.service.JNIService" >
         </service>
         -->
+
+        <activity
+            android:name="com.cinlan.khb.ui.host.KhbActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/khbTheme" />
+        <activity
+            android:name="com.cinlan.khb.ui.host.share.DocListActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/khbTheme" />
 
         <!-- umeng -->
         <meta-data

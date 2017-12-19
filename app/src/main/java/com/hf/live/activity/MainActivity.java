@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -33,6 +34,11 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationMode;
 import com.amap.api.location.AMapLocationListener;
+import com.cinlan.khb.KhbConstant;
+import com.cinlan.khb.agent.KhbAgent;
+import com.cinlan.khb.callback.EnterConfListener;
+import com.cinlan.khb.callback.LoginImListener;
+import com.cinlan.khb.ui.host.KhbActivity;
 import com.hf.live.R;
 import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
@@ -45,6 +51,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cn.com.weather.api.WeatherAPI;
@@ -79,7 +86,8 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
 	private long mExitTime;//记录点击完返回按钮后的long型时间
 	private ImageView ivPerson = null;
-	private int flag = 1;//1为影视、2为会商,别忘记修改安装logo、高德地图key
+	public static int flag = 1;//1为影视、2为会商,别忘记修改安装logo、高德地图key
+	private KhbAgent mKhbAgent;//会商
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,9 +136,11 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 			ivMeet.setBackgroundResource(R.drawable.iv_person2);
 			tvMeet.setText(getString(R.string.person));
 		}else if (flag == 2){
-			ivPerson.setVisibility(View.VISIBLE);
+			ivPerson.setVisibility(View.GONE);
 			ivMeet.setBackgroundResource(R.drawable.iv_meet);
 			tvMeet.setText(getString(R.string.meet));
+
+			mKhbAgent = KhbAgent.getInstance(this);
 		}
 		
 		startLocation();
@@ -426,7 +436,47 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 			if (flag == 1) {
 				startActivity(new Intent(mContext, PersonCenterActivity.class));
 			}else if (flag == 2){
-//				startActivity(new Intent(MainActivity.this, XViewLoginActivity.class));
+				long clientId = 56866334656L;// 从web服务器获取的客户端id ,即:userId
+				String token = "bd8e602e-a2a3-11e7-b692-002590dd0a7d"; //从web 服务器获取的用户token
+				SimpleDateFormat sdf1 = new SimpleDateFormat("HHmmss");
+				final String loginName = "Ad"+sdf1.format(new Date());
+				//填写登录的用户信息
+				mKhbAgent.clientInfo(clientId, token, loginName);
+				//开始登录
+				mKhbAgent.loginIm(mContext);
+
+				//注册登录回调
+				mKhbAgent.registerLoginListener(new LoginImListener() {
+					@Override
+					public void onLoginMsg(int status, int code, String msg) {
+						if (status == KhbConstant.STATUS_SUCCESS) {
+//							Toast.makeText(mContext, "登录成功", Toast.LENGTH_SHORT).show();
+							String confIdStr = "27514215384";
+							long confId = Long.parseLong(confIdStr);
+							String confPwd = "1234";
+							mKhbAgent.startEnterConf(confId, confPwd, loginName);
+						}
+					}
+
+					@Override
+					public void onDisConnectMsg(String msg) {
+						Toast.makeText(mContext, "断开服务器", Toast.LENGTH_SHORT).show();
+					}
+				});
+
+				//注册入会回调
+				mKhbAgent.addEnterConfListener(new EnterConfListener() {
+					@Override
+					public void onEnterSuccess() {
+//						Toast.makeText(mContext, "入会成功", Toast.LENGTH_SHORT).show();
+						startActivity(new Intent(MainActivity.this, KhbActivity.class));
+					}
+					@Override
+					public void onEnterFail(int code, String msg) {
+						Toast.makeText(mContext, "入会失败：code:" + code + " msg:" + msg, Toast.LENGTH_SHORT).show();
+					}
+				});
+
 			}
 			break;
 

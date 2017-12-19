@@ -1,7 +1,19 @@
 [
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/icon_switch_camera.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxxhdpi-v4/icon_switch_camera.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher_round.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxxhdpi-v4/ic_launcher_round.png"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/btn_unmute.png",
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxxhdpi/btn_unmute.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/ic_launcher.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxxhdpi-v4/ic_launcher.png"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi-v4/btn_watermark.png",

@@ -49,23 +49,29 @@ public class WelcomeActivity extends Activity{
 		setContentView(R.layout.activity_welcome);
 		mContext = this;
 
-		//获取用户信息
-		MyApplication.getUserInfo(mContext);
+		if (MainActivity.flag == 2) {//会商版本
+			startActivity(new Intent(getApplication(), MainActivity.class));
+			finish();
+		}else {
+			//获取用户信息
+			MyApplication.getUserInfo(mContext);
 
-		//判断是否显示引导页面
-		new Handler().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				SharedPreferences sharedGuide = getSharedPreferences(CONST.SHOWGUIDE, Context.MODE_PRIVATE);
-				String version = sharedGuide.getString(CONST.VERSION, "");
-				if (!TextUtils.equals(version, CommonUtil.getVersion(getApplicationContext()))) {
-					startActivity(new Intent(getApplication(), GuideActivity.class));
-					finish();
-				}else {
-					OkHttpUserinfo();
+			//判断是否显示引导页面
+			new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					SharedPreferences sharedGuide = getSharedPreferences(CONST.SHOWGUIDE, Context.MODE_PRIVATE);
+					String version = sharedGuide.getString(CONST.VERSION, "");
+					if (!TextUtils.equals(version, CommonUtil.getVersion(getApplicationContext()))) {
+						startActivity(new Intent(getApplication(), GuideActivity.class));
+						finish();
+					}else {
+						OkHttpUserinfo();
+					}
 				}
-			}
-		}, 1000);
+			}, 1000);
+		}
+
 	}
 
 	/**

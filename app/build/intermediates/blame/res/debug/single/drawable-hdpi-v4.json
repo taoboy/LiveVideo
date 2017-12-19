@@ -380,6 +380,10 @@
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/drawable-hdpi/iv_video_cut.png"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/btn_download.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/drawable-hdpi/btn_download.png"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/drawable-hdpi-v4/iv_middle.png",
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/drawable-hdpi/iv_middle.png"
     },

@@ -36,12 +36,12 @@
         "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/drawable-xxhdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/paishe.png",
-        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/paishe.png"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/quxiaonormal.png",
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/quxiaonormal.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/paishe.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/paishe.png"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png",

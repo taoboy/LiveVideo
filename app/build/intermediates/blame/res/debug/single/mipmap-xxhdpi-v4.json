@@ -1,11 +1,75 @@
 [
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_reset.png",
-        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_reset.png"
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/graffiti.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/graffiti.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/enable_camera.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/enable_camera.png"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_watermark.png",
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_watermark.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/share_applying.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/share_applying.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_excel.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_excel.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_client_list.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_client_list.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_ppt.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_ppt.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_word.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_word.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/graffiti_no.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/graffiti_no.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_mix_audio.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_mix_audio.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_unmute.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_unmute.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_jpeg.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_jpeg.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_png.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_png.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/conf_can_no_speak.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/conf_can_no_speak.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_reset.png",
+        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_reset.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_jpg.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_jpg.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/share_normal.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/share_normal.png"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_mute.png",
@@ -16,15 +80,43 @@
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_next.png"
     },
     {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/share_close.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/share_close.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/wb.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/wb.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/shareing_free_apply.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/shareing_free_apply.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/share_apply.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/share_apply.png"
+    },
+    {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_back.png",
         "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_back.png"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_mix_audio.png",
-        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_mix_audio.png"
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/ic_launcher_round.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/btn_unmute.png",
-        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/res/mipmap-xxhdpi/btn_unmute.png"
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/no_enable_camera.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/no_enable_camera.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/conf_can_speak.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/conf_can_speak.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_more.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_more.png"
+    },
+    {
+        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/debug/mipmap-xxhdpi-v4/icon_pdf.png",
+        "source": "/Users/shawn/.android/build-cache/7309caa9b367c97504bc97d9ef96042b76eab8ff/output/res/mipmap-xxhdpi-v4/icon_pdf.png"
     }
 ]
