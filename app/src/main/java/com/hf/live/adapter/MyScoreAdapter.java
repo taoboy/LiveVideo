@@ -25,7 +25,7 @@ public class MyScoreAdapter extends BaseAdapter{
 	
 	private Context mContext = null;
 	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<PhotoDto>();
+	private List<PhotoDto> mArrayList = new ArrayList<>();
 	
 	private final class ViewHolder{
 		ImageView imageView;

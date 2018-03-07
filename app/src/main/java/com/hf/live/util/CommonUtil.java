@@ -45,6 +45,8 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -52,6 +54,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class CommonUtil {
@@ -512,7 +519,7 @@ public class CommonUtil {
 				if (!TextUtils.isEmpty(imgUrl)) {
 					web.setThumb(new UMImage(activity, imgUrl));  //缩略图
 				}else {
-					web.setThumb(new UMImage(activity, R.drawable.iv_logo));
+					web.setThumb(new UMImage(activity, R.drawable.ic_launcher));
 				}
 				web.setDescription(content);
 				sAction.withMedia(web);
@@ -658,6 +665,48 @@ public class CommonUtil {
 			flag = "社会安全";
 		}
 		return flag;
+	}
+
+	/**
+	 * 下载头像
+	 * @param imgUrl
+	 */
+	public static void OkHttpLoadPortrait(final Activity activity, String imgUrl) {
+		OkHttpUtil.enqueue(new Request.Builder().url(imgUrl).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
+
+			}
+
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				final byte[] bytes = response.body().bytes();
+				activity.runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+						try {
+							File files = new File(CONST.SDCARD_PATH);
+							if (!files.exists()) {
+								files.mkdirs();
+							}
+							FileOutputStream fos = new FileOutputStream(CONST.PORTRAIT_ADDR);
+							if (bitmap != null && fos != null) {
+								bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+								if (bitmap != null && !bitmap.isRecycled()) {
+									bitmap.recycle();
+								}
+							}
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 	}
 	
 }

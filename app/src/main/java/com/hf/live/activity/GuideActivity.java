@@ -4,10 +4,6 @@ package com.hf.live.activity;
  * 引导页
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -17,11 +13,14 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hf.live.fragment.GuideFragment;
 import com.hf.live.R;
+import com.hf.live.fragment.GuideFragment;
 import com.hf.live.view.MainViewPager;
 
-public class GuideActivity extends Activity{
+import java.util.ArrayList;
+import java.util.List;
+
+public class GuideActivity extends BaseActivity{
 	
 	private MainViewPager viewPager = null;
 	private List<Fragment> fragments = new ArrayList<>();

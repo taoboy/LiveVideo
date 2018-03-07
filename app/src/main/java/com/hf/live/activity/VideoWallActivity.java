@@ -464,18 +464,41 @@ public class VideoWallActivity extends BaseActivity implements OnClickListener{
 												}
 												if (!obj.isNull("worksinfo")) {
 													JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
+													//视频
+													if (!workObj.isNull("video")) {
+														JSONObject video = workObj.getJSONObject("video");
+														if (!video.isNull("ORG")) {//腾讯云结构解析
+															JSONObject ORG = video.getJSONObject("ORG");
+															if (!ORG.isNull("url")) {
+																dto.videoUrl = ORG.getString("url");
+															}
+															if (!video.isNull("SD")) {
+																JSONObject SD = video.getJSONObject("SD");
+																if (!SD.isNull("url")) {
+																	dto.sd = SD.getString("url");
+																}
+															}
+															if (!video.isNull("HD")) {
+																JSONObject HD = video.getJSONObject("HD");
+																if (!HD.isNull("url")) {
+																	dto.hd = HD.getString("url");
+																	dto.videoUrl = HD.getString("url");
+																}
+															}
+															if (!video.isNull("FHD")) {
+																JSONObject FHD = video.getJSONObject("FHD");
+																if (!FHD.isNull("url")) {
+																	dto.fhd = FHD.getString("url");
+																}
+															}
+														}else {
+															dto.videoUrl = video.getString("url");
+														}
+													}
 													if (!workObj.isNull("thumbnail")) {
 														JSONObject imgObj = new JSONObject(workObj.getString("thumbnail"));
 														if (!imgObj.isNull("url")) {
-															//视频缩略图
 															dto.imgUrl = imgObj.getString("url");
-														}
-													}
-													if (!workObj.isNull("video")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("video"));
-														if (!imgObj.isNull("url")) {
-															//视频地址
-															dto.videoUrl = imgObj.getString("url");
 														}
 													}
 

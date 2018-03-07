@@ -3,8 +3,6 @@ package com.hf.live.activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Paint;
@@ -62,7 +60,7 @@ public class MyAboutActivity extends BaseActivity implements OnClickListener{
 		tvHotline.setOnClickListener(this);
 		ivLogo = (ImageView) findViewById(R.id.ivLogo);
 		
-		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.iv_logo);
+		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 		if (bitmap != null) {
 			Bitmap newBitmap = CommonUtil.getRoundedCornerBitmap(bitmap, 10);
 			if (newBitmap != null) {

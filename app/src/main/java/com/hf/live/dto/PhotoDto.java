@@ -15,6 +15,7 @@ public class PhotoDto implements Parcelable {
 	public boolean state = false;// false为没有拍照，true为拍照完成
 	public String imgUrl;// 图片或者缩略图路径
 	public String videoUrl;// 视频路径
+	public String sd, hd, fhd;//视频的表情、高清、超清格式
 	public String createTime;// 上传视频或图片的时间
 	public int section;
 	public String location;// 地址信息
@@ -232,6 +233,9 @@ public class PhotoDto implements Parcelable {
 		dest.writeByte(this.state ? (byte) 1 : (byte) 0);
 		dest.writeString(this.imgUrl);
 		dest.writeString(this.videoUrl);
+		dest.writeString(this.sd);
+		dest.writeString(this.hd);
+		dest.writeString(this.fhd);
 		dest.writeString(this.createTime);
 		dest.writeInt(this.section);
 		dest.writeString(this.location);
@@ -278,6 +282,9 @@ public class PhotoDto implements Parcelable {
 		this.state = in.readByte() != 0;
 		this.imgUrl = in.readString();
 		this.videoUrl = in.readString();
+		this.sd = in.readString();
+		this.hd = in.readString();
+		this.fhd = in.readString();
 		this.createTime = in.readString();
 		this.section = in.readInt();
 		this.location = in.readString();

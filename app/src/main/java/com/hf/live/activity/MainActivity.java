@@ -78,8 +78,6 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 	private AMapLocationClient mLocationClient = null;//声明AMapLocationClient类对象
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddHHmmss");
 	private long mExitTime;//记录点击完返回按钮后的long型时间
-	private ImageView ivPerson = null;
-	private int flag = 1;//1为影视、2为会商,别忘记修改安装logo、高德地图key
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,21 +116,9 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		reVideo = (RelativeLayout) findViewById(R.id.reVideo);
 		reVideo.setOnClickListener(this);
 		progressBar = (ProgressBar) findViewById(R.id.progressBar);
-		ivPerson = (ImageView) findViewById(R.id.ivPerson);
-		ivPerson.setOnClickListener(this);
 		ivMeet = (ImageView) findViewById(R.id.ivMeet);
 		tvMeet = (TextView) findViewById(R.id.tvMeet);
-		
-		if (flag == 1) {
-			ivPerson.setVisibility(View.GONE);
-			ivMeet.setBackgroundResource(R.drawable.iv_person2);
-			tvMeet.setText(getString(R.string.person));
-		}else if (flag == 2){
-			ivPerson.setVisibility(View.VISIBLE);
-			ivMeet.setBackgroundResource(R.drawable.iv_meet);
-			tvMeet.setText(getString(R.string.meet));
-		}
-		
+
 		startLocation();
 	}
 	
@@ -423,11 +409,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 			startActivity(new Intent(mContext, VideoWallActivity.class));//视频墙
 			break;
 		case R.id.reMeet:
-			if (flag == 1) {
-				startActivity(new Intent(mContext, PersonCenterActivity.class));
-			}else if (flag == 2){
-//				startActivity(new Intent(MainActivity.this, XViewLoginActivity.class));
-			}
+			startActivity(new Intent(mContext, PersonCenterActivity.class));
 			break;
 
 		default:
@@ -435,7 +417,6 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);

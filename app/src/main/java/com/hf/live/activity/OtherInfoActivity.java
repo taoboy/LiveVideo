@@ -84,6 +84,7 @@ public class OtherInfoActivity extends BaseActivity implements OnClickListener{
 			if (!TextUtils.isEmpty(data.phoneNumber)) {
 				tvUserName.setText(data.phoneNumber);
 				tvPhone.setText(data.phoneNumber);
+				tvTitle.setText(data.phoneNumber);
 			}else {
 				tvUserName.setText(data.userName);
 			}
@@ -94,6 +95,7 @@ public class OtherInfoActivity extends BaseActivity implements OnClickListener{
 
 			if (!TextUtils.isEmpty(data.nickName)) {
 				tvNickName.setText(data.nickName);
+				tvTitle.setText(data.nickName);
 			}
 
 			if (!TextUtils.isEmpty(data.mail)) {

@@ -16,11 +16,15 @@ import android.widget.TextView;
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
 
+/**
+ * 视频墙
+ */
+
 public class VideoWallAdapter extends BaseAdapter{
 	
 	private Context mContext = null;
 	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<PhotoDto>();
+	private List<PhotoDto> mArrayList = new ArrayList<>();
 	
 	private final class ViewHolder{
 		ImageView imageView;
@@ -59,7 +63,7 @@ public class VideoWallAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.video_wall_cell, null);
+			convertView = mInflater.inflate(R.layout.adapter_video_wall, null);
 			mHolder = new ViewHolder();
 			mHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 			mHolder.ivVideo = (ImageView) convertView.findViewById(R.id.ivVideo);

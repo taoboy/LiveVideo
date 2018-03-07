@@ -53,34 +53,28 @@
     <application
         android:name="com.hf.live.common.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/iv_logo"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         tools:replace="android:label"
-        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        android:theme="@style/AppTheme" >
 
         <!-- 自动更新下载完成广播 -->
         <receiver android:name="com.hf.live.util.AutoUpdateBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-                <!-- <action android:name="android.intent.action.PACKAGE_INSTALL" /> -->
+                 <action android:name="android.intent.action.PACKAGE_INSTALL" />
             </intent-filter>
         </receiver>
         
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
         
-        
         <!--影视版-->
         <meta-data
            android:name="com.amap.api.v2.apikey"
            android:value="01f99224a6594c739f0a260a67b4f146"/>
 
-        <!--会商版
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="2b765eb17bb448071c91b4e44a83be36"/>
-	     -->
-	        
+
         <activity
             android:name="com.hf.live.activity.WelcomeActivity"
             android:screenOrientation="portrait"
@@ -103,10 +97,7 @@
             android:name="com.hf.live.activity.LiveBroadcastSuccessActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.RegisterActivity"
-            android:screenOrientation="portrait" />
-        <activity 
+        <activity
             android:name="com.hf.live.activity.PersonCenterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -193,7 +184,7 @@
             android:name="com.hf.live.activity.WeatherEyeActivity"
             android:screenOrientation="portrait" />
         <activity 
-            android:name="com.hf.live.activity.SelecteUserActivity"
+            android:name="com.hf.live.activity.SelectUserActivity"
             android:screenOrientation="portrait" />
         <activity 
             android:name="com.hf.live.activity.PersonInfoActivity"
@@ -228,66 +219,6 @@
             android:screenOrientation="portrait" />
         
         
-        <!-- 会商
-        <activity
-            android:name="com.hf.live.LiveBroadcastActivity"
-            android:screenOrientation="landscape"
-            android:launchMode="singleTask"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity
-            android:name="com.cinlan.xview.ui.XViewLoginActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.ProgressBarActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.VoiceVideoSettingActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-         <activity
-            android:name="com.cinlan.xview.ui.SettingServerActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-         <activity
-            android:name="com.cinlan.xview.ui.AboutActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.ConfListActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.JoinConfActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.ConfActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.cinlan.xview.ui.ChatActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-        </activity>
-
-        <receiver android:name="com.cinlan.xview.receiver.ForceOfflineReceiver" >
-            <intent-filter>
-                <action android:name="com.cinlan.xview.broadcast.FORCE_OFFLINE" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name="com.cinlan.xview.service.JNIService" >
-        </service>
-        -->
-
         <!-- umeng -->
         <meta-data
             android:name="UMENG_APPKEY"

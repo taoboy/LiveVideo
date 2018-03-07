@@ -1,6 +1,5 @@
 package com.hf.live.activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -75,7 +74,6 @@ import okhttp3.Response;
  * 在线预览视频
  */
 
-@SuppressLint("SimpleDateFormat")
 public class OnlineVideoActivity extends Activity implements SurfaceHolder.Callback, OnPreparedListener, OnVideoSizeChangedListener, OnCompletionListener, OnClickListener{
 	
 	private Context mContext = null;

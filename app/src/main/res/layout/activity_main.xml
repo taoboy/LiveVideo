@@ -1,21 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/iv_main_bg"
+    android:background="@color/main_color"
     android:orientation="vertical" >
     
-    <ImageView 
-        android:visibility="gone"
-        android:id="@+id/ivPerson"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/iv_person"/>
-
     <ImageView
-        android:layout_below="@+id/ivPerson"
         android:id="@+id/ivCenter"
         android:layout_width="150dip"
         android:layout_height="172dip"
