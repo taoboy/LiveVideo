@@ -8,22 +8,22 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY" />
     
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="20dip"
-        android:layout_height="20dip"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/iv_grid_select"
         android:layout_alignParentRight="true"
-        android:layout_margin="5dip" />
+        android:layout_margin="5dp" />
 
     <ImageView
         android:id="@+id/ivVideo"
-        android:layout_width="30dip"
-        android:layout_height="30dip"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/iv_video_logo" />
+        android:src="@drawable/iv_play" />
 
     <TextView
         android:id="@+id/tvAlbumName"

@@ -142,7 +142,7 @@
                 android:layout_width="15dip"
                 android:layout_height="15dip"
                 android:layout_centerVertical="true"
-                android:src="@drawable/iv_location" />
+                android:src="@drawable/iv_location_white" />
 
             <TextView
                 android:id="@+id/tvAddress"

@@ -32,10 +32,9 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
 
     private Context mContext = null;
     private LinearLayout llBack = null;
-    private TextView tvTitle = null;
-    private TextView tvControl = null;
+    private TextView tvTitle,tvControl;
     private GridView gridView;
-    private SelectPictureAdapter adapter = null;
+    private SelectPictureAdapter mAdapter = null;
     private List<PhotoDto> mList = new ArrayList<>();
     private Thread thread = null;
     private int selectCount = 0;
@@ -64,8 +63,8 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
 
     private void initGridView() {
         gridView = (GridView) findViewById(R.id.gridView);
-        adapter = new SelectPictureAdapter(mContext, mList);
-        gridView.setAdapter(adapter);
+        mAdapter = new SelectPictureAdapter(mContext, mList);
+        gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,8 +80,8 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
                     dto.isSelected = true;
                     selectCount++;
                 }
-                if (adapter != null) {
-                    adapter.notifyDataSetChanged();
+                if (mAdapter != null) {
+                    mAdapter.notifyDataSetChanged();
                 }
 
                 tvTitle.setText("已选中"+selectCount+"张（最多9张）");
@@ -164,9 +163,14 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
             mList.clear();
             mList.addAll(temp);
 
-            if (mList.size() > 0 && adapter != null) {
-                adapter.notifyDataSetChanged();
-            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (mAdapter != null) {
+                        mAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
 
             Thread.interrupted();
         }
@@ -186,10 +190,8 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tvControl:
                 if (selectCount <= 0) {
-                    tvControl.setTextColor(0x60ffffff);
+                    Toast.makeText(mContext, "请选择需要上传的图片！", Toast.LENGTH_SHORT).show();
                 }else {
-                    tvControl.setTextColor(Color.WHITE);
-
                     selectList.clear();
                     for (int i = 0; i < mList.size(); i++) {
                         PhotoDto dto = mList.get(i);

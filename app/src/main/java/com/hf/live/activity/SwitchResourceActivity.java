@@ -1,18 +1,8 @@
 package com.hf.live.activity;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.NameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -24,12 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hf.live.R;
 import com.hf.live.adapter.SwitchResourceAdapter;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.SwitchDto;
-import com.hf.live.R;
-import com.hf.live.util.CustomHttpClient;
 import com.hf.live.util.OkHttpUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -107,68 +104,74 @@ public class SwitchResourceActivity extends BaseActivity implements OnClickListe
 		editor.commit();
 		
 		setResult(RESULT_OK);
+		finish();
 	}
 	
 	/**
 	 * 获取视频墙数据源
 	 */
-	private void OkHttpDataResource(String url) {
-		OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+	private void OkHttpDataResource(final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (result != null) {
-					try {
-						mList.clear();
-						JSONArray array = new JSONArray(result);
-						SharedPreferences sp = getSharedPreferences("DATASOURCE", Context.MODE_PRIVATE);
-						int size = sp.getInt("size", 0);
-						if (size == array.length()) {
-							for (int i = 0; i < size; i++) {
-								SwitchDto dto = new SwitchDto();
-								dto.name = sp.getString("name"+i, "");
-								dto.appid = sp.getString("appid"+i, "");
-								dto.isSelected = sp.getBoolean("isSelected"+i, false);
-								mList.add(dto);
-							}
-						}else {
-							for (int i = 0; i < array.length(); i++) {
-								JSONObject itemObj = array.getJSONObject(i);
-								SwitchDto dto = new SwitchDto();
-								dto.name = itemObj.getString("name");
-								dto.appid = itemObj.getString("id");
-								if (TextUtils.equals(dto.appid, "0")) {
-									dto.isSelected = true;
-								}else {
-									dto.isSelected = false;
-								}
-								mList.add(dto);
-							}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
 						}
-
+						final String result = response.body().string();
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								if (mList.size() > 0 && mAdapter != null) {
-									mAdapter.notifyDataSetChanged();
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										mList.clear();
+										JSONArray array = new JSONArray(result);
+										SharedPreferences sp = getSharedPreferences("DATASOURCE", Context.MODE_PRIVATE);
+										int size = sp.getInt("size", 0);
+										if (size == array.length()) {
+											for (int i = 0; i < size; i++) {
+												SwitchDto dto = new SwitchDto();
+												dto.name = sp.getString("name"+i, "");
+												dto.appid = sp.getString("appid"+i, "");
+												dto.isSelected = sp.getBoolean("isSelected"+i, false);
+												mList.add(dto);
+											}
+										}else {
+											for (int i = 0; i < array.length(); i++) {
+												JSONObject itemObj = array.getJSONObject(i);
+												SwitchDto dto = new SwitchDto();
+												dto.name = itemObj.getString("name");
+												dto.appid = itemObj.getString("id");
+												if (TextUtils.equals(dto.appid, "0")) {
+													dto.isSelected = true;
+												}else {
+													dto.isSelected = false;
+												}
+												mList.add(dto);
+											}
+										}
+
+										if (mAdapter != null) {
+											mAdapter.notifyDataSetChanged();
+										}
+
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
 								}
 							}
 						});
-
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override
@@ -176,7 +179,7 @@ public class SwitchResourceActivity extends BaseActivity implements OnClickListe
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			saveData();
 		}
-		return super.onKeyDown(keyCode, event);
+		return false;
 	}
 
 	@Override
@@ -184,7 +187,6 @@ public class SwitchResourceActivity extends BaseActivity implements OnClickListe
 		switch (v.getId()) {
 		case R.id.llBack:
 			saveData();
-			finish();
 			break;
 
 		default:

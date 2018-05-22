@@ -11,14 +11,13 @@
         android:layout_height="match_parent"
         android:cacheColorHint="@color/transparent"
         android:fadingEdge="none"
-        android:horizontalSpacing="2dip"
+        android:horizontalSpacing="2dp"
         android:listSelector="@color/transparent"
         android:numColumns="4"
         android:padding="2dp"
-        android:overScrollMode="never"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        android:scrollbarSize="2dp"
+        android:scrollbarThumbVertical="@color/main_color"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dip" />
+        android:verticalSpacing="2dp" />
 
 </LinearLayout>

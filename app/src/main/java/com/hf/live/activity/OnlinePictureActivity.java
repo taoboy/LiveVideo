@@ -1,13 +1,14 @@
 package com.hf.live.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,9 +31,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hf.live.R;
+import com.hf.live.adapter.CommentAdapter;
 import com.hf.live.adapter.MyViewPagerAdapter;
 import com.hf.live.adapter.OnlinePictureAdapter;
-import com.hf.live.adapter.VideoAdapter;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
@@ -74,28 +75,22 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	private ImageView[] ivTips = null;//装载点的数组
 	private ViewGroup viewGroup = null;
 	private RelativeLayout rePager = null;
-	private LinearLayout llBack = null;//返回按钮
 	private PhotoDto data = null;
 	private List<String> urlList = new ArrayList<>();//存放图片的list
-	
+
+	private TextView tvTitle, tvContent, tvPositon, tvDate, tvCommentCount, tvSubmit, tvWeatherFlag, tvOtherFlag, tvUserName, tvPlayCount, tvPraiseCount;
+	private ImageView ivPortrait, ivPraise, ivShare, ivClear;
+	private EditText etComment = null;
+	private boolean praiseState = false;//点赞状态
+	private LinearLayout llListView = null;
+	private LinearLayout llSubmit = null;
+
+	//评论
 	private ListView mListView = null;
-	private VideoAdapter mAdapter = null;
+	private CommentAdapter mAdapter = null;
 	private List<PhotoDto> mList = new ArrayList<>();
 	private int page = 1;
 	private int pageSize = 1000;
-	private boolean praiseState = false;//点赞状态
-	private LinearLayout llListView = null;
-	private TextView tvPosition = null;//地址信息
-	private TextView tvTitle = null;//标题
-	private TextView tvTime = null;//时间
-	private TextView tvCommentCount = null;//评论次数
-	private LinearLayout llSubmit = null;
-	private EditText etComment = null;
-	private TextView tvSubmit = null;
-	private ImageView ivComment = null;//评论
-	private ImageView ivPraise = null;//点赞
-	private ImageView ivShare = null;//分享
-	private RelativeLayout reOperate = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,49 +109,137 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	private void initWidget() {
 		rePager = (RelativeLayout) findViewById(R.id.rePager);
 		viewGroup = (ViewGroup) findViewById(R.id.viewGroup);
-		llBack = (LinearLayout) findViewById(R.id.llBack);
-		llBack.setOnClickListener(this);
 		llListView = (LinearLayout) findViewById(R.id.llListView);
-		tvPosition = (TextView) findViewById(R.id.tvPosition);
+		ivPortrait = (ImageView) findViewById(R.id.ivPortrait);
+		tvUserName = (TextView) findViewById(R.id.tvUserName);
+		tvPlayCount = (TextView) findViewById(R.id.tvPlayCount);
+		tvPraiseCount = (TextView) findViewById(R.id.tvPraiseCount);
+		tvPositon = (TextView) findViewById(R.id.tvPosition);
+		tvDate = (TextView) findViewById(R.id.tvDate);
 		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		tvTime = (TextView) findViewById(R.id.tvTime);
+		tvContent = (TextView) findViewById(R.id.tvContent);
 		tvCommentCount = (TextView) findViewById(R.id.tvCommentCount);
-		ivComment = (ImageView) findViewById(R.id.ivComment);
-		ivComment.setOnClickListener(this);
 		ivPraise = (ImageView) findViewById(R.id.ivPraise);
 		ivPraise.setOnClickListener(this);
 		ivShare = (ImageView) findViewById(R.id.ivShare);
 		ivShare.setOnClickListener(this);
 		llSubmit = (LinearLayout) findViewById(R.id.llSubmit);
 		etComment = (EditText) findViewById(R.id.etComment);
+		etComment.addTextChangedListener(watcher);
 		tvSubmit = (TextView) findViewById(R.id.tvSubmit);
 		tvSubmit.setOnClickListener(this);
-		reOperate = (RelativeLayout) findViewById(R.id.reOperate);
+		tvWeatherFlag = (TextView) findViewById(R.id.tvWeatherFlag);
+		tvOtherFlag = (TextView) findViewById(R.id.tvOtherFlag);
+		ivClear = (ImageView) findViewById(R.id.ivClear);
+		ivClear.setOnClickListener(this);
 		
 		if (getIntent().hasExtra("data")) {
 			data = getIntent().getExtras().getParcelable("data");
 			if (data != null) {
 				urlList.clear();
-				urlList = data.getUrlList();
-				
-				tvPosition.setText(data.getLocation());
-				tvTitle.setText(data.getTitle());
-				tvTime.setText(data.getWorkTime());
-				tvCommentCount.setText(getString(R.string.comment) + "（"+data.getCommentCount()+"）");
-				
+				urlList.addAll(data.urlList);
+
+				if (!TextUtils.isEmpty(data.nickName)) {
+					tvUserName.setText(data.nickName);
+				} else if (!TextUtils.isEmpty(data.userName)) {
+					tvUserName.setText(data.userName);
+				} else if (!TextUtils.isEmpty(data.phoneNumber)) {
+					tvUserName.setText(data.phoneNumber);
+				}
+
+				if (!TextUtils.isEmpty(data.playCount)) {
+					tvPlayCount.setText(data.playCount + "次浏览");
+				}
+
+				if (!TextUtils.isEmpty(data.praiseCount)) {
+					tvPraiseCount.setText(data.praiseCount);
+				}
+
 				//获取点赞状态
 				SharedPreferences sharedPreferences = getSharedPreferences(data.getVideoId(), Context.MODE_PRIVATE);
 				if (sharedPreferences.getBoolean("praiseState", false)) {
 					praiseState = true;
 					ivPraise.setImageResource(R.drawable.iv_like);
-				}else {
+				} else {
 					praiseState = false;
 					ivPraise.setImageResource(R.drawable.iv_unlike);
+				}
+
+				if (!TextUtils.isEmpty(data.title)) {
+					tvTitle.setText(data.title);
+				}
+
+				if (!TextUtils.isEmpty(data.content)) {
+					tvContent.setText(data.content);
+					tvContent.setVisibility(View.VISIBLE);
+				}
+
+				String weatherFlag = CommonUtil.getWeatherFlag(data.weatherFlag);
+				if (!TextUtils.isEmpty(weatherFlag)) {
+					tvWeatherFlag.setText(weatherFlag);
+					tvWeatherFlag.setBackgroundResource(R.drawable.corner_flag);
+					tvWeatherFlag.setVisibility(View.VISIBLE);
+				}
+				String otherFlag = CommonUtil.getOtherFlag(data.otherFlag);
+				if (!TextUtils.isEmpty(otherFlag)) {
+					tvOtherFlag.setText(otherFlag);
+					tvOtherFlag.setBackgroundResource(R.drawable.corner_flag);
+					tvOtherFlag.setVisibility(View.VISIBLE);
+				}
+
+				if (!TextUtils.isEmpty(data.location)) {
+					tvPositon.setText("拍摄地点：" + data.location);
+				}
+
+				if (!TextUtils.isEmpty(data.workTime)) {
+					tvDate.setText("拍摄时间：" + data.workTime);
+				}
+
+				if (!TextUtils.isEmpty(data.commentCount)) {
+					tvCommentCount.setText("评论" + "（" + data.commentCount + "）");
+				}
+
+				if (!TextUtils.isEmpty(data.videoId)) {
+					//提交访问次数
+					OkHttpPlayCount("http://channellive2.tianqi.cn/weather/work/fyjp_browsecount/resourceid/" + data.videoId);
 				}
 
 				//获取评论列表
 				OkHttpCommentList(CONST.GET_WORK_COMMENT_URL);
 			}
+		}
+	}
+
+	/**
+	 * 评论监听
+	 */
+	private TextWatcher watcher = new TextWatcher() {
+		@Override
+		public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+		}
+
+		@Override
+		public void afterTextChanged(Editable arg0) {
+			if (!TextUtils.isEmpty(etComment.getText().toString())) {
+				ivClear.setVisibility(View.VISIBLE);
+				tvSubmit.setVisibility(View.VISIBLE);
+			} else {
+				ivClear.setVisibility(View.GONE);
+				tvSubmit.setVisibility(View.GONE);
+			}
+		}
+	};
+
+	/**
+	 * 清空输入内容
+	 */
+	private void clearContent() {
+		if (etComment != null) {
+			etComment.setText("");
 		}
 	}
 	
@@ -172,12 +255,12 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				mGridView.setVisibility(View.GONE);
 				llListView.setVisibility(View.GONE);
-				reOperate.setVisibility(View.GONE);
 				llSubmit.setVisibility(View.GONE);
 				rePager.setVisibility(View.VISIBLE);
 				if (mViewPager != null) {
 					mViewPager.setCurrentItem(arg2);
 				}
+				CommonUtil.hideInputSoft(etComment, mContext);
 			}
 		});
 	}
@@ -238,11 +321,9 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 			}
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
 			}
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
 			}
 		});
 	}
@@ -252,152 +333,237 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	 */
 	private void initListView() {
 		mListView = (ListView) findViewById(R.id.listView);
-		mAdapter = new VideoAdapter(mContext, mList);
+		mAdapter = new CommentAdapter(mContext, mList);
 		mListView.setAdapter(mAdapter);
+	}
+
+	/**
+	 * 提交访问次数
+	 */
+	private void OkHttpPlayCount(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+					}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+					}
+				});
+			}
+		}).start();
 	}
 
 	/**
 	 * 获取评论列表
 	 */
-	private void OkHttpCommentList(String url) {
+	private void OkHttpCommentList(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("wid", data.getVideoId());
-		builder.add("page", page+"");
-		builder.add("pagesize", pageSize+"");
+		builder.add("page", page + "");
+		builder.add("pagesize", pageSize + "");
 		builder.add("appid", CONST.APPID);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (object != null) {
-							if (!object.isNull("status")) {
-								int status  = object.getInt("status");
-								if (status == 1) {//成功
-									if (!object.isNull("info")) {
-										JSONArray array = object.getJSONArray("info");
-										int length = array.length();
-										if (length <= 0) {
-											return;
-										}
-										mList.clear();
-										for (int i = 0; i < array.length(); i++) {
-											JSONObject obj = array.getJSONObject(i);
-											PhotoDto dto = new PhotoDto();
-											if (!obj.isNull("create_time")) {
-												dto.createTime = obj.getString("create_time");
-											}
-											if (!obj.isNull("username")) {
-												dto.userName = obj.getString("username");
-											}
-											if (!obj.isNull("comment")) {
-												dto.comment = EmojiMapUtil.replaceCheatSheetEmojis(obj.getString("comment"));
-											}
-											if (!obj.isNull("photo")) {
-												dto.portraitUrl = obj.getString("photo");
-											}
-											mList.add(dto);
-										}
-									}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONArray array = object.getJSONArray("info");
+														int length = array.length();
+														if (length <= 0) {
+															return;
+														}
+														mList.clear();
+														for (int i = 0; i < array.length(); i++) {
+															JSONObject obj = array.getJSONObject(i);
+															PhotoDto dto = new PhotoDto();
+															if (!obj.isNull("create_time")) {
+																dto.createTime = obj.getString("create_time");
+															}
+															if (!obj.isNull("username")) {
+																dto.userName = obj.getString("username");
+															}
+															if (!obj.isNull("comment")) {
+																dto.comment = EmojiMapUtil.replaceCheatSheetEmojis(obj.getString("comment"));
+															}
+															if (!obj.isNull("photo")) {
+																dto.portraitUrl = obj.getString("photo");
+															}
+															mList.add(dto);
+														}
+													}
 
-									runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											tvCommentCount.setText(getString(R.string.comment) + "（"+mList.size()+"）");
-											if (mList.size() > 0 && mAdapter != null) {
-												mAdapter.notifyDataSetChanged();
-											}
-										}
-									});
+													tvCommentCount.setText("评论" + "（" + mList.size() + "）");
+													if (mAdapter != null) {
+														mAdapter.notifyDataSetChanged();
+													}
 
-								}else {
-									//失败
-									if (!object.isNull("msg")) {
-										final String msg = object.getString("msg");
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+												} else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
-										});
-
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
+						});
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 
 	/**
 	 * 提交评论
 	 */
-	private void OkHttpSubmitComment(String url) {
+	private void OkHttpSubmitComment(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("token", MyApplication.TOKEN);
 		builder.add("wid", data.videoId);
 		builder.add("comment", EmojiMapUtil.replaceUnicodeEmojis(etComment.getText().toString()));
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (object != null) {
-									if (!object.isNull("status")) {
-										int status  = object.getInt("status");
-										if (status == 1) {//成功
-											etComment.setText("");
-											OkHttpCommentList(CONST.GET_WORK_COMMENT_URL);
-										}else {
-											//失败
-											if (!object.isNull("msg")) {
-												String msg = object.getString("msg");
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status = object.getInt("status");
+												if (status == 1) {//成功
+													clearContent();
+													OkHttpCommentList(CONST.GET_WORK_COMMENT_URL);
+												} else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
+	}
+
+	/**
+	 * 点赞
+	 */
+	private void OkHttpPraise(final String url) {
+		FormBody.Builder builder = new FormBody.Builder();
+		builder.add("token", MyApplication.TOKEN);
+		builder.add("id", data.videoId);
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status = object.getInt("status");
+												if (status == 1) {//成功
+													//保存点赞状态
+													SharedPreferences sharedPreferences = getSharedPreferences(data.videoId, Context.MODE_PRIVATE);
+													Editor editor = sharedPreferences.edit();
+													editor.putBoolean("praiseState", true);
+													editor.commit();
+													ivPraise.setImageResource(R.drawable.iv_like);
+												} else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
+												}
+											}
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
+									}
+								}
+							}
+						});
+					}
+				});
+			}
+		}).start();
 	}
 	
 	/**
@@ -408,73 +574,10 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 		if (etComment != null) {
 			CommonUtil.hideInputSoft(etComment, mContext);
 		}
-		if (llSubmit != null) {
-			llSubmit.setVisibility(View.GONE);
-		}
 		return super.onTouchEvent(event);
 	}
 
-	/**
-	 * 点赞
-	 */
-	private void OkHttpPraise(String url) {
-		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("token", MyApplication.TOKEN);
-		builder.add("id", data.videoId);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
-			@Override
-			public void onFailure(Call call, IOException e) {
 
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (result != null) {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (object != null) {
-							if (!object.isNull("status")) {
-								int status  = object.getInt("status");
-								if (status == 1) {//成功
-									//保存点赞状态
-									SharedPreferences sharedPreferences = getSharedPreferences(data.videoId, Context.MODE_PRIVATE);
-									Editor editor = sharedPreferences.edit();
-									editor.putBoolean("praiseState", true);
-									editor.commit();
-									runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											ivPraise.setImageResource(R.drawable.iv_like);
-										}
-									});
-								}else {
-									//失败
-									if (!object.isNull("msg")) {
-										final String msg = object.getString("msg");
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-												}
-											}
-										});
-									}
-								}
-							}
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-	}
 	
 	private void commentAnimation(boolean flag, final LinearLayout llLayout) {
 		AnimationSet animationSet = new AnimationSet(true);
@@ -512,42 +615,22 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (mGridView.getVisibility() == View.GONE || llSubmit.getVisibility() == View.VISIBLE) {
-			if (mGridView.getVisibility() == View.GONE) {
-				mGridView.setVisibility(View.VISIBLE);
-				llListView.setVisibility(View.VISIBLE);
-				reOperate.setVisibility(View.VISIBLE);
-				rePager.setVisibility(View.GONE);
-			}
-			if (llSubmit.getVisibility() == View.VISIBLE) {
-				commentAnimation(true, llSubmit);
-				llSubmit.setVisibility(View.GONE);
-			}
-			return false;
+		if (mGridView.getVisibility() == View.GONE) {
+			mGridView.setVisibility(View.VISIBLE);
+			llListView.setVisibility(View.VISIBLE);
+			llSubmit.setVisibility(View.VISIBLE);
+			rePager.setVisibility(View.GONE);
 		}else {
 			finish();
 		}
-		return super.onKeyDown(keyCode, event);
+		return false;
 	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.llBack:
-			if (mGridView.getVisibility() == View.GONE || llSubmit.getVisibility() == View.VISIBLE) {
-				if (mGridView.getVisibility() == View.GONE) {
-					mGridView.setVisibility(View.VISIBLE);
-					llListView.setVisibility(View.VISIBLE);
-					reOperate.setVisibility(View.VISIBLE);
-					rePager.setVisibility(View.GONE);
-				}
-				if (llSubmit.getVisibility() == View.VISIBLE) {
-					commentAnimation(true, llSubmit);
-					llSubmit.setVisibility(View.GONE);
-				}
-			}else {
-				finish();
-			}
+		case R.id.ivClear:
+			clearContent();
 			break;
 		case R.id.tvSubmit:
 			if (!TextUtils.isEmpty(etComment.getText().toString())) {
@@ -555,48 +638,21 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 				OkHttpSubmitComment(CONST.COMMENT_WORD_URL);
 			}
 			break;
-		case R.id.ivComment:
-			if (MyApplication.TOKEN != null) {
-				if (llSubmit.getVisibility() == View.GONE) {
-					commentAnimation(false, llSubmit);
-					llSubmit.setVisibility(View.VISIBLE);
-				}else {
-					commentAnimation(true, llSubmit);
-					llSubmit.setVisibility(View.GONE);
-				}
-			}else {
-				Intent intent = new Intent(mContext, LoginActivity.class);
-				startActivityForResult(intent, 0);
-			}
-			break;
 		case R.id.ivPraise:
 			if (praiseState) {
 				return;
-			}else {
+			} else {
 				OkHttpPraise(CONST.PRAISE_WORK_URL);
 			}
 			break;
 		case R.id.ivShare:
-			CommonUtil.share(OnlinePictureActivity.this, data.title, data.title, data.imgUrl, CONST.WEB+data.getVideoId()+CONST.WEB_SUFFIX);
+			if (data != null) {
+				CommonUtil.share(OnlinePictureActivity.this, data.title, data.title, data.imgUrl, CONST.WEB + data.videoId + CONST.WEB_SUFFIX);
+			}
 			break;
 
 		default:
 			break;
-		}
-	}
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_OK) {
-			switch (requestCode) {
-			case 0:
-				llSubmit.setVisibility(View.VISIBLE);
-				break;
-
-			default:
-				break;
-			}
 		}
 	}
 	

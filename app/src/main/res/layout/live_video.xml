@@ -65,7 +65,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dip"
-            android:background="@drawable/iv_live_done"
+            android:background="@drawable/iv_complete"
             android:visibility="gone" />
 
         <ImageView

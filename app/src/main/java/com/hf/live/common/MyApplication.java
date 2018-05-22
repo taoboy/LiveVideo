@@ -7,20 +7,44 @@ import android.content.SharedPreferences;
 
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class MyApplication extends Application{
-	
-	private static Map<String,Activity> destoryMap = new HashMap<String, Activity>();
+
+	private static MyApplication instance;
+	private static Map<String,Activity> destoryMap = new HashMap<>();
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		instance = this;
 
-		//获取视频墙选中的数据源信息
+		//在application中初始化sdk，这个初始化最好放在application的程序入口中，防止意外发生：
+		UMShareAPI.get(this);
+
+		getVideoWallResource();
+	}
+
+	public static MyApplication getApplication() {
+		return instance;
+	}
+
+	{
+		//umeng分享的平台注册
+		PlatformConfig.setWeixin("wxde36f1bc838263b2", "29e733030c77dbda77784fc7d880dff5");
+		PlatformConfig.setQQZone("1104765826", "diELThajoUq2TWUa");
+		PlatformConfig.setSinaWeibo("3038972811", "fee238ac7337be352aac2042a3bb017b", "http://sns.whalecloud.com/sina2/callback");
+		Config.DEBUG = false;
+	}
+
+	/**
+	 * 获取照片墙数据源
+	 */
+	private void getVideoWallResource() {
 		SharedPreferences sp = getSharedPreferences("DATASOURCE", Context.MODE_PRIVATE);
 		int size = sp.getInt("size", 0);
 		if (size > 0) {
@@ -33,13 +57,6 @@ public class MyApplication extends Application{
 				}
 			}
 		}
-	}
-
-	{
-		//umeng分享的平台注册
-		PlatformConfig.setWeixin("wxde36f1bc838263b2", "29e733030c77dbda77784fc7d880dff5");
-		PlatformConfig.setQQZone("1104765826", "diELThajoUq2TWUa");
-		Config.DEBUG = false;
 	}
 	
 	/**

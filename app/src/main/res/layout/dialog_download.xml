@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvSd"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:background="@drawable/corner_top_white"
+        android:text="标清360P"
+        android:gravity="center"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_gray"/>
+
+    <TextView
+        android:id="@+id/tvHd"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:background="@color/white"
+        android:text="高清480P"
+        android:gravity="center"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/light_gray"/>
+
+    <TextView
+        android:id="@+id/tvFhd"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:background="@drawable/corner_bottom_white"
+        android:text="超清720P"
+        android:gravity="center"
+        android:textColor="@color/text_color3"
+        android:textSize="@dimen/level_4" />
+
+</LinearLayout>

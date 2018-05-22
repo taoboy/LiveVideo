@@ -68,7 +68,7 @@ public class MyAboutActivity extends BaseActivity implements OnClickListener{
 			}
 		}
 		
-		tvVersion.setText(CommonUtil.getVersion(mContext));
+		tvVersion.setText("版本号："+CommonUtil.getVersion(mContext));
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class MyAboutActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void dialDialog(final String message, final String content) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.delete_dialog, null);
+		View view = inflater.inflate(R.layout.dialog_delete, null);
 		TextView tvMessage = (TextView) view.findViewById(R.id.tvMessage);
 		TextView tvContent = (TextView) view.findViewById(R.id.tvContent);
 		LinearLayout llNegative = (LinearLayout) view.findViewById(R.id.llNegative);
@@ -118,9 +118,9 @@ public class MyAboutActivity extends BaseActivity implements OnClickListener{
 			finish();
 			break;
 		case R.id.tvAddress:
-			Intent intentAddr = new Intent(mContext, MyAboutDetailActivity.class);
-			intentAddr.putExtra("web", tvAddress.getText().toString());
-			startActivity(intentAddr);
+			Intent intent = new Intent(mContext, WebviewActivity.class);
+			intent.putExtra("url", tvAddress.getText().toString());
+			startActivity(intent);
 			break;
 		case R.id.tvHotline:
 			dialDialog(getString(R.string.service_hotline2), getString(R.string.hotline_num));

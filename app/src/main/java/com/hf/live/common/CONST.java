@@ -8,15 +8,15 @@ public class CONST {
 
 	public static String SHOWGUIDE = "show_guide";
 	public static String VERSION = "version";
-	
 	public static String APPID = "0";
 	public static String SOURCENAME = "气象频道";
+	public static String noValue = "--";
 	
 	//接口地址
 	public static String LOGIN_URL = "http://channellive2.tianqi.cn/Weather/User/Login3";//登陆接口
 	public static String REGISTER_URL = "http://channellive2.tianqi.cn/weather/user/Register";//注册接口
 	public static String MODIFY_USERINFO_URL = "http://channellive2.tianqi.cn/weather/user/update";//修改用户信息接口
-	public static String UPLOAD_VIDEO_PIC_URL = "http://channellive2.tianqi.cn/weather/work/Upload";//上传视频、图片接口
+	public static String UPLOAD_VIDEO_PIC_URL = "http://channellive2.tianqi.cn/weather/Tensent/upload";//上传视频、图片接口
 	public static String GET_VIDEO_PIC_URL = "http://channellive2.tianqi.cn/weather/work/getwork";//获取上传视频、图片接口
 	public static String GET_CHECK_LIST = "http://channellive2.tianqi.cn/weather/work/getallwork";//获取视频审核列表
 	public static String CHECK_VIDEO = "http://channellive2.tianqi.cn/Weather/work/workCheck";//视频审核
@@ -53,6 +53,7 @@ public class CONST {
 	public static String THUMBNAIL_ADDR = SDCARD_PATH + "/thumbnail";//缩略图保存的路径
 	public static String PICTURE_ADDR = SDCARD_PATH + "/picture/";//拍照保存的路径
 	public static String VIDEOTYPE = ".mp4";//mp4格式播放视频要快，比.3gp速度快很多
+	public static String IMGTYPE = ".jpg";
 	public static int TIME = 120;//视频录制时间限定为120秒
 	public static int standarH = 608;//当视频高度太高时，给一个定值
 //	public static String WEB = "http://channellive2.tianqi.cn/showVideo.html?url=";//分享视频时，网页需要加载播放器

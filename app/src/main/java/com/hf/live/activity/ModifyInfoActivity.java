@@ -112,7 +112,7 @@ public class ModifyInfoActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 异步请求
 	 */
-	private void OkHttpModify(String url) {
+	private void OkHttpModify(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("token", MyApplication.TOKEN);
 		if (TextUtils.equals(title, "昵称")) {
@@ -122,97 +122,97 @@ public class ModifyInfoActivity extends BaseActivity implements OnClickListener{
 		}else if (TextUtils.equals(title, "单位名称")) {
 			builder.add("department", etContent.getText().toString().trim());
 		}
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (result != null) {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (object != null) {
-							if (!object.isNull("status")) {
-								int status = object.getInt("status");
-								if (status == 1) {//成功
-									if (!object.isNull("info")) {
-										JSONObject obj = new JSONObject(object.getString("info"));
-										if (!obj.isNull("token")) {
-											MyApplication.TOKEN = obj.getString("token");
-										}
-										if (!obj.isNull("phonenumber")) {
-											MyApplication.USERNAME = obj.getString("phonenumber");
-										}
-										if (!obj.isNull("username")) {
-											MyApplication.OLDUSERNAME = obj.getString("username");
-										}
-										if (!obj.isNull("nickname")) {
-											MyApplication.NICKNAME = obj.getString("nickname");
-										}
-										if (!obj.isNull("mail")) {
-											MyApplication.MAIL = obj.getString("mail");
-										}
-										if (!obj.isNull("department")) {
-											MyApplication.UNIT = obj.getString("department");
-										}
-										if (!obj.isNull("groupid")) {
-											MyApplication.GROUPID = obj.getString("groupid");
-										}
-										if (!obj.isNull("points")) {
-											MyApplication.POINTS = obj.getString("points");
-										}
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONObject obj = new JSONObject(object.getString("info"));
+														if (!obj.isNull("token")) {
+															MyApplication.TOKEN = obj.getString("token");
+														}
+														if (!obj.isNull("phonenumber")) {
+															MyApplication.USERNAME = obj.getString("phonenumber");
+														}
+														if (!obj.isNull("username")) {
+															MyApplication.OLDUSERNAME = obj.getString("username");
+														}
+														if (!obj.isNull("nickname")) {
+															MyApplication.NICKNAME = obj.getString("nickname");
+														}
+														if (!obj.isNull("mail")) {
+															MyApplication.MAIL = obj.getString("mail");
+														}
+														if (!obj.isNull("department")) {
+															MyApplication.UNIT = obj.getString("department");
+														}
+														if (!obj.isNull("groupid")) {
+															MyApplication.GROUPID = obj.getString("groupid");
+														}
+														if (!obj.isNull("points")) {
+															MyApplication.POINTS = obj.getString("points");
+														}
 
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												//把用户信息保存在sharedPreferance里
-												SharedPreferences sharedPreferences = getSharedPreferences(MyApplication.USERINFO, Context.MODE_PRIVATE);
-												Editor editor = sharedPreferences.edit();
-												editor.putString(MyApplication.UserInfo.oldUserName, MyApplication.OLDUSERNAME);
-												editor.putString(MyApplication.UserInfo.userName, MyApplication.USERNAME);
-												editor.putString(MyApplication.UserInfo.groupId, MyApplication.GROUPID);
-												editor.putString(MyApplication.UserInfo.token, MyApplication.TOKEN);
-												editor.putString(MyApplication.UserInfo.points, MyApplication.POINTS);
-												editor.putString(MyApplication.UserInfo.photo, MyApplication.PHOTO);
-												editor.putString(MyApplication.UserInfo.nickName, MyApplication.NICKNAME);
-												editor.putString(MyApplication.UserInfo.mail, MyApplication.MAIL);
-												editor.putString(MyApplication.UserInfo.unit, MyApplication.UNIT);
-												editor.commit();
+														//把用户信息保存在sharedPreferance里
+														SharedPreferences sharedPreferences = getSharedPreferences(MyApplication.USERINFO, Context.MODE_PRIVATE);
+														Editor editor = sharedPreferences.edit();
+														editor.putString(MyApplication.UserInfo.oldUserName, MyApplication.OLDUSERNAME);
+														editor.putString(MyApplication.UserInfo.userName, MyApplication.USERNAME);
+														editor.putString(MyApplication.UserInfo.groupId, MyApplication.GROUPID);
+														editor.putString(MyApplication.UserInfo.token, MyApplication.TOKEN);
+														editor.putString(MyApplication.UserInfo.points, MyApplication.POINTS);
+														editor.putString(MyApplication.UserInfo.photo, MyApplication.PHOTO);
+														editor.putString(MyApplication.UserInfo.nickName, MyApplication.NICKNAME);
+														editor.putString(MyApplication.UserInfo.mail, MyApplication.MAIL);
+														editor.putString(MyApplication.UserInfo.unit, MyApplication.UNIT);
+														editor.commit();
 
-												setResult(RESULT_OK);
-												finish();
-											}
-										});
+														setResult(RESULT_OK);
+														finish();
 
-									}
-								}else {
-									if (!object.isNull("msg")) {
-										final String msg = object.getString("msg");
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+													}
+												}else {
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
-										});
+										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
+						});
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override

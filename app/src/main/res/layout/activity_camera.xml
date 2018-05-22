@@ -125,7 +125,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dip"
-            android:src="@drawable/iv_live_done"
+            android:src="@drawable/iv_complete"
             android:visibility="gone" />
 
         <ImageView
@@ -147,6 +147,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >

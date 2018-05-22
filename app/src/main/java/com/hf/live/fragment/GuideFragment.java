@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.activity.LoginActivity;
 import com.hf.live.activity.MainActivity;
+import com.hf.live.activity.MainActivity2;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
 import com.hf.live.util.CommonUtil;
@@ -72,93 +73,98 @@ public class GuideFragment extends Fragment implements OnClickListener{
 	/**
 	 * 获取我的信息，目的是为了验证token是否失效
 	 */
-	private void OkHttpUserinfo(String requestUrl) {
+	private void OkHttpUserinfo(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("token", MyApplication.TOKEN);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(requestUrl).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				getActivity().runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (object != null) {
-									if (!object.isNull("status")) {
-										int status  = object.getInt("status");
-										if (status == 1) {//成功
-											if (!object.isNull("info")) {
-												JSONObject obj = object.getJSONObject("info");
-												if (!obj.isNull("token")) {
-													MyApplication.TOKEN = obj.getString("token");
-												}
-												if (!obj.isNull("phonenumber")) {
-													MyApplication.USERNAME = obj.getString("phonenumber");
-												}
-												if (!obj.isNull("username")) {
-													MyApplication.OLDUSERNAME = obj.getString("username");
-												}
-												if (!obj.isNull("nickname")) {
-													MyApplication.NICKNAME = obj.getString("nickname");
-												}
-												if (!obj.isNull("mail")) {
-													MyApplication.MAIL = obj.getString("mail");
-												}
-												if (!obj.isNull("department")) {
-													MyApplication.UNIT = obj.getString("department");
-												}
-												if (!obj.isNull("groupid")) {
-													MyApplication.GROUPID = obj.getString("groupid");
-												}
-												if (!obj.isNull("points")) {
-													MyApplication.POINTS = obj.getString("points");
-												}
-												if (!obj.isNull("photo")) {
-													MyApplication.PHOTO = obj.getString("photo");
-													if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
-														CommonUtil.OkHttpLoadPortrait(getActivity(), MyApplication.PHOTO);
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONObject obj = object.getJSONObject("info");
+														if (!obj.isNull("token")) {
+															MyApplication.TOKEN = obj.getString("token");
+														}
+														if (!obj.isNull("phonenumber")) {
+															MyApplication.USERNAME = obj.getString("phonenumber");
+														}
+														if (!obj.isNull("username")) {
+															MyApplication.OLDUSERNAME = obj.getString("username");
+														}
+														if (!obj.isNull("nickname")) {
+															MyApplication.NICKNAME = obj.getString("nickname");
+														}
+														if (!obj.isNull("mail")) {
+															MyApplication.MAIL = obj.getString("mail");
+														}
+														if (!obj.isNull("department")) {
+															MyApplication.UNIT = obj.getString("department");
+														}
+														if (!obj.isNull("groupid")) {
+															MyApplication.GROUPID = obj.getString("groupid");
+														}
+														if (!obj.isNull("points")) {
+															MyApplication.POINTS = obj.getString("points");
+														}
+														if (!obj.isNull("photo")) {
+															MyApplication.PHOTO = obj.getString("photo");
+															if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+																CommonUtil.OkHttpLoadPortrait(getActivity(), MyApplication.PHOTO);
+															}
+														}
+
+														MyApplication.saveUserInfo(getActivity());
+
+														startActivity(new Intent(getActivity(), MainActivity2.class));
+														getActivity().finish();
+
 													}
-												}
-
-												MyApplication.saveUserInfo(getActivity());
-
-												startActivity(new Intent(getActivity(), MainActivity.class));
-												getActivity().finish();
-
-											}
-										}else if (status == 401) {//token无效
-											startActivity(new Intent(getActivity(), LoginActivity.class));
-											getActivity().finish();
-										}else {
-											//失败
-											if (!object.isNull("msg")) {
-												final String msg = object.getString("msg");
-												if (msg != null) {
-													Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+												}else if (status == 401) {//token无效
+													startActivity(new Intent(getActivity(), LoginActivity.class));
+													getActivity().finish();
+												}else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override

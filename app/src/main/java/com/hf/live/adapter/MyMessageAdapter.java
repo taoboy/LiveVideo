@@ -17,7 +17,6 @@ import com.hf.live.dto.PhotoDto;
 
 import net.tsz.afinal.FinalBitmap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,21 +25,13 @@ import java.util.List;
 
 public class MyMessageAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<PhotoDto>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PhotoDto> mArrayList ;
 	
 	private final class ViewHolder{
-		ImageView ivPortrait;
-		ImageView imageView;
-		ImageView ivVideo;
-		TextView tvUserName;
-		TextView tvDate;
-		TextView tvContent;
-		TextView tvScore;
-		TextView tvPosition;
-		TextView tvTime;
-		TextView tvTitle;
+		ImageView ivPortrait,imageView,ivVideo;
+		TextView tvUserName,tvDate,tvContent,tvScore,tvPosition,tvTitle;
 		RelativeLayout rePortrait;
 		LinearLayout llVideo;
 	}
@@ -81,7 +72,6 @@ public class MyMessageAdapter extends BaseAdapter{
 			mHolder.tvContent = (TextView) convertView.findViewById(R.id.tvContent);
 			mHolder.tvScore = (TextView) convertView.findViewById(R.id.tvScore);
 			mHolder.tvPosition = (TextView) convertView.findViewById(R.id.tvPosition);
-			mHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 			mHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
 			mHolder.rePortrait = (RelativeLayout) convertView.findViewById(R.id.rePortrait);
 			mHolder.llVideo = (LinearLayout) convertView.findViewById(R.id.llVideo);
@@ -91,49 +81,68 @@ public class MyMessageAdapter extends BaseAdapter{
 		}
 		
 		PhotoDto dto = mArrayList.get(position);
-		mHolder.tvUserName.setText(dto.getUserName());
-		mHolder.tvDate.setText(dto.getCreateTime());
-		mHolder.tvContent.setText(dto.getMsgContent());
+
+		LayoutParams lp = mHolder.ivPortrait.getLayoutParams();
+		int width = lp.width;
+		if (!TextUtils.isEmpty(dto.portraitUrl)) {
+			FinalBitmap portraitBitmap = FinalBitmap.create(mContext);
+			portraitBitmap.display(mHolder.ivPortrait, dto.portraitUrl, null, width);
+		}
+
+		if (!TextUtils.isEmpty(dto.nickName)) {
+			mHolder.tvUserName.setText(dto.nickName);
+		}else if (!TextUtils.isEmpty(dto.userName)) {
+			mHolder.tvUserName.setText(dto.userName);
+		}else if (!TextUtils.isEmpty(dto.phoneNumber)) {
+			if (dto.phoneNumber.length() >= 7) {
+				mHolder.tvUserName.setText(dto.phoneNumber.replace(dto.phoneNumber.substring(3, 7), "****"));
+			}else {
+				mHolder.tvUserName.setText(dto.phoneNumber);
+			}
+		}
+
+		if (!TextUtils.isEmpty(dto.msgContent)) {
+			mHolder.tvContent.setText(dto.msgContent);
+		}
+
+		if (!TextUtils.isEmpty(dto.workTime)) {
+			mHolder.tvDate.setText(dto.workTime);
+		}
+
 		if (!TextUtils.isEmpty(dto.getLocation())) {
 			mHolder.tvPosition.setText(dto.getLocation());
 		}else {
 			mHolder.tvPosition.setText(mContext.getString(R.string.no_location));
 		}
-		mHolder.tvTitle.setText(dto.getTitle());
-		mHolder.tvScore.setText("+"+dto.getScore());
-		if (dto.getScore().equals("0")) {
-			mHolder.tvScore.setVisibility(View.INVISIBLE);
-			mHolder.llVideo.setVisibility(View.VISIBLE);
-			mHolder.rePortrait.setVisibility(View.VISIBLE);
-		}else {
-			mHolder.tvScore.setVisibility(View.VISIBLE);
-			mHolder.llVideo.setVisibility(View.GONE);
-			mHolder.rePortrait.setVisibility(View.GONE);
+
+		if (!TextUtils.isEmpty(dto.title)) {
+			mHolder.tvTitle.setText(dto.title);
 		}
-		
-		if (!TextUtils.isEmpty(dto.getWorkTime())) {
-			mHolder.tvTime.setText(mContext.getResources().getString(R.string.cell_upload)+": "+dto.getWorkTime());
-		}else {
-			mHolder.tvTime.setText(mContext.getResources().getString(R.string.cell_upload)+": "+"--");
+
+		if (!TextUtils.isEmpty(dto.score)) {
+			mHolder.tvScore.setText("+"+dto.score);
+			if (dto.getScore().equals("0")) {
+				mHolder.tvScore.setVisibility(View.INVISIBLE);
+				mHolder.llVideo.setVisibility(View.VISIBLE);
+				mHolder.rePortrait.setVisibility(View.VISIBLE);
+			}else {
+				mHolder.tvScore.setVisibility(View.VISIBLE);
+				mHolder.llVideo.setVisibility(View.GONE);
+				mHolder.rePortrait.setVisibility(View.GONE);
+			}
 		}
-		
-		if (dto.getWorkstype().equals("imgs")) {
+
+		if (dto.workstype.equals("imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);
 		}else {
 			mHolder.ivVideo.setVisibility(View.VISIBLE);
 		}
-		
-		LayoutParams lp = mHolder.ivPortrait.getLayoutParams();
-		int width = lp.width;
-		FinalBitmap portraitBitmap = FinalBitmap.create(mContext);
-		portraitBitmap.display(mHolder.ivPortrait, dto.getPortraitUrl(), null, width);
-		
-		
-		if (dto.imgUrl != null) {
+
+		if (!TextUtils.isEmpty(dto.imgUrl)) {
 			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
 		}
-		
+
 		return convertView;
 	}
 

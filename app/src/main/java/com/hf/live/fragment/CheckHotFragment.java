@@ -261,197 +261,221 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 	/**
 	 * 获取视频列表
 	 */
-	private void OkHttpVideoList(String requestUrl) {
-		OkHttpUtil.enqueue(new Request.Builder().url(requestUrl).build(), new Callback() {
+	private void OkHttpVideoList(final String url) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					if (result != null) {
-						try {
-							JSONObject object = new JSONObject(result);
-							if (object != null) {
-								if (!object.isNull("status")) {
-									int status  = object.getInt("status");
-									if (status == 1) {//成功
-										if (!object.isNull("info")) {
-											JSONArray array = object.getJSONArray("info");
-											for (int i = 0; i < array.length(); i++) {
-												JSONObject obj = array.getJSONObject(i);
-												PhotoDto dto = new PhotoDto();
-												if (!obj.isNull("uid")) {
-													dto.uid = obj.getString("uid");
-												}
-												if (!obj.isNull("id")) {
-													dto.videoId = obj.getString("id");
-												}
-												if (!obj.isNull("title")) {
-													dto.title = obj.getString("title");
-												}
-												if (!obj.isNull("content")) {
-													dto.content = obj.getString("content");
-												}
-												if (!obj.isNull("create_time")) {
-													dto.createTime = obj.getString("create_time");
-												}
-												if (!obj.isNull("location")) {
-													dto.location = obj.getString("location");
-												}
-												if (!obj.isNull("nickname")) {
-													dto.nickName = obj.getString("nickname");
-												}
-												if (!obj.isNull("username")) {
-													dto.userName = obj.getString("username");
-												}
-												if (!obj.isNull("phonenumber")) {
-													dto.phoneNumber = obj.getString("phonenumber");
-												}
-												if (!obj.isNull("praise")) {
-													dto.praiseCount = obj.getString("praise");
-												}
-												if (!obj.isNull("comments")) {
-													dto.commentCount = obj.getString("comments");
-												}
-												if (!obj.isNull("work_time")) {
-													dto.workTime = obj.getString("work_time");
-												}
-												if (!obj.isNull("workstype")) {
-													dto.workstype = obj.getString("workstype");
-												}
-												if (!obj.isNull("status")) {
-													dto.status = obj.getString("status");
-												}
-												if (!obj.isNull("weather_flag")) {
-													dto.weatherFlag = obj.getString("weather_flag");
-												}
-												if (!obj.isNull("et01")) {
-													dto.otherFlag = obj.getString("et01");
-												}
-												if (!obj.isNull("worksinfo")) {
-													JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
-													if (!workObj.isNull("thumbnail")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("thumbnail"));
-														if (!imgObj.isNull("url")) {
-															//视频缩略图
-															dto.imgUrl = imgObj.getString("url");
-														}
-													}
-													if (!workObj.isNull("video")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("video"));
-														if (!imgObj.isNull("url")) {
-															//视频地址
-															dto.videoUrl = imgObj.getString("url");
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						getActivity().runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONArray array = object.getJSONArray("info");
+														for (int i = 0; i < array.length(); i++) {
+															JSONObject obj = array.getJSONObject(i);
+															PhotoDto dto = new PhotoDto();
+															if (!obj.isNull("uid")) {
+																dto.uid = obj.getString("uid");
+															}
+															if (!obj.isNull("id")) {
+																dto.videoId = obj.getString("id");
+															}
+															if (!obj.isNull("title")) {
+																dto.title = obj.getString("title");
+															}
+															if (!obj.isNull("content")) {
+																dto.content = obj.getString("content");
+															}
+															if (!obj.isNull("create_time")) {
+																dto.createTime = obj.getString("create_time");
+															}
+															if (!obj.isNull("location")) {
+																dto.location = obj.getString("location");
+															}
+															if (!obj.isNull("nickname")) {
+																dto.nickName = obj.getString("nickname");
+															}
+															if (!obj.isNull("username")) {
+																dto.userName = obj.getString("username");
+															}
+															if (!obj.isNull("phonenumber")) {
+																dto.phoneNumber = obj.getString("phonenumber");
+															}
+															if (!obj.isNull("praise")) {
+																dto.praiseCount = obj.getString("praise");
+															}
+															if (!obj.isNull("browsecount")) {
+																dto.playCount = obj.getString("browsecount");
+															}
+															if (!obj.isNull("comments")) {
+																dto.commentCount = obj.getString("comments");
+															}
+															if (!obj.isNull("work_time")) {
+																dto.workTime = obj.getString("work_time");
+															}
+															if (!obj.isNull("workstype")) {
+																dto.workstype = obj.getString("workstype");
+															}
+															if (!obj.isNull("status")) {
+																dto.status = obj.getString("status");
+															}
+															if (!obj.isNull("weather_flag")) {
+																dto.weatherFlag = obj.getString("weather_flag");
+															}
+															if (!obj.isNull("other_flags")) {
+																dto.otherFlag = obj.getString("other_flags");
+															}
+															if (!obj.isNull("worksinfo")) {
+																JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
+																//视频
+																if (!workObj.isNull("video")) {
+																	JSONObject video = workObj.getJSONObject("video");
+																	if (!video.isNull("ORG")) {//腾讯云结构解析
+																		JSONObject ORG = video.getJSONObject("ORG");
+																		if (!ORG.isNull("url")) {
+																			dto.videoUrl = ORG.getString("url");
+																		}
+																		if (!video.isNull("SD")) {
+																			JSONObject SD = video.getJSONObject("SD");
+																			if (!SD.isNull("url")) {
+																				dto.sd = SD.getString("url");
+																			}
+																		}
+																		if (!video.isNull("HD")) {
+																			JSONObject HD = video.getJSONObject("HD");
+																			if (!HD.isNull("url")) {
+																				dto.hd = HD.getString("url");
+																				dto.videoUrl = HD.getString("url");
+																			}
+																		}
+																		if (!video.isNull("FHD")) {
+																			JSONObject FHD = video.getJSONObject("FHD");
+																			if (!FHD.isNull("url")) {
+																				dto.fhd = FHD.getString("url");
+																			}
+																		}
+																	}else {
+																		dto.videoUrl = video.getString("url");
+																	}
+																}
+																if (!workObj.isNull("thumbnail")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("thumbnail"));
+																	if (!imgObj.isNull("url")) {
+																		dto.imgUrl = imgObj.getString("url");
+																	}
+																}
+
+																//上传的图片地址，最多9张
+																List<String> urlList = new ArrayList<>();
+																if (!workObj.isNull("imgs1")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs1"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																		dto.imgUrl = imgObj.getString("url");
+																	}
+																}
+																if (!workObj.isNull("imgs2")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs2"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs3")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs3"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs4")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs4"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs5")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs5"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs6")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs6"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs7")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs7"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs8")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs8"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs9")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs9"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																dto.urlList.addAll(urlList);
+															}
+
+															if (!TextUtils.isEmpty(dto.workTime)) {
+																mList.add(dto);
+															}
 														}
 													}
 
-													//上传的图片地址，最多9张
-													List<String> urlList = new ArrayList<>();
-													if (!workObj.isNull("imgs1")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs1"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-															dto.imgUrl = imgObj.getString("url");
-														}
+													if (mAdapter != null) {
+														mAdapter.notifyDataSetChanged();
 													}
-													if (!workObj.isNull("imgs2")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs2"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs3")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs3"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs4")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs4"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs5")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs5"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs6")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs6"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs7")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs7"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs8")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs8"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs9")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs9"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													dto.urlList.addAll(urlList);
-												}
+													refreshLayout.setRefreshing(false);
+													refreshLayout.setLoading(false);
 
-												if (!TextUtils.isEmpty(dto.getWorkTime())) {
-													mList.add(dto);
+												}else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
-
-										getActivity().runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												if (mList.size() > 0 && mAdapter != null) {
-													mAdapter.notifyDataSetChanged();
-												}
-												refreshLayout.setRefreshing(false);
-												refreshLayout.setLoading(false);
-											}
-										});
-
-									}else {
-										//失败
-										if (!object.isNull("msg")) {
-											final String msg = object.getString("msg");
-											getActivity().runOnUiThread(new Runnable() {
-												@Override
-												public void run() {
-													if (msg != null) {
-														Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-													}
-												}
-											});
-										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
+						});
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 	
 }

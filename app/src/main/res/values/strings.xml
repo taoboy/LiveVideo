@@ -97,7 +97,7 @@
     <string name="unselect_all">全不选</string>
     <string name="upload_input_title">上传请输入标题</string>
     <string name="upload_success">上传成功</string>
-    <string name="upload_success_prompt">您可以在以下位置找到它\n个人-我的上传-已上传</string>
+    <string name="upload_success_prompt">您可以在以下位置找到它\n个人中心-我的上传-已上传</string>
     <string name="upload_failed">上传失败！</string>
     <string name="i_know">我知道了</string>
     <string name="at_most_nine">你最多只能拍9张照片</string>
@@ -137,7 +137,7 @@
     <string name="hotline_num">010-68408068</string>
     <string name="web_addr">http://www.tianqi.cn/windcloud/fengyunjipai.html</string>
     <string name="statement">声明</string>
-    <string name="statement_content1">\t\t\t\t通过本APP客户端发布的所有信息，北京华风创新网络技术有限公司和中国气象频道拥有独家并永久免费的使用权，并有权进行再授权，并有权对相关信息进行改写、修订、分发等。\n\n\t\t\t\t所有内容均不代表本APP客户端意见观点，内容发布者需对信息的真实性负责。</string>
+    <string name="statement_content1">\t\t\t\t通过本APP客户端发布的所有信息，北京华风创新网络技术有限公司和中国气象频道拥有独家并永久免费的使用权，并有权进行再授权，并有权对相关信息进行改写、修订、分发等。\n\t\t\t\t所有内容均不代表本APP客户端意见观点，内容发布者需对信息的真实性负责。</string>
     <string name="version_code">版本号：</string>
     <string name="dial_phone">拨打</string>
     <string name="exchange">兑换</string>
@@ -172,6 +172,15 @@
     <string name="delete_all_files">已删除所选文件</string>
     <string name="upload_all_files">已上传所选文件</string>
     <string name="sure_exit">确定退出编辑界面？</string>
+
+    <string name="chart_north">北风</string>
+    <string name="chart_north_east">东北风</string>
+    <string name="chart_east">东风</string>
+    <string name="chart_south_east">东南风</string>
+    <string name="chart_south">南风</string>
+    <string name="chart_south_west">西南风</string>
+    <string name="chart_west">西风</string>
+    <string name="chart_north_west">西北风</string>
     
      <!-- 天气表 -->
     <string name="weather0">晴</string>

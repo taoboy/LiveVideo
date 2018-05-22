@@ -1,20 +1,20 @@
 package com.hf.live.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.tsz.afinal.FinalBitmap;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.hf.live.R;
+
+import net.tsz.afinal.FinalBitmap;
+
+import java.util.List;
 
 /**
  * 在线预览图片
@@ -22,10 +22,11 @@ import com.hf.live.R;
 
 public class OnlinePictureAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<String> mArrayList = new ArrayList<>();
-	private int width = 0;
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<String> mArrayList;
+	private int width;
+	private RelativeLayout.LayoutParams params;
 	
 	private final class ViewHolder{
 		ImageView imageView;
@@ -33,7 +34,6 @@ public class OnlinePictureAdapter extends BaseAdapter{
 	
 	private ViewHolder mHolder = null;
 	
-	@SuppressWarnings("deprecation")
 	public OnlinePictureAdapter(Context context, List<String> mArrayList) {
 		mContext = context;
 		this.mArrayList = mArrayList;
@@ -41,6 +41,7 @@ public class OnlinePictureAdapter extends BaseAdapter{
 		
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
+		params = new RelativeLayout.LayoutParams(width/4, width/4-10);
 	}
 
 	@Override
@@ -73,10 +74,9 @@ public class OnlinePictureAdapter extends BaseAdapter{
 		if (!TextUtils.isEmpty(imgUrl)) {
 			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 			finalBitmap.display(mHolder.imageView, imgUrl, null, 0);
-			LayoutParams params = mHolder.imageView.getLayoutParams();
-			params.width = width/4;
-			params.height = width/4;
-			mHolder.imageView.setLayoutParams(params);
+			if (params != null) {
+				mHolder.imageView.setLayoutParams(params);
+			}
 		}
 		
 		return convertView;

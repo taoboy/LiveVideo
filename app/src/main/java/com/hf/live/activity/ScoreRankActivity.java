@@ -57,68 +57,77 @@ public class ScoreRankActivity extends BaseActivity implements View.OnClickListe
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         tvTitle.setText("积分排行");
 
-        String url = "http://channellive2.tianqi.cn/weather/work/getTopScore20Users";
-        OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
+        OkHttpScoreRank("http://channellive2.tianqi.cn/weather/work/getTopScore20Users");
+    }
 
-            }
-
+    private void OkHttpScoreRank(final String url) {
+        new Thread(new Runnable() {
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    return;
-                }
-                String result = response.body().string();
-                if (!TextUtils.isEmpty(result)) {
-                    try {
-                        JSONArray array = new JSONArray(result);
-                        mList.clear();
-                        for (int i = 0; i < array.length(); i++) {
-                            JSONObject itemObj = array.getJSONObject(i);
-                            PhotoDto dto = new PhotoDto();
-                            if (!itemObj.isNull("username")) {
-                                dto.userName = itemObj.getString("username");
-                            }
-                            if (!itemObj.isNull("phonenumber")) {
-                                dto.phoneNumber = itemObj.getString("phonenumber");
-                            }
-                            if (!itemObj.isNull("nickname")) {
-                                dto.nickName = itemObj.getString("nickname");
-                            }
-                            if (!itemObj.isNull("points")) {
-                                dto.score = itemObj.getString("points");
-                            }
-                            if (!itemObj.isNull("uid")) {
-                                dto.uid = itemObj.getString("uid");
-                            }
-                            if (!itemObj.isNull("photo")) {
-                                dto.portraitUrl = itemObj.getString("photo");
-                            }
-                            if (!itemObj.isNull("mail")) {
-                                dto.mail = itemObj.getString("mail");
-                            }
-                            if (!itemObj.isNull("department")) {
-                                dto.unit = itemObj.getString("department");
-                            }
-                            mList.add(dto);
+            public void run() {
+                OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            return;
                         }
-
+                        final String result = response.body().string();
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (mList.size() > 0 && mAdapter != null) {
-                                    mAdapter.notifyDataSetChanged();
+                                if (!TextUtils.isEmpty(result)) {
+                                    try {
+                                        JSONArray array = new JSONArray(result);
+                                        mList.clear();
+                                        for (int i = 0; i < array.length(); i++) {
+                                            JSONObject itemObj = array.getJSONObject(i);
+                                            PhotoDto dto = new PhotoDto();
+                                            if (!itemObj.isNull("username")) {
+                                                dto.userName = itemObj.getString("username");
+                                            }
+                                            if (!itemObj.isNull("phonenumber")) {
+                                                dto.phoneNumber = itemObj.getString("phonenumber");
+                                            }
+                                            if (!itemObj.isNull("nickname")) {
+                                                dto.nickName = itemObj.getString("nickname");
+                                            }
+                                            if (!itemObj.isNull("points")) {
+                                                dto.score = itemObj.getString("points");
+                                            }
+                                            if (!itemObj.isNull("uid")) {
+                                                dto.uid = itemObj.getString("uid");
+                                            }
+                                            if (!itemObj.isNull("photo")) {
+                                                dto.portraitUrl = itemObj.getString("photo");
+                                            }
+                                            if (!itemObj.isNull("mail")) {
+                                                dto.mail = itemObj.getString("mail");
+                                            }
+                                            if (!itemObj.isNull("department")) {
+                                                dto.unit = itemObj.getString("department");
+                                            }
+                                            mList.add(dto);
+                                        }
+
+                                        if (mAdapter != null) {
+                                            mAdapter.notifyDataSetChanged();
+                                        }
+                                        cancelDialog();
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                                cancelDialog();
                             }
                         });
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
-                }
+                });
             }
-        });
+        }).start();
     }
 
     private void initListView() {

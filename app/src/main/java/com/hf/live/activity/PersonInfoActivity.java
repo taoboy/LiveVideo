@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
+import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.CircleImageView;
 import com.scene.net.Net;
 
@@ -30,6 +31,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * 修改个人信息
@@ -120,36 +129,49 @@ public class PersonInfoActivity extends BaseActivity implements OnClickListener{
 	 * 上传图片
 	 * @param url 接口地址
 	 */
-	private void uploadPortrait(String url) {
-		AjaxParams params = new AjaxParams();
-		params.put("token", MyApplication.TOKEN);
-		
-		try {
-			params.put("photo", new File(CONST.PORTRAIT_ADDR));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+	private void uploadPortrait(final String url) {
+		File file = new File(CONST.PORTRAIT_ADDR);
+		if (!file.exists()) {
+			return;
 		}
-		
-		Net.post(url, params, new AjaxCallBack<String>() {
+		MultipartBody.Builder builder = new MultipartBody.Builder();
+		builder.addFormDataPart("token", MyApplication.TOKEN);
+		builder.addFormDataPart("photo", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onSuccess(String t) {
-				super.onSuccess(t);
-				getPortrait();
-			}
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								Toast.makeText(mContext, getString(R.string.upload_failed), Toast.LENGTH_SHORT).show();
+							}
+						});
+					}
 
-			@Override
-			public void onLoading(long count, long current) {
-				super.onLoading(count, current);
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									getPortrait();
+								}
+							}
+						});
+					}
+				});
 			}
-
-			@Override
-			public void onFailure(Throwable t, int errorNo, String strMsg) {
-				super.onFailure(t, errorNo, strMsg);
-				Toast.makeText(mContext, getString(R.string.upload_failed), Toast.LENGTH_SHORT).show();
-			}
-		});
+		}).start();
 	}
-	
+
 	/**
 	 * 获取头像
 	 */

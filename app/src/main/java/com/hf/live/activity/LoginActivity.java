@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +19,15 @@ import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
 import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,14 +45,11 @@ import okhttp3.Response;
 public class LoginActivity extends BaseActivity implements OnClickListener{
 	
 	private Context mContext = null;
-	private LinearLayout llBack = null;
-	private TextView tvTitle = null;
-	private EditText etUserName = null;//用户名
-	private EditText etPwd = null;//密码
-	private TextView tvSend = null;
+	private EditText etUserName, etPwd;
 	private int seconds = 60;
 	private Timer timer = null;
-	private TextView tvLogin = null;//登录
+	private TextView tvSend, tvLogin = null;
+	private ImageView ivSina, ivQQ, ivWechat;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,16 +63,18 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		tvTitle = (TextView) findViewById(R.id.tvTitle);
-		tvTitle.setText("登录");
 		etUserName = (EditText) findViewById(R.id.etUserName);
 		etPwd = (EditText) findViewById(R.id.etPwd);
 		tvLogin = (TextView) findViewById(R.id.tvLogin);
 		tvLogin.setOnClickListener(this);
-		llBack = (LinearLayout) findViewById(R.id.llBack);
-		llBack.setOnClickListener(this);
 		tvSend = (TextView) findViewById(R.id.tvSend);
 		tvSend.setOnClickListener(this);
+		ivSina = (ImageView) findViewById(R.id.ivSina);
+		ivSina.setOnClickListener(this);
+		ivQQ = (ImageView) findViewById(R.id.ivQQ);
+		ivQQ.setOnClickListener(this);
+		ivWechat = (ImageView) findViewById(R.id.ivWechat);
+		ivWechat.setOnClickListener(this);
 	}
 	
 	/**
@@ -87,49 +91,54 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 获取验证码
 	 */
-	private void OkHttpCode(String url) {
+	private void OkHttpCode(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("phonenumber", etUserName.getText().toString().trim());
-		RequestBody requestBody = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().url(url).post(requestBody).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).post(body).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject obj = new JSONObject(result);
-								if (!obj.isNull("status")) {
-									if (TextUtils.equals(obj.getString("status"), "301")) {//成功发送验证码
-										//发送验证码成功
-										etPwd.setFocusable(true);
-										etPwd.setFocusableInTouchMode(true);
-										etPwd.requestFocus();
-									}else {//发送验证码失败
-										if (!obj.isNull("msg")) {
-											resetTimer();
-											Toast.makeText(mContext, obj.getString("msg"), Toast.LENGTH_SHORT).show();
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject obj = new JSONObject(result);
+										if (!obj.isNull("status")) {
+											if (TextUtils.equals(obj.getString("status"), "301")) {//成功发送验证码
+												//发送验证码成功
+												etPwd.setFocusable(true);
+												etPwd.setFocusableInTouchMode(true);
+												etPwd.requestFocus();
+											}else {//发送验证码失败
+												if (!obj.isNull("msg")) {
+													resetTimer();
+													Toast.makeText(mContext, obj.getString("msg"), Toast.LENGTH_SHORT).show();
+												}
+											}
 										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
 	
 	@SuppressLint("HandlerLeak")
@@ -166,112 +175,117 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	}
 	
 	/**
-	 * 异步请求
+	 * 登录
 	 */
-	private void OkHttpLogin(final String requestUrl) {
+	private void OkHttpLogin(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("phonenumber", etUserName.getText().toString().trim());
 		builder.add("vcode", etPwd.getText().toString().trim());
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().url(requestUrl).post(body).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).post(body).build(), new Callback() {
 					@Override
-					public void run() {
-						if (!TextUtils.isEmpty(result)) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (object != null) {
-									if (!object.isNull("status")) {
-										int status  = object.getInt("status");
-										if (status == 1) {//成功
-											if (!object.isNull("info")) {
-												JSONObject obj = object.getJSONObject("info");
-												if (!obj.isNull("token")) {
-													MyApplication.TOKEN = obj.getString("token");
-												}
-												if (!obj.isNull("phonenumber")) {
-													MyApplication.USERNAME = obj.getString("phonenumber");
-												}
-												if (!obj.isNull("username")) {
-													MyApplication.OLDUSERNAME = obj.getString("username");
-												}
-												if (!obj.isNull("nickname")) {
-													MyApplication.NICKNAME = obj.getString("nickname");
-												}
-												if (!obj.isNull("mail")) {
-													MyApplication.MAIL = obj.getString("mail");
-												}
-												if (!obj.isNull("department")) {
-													MyApplication.UNIT = obj.getString("department");
-												}
-												if (!obj.isNull("groupid")) {
-													MyApplication.GROUPID = obj.getString("groupid");
-												}
-												if (!obj.isNull("points")) {
-													MyApplication.POINTS = obj.getString("points");
-												}
-												if (!obj.isNull("photo")) {
-													MyApplication.PHOTO = obj.getString("photo");
-													if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
-														CommonUtil.OkHttpLoadPortrait(LoginActivity.this, MyApplication.PHOTO);
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONObject obj = object.getJSONObject("info");
+														if (!obj.isNull("token")) {
+															MyApplication.TOKEN = obj.getString("token");
+														}
+														if (!obj.isNull("phonenumber")) {
+															MyApplication.USERNAME = obj.getString("phonenumber");
+														}
+														if (!obj.isNull("username")) {
+															MyApplication.OLDUSERNAME = obj.getString("username");
+														}
+														if (!obj.isNull("nickname")) {
+															MyApplication.NICKNAME = obj.getString("nickname");
+														}
+														if (!obj.isNull("mail")) {
+															MyApplication.MAIL = obj.getString("mail");
+														}
+														if (!obj.isNull("department")) {
+															MyApplication.UNIT = obj.getString("department");
+														}
+														if (!obj.isNull("groupid")) {
+															MyApplication.GROUPID = obj.getString("groupid");
+														}
+														if (!obj.isNull("points")) {
+															MyApplication.POINTS = obj.getString("points");
+														}
+														if (!obj.isNull("photo")) {
+															MyApplication.PHOTO = obj.getString("photo");
+															if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+																CommonUtil.OkHttpLoadPortrait(LoginActivity.this, MyApplication.PHOTO);
+															}
+														}
+
+														MyApplication.saveUserInfo(mContext);
+
+														cancelDialog();
+														resetTimer();
+														startActivity(new Intent(mContext, MainActivity2.class));
+														finish();
+
 													}
-												}
+												}else if (status == 400) {//选择新用户或者老用户
+													if (!object.isNull("info")) {
+														JSONObject obj = object.getJSONObject("info");
+														if (!obj.isNull("token")) {
+															MyApplication.TOKEN = obj.getString("token");
+														}
+														if (!obj.isNull("phonenumber")) {
+															MyApplication.USERNAME = obj.getString("phonenumber");
+														}
 
-												MyApplication.saveUserInfo(mContext);
+														cancelDialog();
+														resetTimer();
+														startActivity(new Intent(mContext, SelectUserActivity.class));
 
-												cancelDialog();
-												resetTimer();
-												startActivity(new Intent(mContext, MainActivity.class));
-												finish();
-
-											}
-										}else if (status == 400) {//选择新用户或者老用户
-											if (!object.isNull("info")) {
-												JSONObject obj = object.getJSONObject("info");
-												if (!obj.isNull("token")) {
-													MyApplication.TOKEN = obj.getString("token");
-												}
-												if (!obj.isNull("phonenumber")) {
-													MyApplication.USERNAME = obj.getString("phonenumber");
-												}
-
-												cancelDialog();
-												resetTimer();
-												startActivity(new Intent(mContext, SelectUserActivity.class));
-
-											}
-										}else {
-											//失败
-											if (!object.isNull("msg")) {
-												final String msg = object.getString("msg");
-												if (msg != null) {
-													cancelDialog();
-													resetTimer();
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+													}
+												}else {
+													//失败
+													if (!object.isNull("msg")) {
+														final String msg = object.getString("msg");
+														if (msg != null) {
+															cancelDialog();
+															resetTimer();
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
 	
 	/**
@@ -295,9 +309,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.llBack:
-			finish();
-			break;
 		case R.id.tvSend:
 			if (checkMobileInfo()) {
 				if (timer == null) {
@@ -319,10 +330,92 @@ public class LoginActivity extends BaseActivity implements OnClickListener{
 				OkHttpLogin(CONST.LOGIN_URL);
 			}
 			break;
+		case R.id.ivSina:
+			UMShareAPI.get(mContext).getPlatformInfo(this, SHARE_MEDIA.SINA, new UMAuthListener() {
+				@Override
+				public void onStart(SHARE_MEDIA share_media) {
+
+					Toast.makeText(mContext, "start", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+					Log.e("data", map+"");
+				}
+
+				@Override
+				public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+					Toast.makeText(mContext, "error", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onCancel(SHARE_MEDIA share_media, int i) {
+					Toast.makeText(mContext, "cancel", Toast.LENGTH_SHORT).show();
+				}
+			});
+			break;
+		case R.id.ivQQ:
+			UMShareAPI.get(mContext).getPlatformInfo(this, SHARE_MEDIA.QQ, new UMAuthListener() {
+				@Override
+				public void onStart(SHARE_MEDIA share_media) {
+
+					Toast.makeText(mContext, "start", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+					Log.e("data", map+"");
+				}
+
+				@Override
+				public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+					Toast.makeText(mContext, "error", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onCancel(SHARE_MEDIA share_media, int i) {
+					Toast.makeText(mContext, "cancel", Toast.LENGTH_SHORT).show();
+				}
+			});
+			break;
+		case R.id.ivWechat:
+			UMShareAPI.get(mContext).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+				@Override
+				public void onStart(SHARE_MEDIA share_media) {
+
+					Toast.makeText(mContext, "start", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+
+					Log.e("data", map+"");
+				}
+
+				@Override
+				public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+					Toast.makeText(mContext, "error", Toast.LENGTH_SHORT).show();
+				}
+
+				@Override
+				public void onCancel(SHARE_MEDIA share_media, int i) {
+					Toast.makeText(mContext, "cancel", Toast.LENGTH_SHORT).show();
+				}
+			});
+			break;
+
 
 		default:
 			break;
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
 	}
 	
 }

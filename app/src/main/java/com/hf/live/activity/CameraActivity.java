@@ -57,7 +57,6 @@ import com.hf.live.adapter.CameraAdapter;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.util.CommonUtil;
-import com.hf.live.videoedit.VideoTrimActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -87,11 +86,10 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 	private int curCameraId = 0;//0是后置摄像头，1是前置摄像头
 	private long mExitTime;//记录点击完返回按钮后的long型时间
 	private boolean isRecorderOrCamera = true;//true为录像，false为拍照
-	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
 	private boolean isFull = false;//判断gridview是否够9张
 	private CameraAdapter mAdapter = null;
-	private List<PhotoDto> mList = new ArrayList<PhotoDto>();
+	private List<PhotoDto> mList = new ArrayList<>();
 	private int displayW = 0;//屏幕宽
 	private int displayH = 0;//屏幕高
 	private int degree = 0;//保存的图片要旋转的角度
@@ -217,7 +215,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 			return true;
 		}
 	};
-	
+
+	@SuppressLint("HandlerLeak")
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -233,11 +232,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 					dto.videoUrl = intentVideoUrl;
 					selectList.add(dto);
 
-					Intent intent = new Intent(mContext, VideoTrimActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
-					intent.putExtras(bundle);
-					startActivity(intent);
+//					Intent intent = new Intent(mContext, VideoTrimActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
+//					intent.putExtras(bundle);
+//					startActivity(intent);
 				}else {
 					tvTime.setText(String.valueOf(CommonUtil.formatMiss2(miss)));
 					miss--;
@@ -965,11 +964,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 						dto.videoUrl = intentVideoUrl;
 						selectList.add(dto);
 
-						Intent intent = new Intent(mContext, VideoTrimActivity.class);
-						Bundle bundle = new Bundle();
-						bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
-						intent.putExtras(bundle);
-						startActivity(intent);
+//						Intent intent = new Intent(mContext, VideoTrimActivity.class);
+//						Bundle bundle = new Bundle();
+//						bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
+//						intent.putExtras(bundle);
+//						startActivity(intent);
 					}
 				}else {
 					ivDoneLand.setVisibility(View.GONE);
@@ -990,11 +989,11 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback, 
 					dto.videoUrl = intentVideoUrl;
 					selectList.add(dto);
 
-					Intent intent = new Intent(mContext, VideoTrimActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
-					intent.putExtras(bundle);
-					startActivity(intent);
+//					Intent intent = new Intent(mContext, VideoTrimActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putParcelableArrayList("selectList", (ArrayList<? extends Parcelable>) selectList);
+//					intent.putExtras(bundle);
+//					startActivity(intent);
 				}
 			}else {
 				completeTakePhoto();

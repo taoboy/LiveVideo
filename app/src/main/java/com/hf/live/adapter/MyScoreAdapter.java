@@ -14,7 +14,6 @@ import com.hf.live.dto.PhotoDto;
 
 import net.tsz.afinal.FinalBitmap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,19 +22,13 @@ import java.util.List;
 
 public class MyScoreAdapter extends BaseAdapter{
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PhotoDto> mArrayList;
 	
 	private final class ViewHolder{
-		ImageView imageView;
-		ImageView ivVideo;
-		TextView tvDate;
-		TextView tvContent;
-		TextView tvScore;
-		TextView tvPosition;
-		TextView tvTime;
-		TextView tvTitle;
+		ImageView imageView,ivVideo;
+		TextView tvDate,tvScore,tvContent,tvTitle,tvPosition;
 	}
 	
 	private ViewHolder mHolder = null;
@@ -72,7 +65,6 @@ public class MyScoreAdapter extends BaseAdapter{
 			mHolder.tvContent = (TextView) convertView.findViewById(R.id.tvContent);
 			mHolder.tvScore = (TextView) convertView.findViewById(R.id.tvScore);
 			mHolder.tvPosition = (TextView) convertView.findViewById(R.id.tvPosition);
-			mHolder.tvTime = (TextView) convertView.findViewById(R.id.tvTime);
 			mHolder.tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
 			convertView.setTag(mHolder);
 		}else {
@@ -80,24 +72,27 @@ public class MyScoreAdapter extends BaseAdapter{
 		}
 		
 		PhotoDto dto = mArrayList.get(position);
-		mHolder.tvDate.setText(dto.getCreateTime());
-		mHolder.tvContent.setText(dto.getScoreWhy());
-		mHolder.tvScore.setText("+"+dto.getScore());
-		if (!TextUtils.isEmpty(dto.getLocation())) {
-			mHolder.tvPosition.setText(dto.getLocation());
+		if (!TextUtils.isEmpty(dto.workTime)) {
+			mHolder.tvDate.setText(dto.workTime);
+		}
+		if (!TextUtils.isEmpty(dto.scoreWhy)) {
+			mHolder.tvContent.setText(dto.scoreWhy);
+		}
+		if (!TextUtils.isEmpty(dto.score)) {
+			mHolder.tvScore.setText("+"+dto.score);
+		}
+		if (!TextUtils.isEmpty(dto.title)) {
+			mHolder.tvTitle.setText(dto.title);
+		}
+		if (!TextUtils.isEmpty(dto.location)) {
+			mHolder.tvPosition.setText(dto.location);
 		}else {
 			mHolder.tvPosition.setText(mContext.getString(R.string.no_location));
 		}
-		mHolder.tvTitle.setText(dto.getTitle());
-		
-		if (!TextUtils.isEmpty(dto.getWorkTime())) {
-			mHolder.tvTime.setText(mContext.getResources().getString(R.string.cell_upload)+": "+dto.getWorkTime());
-		}else {
-			mHolder.tvTime.setText(mContext.getResources().getString(R.string.cell_upload)+": "+"--");
+		if (!TextUtils.isEmpty(dto.imgUrl)) {
+			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
+			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
 		}
-		
-		FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-		finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
 		if (dto.getWorkstype().equals("imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);
 		}else {

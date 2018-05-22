@@ -1,9 +1,22 @@
 <resources>
 
-    <dimen name="level_1">20dip</dimen>
-    <dimen name="level_2">18dip</dimen>
-    <dimen name="level_3">16dip</dimen>
-    <dimen name="level_4">14dip</dimen>
-    <dimen name="level_5">12dip</dimen>
+    <dimen name="level_1">20dp</dimen>
+    <dimen name="level_2">18dp</dimen>
+    <dimen name="level_3">16dp</dimen>
+    <dimen name="level_4">14dp</dimen>
+    <dimen name="level_5">12dp</dimen>
+
+    <!-- UGC*******************************************************************************************************************************-->
+    <dimen name="ugc_aspect_width">44dp</dimen>
+    <dimen name="ugc_aspect_divider">18dp</dimen>
+    <dimen name="ugc_progress_cursor">2dp</dimen>
+    <dimen name="ugc_progress_min_pos">2dp</dimen>
+    <dimen name="ugc_progress_divider">1dp</dimen>
+
+    <!-- 视频进度条 -->
+    <dimen name="video_progress_height">50dp</dimen>
+    <dimen name="video_thumbnail_width">50dp</dimen>
+    <dimen name="repeat_slider_width">26dp</dimen>
+    <!-- UGC*******************************************************************************************************************************-->
 
 </resources>

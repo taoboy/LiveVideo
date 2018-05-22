@@ -1,8 +1,5 @@
 package com.hf.live.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
@@ -16,6 +13,8 @@ import android.widget.TextView;
 import com.hf.live.R;
 import com.hf.live.dto.UploadVideoDto;
 
+import java.util.List;
+
 /**
  * 天气类型
  * @author shawn_sun
@@ -24,9 +23,9 @@ import com.hf.live.dto.UploadVideoDto;
 
 public class WeatherTypeAdapter extends BaseAdapter {
 	
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<UploadVideoDto> mArrayList = new ArrayList<UploadVideoDto>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<UploadVideoDto> mArrayList;
 	
 	private final class ViewHolder{
 		ImageView imageView;

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
@@ -32,12 +33,13 @@ import java.util.List;
 
 public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter{
 
-	private Context mContext = null;
-	private List<PhotoDto> mArrayList = null;
-	private LayoutInflater mInflater = null;
+	private Context mContext;
+	private List<PhotoDto> mArrayList;
+	private LayoutInflater mInflater;
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMddHHmmss");
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-	private int width = 0;
+	private int width;
+	private RelativeLayout.LayoutParams params;
 
 	public MyNotUploadAdapter(Context context, List<PhotoDto> mArrayList) {
 		this.mContext = context;
@@ -46,6 +48,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 		
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
+		params = new RelativeLayout.LayoutParams(width/4, width/4-10);
 	}
 
 	private HeaderViewHolder mHeaderHolder = null;
@@ -64,7 +67,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			mHeaderHolder = new HeaderViewHolder();
-			convertView = mInflater.inflate(R.layout.sticky_grid_header, null);
+			convertView = mInflater.inflate(R.layout.adapter_my_upload_header, null);
 			mHeaderHolder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 			mHeaderHolder.tvPosition = (TextView) convertView.findViewById(R.id.tvPosition);
 			convertView.setTag(mHeaderHolder);
@@ -111,7 +114,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			mHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.sticky_grid_item, null);
+			convertView = mInflater.inflate(R.layout.adapter_my_upload_content, null);
 			mHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 			mHolder.ivVideo = (ImageView) convertView.findViewById(R.id.ivVideo);
 			convertView.setTag(mHolder);
@@ -125,10 +128,9 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 			if (!TextUtils.isEmpty(dto.imgUrl)) {
 				FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 				finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-				ViewGroup.LayoutParams params = mHolder.imageView.getLayoutParams();
-				params.width = width/4;
-				params.height = width/4;
-				mHolder.imageView.setLayoutParams(params);
+				if (params != null) {
+					mHolder.imageView.setLayoutParams(params);
+				}
 			}
 		}else {
 			mHolder.ivVideo.setVisibility(View.VISIBLE);
@@ -138,17 +140,15 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 					Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
 					if (bitmap != null) {
 						mHolder.imageView.setImageBitmap(bitmap);
-						ViewGroup.LayoutParams params = mHolder.imageView.getLayoutParams();
-						params.width = width/4;
-						params.height = width/4;
-						mHolder.imageView.setLayoutParams(params);
+						if (params != null) {
+							mHolder.imageView.setLayoutParams(params);
+						}
 					}
 				}else {//本地缩略图呗删除就根据视频获取缩略图
-					downloadPortrait(dto.videoUrl, width/4, width/4, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
-					ViewGroup.LayoutParams params = mHolder.imageView.getLayoutParams();
-					params.width = width/4;
-					params.height = width/4;
-					mHolder.imageView.setLayoutParams(params);
+					videoThumbnail(dto.videoUrl, width/4, width/4, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+					if (params != null) {
+						mHolder.imageView.setLayoutParams(params);
+					}
 				}
 			}
 		}
@@ -159,7 +159,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 	/**
 	 * 下载头像保存在本地
 	 */
-	private void downloadPortrait(String imgUrl, int width, int height, int kind, final ImageView imageView) {
+	private void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
 		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
 			@Override
 			public void loadComplete(Bitmap bitmap) {

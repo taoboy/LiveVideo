@@ -4,26 +4,20 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.TextView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.hf.live.R;
 
 public class MyDialog extends Dialog {
 
-	private Context mContext = null;
-	private String message = null;
-	private TextView tvPercent = null;
-	private TextView tvContent = null;// message
+	private Context mContext;
+	private ImageView imageView;
 
 	public MyDialog(Context context) {
 		super(context);
 		mContext = context;
-	}
-
-	public MyDialog(Context context, String msg) {
-		super(context);
-		mContext = context;
-		message = msg;
 	}
 
 	public void setStyle(int featureId) {
@@ -43,23 +37,10 @@ public class MyDialog extends Dialog {
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		tvContent = (TextView) findViewById(R.id.content);
-		tvPercent = (TextView) findViewById(R.id.tvPercent);
+		imageView = (ImageView) findViewById(R.id.imageView);
 
-		if (tvContent != null) {
-			if (message == null) {
-				tvContent.setText(mContext.getResources().getString(R.string.is_loading));
-			} else {
-				tvContent.setText(message);
-			}
-		}
-
-	}
-
-	public void setPercent(int percent) {
-		if (tvPercent != null) {
-			tvPercent.setText(percent + "%");
-		}
+		Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.round_animation);
+		imageView.startAnimation(animation);
 	}
 
 }

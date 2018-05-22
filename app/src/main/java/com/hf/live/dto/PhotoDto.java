@@ -24,6 +24,7 @@ public class PhotoDto implements Parcelable {
 	public String userName;// 用户名
 	public String praiseCount;// 点赞次数
 	public String commentCount;// 评论次数
+	public String playCount;//播放次数
 	public String videoId;// 视频id
 	public String title;// 标题
 	public String content;//上传内容
@@ -44,6 +45,8 @@ public class PhotoDto implements Parcelable {
 	public int selectSequnce = 0;//选择视频的顺序，数越大，优先级越高
 	public String weatherFlag;//天气标签
 	public String otherFlag;//其它标签
+	public String adcode;//6位行政编码
+	public String history;
 	
 	//获取本地所有视频文件
 	public String fileName;//文件名称
@@ -244,6 +247,7 @@ public class PhotoDto implements Parcelable {
 		dest.writeString(this.userName);
 		dest.writeString(this.praiseCount);
 		dest.writeString(this.commentCount);
+		dest.writeString(this.playCount);
 		dest.writeString(this.videoId);
 		dest.writeString(this.title);
 		dest.writeString(this.content);
@@ -267,6 +271,8 @@ public class PhotoDto implements Parcelable {
 		dest.writeInt(this.selectSequnce);
 		dest.writeString(this.weatherFlag);
 		dest.writeString(this.otherFlag);
+		dest.writeString(this.adcode);
+		dest.writeString(this.history);
 		dest.writeString(this.fileName);
 		dest.writeString(this.filePath);
 		dest.writeString(this.albumName);
@@ -293,6 +299,7 @@ public class PhotoDto implements Parcelable {
 		this.userName = in.readString();
 		this.praiseCount = in.readString();
 		this.commentCount = in.readString();
+		this.playCount = in.readString();
 		this.videoId = in.readString();
 		this.title = in.readString();
 		this.content = in.readString();
@@ -316,6 +323,8 @@ public class PhotoDto implements Parcelable {
 		this.selectSequnce = in.readInt();
 		this.weatherFlag = in.readString();
 		this.otherFlag = in.readString();
+		this.adcode = in.readString();
+		this.history = in.readString();
 		this.fileName = in.readString();
 		this.filePath = in.readString();
 		this.albumName = in.readString();

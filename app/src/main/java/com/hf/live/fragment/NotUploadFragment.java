@@ -1,15 +1,5 @@
 package com.hf.live.fragment;
 
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,14 +14,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.hf.live.R;
 import com.hf.live.activity.DisplayPictureActivity;
 import com.hf.live.activity.DisplayVideoActivity;
-import com.hf.live.R;
 import com.hf.live.adapter.MyNotUploadAdapter;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
+import com.hf.live.qcloud.TCConstants;
 import com.hf.live.stickygridheaders.StickyGridHeadersGridView;
 import com.hf.live.util.CommonUtil;
+
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 未上传
@@ -39,7 +39,6 @@ import com.hf.live.util.CommonUtil;
  *
  */
 
-@SuppressLint("SimpleDateFormat")
 public class NotUploadFragment extends Fragment {
 	
 	private StickyGridHeadersGridView localGridView = null;
@@ -61,7 +60,7 @@ public class NotUploadFragment extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		initBroadCast();
-		initLocalStickyGridView(view);
+		initGridView(view);
 	}
 	
 	private void initBroadCast() {
@@ -101,14 +100,18 @@ public class NotUploadFragment extends Fragment {
 			for (int i = 0; i < videoArray.length; i++) {
 				File localFile = videoFiles.listFiles()[i];
 				if (localFile.exists()) {
-					String videoUrl = localFile.getPath();
-					String name = localFile.getName();
-					String workTime = name.substring(0, name.length()-4);
+					String filePath = localFile.getPath();
+					if (!TextUtils.isEmpty(filePath) && filePath.endsWith(CONST.VIDEOTYPE)) {
+						String imgPath = filePath.replace(CONST.VIDEOTYPE, CONST.IMGTYPE);
+						String fileName = localFile.getName();
+						String workTime = fileName.substring(0, fileName.length()-4);
 
-					PhotoDto dto = CommonUtil.getVideoInfo(getActivity(), workTime);
-					if (dto != null) {
-						dto.videoUrl = videoUrl;
-						localList.add(dto);
+						PhotoDto dto = CommonUtil.getVideoInfo(getActivity(), workTime);
+						if (dto != null) {
+							dto.videoUrl = filePath;
+							dto.imgUrl = imgPath;
+							localList.add(dto);
+						}
 					}
 				}
 			}
@@ -133,19 +136,19 @@ public class NotUploadFragment extends Fragment {
 				}
 			}
 		}
-		
+
 		for (int i = 0; i < localList.size(); i++) {
-			PhotoDto dto2 = localList.get(i);
+			PhotoDto dto = localList.get(i);
 			try {
-				String date = sdf2.format(sdf3.parse(dto2.workTime));
+				String date = sdf2.format(sdf3.parse(dto.workTime));
 				if (!localSectionMap.containsKey(date)) {
-					dto2.setSection(localSection);
+					dto.setSection(localSection);
 					localSectionMap.put(date, localSection);
 					localSection++;
 				}else {
-					dto2.setSection(localSectionMap.get(date));
+					dto.setSection(localSectionMap.get(date));
 				}
-				localList.set(i, dto2);
+				localList.set(i, dto);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
@@ -175,8 +178,9 @@ public class NotUploadFragment extends Fragment {
 	/**
 	 * 初始化gridview
 	 */
-	private void initLocalStickyGridView(View view) {
+	private void initGridView(View view) {
 		getLocalVideoPic();
+
 		localGridView = (StickyGridHeadersGridView) view.findViewById(R.id.localGridView);
 		localAdapter = new MyNotUploadAdapter(getActivity(), localList);
 		localGridView.setAdapter(localAdapter);
@@ -185,7 +189,7 @@ public class NotUploadFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 				PhotoDto dto = localList.get(arg2);
-				Intent intent = null;
+				Intent intent;
 				if (dto.getWorkstype().equals("imgs")) {
 					List<PhotoDto> selectList = new ArrayList<>();
 					selectList.clear();
@@ -203,9 +207,7 @@ public class NotUploadFragment extends Fragment {
 					startActivity(intent);
 				}else {
 					intent = new Intent(getActivity(), DisplayVideoActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putParcelable("data", dto);
-					intent.putExtras(bundle);
+					intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, dto.videoUrl);
 					startActivity(intent);
 
 //					List<PhotoDto> selectList = new ArrayList<>();

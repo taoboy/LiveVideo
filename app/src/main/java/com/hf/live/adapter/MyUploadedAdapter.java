@@ -5,10 +5,10 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
@@ -27,12 +27,13 @@ import java.util.List;
 
 public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 
-	private Context mContext = null;
-	private List<PhotoDto> mArrayList = null;
-	private LayoutInflater mInflater = null;
+	private Context mContext;
+	private List<PhotoDto> mArrayList;
+	private LayoutInflater mInflater;
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-	private int width = 0;
+	private int width;
+	private RelativeLayout.LayoutParams params;
 
 	public MyUploadedAdapter(Context context, List<PhotoDto> mArrayList) {
 		this.mContext = context;
@@ -41,6 +42,7 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 		
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
+		params = new RelativeLayout.LayoutParams(width/4, width/4-10);
 	}
 
 	private HeaderViewHolder mHeaderHolder = null;
@@ -59,7 +61,7 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			mHeaderHolder = new HeaderViewHolder();
-			convertView = mInflater.inflate(R.layout.sticky_grid_header, null);
+			convertView = mInflater.inflate(R.layout.adapter_my_upload_header, null);
 			mHeaderHolder.tvDate = (TextView) convertView.findViewById(R.id.tvDate);
 			mHeaderHolder.tvPosition = (TextView) convertView.findViewById(R.id.tvPosition);
 			convertView.setTag(mHeaderHolder);
@@ -105,7 +107,7 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			mHolder = new ViewHolder();
-			convertView = mInflater.inflate(R.layout.sticky_grid_item, null);
+			convertView = mInflater.inflate(R.layout.adapter_my_upload_content, null);
 			mHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 			mHolder.ivVideo = (ImageView) convertView.findViewById(R.id.ivVideo);
 			convertView.setTag(mHolder);
@@ -117,10 +119,9 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 		if (!TextUtils.isEmpty(dto.imgUrl)) {
 			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
 			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-			LayoutParams params = mHolder.imageView.getLayoutParams();
-			params.width = width/4;
-			params.height = width/4;
-			mHolder.imageView.setLayoutParams(params);
+			if (params != null) {
+				mHolder.imageView.setLayoutParams(params);
+			}
 		}
 		if (dto.getWorkstype().equals("imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);

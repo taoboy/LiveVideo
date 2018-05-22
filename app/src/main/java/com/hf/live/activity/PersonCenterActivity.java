@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,18 +16,13 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
-import com.hf.live.util.CustomHttpClient;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.CircleImageView;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -134,65 +128,70 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
 	/**
 	 * 获取我的消息条数
 	 */
-	private void OkHttpNewsCount(String url) {
+	private void OkHttpNewsCount(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("token", MyApplication.TOKEN);
 		builder.add("appid", CONST.APPID);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final String result = response.body().string();
-				runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
 					@Override
-					public void run() {
-						if (result != null) {
-							try {
-								JSONObject object = new JSONObject(result);
-								if (object != null) {
-									if (!object.isNull("status")) {
-										int status  = object.getInt("status");
-										if (status == 1) {//成功
-											if (!object.isNull("count")) {
-												String count = object.getString("count");
-												if (Integer.valueOf(count) > 99) {
-													tvNewsCount.setText("99+");
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (result != null) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("count")) {
+														String count = object.getString("count");
+														if (Integer.valueOf(count) > 99) {
+															tvNewsCount.setText("99+");
+														}else {
+															tvNewsCount.setText(count);
+														}
+														if (count.equals("0")) {
+															reNewsCount.setVisibility(View.GONE);
+														}else {
+															reNewsCount.setVisibility(View.VISIBLE);
+														}
+													}
 												}else {
-													tvNewsCount.setText(count);
-												}
-												if (count.equals("0")) {
-													reNewsCount.setVisibility(View.GONE);
-												}else {
-													reNewsCount.setVisibility(View.VISIBLE);
-												}
-											}
-										}else {
-											//失败
-											if (!object.isNull("msg")) {
-												String msg = object.getString("msg");
-												if (msg != null) {
-													Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
-							} catch (JSONException e) {
-								e.printStackTrace();
 							}
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
 	
 	@Override
@@ -223,10 +222,14 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
 			startActivity(new Intent(mContext, MyAboutActivity.class));
 			break;
 		case R.id.llResponse:
-			startActivity(new Intent(mContext, MyResponseActivity.class));
+			Intent intent = new Intent(mContext, WebviewActivity.class);
+			intent.putExtra("url", "file:///android_asset/response.html");
+			startActivity(intent);
 			break;
 		case R.id.llOperate:
-			startActivity(new Intent(mContext, UseActivity.class));
+			intent = new Intent(mContext, WebviewActivity.class);
+			intent.putExtra("url", "http://tianjinqixiang.tianqi.cn/navpage/");
+			startActivity(intent);
 			break;
 
 		default:

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:orientation="vertical">
+
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="20dp"
+        android:src="@drawable/iv_close_white"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeRatio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:id="@+id/ivRatio"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_record_round"
+            android:padding="5dp"
+            android:src="@drawable/iv_aspect169"/>
+
+        <ImageView
+            android:id="@+id/ivRatioMask"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:onClick="onClick"
+            android:background="@drawable/bg_record_round"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivRatio"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="屏比"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reRatio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/relativeRatio"
+        android:layout_marginTop="20dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivRatio1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_record_round"
+            android:padding="5dp"
+            android:src="@drawable/iv_aspect11"/>
+
+        <ImageView
+            android:id="@+id/ivRatio2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/ivRatio1"
+            android:background="@drawable/bg_record_round"
+            android:padding="5dp"
+            android:src="@drawable/iv_aspect43"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/relativeRatio"
+        android:id="@+id/relativeRes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tvResolution"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_record_round"
+            android:text="540p"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="13dp"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/ivResolutionMask"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:onClick="onClick"
+            android:background="@drawable/bg_record_round"
+            android:visibility="gone"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvResolution"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="分辨率"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reResolution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeRatio"
+        android:layout_toLeftOf="@+id/relativeRes"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvResolution1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_record_round"
+            android:text="360p"
+            android:layout_marginRight="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="13dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tvResolution2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/tvResolution1"
+            android:background="@drawable/bg_record_round"
+            android:text="720p"
+            android:layout_marginRight="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="13dp"
+            android:textColor="@color/white"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/relativeRes"
+        android:id="@+id/reBeauty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/ivBeauty"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_record_round"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:src="@drawable/iv_record_beautiful_girl"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivBeauty"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:text="美颜"
+        android:textColor="@color/white"
+        android:textSize="@dimen/level_5"/>
+
+    </RelativeLayout>
+
+
+    <com.hf.live.qcloud.BeautySettingPannel
+        android:id="@+id/beauty_pannel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:visibility="gone"/>
+
+
+    <RelativeLayout
+        android:id="@+id/reBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_video_bottom_controller"
+        android:orientation="vertical">
+
+        <com.hf.live.qcloud.RecordProgressView
+            android:id="@+id/record_progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
+
+        <TextView
+            android:layout_below="@+id/record_progress_view"
+            android:id="@+id/progress_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:text="00:00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4"/>
+
+        <LinearLayout
+            android:layout_below="@+id/progress_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/ivFlash"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/iv_flash_disable"/>
+
+        <ImageView
+            android:id="@+id/ivSwitch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/iv_switcher"/>
+
+        <ImageView
+            android:id="@+id/ivRecord"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:src="@drawable/iv_start"/>
+
+        <ImageView
+            android:id="@+id/ivRemove"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/iv_del_last"/>
+
+        <ImageView
+            android:id="@+id/ivComplete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/iv_complete_disable"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

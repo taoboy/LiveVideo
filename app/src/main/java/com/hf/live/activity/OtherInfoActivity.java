@@ -4,8 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
-import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.CircleImageView;
 
@@ -113,62 +112,67 @@ public class OtherInfoActivity extends BaseActivity implements OnClickListener{
 	private void OkHttpOtherInfo() {
 		String uid = getIntent().getStringExtra("uid");
 		if (!TextUtils.isEmpty(uid)) {
-			String url = "http://channellive2.tianqi.cn/weather/work/getUserById?uid="+uid;
-			OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+			final String url = "http://channellive2.tianqi.cn/weather/work/getUserById?uid="+uid;
+			new Thread(new Runnable() {
 				@Override
-				public void onFailure(Call call, IOException e) {
-
-				}
-
-				@Override
-				public void onResponse(Call call, Response response) throws IOException {
-					if (!response.isSuccessful()) {
-						return;
-					}
-					final String result = response.body().string();
-					runOnUiThread(new Runnable() {
+				public void run() {
+					OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
 						@Override
-						public void run() {
-							if (!TextUtils.isEmpty(result)) {
-								try {
-									JSONObject obj = new JSONObject(result);
-									if (!obj.isNull("photo")) {
-										downloadPortrait(obj.getString("photo"));
-									}
+						public void onFailure(Call call, IOException e) {
 
-									String username = obj.getString("username");
-									String phonenumber = obj.getString("phonenumber");
-									if (!TextUtils.isEmpty(phonenumber)) {
-										tvUserName.setText(phonenumber);
-										tvPhone.setText(phonenumber);
-									}else {
-										tvUserName.setText(username);
-									}
+						}
 
-									if (!obj.isNull("points")) {
-										tvScore.setText(obj.getString("points"));
-									}
-
-									if (!obj.isNull("nickname")) {
-										tvNickName.setText(obj.getString("nickname"));
-									}
-
-									if (!obj.isNull("mail")) {
-										tvMail.setText(obj.getString("mail"));
-									}
-
-									if (!obj.isNull("department")) {
-										tvUnit.setText(obj.getString("department"));
-									}
-									cancelDialog();
-								} catch (JSONException e) {
-									e.printStackTrace();
-								}
+						@Override
+						public void onResponse(Call call, Response response) throws IOException {
+							if (!response.isSuccessful()) {
+								return;
 							}
+							final String result = response.body().string();
+							runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									if (!TextUtils.isEmpty(result)) {
+										try {
+											JSONObject obj = new JSONObject(result);
+											if (!obj.isNull("photo")) {
+												downloadPortrait(obj.getString("photo"));
+											}
+
+											String username = obj.getString("username");
+											String phonenumber = obj.getString("phonenumber");
+											if (!TextUtils.isEmpty(phonenumber)) {
+												tvUserName.setText(phonenumber);
+												tvPhone.setText(phonenumber);
+											}else {
+												tvUserName.setText(username);
+											}
+
+											if (!obj.isNull("points")) {
+												tvScore.setText(obj.getString("points"));
+											}
+
+											if (!obj.isNull("nickname")) {
+												tvNickName.setText(obj.getString("nickname"));
+											}
+
+											if (!obj.isNull("mail")) {
+												tvMail.setText(obj.getString("mail"));
+											}
+
+											if (!obj.isNull("department")) {
+												tvUnit.setText(obj.getString("department"));
+											}
+											cancelDialog();
+										} catch (JSONException e) {
+											e.printStackTrace();
+										}
+									}
+								}
+							});
 						}
 					});
 				}
-			});
+			}).start();
 		}else {
 			cancelDialog();
 		}
@@ -177,52 +181,35 @@ public class OtherInfoActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 下载头像保存在本地
 	 */
-	private void downloadPortrait(String imgUrl) {
-		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
+	private void downloadPortrait(final String imgUrl) {
+		new Thread(new Runnable() {
 			@Override
-			public void loadComplete(Bitmap bitmap) {
-				if (bitmap != null) {
-					ivPortrait.setImageBitmap(bitmap);
-				}
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(imgUrl).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final byte[] bytes = response.body().bytes();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+								if (bitmap != null) {
+									ivPortrait.setImageBitmap(bitmap);
+								}
+							}
+						});
+					}
+				});
 			}
-		}, imgUrl);
-		task.execute();
-	}
-
-	private interface AsynLoadCompleteListener {
-		void loadComplete(Bitmap bitmap);
-	}
-
-	private class AsynLoadTask extends AsyncTask<Void, Bitmap, Bitmap> {
-
-		private String imgUrl;
-		private AsynLoadCompleteListener completeListener;
-
-		private AsynLoadTask(AsynLoadCompleteListener completeListener, String imgUrl) {
-			this.imgUrl = imgUrl;
-			this.completeListener = completeListener;
-		}
-
-		@Override
-		protected void onPreExecute() {
-		}
-
-		@Override
-		protected void onProgressUpdate(Bitmap... values) {
-		}
-
-		@Override
-		protected Bitmap doInBackground(Void... params) {
-			Bitmap bitmap = CommonUtil.getHttpBitmap(imgUrl);
-			return bitmap;
-		}
-
-		@Override
-		protected void onPostExecute(Bitmap bitmap) {
-			if (completeListener != null) {
-				completeListener.loadComplete(bitmap);
-			}
-		}
+		}).start();
 	}
 
 	/**
@@ -232,7 +219,7 @@ public class OtherInfoActivity extends BaseActivity implements OnClickListener{
 	 */
 	private void dialDialog(final String message, final String content) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.delete_dialog, null);
+		View view = inflater.inflate(R.layout.dialog_delete, null);
 		TextView tvMessage = (TextView) view.findViewById(R.id.tvMessage);
 		TextView tvContent = (TextView) view.findViewById(R.id.tvContent);
 		LinearLayout llNegative = (LinearLayout) view.findViewById(R.id.llNegative);

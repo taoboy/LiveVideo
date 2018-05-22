@@ -16,36 +16,7 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/llUseHelp"
-            android:layout_width="match_parent"
-            android:layout_height="50dip"
-            android:background="@drawable/selector_cell"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
-            android:visibility="gone" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/use_help"
-                android:textColor="@color/text_color2"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dip"
-                android:layout_height="18dip"
-                android:src="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dip"
-            android:background="#20ffffff"
-            android:visibility="gone" />
-
-        <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llPushNews"
             android:layout_width="match_parent"
             android:layout_height="45dip"
@@ -69,6 +40,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0.5dip"
             android:background="#20ffffff" />
@@ -181,35 +153,6 @@
             android:layout_height="0.5dip"
             android:background="#20ffffff" />
 
-        <LinearLayout
-            android:id="@+id/llVideoView"
-            android:layout_width="match_parent"
-            android:layout_height="50dip"
-            android:background="@drawable/selector_cell"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
-            android:visibility="gone" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="天气网眼在线点播"
-                android:textColor="@color/text_color2"
-                android:textSize="@dimen/level_4" />
-
-            <ImageView
-                android:layout_width="10dip"
-                android:layout_height="18dip"
-                android:src="@drawable/iv_arrow" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0.5dip"
-            android:background="#20ffffff"
-            android:visibility="gone" />
     </LinearLayout>
 
     <TextView

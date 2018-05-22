@@ -72,93 +72,98 @@ public class WelcomeActivity extends BaseActivity{
 	 */
 	private void OkHttpUserinfo() {
 		if (!TextUtils.isEmpty(MyApplication.TOKEN)) {
-			String url = "http://channellive2.tianqi.cn/Weather/User/getUser2";//刷新token
+			final String url = "http://channellive2.tianqi.cn/Weather/User/getUser2";//刷新token
 			FormBody.Builder builder = new FormBody.Builder();
 			builder.add("token", MyApplication.TOKEN);
-			RequestBody requestBody = builder.build();
-			OkHttpUtil.enqueue(new Request.Builder().url(url).post(requestBody).build(), new Callback() {
+			final RequestBody requestBody = builder.build();
+			new Thread(new Runnable() {
 				@Override
-				public void onFailure(Call call, IOException e) {
-
-				}
-
-				@Override
-				public void onResponse(Call call, Response response) throws IOException {
-					if (!response.isSuccessful()) {
-						return;
-					}
-					final String result = response.body().string();
-					runOnUiThread(new Runnable() {
+				public void run() {
+					OkHttpUtil.enqueue(new Request.Builder().url(url).post(requestBody).build(), new Callback() {
 						@Override
-						public void run() {
-							if (!TextUtils.isEmpty(result)) {
-								try {
-									JSONObject object = new JSONObject(result);
-									if (object != null) {
-										if (!object.isNull("status")) {
-											int status  = object.getInt("status");
-											if (status == 1) {//成功
-												if (!object.isNull("info")) {
-													JSONObject obj = object.getJSONObject("info");
-													if (!obj.isNull("token")) {
-														MyApplication.TOKEN = obj.getString("token");
-													}
-													if (!obj.isNull("phonenumber")) {
-														MyApplication.USERNAME = obj.getString("phonenumber");
-													}
-													if (!obj.isNull("username")) {
-														MyApplication.OLDUSERNAME = obj.getString("username");
-													}
-													if (!obj.isNull("nickname")) {
-														MyApplication.NICKNAME = obj.getString("nickname");
-													}
-													if (!obj.isNull("mail")) {
-														MyApplication.MAIL = obj.getString("mail");
-													}
-													if (!obj.isNull("department")) {
-														MyApplication.UNIT = obj.getString("department");
-													}
-													if (!obj.isNull("groupid")) {
-														MyApplication.GROUPID = obj.getString("groupid");
-													}
-													if (!obj.isNull("points")) {
-														MyApplication.POINTS = obj.getString("points");
-													}
-													if (!obj.isNull("photo")) {
-														MyApplication.PHOTO = obj.getString("photo");
-														if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
-															CommonUtil.OkHttpLoadPortrait(WelcomeActivity.this, MyApplication.PHOTO);
+						public void onFailure(Call call, IOException e) {
+
+						}
+
+						@Override
+						public void onResponse(Call call, Response response) throws IOException {
+							if (!response.isSuccessful()) {
+								return;
+							}
+							final String result = response.body().string();
+							runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									if (!TextUtils.isEmpty(result)) {
+										try {
+											JSONObject object = new JSONObject(result);
+											if (object != null) {
+												if (!object.isNull("status")) {
+													int status  = object.getInt("status");
+													if (status == 1) {//成功
+														if (!object.isNull("info")) {
+															JSONObject obj = object.getJSONObject("info");
+															if (!obj.isNull("token")) {
+																MyApplication.TOKEN = obj.getString("token");
+															}
+															if (!obj.isNull("phonenumber")) {
+																MyApplication.USERNAME = obj.getString("phonenumber");
+															}
+															if (!obj.isNull("username")) {
+																MyApplication.OLDUSERNAME = obj.getString("username");
+															}
+															if (!obj.isNull("nickname")) {
+																MyApplication.NICKNAME = obj.getString("nickname");
+															}
+															if (!obj.isNull("mail")) {
+																MyApplication.MAIL = obj.getString("mail");
+															}
+															if (!obj.isNull("department")) {
+																MyApplication.UNIT = obj.getString("department");
+															}
+															if (!obj.isNull("groupid")) {
+																MyApplication.GROUPID = obj.getString("groupid");
+															}
+															if (!obj.isNull("points")) {
+																MyApplication.POINTS = obj.getString("points");
+															}
+															if (!obj.isNull("photo")) {
+																MyApplication.PHOTO = obj.getString("photo");
+																if (!TextUtils.isEmpty(MyApplication.PHOTO)) {
+																	CommonUtil.OkHttpLoadPortrait(WelcomeActivity.this, MyApplication.PHOTO);
+																}
+															}
+
+															MyApplication.saveUserInfo(mContext);
+
+															startActivity(new Intent(mContext, MainActivity2.class));
+															finish();
+
 														}
-													}
-
-													MyApplication.saveUserInfo(mContext);
-
-													startActivity(new Intent(mContext, MainActivity.class));
-													finish();
-
-												}
-											}else if (status == 401) {//token无效
-												startActivity(new Intent(mContext, LoginActivity.class));
-												finish();
-											}else {
-												//失败
-												if (!object.isNull("msg")) {
-													String msg = object.getString("msg");
-													if (msg != null) {
-														Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+													}else if (status == 401) {//token无效
+														startActivity(new Intent(mContext, LoginActivity.class));
+														finish();
+													}else {
+														//失败
+														if (!object.isNull("msg")) {
+															String msg = object.getString("msg");
+															if (msg != null) {
+																Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+															}
+														}
 													}
 												}
 											}
+										} catch (JSONException e) {
+											e.printStackTrace();
 										}
 									}
-								} catch (JSONException e) {
-									e.printStackTrace();
 								}
-							}
+							});
 						}
 					});
 				}
-			});
+			}).start();
 		}else {
 			startActivity(new Intent(mContext, LoginActivity.class));
 			finish();

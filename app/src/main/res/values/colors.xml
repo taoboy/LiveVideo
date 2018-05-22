@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#202934</color>//标题栏颜色
-    <color name="colorPrimaryDark">#202934</color>//状态栏颜色
+    <color name="colorPrimary">#121926</color>//标题栏颜色
+    <color name="colorPrimaryDark">#121926</color>//状态栏颜色
     <color name="colorAccent">#A3A7AC</color>//按钮选中颜色
 
     <color name="text_color1">#F0F0F0</color>
     <color name="text_color2">#A3A7AC</color>
     <color name="text_color3">#3b3c3d</color>
-    <color name="text_color4">#707372</color>
+    <color name="text_color4">#4cffffff</color>
     <color name="light_pink">#ffd5d5</color>
     <color name="light_blue">#c1e7ff</color>
     <color name="light_gray">#f0eff5</color>
@@ -20,13 +20,18 @@
     <color name="yellow">#fff139</color>
     <color name="green">#00ff00</color>
     <color name="orange">#fd8612</color>
-    <color name="red">#FF3A31</color>
+    <color name="red">#AF1610</color>
     <color name="cell_default">#00000000</color>
     <color name="cell_pressed">#30ffffff</color>
-    <color name="main_color">#202934</color>
+    <color name="main_color">#121926</color>
 
-    <color name="refresh_color1">#960c1b</color>
-    <color name="refresh_color2">#30960c1b</color>
-    <color name="refresh_color3">#960c1b</color>
-    <color name="refresh_color4">#30960c1b</color>
+    <color name="refresh_color1">#AF1610</color>
+    <color name="refresh_color2">#A0AF1610</color>
+    <color name="refresh_color3">#80AF1610</color>
+    <color name="refresh_color4">#40AF1610</color>
+
+    <!--腾讯云-->
+    <color name="record_progress_bg">#40000000</color> <!-- 40%不透明度 -->
+    <color name="record_progress">#AF1610</color>
+    <color name="record_progress_pending">#60AF1610</color>
 </resources>

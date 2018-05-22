@@ -143,9 +143,14 @@ public class SelectAlbumPictureActivity extends BaseActivity implements View.OnC
             mList.clear();
             mList.addAll(temp);
 
-            if (mList.size() > 0 && adapter != null) {
-                adapter.notifyDataSetChanged();
-            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (adapter != null) {
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
 
             Thread.interrupted();
         }

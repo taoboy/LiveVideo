@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
-import com.hf.live.adapter.SelectAlbumPictureAdapter;
 import com.hf.live.adapter.SelectAlbumVideoAdapter;
 import com.hf.live.dto.PhotoDto;
 
@@ -31,9 +30,9 @@ public class SelectAlbumVideoActivity extends BaseActivity implements View.OnCli
     private LinearLayout llBack = null;
     private TextView tvTitle = null;
     private GridView gridView;
-    private SelectAlbumVideoAdapter adapter = null;
+    private SelectAlbumVideoAdapter mAdapter = null;
     private List<PhotoDto> mList = new ArrayList<>();
-    private Thread thread = null;
+    private Thread albumsThread = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +52,8 @@ public class SelectAlbumVideoActivity extends BaseActivity implements View.OnCli
 
     private void initGridView() {
         gridView = (GridView) findViewById(R.id.gridView);
-        adapter = new SelectAlbumVideoAdapter(mContext, mList);
-        gridView.setAdapter(adapter);
+        mAdapter = new SelectAlbumVideoAdapter(mContext, mList);
+        gridView.setAdapter(mAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -68,58 +67,54 @@ public class SelectAlbumVideoActivity extends BaseActivity implements View.OnCli
     }
 
     /**
-     * 获取相册信息
+     * 终止扫描相册任务
      */
-    private void loadAlbums() {
-        abortLoading();
-        AlbumLoaderRunnable runnable = new AlbumLoaderRunnable();
-        thread = new Thread(runnable);
-        thread.start();
-    }
-
-    private void abortLoading() {
-        if (thread == null) {
+    private void abortLoadingAlbums() {
+        if (albumsThread == null) {
             return;
         }
-
-        if (thread.isAlive()) {
-            thread.interrupt();
+        if (albumsThread.isAlive()) {
+            albumsThread.interrupt();
             try {
-                thread.join();
+                albumsThread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private class AlbumLoaderRunnable implements Runnable {
-        @Override
-        public void run() {
-            Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
+    /**
+     * 获取相册信息
+     */
+    private void loadAlbums() {
+        abortLoadingAlbums();
+        albumsThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
 
-            if (Thread.interrupted()) {
-                return;
-            }
+                if (Thread.interrupted()) {
+                    return;
+                }
 
-            Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null,
-                            null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
+                Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null,
+                        null, null, MediaStore.Video.Media.DEFAULT_SORT_ORDER);
 
-            if (cursor == null) {
-                return;
-            }
+                if (cursor == null) {
+                    return;
+                }
 
-            ArrayList<PhotoDto> temp = new ArrayList<>(cursor.getCount());
-            HashSet<String> albumSet = new HashSet<>();
-            File file;
+                ArrayList<PhotoDto> list = new ArrayList<>(cursor.getCount());
+                HashSet<String> albumSet = new HashSet<>();
 
-            if (cursor.moveToLast()) {
-                do {
-                    if (Thread.interrupted()) {
-                        return;
-                    }
+                if (cursor.moveToLast()) {
+                    do {
+                        if (Thread.interrupted()) {
+                            return;
+                        }
 
-                    String album = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_DISPLAY_NAME));
-                    String image = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
+                        String album = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_DISPLAY_NAME));
+                        String image = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
 
                     /*
                     It may happen that some image file paths are still present in cache,
@@ -127,34 +122,41 @@ public class SelectAlbumVideoActivity extends BaseActivity implements View.OnCli
                     scanner is not run again. To avoid get such image file paths, check
                     if image file exists.
                      */
-                    file = new File(image);
-                    if (file.exists() && !albumSet.contains(album)) {
-                        PhotoDto dto = new PhotoDto();
-                        dto.albumName = album;
-                        dto.albumCover = image;
-                        temp.add(dto);
-                        albumSet.add(album);
+                        File file = new File(image);
+                        if (file.exists() && !albumSet.contains(album)) {
+                            PhotoDto dto = new PhotoDto();
+                            dto.albumName = album;
+                            dto.albumCover = image;
+                            list.add(dto);
+                            albumSet.add(album);
+                        }
+
+                    } while (cursor.moveToPrevious());
+                }
+                cursor.close();
+
+                mList.clear();
+                mList.addAll(list);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mAdapter != null) {
+                            mAdapter.notifyDataSetChanged();
+                        }
                     }
+                });
 
-                } while (cursor.moveToPrevious());
+                Thread.interrupted();
             }
-            cursor.close();
-
-            mList.clear();
-            mList.addAll(temp);
-
-            if (mList.size() > 0 && adapter != null) {
-                adapter.notifyDataSetChanged();
-            }
-
-            Thread.interrupted();
-        }
+        });
+        albumsThread.start();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        abortLoading();
+        abortLoadingAlbums();
     }
 
     @Override

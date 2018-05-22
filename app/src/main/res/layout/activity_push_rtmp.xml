@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_color"
+    android:orientation="vertical" >
+
+    <com.tencent.rtmp.ui.TXCloudVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="20dp"
+        android:src="@drawable/iv_close_white"/>
+
+    <RelativeLayout
+        android:id="@+id/reBeauty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp">
+
+        <ImageView
+            android:id="@+id/ivBeauty"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_record_round"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            android:src="@drawable/iv_record_beautiful_girl"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivBeauty"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="美颜"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+    </RelativeLayout>
+
+    <com.hf.live.qcloud.BeautySettingPannel
+        android:id="@+id/beauty_pannel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/reBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_video_bottom_controller"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_below="@+id/progress_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/ivFlash"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/iv_flash_disable"/>
+
+            <ImageView
+                android:id="@+id/ivStart"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/iv_start"/>
+
+            <ImageView
+                android:id="@+id/ivSwitch"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/iv_switcher"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="日志"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_3"/>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvHard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="解码"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_3"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

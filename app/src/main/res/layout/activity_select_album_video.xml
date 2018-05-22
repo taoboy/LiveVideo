@@ -16,13 +16,13 @@
         android:cacheColorHint="@color/transparent"
         android:fadingEdge="none"
         android:gravity="center"
-        android:horizontalSpacing="2dip"
+        android:horizontalSpacing="2dp"
         android:listSelector="@color/transparent"
         android:numColumns="2"
         android:overScrollMode="never"
         android:padding="2dp"
         android:scrollbars="none"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="2dip"/>
+        android:verticalSpacing="2dp"/>
 
 </LinearLayout>

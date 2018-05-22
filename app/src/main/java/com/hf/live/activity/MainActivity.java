@@ -279,22 +279,14 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 	private void loginDialog() {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		final View view = inflater.inflate(R.layout.live_dialog, null);
-		final EditText etIp = (EditText) view.findViewById(R.id.etIp);
-		final EditText etUserName = (EditText) view.findViewById(R.id.etUserName);
-		final EditText etPwd = (EditText) view.findViewById(R.id.etPwd);
+		final EditText etCode = (EditText) view.findViewById(R.id.etCode);
 		TextView tvCancel = (TextView) view.findViewById(R.id.tvCancel);
 		TextView tvLogin = (TextView) view.findViewById(R.id.tvLogin);
-		
-		SharedPreferences sharedPreferences = getSharedPreferences("LIVE", Context.MODE_PRIVATE);
-		etIp.setText(sharedPreferences.getString("ip", null));
-		etUserName.setText(sharedPreferences.getString("userName", null));
-		etUserName.setSelection(etUserName.getText().toString().length());
-		etPwd.setText(sharedPreferences.getString("pwd", null));
 		
 		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
 		dialog.setContentView(view);
 		dialog.show();
-		
+
 		tvCancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -305,6 +297,14 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 		tvLogin.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
+				if (TextUtils.isEmpty(etCode.getText().toString())) {
+					Toast.makeText(mContext, "请输入直播码", Toast.LENGTH_SHORT).show();
+					return;
+				}
+				dialog.dismiss();
+				Intent intent = new Intent(mContext, PushRtmpActivity.class);
+				intent.putExtra("liveCode", etCode.getText().toString());
+				startActivity(intent);
 			}
 		});
 	}
@@ -397,7 +397,7 @@ public class MainActivity extends BaseActivity implements AMapLocationListener, 
 			break;
 		case R.id.reLive:
 //			loginDialog();
-			Toast.makeText(mContext, "正在研发中", Toast.LENGTH_SHORT).show();
+			startActivity(new Intent(mContext, PushRtmpActivity.class));
 			break;
 		case R.id.ivPerson:
 			startActivity(new Intent(mContext, PersonCenterActivity.class));

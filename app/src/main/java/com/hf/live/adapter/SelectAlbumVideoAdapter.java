@@ -1,9 +1,5 @@
 package com.hf.live.adapter;
 
-/**
- * 选择相册图片、多选
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
@@ -15,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
@@ -24,12 +21,17 @@ import com.hf.live.util.CommonUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 获取相册视频
+ */
+
 public class SelectAlbumVideoAdapter extends BaseAdapter {
 
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<>();
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PhotoDto> mArrayList;
 	private int width;
+	private RelativeLayout.LayoutParams params;
 
 	private final class ViewHolder{
 		ImageView imageView;
@@ -38,7 +40,6 @@ public class SelectAlbumVideoAdapter extends BaseAdapter {
 
 	private ViewHolder mHolder = null;
 
-	@SuppressWarnings("deprecation")
 	public SelectAlbumVideoAdapter(Context context, List<PhotoDto> mArrayList) {
 		mContext = context;
 		this.mArrayList = mArrayList;
@@ -46,6 +47,7 @@ public class SelectAlbumVideoAdapter extends BaseAdapter {
 
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
+		params = new RelativeLayout.LayoutParams(width/2, width/2);
 	}
 
 	@Override
@@ -77,11 +79,10 @@ public class SelectAlbumVideoAdapter extends BaseAdapter {
 
 		final PhotoDto dto = mArrayList.get(position);
 		if (!TextUtils.isEmpty(dto.albumCover)) {
-			downloadPortrait(dto.albumCover, width/2, width/2, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
-			ViewGroup.LayoutParams params = mHolder.imageView.getLayoutParams();
-			params.width = width/2;
-			params.height = width/2;
-			mHolder.imageView.setLayoutParams(params);
+			videoThumbnail(dto.albumCover, width/2, width/2, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+			if (params != null) {
+				mHolder.imageView.setLayoutParams(params);
+			}
 		}
 
 		if (!TextUtils.isEmpty(dto.albumName)) {
@@ -94,7 +95,7 @@ public class SelectAlbumVideoAdapter extends BaseAdapter {
 	/**
 	 * 下载头像保存在本地
 	 */
-	private void downloadPortrait(String imgUrl, int width, int height, int kind, final ImageView imageView) {
+	private void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
 		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
 			@Override
 			public void loadComplete(Bitmap bitmap) {

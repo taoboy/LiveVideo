@@ -1,8 +1,6 @@
 package com.hf.live.activity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,19 +13,24 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
-import com.hf.live.util.CustomHttpClient;
-import com.hf.live.view.MyDialog;
+import com.hf.live.util.OkHttpUtil;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
-public class ScoreExchangeActivity extends Activity implements OnClickListener{
+/**
+ * 积分兑换
+ */
+public class ScoreExchangeActivity extends BaseActivity implements OnClickListener{
 	
 	private Context mContext = null;
 	private ImageView ivBack = null;
@@ -35,7 +38,6 @@ public class ScoreExchangeActivity extends Activity implements OnClickListener{
 	private EditText etUserName = null;//用户名
 	private EditText etPwd = null;//密码
 	private TextView tvExchange = null;
-	private MyDialog mDialog = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +45,6 @@ public class ScoreExchangeActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.score_exchange);
 		mContext = this;
 		initWidget();
-	}
-	
-	/**
-	 * 初始化dialog
-	 */
-	private void showDialog() {
-		mDialog = new MyDialog(mContext);
-		if (mDialog != null) {
-			mDialog.show();
-		}
-	}
-	private void cancelDialog() {
-		if (mDialog != null) {
-			mDialog.cancel();
-		}
 	}
 	
 	/**
@@ -96,102 +83,58 @@ public class ScoreExchangeActivity extends Activity implements OnClickListener{
 	}
 	
 	/**
-	 * 异步请求
+	 * 积分兑换
 	 */
-	private void asyncQuery(String requestUrl) {
-		HttpAsyncTask task = new HttpAsyncTask();
-		task.setMethod("POST");
-		task.setTimeOut(CustomHttpClient.TIME_OUT);
-		task.execute(requestUrl);
-	}
-	
-	/**
-	 * 异步请求方法
-	 * @author dell
-	 *
-	 */
-	private class HttpAsyncTask extends AsyncTask<String, Void, String> {
-		private String method = "POST";
-		private List<NameValuePair> nvpList = new ArrayList<NameValuePair>();
-		
-		public HttpAsyncTask() {
-			transParams();
-		}
-		
-		/**
-		 * 传参数
-		 */
-		private void transParams() {
-			NameValuePair pair1 = new BasicNameValuePair("token", MyApplication.TOKEN);
-			NameValuePair pair2 = new BasicNameValuePair("alipay", etUserName.getText().toString());
-			NameValuePair pair3 = new BasicNameValuePair("appid", CONST.APPID);
-			nvpList.add(pair1);
-			nvpList.add(pair2);
-			nvpList.add(pair3);
-		}
-		
-		@Override
-		protected String doInBackground(String... url) {
-			String result = null;
-			if (method.equalsIgnoreCase("POST")) {
-				result = CustomHttpClient.post(url[0], nvpList);
-			} else if (method.equalsIgnoreCase("GET")) {
-				result = CustomHttpClient.get(url[0]);
-			}
-			return result;
-		}
+	private void OkHttpScore(String url) {
+		FormBody.Builder builder = new FormBody.Builder();
+		builder.add("token", MyApplication.TOKEN);
+		builder.add("alipay", etUserName.getText().toString());
+		builder.add("appid", CONST.APPID);
+		RequestBody body = builder.build();
+		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+			@Override
+			public void onFailure(Call call, IOException e) {
 
-		@Override
-		protected void onPostExecute(String requestResult) {
-			super.onPostExecute(requestResult);
-			cancelDialog();
-			if (requestResult != null) {
-				try {
-					JSONObject object = new JSONObject(requestResult);
-					if (object != null) {
-						if (!object.isNull("status")) {
-							int status = object.getInt("status");
-							if (status == 1) {//成功
-								Toast.makeText(mContext, getString(R.string.apply_submited), Toast.LENGTH_SHORT).show();
-								finish();
-							}else {
-								//失败
-							}
-						}
+			}
+
+			@Override
+			public void onResponse(Call call, Response response) throws IOException {
+				if (!response.isSuccessful()) {
+					return;
+				}
+				final String result = response.body().string();
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (!TextUtils.isEmpty(result)) {
+							try {
+								cancelDialog();
+								JSONObject object = new JSONObject(result);
+								if (object != null) {
+									if (!object.isNull("status")) {
+										int status = object.getInt("status");
+										if (status == 1) {//成功
+											Toast.makeText(mContext, getString(R.string.apply_submited), Toast.LENGTH_SHORT).show();
+											finish();
+										}else {
+											//失败
+										}
+									}
 //						if (!object.isNull("msg")) {
 //							String msg = object.getString("msg");
 //							if (msg != null) {
 //								Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 //							}
 //						}
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
 					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				});
 			}
-		}
-
-		@SuppressWarnings("unused")
-		private void setParams(NameValuePair nvp) {
-			nvpList.add(nvp);
-		}
-
-		private void setMethod(String method) {
-			this.method = method;
-		}
-
-		private void setTimeOut(int timeOut) {
-			CustomHttpClient.TIME_OUT = timeOut;
-		}
-
-		/**
-		 * 取消当前task
-		 */
-		@SuppressWarnings("unused")
-		private void cancelTask() {
-			CustomHttpClient.shuttdownRequest();
-			this.cancel(true);
-		}
+		});
 	}
 	
 	@Override
@@ -203,7 +146,7 @@ public class ScoreExchangeActivity extends Activity implements OnClickListener{
 		case R.id.tvExchange:
 			if (checkInfo()) {
 				showDialog();
-				asyncQuery(CONST.EXCHANGE_SCORE_URL);
+				OkHttpScore(CONST.EXCHANGE_SCORE_URL);
 			}
 			break;
 

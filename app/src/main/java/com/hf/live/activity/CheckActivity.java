@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,7 +61,7 @@ import okhttp3.Response;
  */
 
 public class CheckActivity extends BaseActivity implements OnClickListener{
-	
+
 	private Context mContext = null;
 	private LinearLayout llBack = null;//返回按钮
 	private LinearLayout llUploadYes = null;//已上传
@@ -78,12 +77,12 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 	private LinearLayout llSearch = null;
 	private EditText etSearch = null;
 	private TextView tvCancel = null;
+	private ImageView ivClear;
 	private ListView searchListView = null;
 	private MyCheckAdapter searchAdapter = null;
 	private List<PhotoDto> searchList = new ArrayList<>();
 	private MainViewPager viewPager = null;
 	private List<Fragment> fragments = new ArrayList<>();
-	private ProgressBar progressBar = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		initSearchListView();
 		initViewPager();
 	}
-	
+
 	/**
 	 * 初始化控件
 	 */
@@ -112,12 +111,13 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		llSearch = (LinearLayout) findViewById(R.id.llSearch);
 		etSearch = (EditText) findViewById(R.id.etSearch);
 		etSearch.addTextChangedListener(watcher);
-		tvCancel = (TextView) findViewById(R.id.tvCancel);
-		tvCancel.setOnClickListener(this);
+        tvCancel = (TextView) findViewById(R.id.tvCancel);
+        tvCancel.setOnClickListener(this);
 		reTitle = (RelativeLayout) findViewById(R.id.reTitle);
-		progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        ivClear = (ImageView) findViewById(R.id.ivClear);
+        ivClear.setOnClickListener(this);
 	}
-	
+
 	/**
 	 * 搜索框监听器
 	 */
@@ -125,7 +125,6 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		@Override
 		public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
 			if (!TextUtils.isEmpty(arg0.toString())) {
-				progressBar.setVisibility(View.VISIBLE);
 				order = "";
 				search = arg0.toString();
 				page = 1;
@@ -145,7 +144,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		public void afterTextChanged(Editable arg0) {
 		}
 	};
-	
+
 	/**
 	 * 相机动画
 	 * @param flag false从右到左，true从左到右
@@ -202,18 +201,18 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 			}
 		});
 		reTitle.startAnimation(animup);
-		
+
 		AnimationSet animdn = new AnimationSet(true);
 		TranslateAnimation animation1 = null;
 		if (flag == false) {
-			tvCancel.setClickable(true);
+            tvCancel.setClickable(true);
 			animation1 = new TranslateAnimation(
 				Animation.RELATIVE_TO_SELF,1.0f,
 				Animation.RELATIVE_TO_SELF,0f,
 				Animation.RELATIVE_TO_SELF,0f,
 				Animation.RELATIVE_TO_SELF,0f);
 		}else {
-			tvCancel.setClickable(false);
+            tvCancel.setClickable(false);
 			animation1 = new TranslateAnimation(
 				Animation.RELATIVE_TO_SELF,0f,
 				Animation.RELATIVE_TO_SELF,1.0f,
@@ -223,9 +222,9 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		animation1.setDuration(500);
 		animdn.addAnimation(animation1);
 		animdn.setFillAfter(true);
-		llSearch.startAnimation(animdn);	
+		llSearch.startAnimation(animdn);
 	}
-	
+
 	/**
 	 * 初始化viewPager
 	 */
@@ -241,14 +240,14 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 			fragment.setArguments(bundle);
 			fragments.add(fragment);
 		}
-			
+
 		viewPager = (MainViewPager) findViewById(R.id.viewPager);
 		viewPager.setSlipping(false);//设置ViewPager是否可以滑动
 		viewPager.setOffscreenPageLimit(fragments.size());
 		viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 		viewPager.setAdapter(new MyPagerAdapter());
 	}
-	
+
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 		@Override
 		public void onPageSelected(int arg0) {
@@ -341,7 +340,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 			return fragment.getView();
 		}
 	}
-	
+
 	/**
 	 * 初始化listview
 	 */
@@ -373,7 +372,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 					OkHttpVideoList(CONST.GET_VIDEO_PIC_URL);
 				}
 			}
-			
+
 			@Override
 			public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
 			}
@@ -383,7 +382,7 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 	/**
 	 * 获取视频列表
 	 */
-	private void OkHttpVideoList(String requestUrl) {
+	private void OkHttpVideoList(final String url) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("page", page+"");
 		builder.add("pagesize", pageSize+"");
@@ -394,217 +393,222 @@ public class CheckActivity extends BaseActivity implements OnClickListener{
 		if (!TextUtils.isEmpty(search)) {
 			builder.add("search", search);
 		}
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(requestUrl).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (!TextUtils.isEmpty(result)) {
-					if (result != null) {
-						try {
-							JSONObject object = new JSONObject(result);
-							if (object != null) {
-								if (!object.isNull("status")) {
-									int status  = object.getInt("status");
-									if (status == 1) {//成功
-										if (!object.isNull("info")) {
-											JSONArray array = object.getJSONArray("info");
-											for (int i = 0; i < array.length(); i++) {
-												JSONObject obj = array.getJSONObject(i);
-												PhotoDto dto = new PhotoDto();
-												if (!obj.isNull("uid")) {
-													dto.uid = obj.getString("uid");
-												}
-												if (!obj.isNull("id")) {
-													dto.videoId = obj.getString("id");
-												}
-												if (!obj.isNull("title")) {
-													dto.title = obj.getString("title");
-												}
-												if (!obj.isNull("content")) {
-													dto.content = obj.getString("content");
-												}
-												if (!obj.isNull("create_time")) {
-													dto.createTime = obj.getString("create_time");
-												}
-												if (!obj.isNull("location")) {
-													dto.location = obj.getString("location");
-												}
-												if (!obj.isNull("nickname")) {
-													dto.nickName = obj.getString("nickname");
-												}
-												if (!obj.isNull("username")) {
-													dto.userName = obj.getString("username");
-												}
-												if (!obj.isNull("phonenumber")) {
-													dto.phoneNumber = obj.getString("phonenumber");
-												}
-												if (!obj.isNull("praise")) {
-													dto.praiseCount = obj.getString("praise");
-												}
-												if (!obj.isNull("comments")) {
-													dto.commentCount = obj.getString("comments");
-												}
-												if (!obj.isNull("work_time")) {
-													dto.workTime = obj.getString("work_time");
-												}
-												if (!obj.isNull("workstype")) {
-													dto.workstype = obj.getString("workstype");
-												}
-												if (!obj.isNull("status")) {
-													dto.status = obj.getString("status");
-												}
-												if (!obj.isNull("weather_flag")) {
-													dto.weatherFlag = obj.getString("weather_flag");
-												}
-												if (!obj.isNull("et01")) {
-													dto.otherFlag = obj.getString("et01");
-												}
-												if (!obj.isNull("worksinfo")) {
-													JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
-
-													//视频
-													if (!workObj.isNull("video")) {
-														JSONObject video = workObj.getJSONObject("video");
-														if (!video.isNull("ORG")) {//腾讯云结构解析
-															JSONObject ORG = video.getJSONObject("ORG");
-															if (!ORG.isNull("url")) {
-																dto.videoUrl = ORG.getString("url");
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if (!TextUtils.isEmpty(result)) {
+									try {
+										JSONObject object = new JSONObject(result);
+										if (object != null) {
+											if (!object.isNull("status")) {
+												int status  = object.getInt("status");
+												if (status == 1) {//成功
+													if (!object.isNull("info")) {
+														JSONArray array = object.getJSONArray("info");
+														for (int i = 0; i < array.length(); i++) {
+															JSONObject obj = array.getJSONObject(i);
+															PhotoDto dto = new PhotoDto();
+															if (!obj.isNull("uid")) {
+																dto.uid = obj.getString("uid");
 															}
-															if (!video.isNull("SD")) {
-																JSONObject SD = video.getJSONObject("SD");
-																if (!SD.isNull("url")) {
-																	dto.sd = SD.getString("url");
+															if (!obj.isNull("id")) {
+																dto.videoId = obj.getString("id");
+															}
+															if (!obj.isNull("title")) {
+																dto.title = obj.getString("title");
+															}
+															if (!obj.isNull("content")) {
+																dto.content = obj.getString("content");
+															}
+															if (!obj.isNull("create_time")) {
+																dto.createTime = obj.getString("create_time");
+															}
+															if (!obj.isNull("location")) {
+																dto.location = obj.getString("location");
+															}
+															if (!obj.isNull("nickname")) {
+																dto.nickName = obj.getString("nickname");
+															}
+															if (!obj.isNull("username")) {
+																dto.userName = obj.getString("username");
+															}
+															if (!obj.isNull("phonenumber")) {
+																dto.phoneNumber = obj.getString("phonenumber");
+															}
+															if (!obj.isNull("praise")) {
+																dto.praiseCount = obj.getString("praise");
+															}
+															if (!obj.isNull("browsecount")) {
+																dto.playCount = obj.getString("browsecount");
+															}
+															if (!obj.isNull("comments")) {
+																dto.commentCount = obj.getString("comments");
+															}
+															if (!obj.isNull("work_time")) {
+																dto.workTime = obj.getString("work_time");
+															}
+															if (!obj.isNull("workstype")) {
+																dto.workstype = obj.getString("workstype");
+															}
+															if (!obj.isNull("status")) {
+																dto.status = obj.getString("status");
+															}
+															if (!obj.isNull("weather_flag")) {
+																dto.weatherFlag = obj.getString("weather_flag");
+															}
+															if (!obj.isNull("et01")) {
+																dto.otherFlag = obj.getString("et01");
+															}
+															if (!obj.isNull("worksinfo")) {
+																JSONObject workObj = new JSONObject(obj.getString("worksinfo"));
+
+																//视频
+																if (!workObj.isNull("video")) {
+																	JSONObject video = workObj.getJSONObject("video");
+																	if (!video.isNull("ORG")) {//腾讯云结构解析
+																		JSONObject ORG = video.getJSONObject("ORG");
+																		if (!ORG.isNull("url")) {
+																			dto.videoUrl = ORG.getString("url");
+																		}
+																		if (!video.isNull("SD")) {
+																			JSONObject SD = video.getJSONObject("SD");
+																			if (!SD.isNull("url")) {
+																				dto.sd = SD.getString("url");
+																			}
+																		}
+																		if (!video.isNull("HD")) {
+																			JSONObject HD = video.getJSONObject("HD");
+																			if (!HD.isNull("url")) {
+																				dto.hd = HD.getString("url");
+																				dto.videoUrl = HD.getString("url");
+																			}
+																		}
+																		if (!video.isNull("FHD")) {
+																			JSONObject FHD = video.getJSONObject("FHD");
+																			if (!FHD.isNull("url")) {
+																				dto.fhd = FHD.getString("url");
+																			}
+																		}
+																	}else {
+																		dto.videoUrl = video.getString("url");
+																	}
 																}
-															}
-															if (!video.isNull("HD")) {
-																JSONObject HD = video.getJSONObject("HD");
-																if (!HD.isNull("url")) {
-																	dto.hd = HD.getString("url");
-																	dto.videoUrl = HD.getString("url");
+																if (!workObj.isNull("thumbnail")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("thumbnail"));
+																	if (!imgObj.isNull("url")) {
+																		dto.imgUrl = imgObj.getString("url");
+																	}
 																}
-															}
-															if (!video.isNull("FHD")) {
-																JSONObject FHD = video.getJSONObject("FHD");
-																if (!FHD.isNull("url")) {
-																	dto.fhd = FHD.getString("url");
+
+																//上传的图片地址，最多9张
+																List<String> urlList = new ArrayList<>();
+																if (!workObj.isNull("imgs1")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs1"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																		dto.imgUrl = imgObj.getString("url");
+																	}
 																}
+																if (!workObj.isNull("imgs2")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs2"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs3")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs3"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs4")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs4"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs5")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs5"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs6")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs6"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs7")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs7"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs8")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs8"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																if (!workObj.isNull("imgs9")) {
+																	JSONObject imgObj = new JSONObject(workObj.getString("imgs9"));
+																	if (!imgObj.isNull("url")) {
+																		urlList.add(imgObj.getString("url"));
+																	}
+																}
+																dto.urlList.addAll(urlList);
 															}
-														}else {
-															dto.videoUrl = video.getString("url");
-														}
-													}
-													if (!workObj.isNull("thumbnail")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("thumbnail"));
-														if (!imgObj.isNull("url")) {
-															dto.imgUrl = imgObj.getString("url");
+
+															if (!TextUtils.isEmpty(dto.getWorkTime())) {
+																searchList.add(dto);
+															}
 														}
 													}
 
-													//上传的图片地址，最多9张
-													List<String> urlList = new ArrayList<>();
-													if (!workObj.isNull("imgs1")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs1"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-															dto.imgUrl = imgObj.getString("url");
-														}
+													if (searchAdapter != null) {
+														searchAdapter.notifyDataSetChanged();
 													}
-													if (!workObj.isNull("imgs2")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs2"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs3")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs3"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs4")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs4"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs5")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs5"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs6")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs6"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs7")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs7"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs8")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs8"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													if (!workObj.isNull("imgs9")) {
-														JSONObject imgObj = new JSONObject(workObj.getString("imgs9"));
-														if (!imgObj.isNull("url")) {
-															urlList.add(imgObj.getString("url"));
-														}
-													}
-													dto.urlList.addAll(urlList);
-												}
 
-												if (!TextUtils.isEmpty(dto.getWorkTime())) {
-													searchList.add(dto);
+												}else {
+													//失败
+													if (!object.isNull("msg")) {
+														String msg = object.getString("msg");
+														if (msg != null) {
+															Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+														}
+													}
 												}
 											}
 										}
-
-										runOnUiThread(new Runnable() {
-											@Override
-											public void run() {
-												if (searchList.size() > 0 && searchAdapter != null) {
-													searchAdapter.notifyDataSetChanged();
-												}
-												progressBar.setVisibility(View.GONE);
-											}
-										});
-
-									}else {
-										//失败
-										if (!object.isNull("msg")) {
-											String msg = object.getString("msg");
-											if (msg != null) {
-												Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
-											}
-										}
+									} catch (JSONException e) {
+										e.printStackTrace();
 									}
 								}
 							}
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
+						});
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
-	
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {

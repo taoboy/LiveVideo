@@ -447,6 +447,9 @@ public class VideoWallActivity extends BaseActivity implements OnClickListener{
 												if (!obj.isNull("praise")) {
 													dto.praiseCount = obj.getString("praise");
 												}
+												if (!obj.isNull("browsecount")) {
+													dto.playCount = obj.getString("browsecount");
+												}
 												if (!obj.isNull("comments")) {
 													dto.commentCount = obj.getString("comments");
 												}

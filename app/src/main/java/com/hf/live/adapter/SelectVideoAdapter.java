@@ -12,24 +12,25 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.util.CommonUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectVideoAdapter extends BaseAdapter {
 
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<>();
-	private int imageWidth = 0;
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PhotoDto> mArrayList;
+	private int imageWidth;
+	private RelativeLayout.LayoutParams params;
 
 	private final class ViewHolder{
 		ImageView imageView;
@@ -39,12 +40,14 @@ public class SelectVideoAdapter extends BaseAdapter {
 
 	private ViewHolder mHolder = null;
 
-	@SuppressWarnings("deprecation")
-	public SelectVideoAdapter(Context context, List<PhotoDto> mArrayList, int imageWidth) {
+	public SelectVideoAdapter(Context context, List<PhotoDto> mArrayList) {
 		mContext = context;
-		this.imageWidth = imageWidth;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+		imageWidth = wm.getDefaultDisplay().getWidth();
+		params = new RelativeLayout.LayoutParams(imageWidth/4, imageWidth/4-10);
 	}
 
 	@Override
@@ -77,10 +80,9 @@ public class SelectVideoAdapter extends BaseAdapter {
 		
 		PhotoDto dto = mArrayList.get(position);
 		if (!TextUtils.isEmpty(dto.videoUrl)) {
-			downloadPortrait(dto.videoUrl, imageWidth, imageWidth, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
-			LayoutParams params = mHolder.imageView.getLayoutParams();
-			params.width = imageWidth;
-			params.height = imageWidth;
+            videoThumbnail(dto.videoUrl, imageWidth/4, imageWidth/4-10, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+		}
+		if (params != null) {
 			mHolder.imageView.setLayoutParams(params);
 		}
 		
@@ -98,9 +100,9 @@ public class SelectVideoAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * 下载头像保存在本地
+	 * 获取视频缩略图
 	 */
-	private void downloadPortrait(String imgUrl, int width, int height, int kind, final ImageView imageView) {
+	private void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
 		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
 			@Override
 			public void loadComplete(Bitmap bitmap) {

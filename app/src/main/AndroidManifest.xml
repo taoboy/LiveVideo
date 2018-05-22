@@ -40,16 +40,6 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     
-    <!-- 会商 -->
-    <uses-permission android:name="android.permission.READ_LOGS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <!-- 会商 -->
-
     <application
         android:name="com.hf.live.common.MyApplication"
         android:allowBackup="true"
@@ -92,8 +82,30 @@
             android:name="com.hf.live.activity.MainActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-
-        <activity 
+        <activity
+            android:name="com.hf.live.activity.MainActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.PushRtmpSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.PushRtmpSettingEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.PushRtmpActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name="com.hf.live.activity.PullRtmpSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.PullRtmpSettingEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.PullRtmpActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.hf.live.activity.LiveBroadcastSuccessActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
@@ -153,16 +165,12 @@
             android:name="com.hf.live.activity.ModifyInfoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.MyResponseActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity 
+        <activity
             android:name="com.hf.live.activity.MyAboutActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity 
-            android:name="com.hf.live.activity.MyAboutDetailActivity"
+            android:name="com.hf.live.activity.WebviewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity 
@@ -177,13 +185,7 @@
         <activity 
             android:name="com.hf.live.activity.SwitchResourceActivity"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.VideoViewActivity"
-            android:screenOrientation="landscape" />
-        <activity 
-            android:name="com.hf.live.activity.WeatherEyeActivity"
-            android:screenOrientation="portrait" />
-        <activity 
+        <activity
             android:name="com.hf.live.activity.SelectUserActivity"
             android:screenOrientation="portrait" />
         <activity 
@@ -194,9 +196,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hf.live.activity.ScoreRankActivity"
-            android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.UseActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hf.live.activity.GuideActivity"
@@ -215,9 +214,15 @@
             android:name="com.hf.live.activity.SelectVideoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hf.live.videoedit.VideoTrimActivity"
+            android:name="com.hf.live.activity.SearchVideoActivity"
             android:screenOrientation="portrait" />
-        
+        <activity
+            android:name="com.hf.live.activity.VideoRecordActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="sensor"/>
+
+
         
         <!-- umeng -->
         <meta-data
@@ -232,6 +237,24 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
+        <!-- 新浪 -->
+        <activity
+            android:name=".activity.WBShareActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 分享编辑页(只有新浪微博精简版，豆瓣人人腾讯微博领英twitter需要)： -->
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+
         <!-- QQ -->
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
@@ -243,7 +266,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent1104765826" />
+                <data android:scheme="tencent1105801723" />
             </intent-filter>
         </activity>
         <activity

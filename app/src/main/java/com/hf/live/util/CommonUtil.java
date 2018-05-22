@@ -38,6 +38,8 @@ import com.hf.live.R;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
 import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareConfig;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
@@ -68,7 +70,7 @@ public class CommonUtil {
      */  
     public static float dip2px(Context context, float dpValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
-        return (float) (dpValue * scale);  
+        return dpValue * scale;
     }  
   
     /** 
@@ -76,66 +78,9 @@ public class CommonUtil {
      */  
     public static float px2dip(Context context, float pxValue) {  
         final float scale = context.getResources().getDisplayMetrics().density;  
-        return (float) (pxValue / scale);  
+        return pxValue / scale;
     } 
     
-    /**
-	 * 解决ScrollView与ListView共存的问题
-	 * 
-	 * @param listView
-	 */
-	public static void setListViewHeightBasedOnChildren(ListView listView) {
-		ListAdapter listAdapter = listView.getAdapter();
-		if (listAdapter == null) {
-			return;
-		}
-
-		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i++) {
-			View listItem = listAdapter.getView(i, null, listView);
-			listItem.measure(0, 0); 
-			totalHeight += listItem.getMeasuredHeight();
-		}
-
-		ViewGroup.LayoutParams params = listView.getLayoutParams();
-		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		((MarginLayoutParams) params).setMargins(0, 0, 0, 0);
-		listView.setLayoutParams(params);
-	}
-	
-	/**
-	 * 解决ScrollView与GridView共存的问题
-	 *
-	 */
-	public static void setGridViewHeightBasedOnChildren(GridView gridView) {
-		ListAdapter listAdapter = gridView.getAdapter();
-		if (listAdapter == null) {
-			return;
-		}
-		
-		Class<GridView> tempGridView = GridView.class; // 获得gridview这个类的class
-		int column = -1;
-        try {
- 
-            Field field = tempGridView.getDeclaredField("mRequestedNumColumns"); // 获得申明的字段
-            field.setAccessible(true); // 设置访问权限
-            column = Integer.valueOf(field.get(gridView).toString()); // 获取字段的值
-        } catch (Exception e1) {
-        }
-
-		int totalHeight = 0;
-		for (int i = 0; i < listAdapter.getCount(); i+=column) {
-			View listItem = listAdapter.getView(i, null, gridView);
-			listItem.measure(0, 0); 
-			totalHeight += listItem.getMeasuredHeight();
-		}
-
-		ViewGroup.LayoutParams params = gridView.getLayoutParams();
-		params.height = totalHeight + (gridView.getVerticalSpacing() * (listAdapter.getCount()/column - 1) + 30);
-		((MarginLayoutParams) params).setMargins(0, 0, 0, 0);
-		gridView.setLayoutParams(params);
-	}
-
 	/**
 	 * 校验用户名是否正确,只能有字母，数字和下划线
 	 */
@@ -507,8 +452,12 @@ public class CommonUtil {
 	 * @param activity
 	 */
 	public static void share(final Activity activity, final String title, final String content, final String imgUrl, final String url) {
+		UMShareConfig config = new UMShareConfig();
+		config.setSinaAuthType(UMShareConfig.AUTH_TYPE_WEBVIEW);//只进行网页授权
+		UMShareAPI.get(activity).setShareConfig(config);
+
 		ShareAction panelAction = new ShareAction(activity);
-		panelAction.setDisplayList(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE);
+		panelAction.setDisplayList(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.QQ,SHARE_MEDIA.SINA);
 		panelAction.setShareboardclickCallback(new ShareBoardlistener() {
 			@Override
 			public void onclick(SnsPlatform arg0, SHARE_MEDIA arg1) {
@@ -541,9 +490,8 @@ public class CommonUtil {
 	 * @return 指定大小的视频缩略图
 	 */
 	public static Bitmap getVideoThumbnail(String videoPath, int width, int height, int kind) {
-		Bitmap bitmap = null;
 		// 获取视频的缩略图
-		bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
+		Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
 		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 		return bitmap;
 	}
@@ -671,42 +619,47 @@ public class CommonUtil {
 	 * 下载头像
 	 * @param imgUrl
 	 */
-	public static void OkHttpLoadPortrait(final Activity activity, String imgUrl) {
-		OkHttpUtil.enqueue(new Request.Builder().url(imgUrl).build(), new Callback() {
+	public static void OkHttpLoadPortrait(final Activity activity, final String imgUrl) {
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
-
-			}
-
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				final byte[] bytes = response.body().bytes();
-				activity.runOnUiThread(new Runnable() {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(imgUrl).build(), new Callback() {
 					@Override
-					public void run() {
-						Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-						try {
-							File files = new File(CONST.SDCARD_PATH);
-							if (!files.exists()) {
-								files.mkdirs();
-							}
-							FileOutputStream fos = new FileOutputStream(CONST.PORTRAIT_ADDR);
-							if (bitmap != null && fos != null) {
-								bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-								if (bitmap != null && !bitmap.isRecycled()) {
-									bitmap.recycle();
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final byte[] bytes = response.body().bytes();
+						activity.runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+								try {
+									File files = new File(CONST.SDCARD_PATH);
+									if (!files.exists()) {
+										files.mkdirs();
+									}
+									FileOutputStream fos = new FileOutputStream(CONST.PORTRAIT_ADDR);
+									if (bitmap != null && fos != null) {
+										bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+										if (bitmap != null && !bitmap.isRecycled()) {
+											bitmap.recycle();
+										}
+									}
+								} catch (FileNotFoundException e) {
+									e.printStackTrace();
 								}
 							}
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
+						});
 					}
 				});
 			}
-		});
+		}).start();
 	}
-	
+
 }

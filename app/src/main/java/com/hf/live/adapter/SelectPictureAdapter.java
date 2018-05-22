@@ -15,7 +15,6 @@ import com.hf.live.dto.PhotoDto;
 
 import net.tsz.afinal.FinalBitmap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,10 +23,10 @@ import java.util.List;
 
 public class SelectPictureAdapter extends BaseAdapter {
 
-	private Context mContext = null;
-	private LayoutInflater mInflater = null;
-	private List<PhotoDto> mArrayList = new ArrayList<>();
-	private int width = 0;
+	private Context mContext;
+	private LayoutInflater mInflater;
+	private List<PhotoDto> mArrayList;
+	private int width;
 
 	private final class ViewHolder{
 		ImageView imageView;
@@ -36,7 +35,6 @@ public class SelectPictureAdapter extends BaseAdapter {
 
 	private ViewHolder mHolder = null;
 
-	@SuppressWarnings("deprecation")
 	public SelectPictureAdapter(Context context, List<PhotoDto> mArrayList) {
 		mContext = context;
 		this.mArrayList = mArrayList;
