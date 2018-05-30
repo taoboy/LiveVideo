@@ -1,6 +1,8 @@
 package com.hf.live.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ public class VideoWallMapAdapter extends BaseAdapter{
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<PhotoDto> mArrayList;
+	private Bitmap seatBitmap;
 
 	private final class ViewHolder{
 		ImageView imageView;
@@ -44,6 +47,8 @@ public class VideoWallMapAdapter extends BaseAdapter{
 		mContext = context;
 		this.mArrayList = mArrayList;
 		mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+		seatBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.iv_seat_bitmap);
 	}
 
 	@Override
@@ -84,7 +89,11 @@ public class VideoWallMapAdapter extends BaseAdapter{
 
 			if (!TextUtils.isEmpty(dto.imgUrl)) {
 				FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-				finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
+				if (seatBitmap != null) {
+					finalBitmap.display(mHolder.imageView, dto.imgUrl, seatBitmap, seatBitmap, null, 0);
+				}else {
+					finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
+				}
 			}
 
 			if (!TextUtils.isEmpty(dto.portraitUrl)) {

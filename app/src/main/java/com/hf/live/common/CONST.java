@@ -47,10 +47,10 @@ public class CONST {
 	public static String PORTRAIT_ADDR = SDCARD_PATH + "/portrait.png";//头像保存的路径
 	public static String OLD_PORTRAIT_ADDR = SDCARD_PATH + "/oldportrait.png";//头像保存的路径
 	public static String VIDEO_ADDR = SDCARD_PATH + "/video";//拍摄视频保存的路径
-	public static String TRIMPATH = SDCARD_PATH + "/trimmed/";//裁剪后视频文件夹路径
+	public static String TRIMPATH = SDCARD_PATH + "/trim/";//裁剪后视频文件夹路径
 	public static String DOWNLOAD_ADDR = SDCARD_PATH + "/download";//下载视频保存的路径
-	public static String SAVEPATH = SDCARD_PATH + "/merge/";//合并裁剪后的视频文件夹路径
-	public static String THUMBNAIL_ADDR = SDCARD_PATH + "/thumbnail";//缩略图保存的路径
+	public static String MERGEPATH = SDCARD_PATH + "/merge/";//合并裁剪后的视频文件夹路径
+	public static String THUMBNAIL_ADDR = SDCARD_PATH + "/thumbnail/";//缩略图保存的路径
 	public static String PICTURE_ADDR = SDCARD_PATH + "/picture/";//拍照保存的路径
 	public static String VIDEOTYPE = ".mp4";//mp4格式播放视频要快，比.3gp速度快很多
 	public static String IMGTYPE = ".jpg";

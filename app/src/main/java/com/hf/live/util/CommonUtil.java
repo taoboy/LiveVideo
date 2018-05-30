@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -23,16 +24,14 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
+import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Surface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.GridView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
 
 import com.hf.live.R;
 import com.hf.live.common.CONST;
@@ -51,9 +50,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -483,17 +483,106 @@ public class CommonUtil {
 	 * 先通过ThumbnailUtils来创建一个视频的缩略图，然后再利用ThumbnailUtils来生成指定大小的缩略图。
 	 * 如果想要的缩略图的宽和高都小于MICRO_KIND，则类型要使用MICRO_KIND作为kind的值，这样会节省内存。
 	 * @param videoPath 视频的路径
-	 * @param width 指定输出视频缩略图的宽度
-	 * @param height 指定输出视频缩略图的高度度
 	 * @param kind 参照MediaStore.Images.Thumbnails类中的常量MINI_KIND和MICRO_KIND。
 	 *            其中，MINI_KIND: 512 x 384，MICRO_KIND: 96 x 96
 	 * @return 指定大小的视频缩略图
 	 */
+	public static String getVideoThumbnail(final String videoPath, final int kind) {
+		File files = new File(CONST.THUMBNAIL_ADDR);
+		if (!files.exists()) {
+			files.mkdirs();
+		}
+		File file = new File(videoPath);
+		if (!file.exists()) {
+			return null;
+		}
+		String fileName = file.getName();
+		if (fileName.endsWith(CONST.VIDEOTYPE)) {
+			fileName = fileName.replace(CONST.VIDEOTYPE, CONST.IMGTYPE);
+		}
+		final String imgPath = files.getAbsolutePath()+File.separator+fileName;
+		if (!new File(imgPath).exists()) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						FileOutputStream fos = new FileOutputStream(imgPath);
+						Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
+						if (bitmap != null && fos != null) {
+							bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+							if (bitmap != null && !bitmap.isRecycled()) {
+								bitmap.recycle();
+							}
+						}
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+		}
+		return imgPath;
+	}
+
 	public static Bitmap getVideoThumbnail(String videoPath, int width, int height, int kind) {
 		// 获取视频的缩略图
 		Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, kind);
 		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height, ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
 		return bitmap;
+	}
+
+	/**
+	 * 获取视频缩略图
+	 */
+	public static void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
+		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
+			@Override
+			public void loadComplete(Bitmap bitmap) {
+				if (bitmap != null) {
+					imageView.setImageBitmap(bitmap);
+				}
+			}
+		}, imgUrl, width, height, kind);
+		task.execute();
+	}
+
+	private interface AsynLoadCompleteListener {
+		void loadComplete(Bitmap bitmap);
+	}
+
+	private static class AsynLoadTask extends AsyncTask<Void, Bitmap, Bitmap> {
+
+		private String imgUrl;
+		private int width, height;
+		private int kind;
+		private AsynLoadCompleteListener completeListener;
+
+		private AsynLoadTask(AsynLoadCompleteListener completeListener, String imgUrl, int width, int height, int kind) {
+			this.imgUrl = imgUrl;
+			this.width = width;
+			this.height = height;
+			this.kind = kind;
+			this.completeListener = completeListener;
+		}
+
+		@Override
+		protected void onPreExecute() {
+		}
+
+		@Override
+		protected void onProgressUpdate(Bitmap... values) {
+		}
+
+		@Override
+		protected Bitmap doInBackground(Void... params) {
+			return CommonUtil.getVideoThumbnail(imgUrl, width, height, kind);
+		}
+
+		@Override
+		protected void onPostExecute(Bitmap bitmap) {
+			if (completeListener != null) {
+				completeListener.loadComplete(bitmap);
+			}
+		}
 	}
 
 	/**
@@ -613,6 +702,72 @@ public class CommonUtil {
 			flag = "社会安全";
 		}
 		return flag;
+	}
+
+	/**
+	 * 获取所有本地视频文件信息
+	 * @return
+	 */
+	public static List<PhotoDto> getAllLocalVideos(Context context) {
+		List<PhotoDto> list = new ArrayList<>();
+		if (context != null) {
+			Cursor cursor = context.getContentResolver().query(
+					MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null, null,
+					null, null);
+			if (cursor != null) {
+				while (cursor.moveToNext()) {
+					int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media._ID));
+					String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.TITLE));
+					String album = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.ALBUM));
+					String artist = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.ARTIST));
+					String displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DISPLAY_NAME));
+					String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.MIME_TYPE));
+					String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA));
+					long duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
+					long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE));
+
+					PhotoDto dto = new PhotoDto();
+					dto.imageName = title;
+					dto.videoUrl = path;
+					dto.duration = duration;
+					list.add(dto);
+				}
+				cursor.close();
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * 获取所有本地图片文件信息
+	 * @return
+	 */
+	public static List<PhotoDto> getAllLocalImages(Context context) {
+		List<PhotoDto> list = new ArrayList<>();
+		if (context != null) {
+			Cursor cursor = context.getContentResolver().query(
+					MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, null,
+					null, null);
+			if (cursor != null) {
+				while (cursor.moveToNext()) {
+					int id = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID));
+					String title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.TITLE));
+					String displayName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME));
+					String mimeType = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE));
+					String path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+					long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE));
+
+					PhotoDto dto = new PhotoDto();
+					dto.imageName = title;
+					dto.imgUrl = path;
+					list.add(dto);
+				}
+				cursor.close();
+			}
+		}
+
+		return list;
 	}
 
 	/**

@@ -47,6 +47,8 @@ public class PhotoDto implements Parcelable {
 	public String otherFlag;//其它标签
 	public String adcode;//6位行政编码
 	public String history;
+	public long duration;//视频时长
+	public boolean isEditing = false;//是否正在编辑
 	
 	//获取本地所有视频文件
 	public String fileName;//文件名称
@@ -273,6 +275,8 @@ public class PhotoDto implements Parcelable {
 		dest.writeString(this.otherFlag);
 		dest.writeString(this.adcode);
 		dest.writeString(this.history);
+		dest.writeLong(this.duration);
+		dest.writeByte(this.isEditing ? (byte) 1 : (byte) 0);
 		dest.writeString(this.fileName);
 		dest.writeString(this.filePath);
 		dest.writeString(this.albumName);
@@ -325,6 +329,8 @@ public class PhotoDto implements Parcelable {
 		this.otherFlag = in.readString();
 		this.adcode = in.readString();
 		this.history = in.readString();
+		this.duration = in.readLong();
+		this.isEditing = in.readByte() != 0;
 		this.fileName = in.readString();
 		this.filePath = in.readString();
 		this.albumName = in.readString();

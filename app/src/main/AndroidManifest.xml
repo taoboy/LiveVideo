@@ -78,10 +78,6 @@
         <activity 
             android:name="com.hf.live.activity.LoginActivity"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.MainActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
         <activity
             android:name="com.hf.live.activity.MainActivity2"
             android:screenOrientation="portrait" />
@@ -106,20 +102,10 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hf.live.activity.LiveBroadcastSuccessActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.hf.live.activity.PersonCenterActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.hf.live.activity.CameraActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenSize" />
-        <activity 
+        <activity
             android:name="com.hf.live.activity.DisplayVideoActivity"
             android:launchMode="singleTask"
             android:screenOrientation="nosensor"
@@ -202,13 +188,7 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.hf.live.activity.SelectAlbumPictureActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.hf.live.activity.SelectPictureActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.hf.live.activity.SelectAlbumVideoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hf.live.activity.SelectVideoActivity"
@@ -221,9 +201,20 @@
             android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="sensor"/>
+        <activity
+            android:name="com.hf.live.activity.VideoEditListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.VideoSelectEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.VideoEditDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.TCVideoPreprocessActivity"
+            android:screenOrientation="portrait" />
 
 
-        
         <!-- umeng -->
         <meta-data
             android:name="UMENG_APPKEY"

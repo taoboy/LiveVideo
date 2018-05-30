@@ -3,7 +3,6 @@ package com.hf.live.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -145,7 +144,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 						}
 					}
 				}else {//本地缩略图呗删除就根据视频获取缩略图
-					videoThumbnail(dto.videoUrl, width/4, width/4, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+					CommonUtil.videoThumbnail(dto.videoUrl, width/4, width/4, MediaStore.Video.Thumbnails.MICRO_KIND, mHolder.imageView);
 					if (params != null) {
 						mHolder.imageView.setLayoutParams(params);
 					}
@@ -154,61 +153,6 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 		}
 
 		return convertView;
-	}
-
-	/**
-	 * 下载头像保存在本地
-	 */
-	private void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
-		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
-			@Override
-			public void loadComplete(Bitmap bitmap) {
-				if (bitmap != null) {
-					imageView.setImageBitmap(bitmap);
-				}
-			}
-		}, imgUrl, width, height, kind);
-		task.execute();
-	}
-
-	private interface AsynLoadCompleteListener {
-		void loadComplete(Bitmap bitmap);
-	}
-
-	private class AsynLoadTask extends AsyncTask<Void, Bitmap, Bitmap> {
-
-		private String imgUrl;
-		private int width, height;
-		private int kind;
-		private AsynLoadCompleteListener completeListener;
-
-		private AsynLoadTask(AsynLoadCompleteListener completeListener, String imgUrl, int width, int height, int kind) {
-			this.imgUrl = imgUrl;
-			this.width = width;
-			this.height = height;
-			this.kind = kind;
-			this.completeListener = completeListener;
-		}
-
-		@Override
-		protected void onPreExecute() {
-		}
-
-		@Override
-		protected void onProgressUpdate(Bitmap... values) {
-		}
-
-		@Override
-		protected Bitmap doInBackground(Void... params) {
-			return CommonUtil.getVideoThumbnail(imgUrl, width, height, kind);
-		}
-
-		@Override
-		protected void onPostExecute(Bitmap bitmap) {
-			if (completeListener != null) {
-				completeListener.loadComplete(bitmap);
-			}
-		}
 	}
 
 }

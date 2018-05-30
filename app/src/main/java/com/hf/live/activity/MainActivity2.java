@@ -23,6 +23,7 @@ import com.hf.live.R;
 import com.hf.live.common.MyApplication;
 import com.hf.live.fragment.EditVideoFragment;
 import com.hf.live.fragment.VideoWallFragment;
+import com.hf.live.util.AutoUpdateUtil;
 import com.hf.live.view.MainViewPager;
 
 import java.util.ArrayList;
@@ -58,6 +59,8 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 	 * 初始化控件
 	 */
 	private void initWidget() {
+		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "51", getString(R.string.app_name), true);
+
 		llWall = (LinearLayout) findViewById(R.id.llWall);
 		llWall.setOnClickListener(new MyOnClickListener(0));
 		llClip = (LinearLayout) findViewById(R.id.llClip);
@@ -245,7 +248,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 		ll5.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mContext, SelectAlbumVideoActivity.class));
+				startActivity(new Intent(mContext, SelectVideoActivity.class));
 			}
 		});
 
@@ -253,7 +256,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 		ll6.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(mContext, SelectAlbumPictureActivity.class));
+				startActivity(new Intent(mContext, SelectPictureActivity.class));
 			}
 		});
 	}

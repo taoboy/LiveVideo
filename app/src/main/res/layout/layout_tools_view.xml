@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel_ll_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/btn_cut"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_cut_press" />
+
+    <ImageView
+        android:id="@+id/btn_time_effect"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_time_effect_normal" />
+
+    <ImageView
+        android:id="@+id/btn_motion_filter"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_motion" />
+
+    <ImageView
+        android:id="@+id/btn_filter"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_beautiful" />
+
+    <ImageView
+        android:id="@+id/btn_music"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_music" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/btn_paster"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_paster" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/btn_word"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:src="@drawable/ic_word" />
+</LinearLayout>

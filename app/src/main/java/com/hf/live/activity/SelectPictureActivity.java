@@ -2,13 +2,8 @@ package com.hf.live.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.os.Process;
-import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -19,8 +14,8 @@ import android.widget.Toast;
 import com.hf.live.R;
 import com.hf.live.adapter.SelectPictureAdapter;
 import com.hf.live.dto.PhotoDto;
+import com.hf.live.util.CommonUtil;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +31,6 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
     private GridView gridView;
     private SelectPictureAdapter mAdapter = null;
     private List<PhotoDto> mList = new ArrayList<>();
-    private Thread thread = null;
     private int selectCount = 0;
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
     private List<PhotoDto> selectList = new ArrayList<>();
@@ -95,91 +89,13 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
      * 获取相册信息
      */
     private void loadImages() {
-        abortLoading();
-        ImageLoaderRunnable runnable = new ImageLoaderRunnable();
-        thread = new Thread(runnable);
-        thread.start();
-    }
+        mList.clear();
+        mList.addAll(CommonUtil.getAllLocalImages(mContext));
 
-    private void abortLoading() {
-        if (thread == null) {
-            return;
+        if (mAdapter != null) {
+            mAdapter.notifyDataSetChanged();
         }
 
-        if (thread.isAlive()) {
-            thread.interrupt();
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private class ImageLoaderRunnable implements Runnable {
-        @Override
-        public void run() {
-            android.os.Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND);
-
-            if (Thread.interrupted()) {
-                return;
-            }
-
-            String albumName = getIntent().getStringExtra("albumName");
-            if (TextUtils.isEmpty(albumName)) {
-                return;
-            }
-            Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATA },
-                    MediaStore.Images.Media.BUCKET_DISPLAY_NAME + " =?", new String[]{ albumName }, MediaStore.Images.Media.DATE_ADDED);
-
-            /*
-            In case this runnable is executed to onChange calling loadImages,
-            using countSelected variable can result in a race condition. To avoid that,
-            tempCountSelected keeps track of number of selected images. On handling
-            FETCH_COMPLETED message, countSelected is assigned value of tempCountSelected.
-             */
-            ArrayList<PhotoDto> temp = new ArrayList<>(cursor.getCount());
-            if (cursor.moveToLast()) {
-                do {
-                    if (Thread.interrupted()) {
-                        return;
-                    }
-
-                    String imageName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DISPLAY_NAME));
-                    String imagePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-
-                    File file = new File(imagePath);
-                    if (file.exists()) {
-                        PhotoDto dto = new PhotoDto();
-                        dto.imageName = imageName;
-                        dto.imgUrl = imagePath;
-                        temp.add(dto);
-                    }
-
-                } while (cursor.moveToPrevious());
-            }
-            cursor.close();
-
-            mList.clear();
-            mList.addAll(temp);
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (mAdapter != null) {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                }
-            });
-
-            Thread.interrupted();
-        }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        abortLoading();
     }
 
     @Override

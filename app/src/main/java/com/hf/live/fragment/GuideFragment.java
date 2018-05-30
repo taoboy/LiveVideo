@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.hf.live.R;
 import com.hf.live.activity.LoginActivity;
-import com.hf.live.activity.MainActivity;
 import com.hf.live.activity.MainActivity2;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;

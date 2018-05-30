@@ -17,6 +17,8 @@ import com.hf.live.R;
 import com.hf.live.common.CONST;
 import com.hf.live.common.MyApplication;
 import com.hf.live.dto.SwitchDto;
+import com.hf.live.util.AutoUpdateUtil;
+import com.hf.live.util.CommonUtil;
 import com.hf.live.util.DataCleanManager;
 import com.smartapi.pn.client.NotificationService;
 
@@ -30,16 +32,9 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 	
 	private Context mContext = null;
 	private LinearLayout llBack = null;
-	private TextView tvTitle = null;
-	private LinearLayout llPushNews = null;//消息推送
-	private LinearLayout llLocalSave = null;//本地存储
-	private LinearLayout llLocalCache = null;//本地缓存
-	private LinearLayout llSwitch = null;//切换数据源
+	private TextView tvTitle,tvLocalSave,tvLocalCache,tvDataResource,tvVersion,tvLogout;
+	private LinearLayout llPushNews,llLocalSave,llLocalCache,llSwitch,llVersion ;
 	private ImageView ivPushNews = null;
-	private TextView tvLocalSave = null;
-	private TextView tvLocalCache = null;
-	private TextView tvLogout = null;
-	private TextView tvDataResource = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +64,9 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 		tvLocalSave = (TextView) findViewById(R.id.tvLocalSave);
 		tvLocalCache = (TextView) findViewById(R.id.tvLocalCache);
 		tvDataResource = (TextView) findViewById(R.id.tvDataResource);
+		llVersion = (LinearLayout) findViewById(R.id.llVersion);
+		llVersion.setOnClickListener(this);
+		tvVersion = (TextView) findViewById(R.id.tvVersion);
 		tvLogout = (TextView) findViewById(R.id.tvLogout);
 		tvLogout.setOnClickListener(this);
 		
@@ -108,6 +106,8 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 		}else {
 			tvDataResource.setText(CONST.SOURCENAME);
 		}
+
+		tvVersion.setText(CommonUtil.getVersion(mContext));
 		
 	}
 	
@@ -248,6 +248,9 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 			break;
 		case R.id.llSwitch:
 			startActivityForResult(new Intent(mContext, SwitchResourceActivity.class), 2);
+			break;
+		case R.id.llVersion:
+			AutoUpdateUtil.checkUpdate(MySettingActivity.this, mContext, "51", getString(R.string.app_name), false);
 			break;
 		case R.id.tvLogout:
 			logoutDialog(getString(R.string.sure_logout));

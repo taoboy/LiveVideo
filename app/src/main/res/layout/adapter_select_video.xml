@@ -8,7 +8,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY" />
+        android:scaleType="centerCrop" />
     
     <ImageView
         android:id="@+id/imageView1"
@@ -26,6 +26,7 @@
         android:src="@drawable/iv_play" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvAlbumName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

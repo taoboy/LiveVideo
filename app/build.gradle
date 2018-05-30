@@ -12,8 +12,8 @@ android {
         applicationId "com.hf.live"
         minSdkVersion 17
         targetSdkVersion 22
-        versionCode 1413
-        versionName "2.0.0"
+        versionCode 1414
+        versionName "2.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -57,7 +57,9 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.3.1'
+//    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.+'
+    compile 'com.android.support:recyclerview-v7:25.+'
     compile files('libs/ChinaWeatherAPI.jar')
     compile files('libs/scene-final.jar')
     compile files('libs/uk-co-senab-photoview.jar')

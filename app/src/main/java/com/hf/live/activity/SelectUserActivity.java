@@ -167,7 +167,7 @@ public class SelectUserActivity extends BaseActivity implements OnClickListener{
 				MyApplication.saveUserInfo(mContext);
 
 				cancelDialog();
-				startActivity(new Intent(mContext, MainActivity.class));
+				startActivity(new Intent(mContext, MainActivity2.class));
 				finish();
 			}
 		} catch (JSONException e) {

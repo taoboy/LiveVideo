@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/main_color"
@@ -8,44 +8,60 @@
     <RelativeLayout
         android:id="@+id/reTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="视频剪辑"
+            android:text="选择视频"
             android:textColor="@color/white"
             android:textSize="@dimen/level_3"/>
 
         <TextView
-            android:visibility="gone"
-            android:id="@+id/tvAdd"
+            android:visibility="invisible"
+            android:id="@+id/tvControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="添加"
+            android:text="确认"
+            android:padding="10dp"
             android:textColor="@color/white"
             android:textSize="@dimen/level_4"/>
 
     </RelativeLayout>
 
-    <ListView
-        android:layout_below="@+id/reTitle"
-        android:id="@+id/listView"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="#15ffffff" />
+
+    <TextView
+        android:id="@+id/tvPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:paddingBottom="3dp"
-        android:cacheColorHint="@color/transparent"
-        android:divider="@color/transparent"
-        android:dividerHeight="3dip"
-        android:listSelector="@color/transparent"
-        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
-        android:scrollbarStyle="outsideOverlay" />
+        android:padding="10dp"
+        android:text="点击选择要剪辑的视频文件"
+        android:textColor="@color/text_color2"
+        android:gravity="center"
+        android:textSize="@dimen/level_4"/>
 
-</RelativeLayout>
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@color/transparent"
+        android:fadingEdge="none"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="4"
+        android:overScrollMode="never"
+        android:padding="2dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="2dp"/>
+
+</LinearLayout>

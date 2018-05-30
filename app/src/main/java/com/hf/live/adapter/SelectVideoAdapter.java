@@ -6,7 +6,7 @@ package com.hf.live.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
+import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -22,6 +22,7 @@ import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.util.CommonUtil;
 
+import java.io.File;
 import java.util.List;
 
 public class SelectVideoAdapter extends BaseAdapter {
@@ -80,7 +81,15 @@ public class SelectVideoAdapter extends BaseAdapter {
 		
 		PhotoDto dto = mArrayList.get(position);
 		if (!TextUtils.isEmpty(dto.videoUrl)) {
-            videoThumbnail(dto.videoUrl, imageWidth/4, imageWidth/4-10, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+			String imgPath = CommonUtil.getVideoThumbnail(dto.videoUrl, MediaStore.Video.Thumbnails.MINI_KIND);
+			if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
+				Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+				if (bitmap != null) {
+					mHolder.imageView.setImageBitmap(bitmap);
+				}
+			}else {
+				CommonUtil.videoThumbnail(dto.videoUrl, imageWidth/4, imageWidth/4-10, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+			}
 		}
 		if (params != null) {
 			mHolder.imageView.setLayoutParams(params);
@@ -92,66 +101,11 @@ public class SelectVideoAdapter extends BaseAdapter {
 			mHolder.imageView1.setVisibility(View.INVISIBLE);
 		}
 
-//		if (!TextUtils.isEmpty(dto.imageName)) {
-//			mHolder.tvAlbumName.setText(dto.imageName);
-//		}
+		if (!TextUtils.isEmpty(dto.imageName)) {
+			mHolder.tvAlbumName.setText(dto.imageName);
+		}
 		
 		return convertView;
-	}
-
-	/**
-	 * 获取视频缩略图
-	 */
-	private void videoThumbnail(String imgUrl, int width, int height, int kind, final ImageView imageView) {
-		AsynLoadTask task = new AsynLoadTask(new AsynLoadCompleteListener() {
-			@Override
-			public void loadComplete(Bitmap bitmap) {
-				if (bitmap != null) {
-					imageView.setImageBitmap(bitmap);
-				}
-			}
-		}, imgUrl, width, height, kind);
-		task.execute();
-	}
-
-	private interface AsynLoadCompleteListener {
-		void loadComplete(Bitmap bitmap);
-	}
-
-	private class AsynLoadTask extends AsyncTask<Void, Bitmap, Bitmap> {
-
-		private String imgUrl;
-		private int width, height;
-		private int kind;
-		private AsynLoadCompleteListener completeListener;
-
-		private AsynLoadTask(AsynLoadCompleteListener completeListener, String imgUrl, int width, int height, int kind) {
-			this.imgUrl = imgUrl;
-			this.width = width;
-			this.height = height;
-			this.kind = kind;
-			this.completeListener = completeListener;
-		}
-
-		@Override
-		protected void onPreExecute() {
-		}
-
-		@Override
-		protected void onProgressUpdate(Bitmap... values) {
-		}
-
-		@Override
-		protected Bitmap doInBackground(Void... params) {
-			return CommonUtil.getVideoThumbnail(imgUrl, width, height, kind);
-		}
-
-		@Override
-		protected void onPostExecute(Bitmap bitmap) {
-			if (completeListener != null) {
-				completeListener.loadComplete(bitmap);
-			}
-		}
 	}
 
 }

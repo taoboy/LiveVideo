@@ -139,7 +139,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dip"
+                android:textColor="@color/text_color1"
+                android:textSize="@dimen/level_4" />
+
+            <ImageView
+                android:layout_width="10dip"
+                android:layout_height="18dip"
+                android:src="@drawable/iv_arrow" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="#20ffffff" />
+
+        <LinearLayout
+            android:id="@+id/llVersion"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:background="@drawable/selector_cell"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="版本检测"
                 android:textColor="@color/text_color2"
+                android:textSize="@dimen/level_4" />
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:textColor="@color/text_color1"
                 android:textSize="@dimen/level_4" />
 
             <ImageView
