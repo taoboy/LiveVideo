@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="100dip" >
+              android:layout_width="match_parent"
+              android:layout_height="80dp">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical|right" >
+            android:gravity="center_vertical|right">
 
             <TextView
                 android:id="@+id/tvNotCheck"
@@ -22,7 +22,7 @@
                 android:padding="5dp"
                 android:text="@string/not_check2"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textSize="@dimen/level_5"/>
 
             <TextView
                 android:id="@+id/tvPassCheck"
@@ -33,7 +33,7 @@
                 android:padding="5dp"
                 android:text="@string/pass_check2"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textSize="@dimen/level_5"/>
 
             <TextView
                 android:id="@+id/tvRefuseCheck"
@@ -44,7 +44,7 @@
                 android:padding="5dp"
                 android:text="@string/refuse_check2"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:textSize="@dimen/level_5"/>
         </LinearLayout>
 
         <LinearLayout
@@ -52,166 +52,64 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dip" >
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="150dip"
-                    android:layout_height="100dip"
-                    android:scaleType="fitXY" />
+                    android:layout_width="120dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"/>
 
                 <ImageView
                     android:id="@+id/ivVideo"
-                    android:layout_width="35dip"
-                    android:layout_height="35dip"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/iv_video_logo"
-                    android:visibility="invisible" />
+                    android:src="@drawable/iv_play"
+                    android:visibility="invisible"/>
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical" >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:id="@+id/ivLocation"
-                        android:layout_width="13dip"
-                        android:layout_height="13dip"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/iv_location_blue" />
-
-                    <TextView
-                        android:id="@+id/tvAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/ivLocation"
-                        android:text="北京  东城"
-                        android:textColor="@color/text_color2"
-                        android:textSize="@dimen/level_5" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/tvTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:text="13:02"
-                    android:textColor="@color/text_color2"
-                    android:textSize="@dimen/level_5" />
-
-                <TextView
-                    android:id="@+id/line1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dip"
-                    android:layout_marginTop="2dip"
-                    android:background="#20ffffff" />
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:layout_weight="1"
-                    android:maxLines="3"
-                    android:paddingBottom="2dp"
-                    android:paddingTop="2dp"
+                    android:layout_centerVertical="true"
+                    android:maxLines="2"
                     android:text="测试标题"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/level_5" />
+                    android:textColor="@color/text_color3"
+                    android:textSize="@dimen/level_4"/>
 
                 <TextView
-                    android:id="@+id/line2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dip"
-                    android:background="#20ffffff" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="2dip"
-                    android:layout_marginLeft="5dip"
-                    android:layout_marginRight="5dip"
-                    android:layout_marginTop="2dip" >
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:singleLine="true"
+                    android:text="王文博"
+                    android:textColor="@color/text_color2"
+                    android:textSize="@dimen/level_4"/>
 
-                    <TextView
-                        android:id="@+id/tvUserName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:singleLine="true"
-                        android:text="王文博"
-                        android:textColor="@color/text_color2"
-                        android:textSize="@dimen/level_5" />
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="未审核"
+                    android:textColor="@color/text_color2"
+                    android:textSize="@dimen/level_5"/>
 
-                    <TextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="right"
-                        android:singleLine="true"
-                        android:text="未审核"
-                        android:textColor="@color/text_color2"
-                        android:textSize="@dimen/level_5" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center|center_vertical"
-                        android:visibility="gone" >
-
-                        <ImageView
-                            android:id="@+id/ivPraise"
-                            android:layout_width="13dip"
-                            android:layout_height="13dip"
-                            android:layout_marginRight="2dip"
-                            android:src="@drawable/iv_unlike" />
-
-                        <TextView
-                            android:id="@+id/tvPraise"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="12"
-                            android:textColor="@color/text_color2"
-                            android:textSize="@dimen/level_5" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center|center_vertical"
-                        android:visibility="gone" >
-
-                        <ImageView
-                            android:id="@+id/ivComment"
-                            android:layout_width="15dip"
-                            android:layout_height="15dip"
-                            android:layout_marginRight="2dip"
-                            android:src="@drawable/iv_reply" />
-
-                        <TextView
-                            android:id="@+id/tvComment"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="12"
-                            android:textColor="@color/text_color2"
-                            android:textSize="@dimen/level_5" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
     </FrameLayout>
 

@@ -1,42 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/iv_main_bg"
-    android:orientation="vertical" >
-
-    <include
-        android:id="@+id/reTitle"
-        layout="@layout/layout_title" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/main_color"
+                android:orientation="vertical">
 
     <GridView
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reTitle"
         android:cacheColorHint="@color/transparent"
         android:fadingEdge="none"
         android:gravity="center"
-        android:horizontalSpacing="3dip"
+        android:horizontalSpacing="1dp"
         android:listSelector="@color/transparent"
         android:numColumns="4"
-        android:overScrollMode="never"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+        android:scrollbarSize="2dp"
+        android:scrollbarThumbVertical="@color/refresh_color4"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="3dip" />
+        android:verticalSpacing="1dp"/>
 
     <RelativeLayout
         android:id="@+id/rePager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reTitle"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:id="@+id/viewGroup"
@@ -44,7 +37,7 @@
             android:layout_height="20dip"
             android:layout_alignParentBottom="true"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
         </LinearLayout>
     </RelativeLayout>
 
@@ -52,54 +45,154 @@
         android:id="@+id/llListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/reOperate"
+        android:layout_above="@+id/llSubmit"
         android:layout_below="@+id/gridView"
-        android:orientation="vertical" >
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/ivPortrait"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_portrait"/>
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/ivPortrait"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4"/>
+
+            <TextView
+                android:id="@+id/tvPlayCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/ivPraise"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4"/>
+
+            <ImageView
+                android:id="@+id/ivPraise"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@+id/tvPraiseCount"
+                android:src="@drawable/iv_unlike"/>
+
+            <TextView
+                android:id="@+id/tvPraiseCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/ivShare"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4"/>
+
+            <ImageView
+                android:id="@+id/ivShare"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/iv_share"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4"/>
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:lineSpacingExtra="2dp"
+            android:textColor="@color/text_color4"
+            android:textSize="@dimen/level_5"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:gravity="center_vertical" >
+            android:layout_marginBottom="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvPosition"
+                android:id="@+id/tvWeatherFlag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color1"
-                android:textSize="@dimen/level_5" />
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="@dimen/level_5"
+                android:visibility="gone"/>
 
             <TextView
-                android:id="@+id/tvTime"
+                android:id="@+id/tvOtherFlag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:textColor="@color/text_color1"
-                android:textSize="@dimen/level_5" />
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:textColor="@color/red"
+                android:textSize="@dimen/level_5"
+                android:visibility="gone"/>
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPosition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color4"
+            android:textSize="@dimen/level_5"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color4"
+            android:textSize="@dimen/level_5"/>
 
         <LinearLayout
             android:id="@+id/llComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="10dip"
-            android:gravity="center_vertical" >
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:gravity="center_vertical">
 
             <TextView
                 android:id="@+id/tvCommentCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color2"
-                android:textSize="@dimen/level_4" />
+                android:textSize="@dimen/level_4"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dip"
                 android:layout_marginLeft="10dip"
-                android:background="#20ffffff" />
+                android:background="#20ffffff"/>
         </LinearLayout>
 
         <ListView
@@ -110,86 +203,69 @@
             android:divider="#20ffffff"
             android:dividerHeight="0.5dip"
             android:listSelector="@color/transparent"
-            android:overScrollMode="never"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/refresh_color4"/>
 
-        <TextView
-            android:id="@+id/line2"
-            android:layout_width="match_parent"
-            android:layout_height="0.5dip"
-            android:layout_marginLeft="10dip"
-            android:background="#20ffffff" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/reOperate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/translucent"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="5dp" >
-
-        <ImageView
-            android:id="@+id/ivComment"
-            android:layout_width="25dip"
-            android:layout_height="25dip"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dip"
-            android:src="@drawable/iv_reply" />
-
-        <ImageView
-            android:id="@+id/ivPraise"
-            android:layout_width="22dip"
-            android:layout_height="22dip"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/iv_unlike" />
-
-        <ImageView
-            android:id="@+id/ivShare"
-            android:layout_width="22dip"
-            android:layout_height="22dip"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dip"
-            android:src="@drawable/iv_share" />
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/llSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="@color/main_color"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical"
-        android:padding="5dip"
-        android:visibility="gone" >
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:visibility="visible">
 
-        <EditText
-            android:id="@+id/etComment"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/corner_edittext_transparent"
-            android:paddingLeft="5dip"
-            android:textColor="@color/black"
-            android:textSize="@dimen/level_4" />
+            android:background="@drawable/bg_corner_comment"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <EditText
+                android:id="@+id/etComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:hint="说点什么..."
+                android:maxLines="5"
+                android:textColor="@color/text_color3"
+                android:textColorHint="@color/text_color2"
+                android:textSize="@dimen/level_4"/>
+
+            <ImageView
+                android:id="@+id/ivClear"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/iv_clear"
+                android:visibility="gone"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvSubmit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="45dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="5dip"
-            android:text="@string/submit"
-            android:textColor="@color/blue"
-            android:textSize="@dimen/level_3" />
+            android:background="@drawable/selector_submit"
+            android:gravity="center"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_4"
+            android:visibility="gone"/>
     </LinearLayout>
 
 </RelativeLayout>

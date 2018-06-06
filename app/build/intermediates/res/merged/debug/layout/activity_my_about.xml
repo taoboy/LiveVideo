@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/iv_main_bg"
+    android:background="@color/main_color"
     android:orientation="vertical" >
 
     <include
@@ -12,10 +12,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dip"
+        android:padding="10dp"
         android:orientation="vertical" >
 
         <RelativeLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/reLogo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,53 +27,68 @@
                 android:id="@+id/ivLogo"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/iv_logo" />
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_toRightOf="@+id/ivLogo"
+                android:layout_below="@+id/ivLogo"
                 android:text="@string/app_name"
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_1"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_below="@+id/tvName"
-                android:layout_marginLeft="10dip"
-                android:lineSpacingExtra="3dp"
-                android:layout_marginTop="3dp"
-                android:layout_toRightOf="@+id/ivLogo"
-                android:text="@string/web_addr"
-                android:textColor="@color/white"
-                android:textSize="@dimen/level_4" />
-
-            <TextView
+                android:layout_marginTop="5dp"
                 android:id="@+id/tvVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvAddress"
-                android:layout_marginLeft="10dip"
-                android:layout_marginTop="3dp"
-                android:layout_toRightOf="@+id/ivLogo"
                 android:textColor="@color/white"
-                android:textSize="@dimen/level_5" />
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/level_4"/>
+
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reLogo"
-            android:layout_margin="5dip"
+            android:padding="5dp"
             android:orientation="vertical" >
 
             <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="官方网址："
+                    android:textColor="@color/text_color4"
+                    android:textSize="@dimen/level_4"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/web_addr"
+                    android:textColor="@color/text_color4"
+                    android:textSize="@dimen/level_4" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical" >
@@ -81,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/service_hotline"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color4"
                     android:textSize="@dimen/level_4"
                     android:textStyle="bold" />
 
@@ -90,16 +106,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/hotline_num"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color4"
                     android:textSize="@dimen/level_4" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
+                android:layout_marginTop="20dp"
                 android:text="@string/statement"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color4"
                 android:textSize="@dimen/level_3"
                 android:textStyle="bold" />
 
@@ -109,18 +125,19 @@
                 android:layout_marginTop="5dip"
                 android:lineSpacingExtra="5dp"
                 android:text="@string/statement_content1"
-                android:textColor="@color/text_color1"
+                android:textColor="@color/text_color4"
                 android:textSize="@dimen/level_4" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvCopyright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/supply_unit"
-            android:textColor="@color/text_color1"
+            android:textColor="@color/text_color4"
             android:textSize="@dimen/level_5" />
     </RelativeLayout>
 

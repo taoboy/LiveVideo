@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:2:1-327:12
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:2:1-275:12
 	package
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:4:11-32
 		INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml
@@ -25,6 +25,7 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:7:19-63
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:8:2-76
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:8:19-73
 uses-permission#android.permission.ACCESS_FINE_LOCATION
@@ -41,6 +42,7 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:11:19-70
 uses-permission#android.permission.ACCESS_WIFI_STATE
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:12:2-73
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:17:5-76
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:12:19-70
 uses-permission#android.permission.CHANGE_CONFIGURATION
@@ -49,7 +51,6 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:13:19-73
 uses-permission#android.permission.WRITE_SETTINGS
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:14:2-70
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:12:5-73
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:14:19-67
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
@@ -74,10 +75,12 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:19:22-72
 uses-permission#android.permission.RECORD_AUDIO
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:20:5-71
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:14:5-71
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:20:22-68
 uses-permission#android.permission.INTERNET
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:21:5-67
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:12:5-67
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:21:22-64
 uses-permission#android.permission.WAKE_LOCK
@@ -86,12 +89,12 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:22:22-65
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:23:5-81
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:11:5-81
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:16:5-81
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:23:22-78
 uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:24:5-84
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:13:5-84
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:15:5-84
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:24:22-81
 uses-permission#android.permission.DISABLE_KEYGUARD
@@ -108,6 +111,7 @@ ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidMani
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:27:22-65
 uses-permission#android.permission.CAMERA
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:28:5-65
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:13:5-65
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:28:22-62
 uses-permission#android.permission.FLASHLIGHT
@@ -150,445 +154,451 @@ uses-permission#android.permission.MANAGE_ACCOUNTS
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:41:5-74
 	android:name
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:41:22-71
-uses-permission#android.permission.READ_LOGS
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:44:5-68
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:44:22-65
-uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:45:5-80
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:14:5-80
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:45:22-77
-uses-permission#android.permission.READ_CONTACTS
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:46:5-72
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:46:22-69
-uses-permission#com.android.launcher.permission.INSTALL_SHORTCUT
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:47:5-88
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:47:22-85
-uses-permission#android.permission.INTERACT_ACROSS_USERS_FULL
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:48:5-85
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:48:22-82
-uses-permission#android.permission.RESTART_PACKAGES
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:49:5-75
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:49:22-72
-uses-permission#android.permission.SYSTEM_OVERLAY_WINDOW
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:50:5-80
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:50:22-77
 application
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:53:5-325:19
-MERGED from [LiveVideo:kiwi:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/AndroidManifest.xml:12:5-17:19
-MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-v4:25.3.1] /Users/shawn/.android/build-cache/0ae30407faa7c34c94bcf02a2a5890d8915ac998/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/shawn/.android/build-cache/cef0152d07f16bc028d8876630bfc2b516ee1c2e/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/shawn/.android/build-cache/6493c28d823f920c512e09faee19f8b4914a8df6/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/shawn/.android/build-cache/95a9dee8e6db5c4de91d94c79535c0a13f862fd2/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/shawn/.android/build-cache/638124a5b414557cc329b4c08b3ea08826e9252a/output/AndroidManifest.xml:29:5-20
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/3c05f626c692e25b5500dc14246b97df31fa3bc2/output/AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/904c82af875ad4228cc2e827dc8c7a645b99c97e/output/AndroidManifest.xml:26:5-20
-MERGED from [com.android.support:support-compat:25.3.1] /Users/shawn/.android/build-cache/a60a6c8aa64e3e98aeff412989cc8ea5add03114/output/AndroidManifest.xml:29:5-20
-MERGED from [:kw-tracker:] /Users/shawn/.android/build-cache/69b0415d36604c434fd7d2443f16167516a3156e/output/AndroidManifest.xml:11:5-15:19
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:16:5-20:19
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:43:5-273:19
+MERGED from [com.android.support:recyclerview-v7:25.4.0] /Users/shawn/.android/build-cache/fc28961b501da1ba5f5e15e2bf112a04da70165e/output/AndroidManifest.xml:22:5-26:19
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:19:5-23:19
+MERGED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:11:5-18:19
+MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/5c511b69085cabfd6d5d635a262afdef7415aadd/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/99bf8a76dcc9d3d0ea64e70d7f671527da217e80/output/AndroidManifest.xml:22:5-26:19
+MERGED from [com.android.support:support-v4:25.4.0] /Users/shawn/.android/build-cache/ba61036d0484998324d62ea0a6cf13d9f5d29a31/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/shawn/.android/build-cache/c2b87bc4cae07076335d0aef87f277c767cbba39/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/shawn/.android/build-cache/2cb058ceec288fa7b83d57de2b7ae9c83a1d4f65/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/shawn/.android/build-cache/1f5f9b5ef0ebbfa88df143c5dbfce0bdf5a75454/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/shawn/.android/build-cache/b35a2a5b9899b3738fffcdc4f0e4961968fd9d96/output/AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:25.4.0] /Users/shawn/.android/build-cache/788741db946d5da1d0c985505d56e43d1ad65328/output/AndroidManifest.xml:25:5-29:19
 	android:label
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:57:9-41
-		REJECTED from [LiveVideo:kiwi:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/AndroidManifest.xml:14:9-29
-		REJECTED from [:kw-tracker:] /Users/shawn/.android/build-cache/69b0415d36604c434fd7d2443f16167516a3156e/output/AndroidManifest.xml:13:9-41
-		REJECTED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:18:9-36
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:47:9-41
+		REJECTED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:21:9-41
 	android:supportsRtl
-		ADDED from [LiveVideo:kiwi:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/AndroidManifest.xml:15:9-35
+		ADDED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:22:9-35
 	android:allowBackup
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:55:9-35
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:45:9-35
 	android:icon
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:56:9-41
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:46:9-45
 	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:59:9-62
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:49:9-40
 	tools:replace
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:58:9-38
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:48:9-38
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:54:9-56
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:44:9-56
 receiver#com.hf.live.util.AutoUpdateBroadcastReceiver
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:62:9-67:20
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:52:9-57:20
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:62:19-78
-intent-filter#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:63:13-66:29
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:52:19-78
+intent-filter#android.intent.action.DOWNLOAD_COMPLETE+android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:53:13-56:29
 action#android.intent.action.DOWNLOAD_COMPLETE
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:64:17-82
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:54:17-82
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:64:25-79
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:54:25-79
+action#android.intent.action.PACKAGE_INSTALL
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:55:18-81
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:55:26-78
 service#com.amap.api.location.APSService
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:70:9-68
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:60:9-68
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:70:18-65
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:60:18-65
 meta-data#com.amap.api.v2.apikey
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:74:9-76:62
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:63:9-65:62
 	android:value
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:76:12-60
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:65:12-60
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:75:12-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:64:12-49
 activity#com.hf.live.activity.WelcomeActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:84:9-93:20
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:68:9-77:20
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:70:13-49
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:71:13-77
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:69:13-64
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:72:13-76:29
+action#android.intent.action.MAIN
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:73:17-69
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:73:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:75:17-77
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:75:27-74
+activity#com.hf.live.activity.LoginActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:78:9-80:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:80:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:79:13-62
+activity#com.hf.live.activity.MainActivity2
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:81:9-83:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:83:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:82:13-62
+activity#com.hf.live.activity.PushRtmpSettingActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:84:9-86:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:86:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:85:13-72
+activity#com.hf.live.activity.PushRtmpSettingEditActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:87:9-89:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:89:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:88:13-76
+activity#com.hf.live.activity.PushRtmpActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:90:9-93:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:93:13-49
 	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:87:13-77
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:92:13-77
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:85:13-64
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:88:13-92:29
-action#android.intent.action.MAIN
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:89:17-69
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:89:25-66
-category#android.intent.category.LAUNCHER
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:91:17-77
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:91:27-74
-activity#com.hf.live.activity.LoginActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:91:13-65
+activity#com.hf.live.activity.PullRtmpSettingActivity
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:94:9-96:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:96:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:95:13-62
-activity#com.hf.live.activity.MainActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:97:9-100:52
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:95:13-72
+activity#com.hf.live.activity.PullRtmpSettingEditActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:97:9-99:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:100:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:99:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:99:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:98:13-61
-activity#com.hf.live.activity.LiveBroadcastSuccessActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:102:9-105:52
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:98:13-76
+activity#com.hf.live.activity.PullRtmpActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:100:9-103:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:105:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:104:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:103:13-49
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:102:13-77
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:103:13-77
-activity#com.hf.live.activity.RegisterActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:106:9-108:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:108:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:107:13-65
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:101:13-65
 activity#com.hf.live.activity.PersonCenterActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:109:9-112:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:104:9-107:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:112:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:107:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:111:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:106:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:110:13-69
-activity#com.hf.live.activity.CameraActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:113:9-118:86
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:105:13-69
+activity#com.hf.live.activity.DisplayVideoActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:108:9-112:86
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:116:13-50
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:111:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:110:13-44
+	android:configChanges
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:112:13-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:109:13-69
+activity#com.hf.live.activity.DisplayPictureActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:113:9-117:86
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:116:13-49
 	android:launchMode
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:115:13-44
 	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:118:13-83
-	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:117:13-71
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:117:13-83
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:114:13-63
-activity#com.hf.live.activity.DisplayVideoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:119:9-123:86
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:122:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:121:13-44
-	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:123:13-83
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:120:13-69
-activity#com.hf.live.activity.DisplayPictureActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:124:9-128:86
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:127:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:126:13-44
-	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:128:13-83
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:125:13-71
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:114:13-71
 activity#com.hf.live.activity.MyUploadActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:129:9-132:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:118:9-121:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:132:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:121:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:131:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:120:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:130:13-65
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:119:13-65
 activity#com.hf.live.activity.MyMessageActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:133:9-136:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:122:9-125:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:136:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:125:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:135:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:124:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:134:13-66
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:123:13-66
 activity#com.hf.live.activity.MyScoreActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:137:9-140:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:126:9-129:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:140:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:129:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:139:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:128:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:138:13-64
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:127:13-64
 activity#com.hf.live.activity.VideoWallActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:141:9-145:67
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:130:9-134:67
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:133:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:132:13-44
+	android:windowSoftInputMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:134:13-64
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:131:13-66
+activity#com.hf.live.activity.OnlineVideoActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:135:9-140:58
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:138:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:137:13-44
+	android:windowSoftInputMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:140:13-55
+	android:configChanges
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:139:13-83
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:136:13-68
+activity#com.hf.live.activity.OnlinePictureActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:141:9-145:58
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:144:13-49
 	android:launchMode
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:143:13-44
 	android:windowSoftInputMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:145:13-64
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:145:13-55
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:142:13-66
-activity#com.hf.live.activity.OnlineVideoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:146:9-151:58
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:142:13-70
+activity#com.hf.live.activity.MySettingActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:146:9-149:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:149:13-49
 	android:launchMode
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:148:13-44
-	android:windowSoftInputMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:151:13-55
-	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:150:13-83
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:147:13-68
-activity#com.hf.live.activity.OnlinePictureActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:152:9-156:58
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:155:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:154:13-44
-	android:windowSoftInputMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:156:13-55
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:153:13-70
-activity#com.hf.live.activity.MySettingActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:157:9-160:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:160:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:159:13-44
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:158:13-66
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:147:13-66
 activity#com.hf.live.activity.ModifyInfoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:161:9-164:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:150:9-153:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:164:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:153:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:163:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:152:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:162:13-67
-activity#com.hf.live.activity.MyResponseActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:165:9-168:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:168:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:167:13-44
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:166:13-67
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:151:13-67
 activity#com.hf.live.activity.MyAboutActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:169:9-172:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:154:9-157:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:172:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:157:13-49
 	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:171:13-44
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:156:13-44
 	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:155:13-64
+activity#com.hf.live.activity.WebviewActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:158:9-161:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:161:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:160:13-44
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:159:13-64
+activity#com.hf.live.activity.ScoreExchangeActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:162:9-165:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:165:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:164:13-44
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:163:13-70
+activity#com.hf.live.activity.CheckActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:166:9-170:67
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:169:13-49
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:168:13-44
+	android:windowSoftInputMode
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:170:13-64
-activity#com.hf.live.activity.MyAboutDetailActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:173:9-176:52
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:167:13-62
+activity#com.hf.live.activity.SwitchResourceActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:171:9-173:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:173:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:172:13-71
+activity#com.hf.live.activity.SelectUserActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:174:9-176:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:176:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:175:13-44
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:174:13-70
-activity#com.hf.live.activity.ScoreExchangeActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:177:9-180:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:180:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:179:13-44
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:178:13-70
-activity#com.hf.live.activity.CheckActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:181:9-185:67
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:184:13-49
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:183:13-44
-	android:windowSoftInputMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:185:13-64
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:182:13-62
-activity#com.hf.live.activity.SwitchResourceActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:186:9-188:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:188:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:187:13-71
-activity#com.hf.live.activity.VideoViewActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:189:9-191:53
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:191:13-50
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:190:13-66
-activity#com.hf.live.activity.WeatherEyeActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:192:9-194:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:194:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:193:13-67
-activity#com.hf.live.activity.SelecteUserActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:195:9-197:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:197:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:196:13-68
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:175:13-67
 activity#com.hf.live.activity.PersonInfoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:198:9-200:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:177:9-179:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:200:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:179:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:199:13-67
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:178:13-67
 activity#com.hf.live.activity.OtherInfoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:201:9-203:52
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:180:9-182:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:203:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:182:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:202:13-66
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:181:13-66
 activity#com.hf.live.activity.ScoreRankActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:183:9-185:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:185:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:184:13-66
+activity#com.hf.live.activity.GuideActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:186:9-189:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:189:13-49
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:188:13-77
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:187:13-62
+activity#com.hf.live.activity.SelectPictureActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:190:9-192:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:192:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:191:13-70
+activity#com.hf.live.activity.SelectVideoActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:193:9-195:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:195:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:194:13-68
+activity#com.hf.live.activity.SearchVideoActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:196:9-198:52
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:198:13-49
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:197:13-68
+activity#com.hf.live.activity.VideoRecordActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:199:9-203:49
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:203:13-47
+	android:configChanges
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:202:13-74
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:201:13-77
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:200:13-68
+activity#com.hf.live.activity.VideoEditListActivity
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:204:9-206:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:206:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:205:13-66
-activity#com.hf.live.activity.UseActivity
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:205:13-70
+activity#com.hf.live.activity.VideoSelectEditActivity
 ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:207:9-209:52
 	android:screenOrientation
 		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:209:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:208:13-60
-activity#com.hf.live.activity.GuideActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:210:9-213:52
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:208:13-72
+activity#com.hf.live.activity.VideoEditDetailActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:210:9-212:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:213:13-49
-	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:212:13-77
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:212:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:211:13-62
-activity#com.hf.live.activity.SelectAlbumPictureActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:214:9-216:52
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:211:13-72
+activity#com.hf.live.activity.TCVideoPreprocessActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:213:9-215:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:216:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:215:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:215:13-75
-activity#com.hf.live.activity.SelectPictureActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:217:9-219:52
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:214:13-74
+activity#com.hf.live.activity.EventActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:216:9-218:52
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:219:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:218:13-49
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:218:13-70
-activity#com.hf.live.activity.SelectAlbumVideoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:220:9-222:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:222:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:221:13-73
-activity#com.hf.live.activity.SelectVideoActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:223:9-225:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:225:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:224:13-68
-activity#com.hf.live.videoedit.VideoTrimActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:226:9-228:52
-	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:228:13-49
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:227:13-67
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:217:13-62
 meta-data#UMENG_APPKEY
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:292:9-294:56
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:222:9-224:56
 	android:value
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:294:13-53
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:224:13-53
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:293:13-40
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:223:13-40
 activity#com.hf.live.wxapi.WXEntryActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:297:9-302:75
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:227:9-232:75
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:301:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:231:13-49
 	android:exported
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:300:13-36
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:230:13-36
 	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:299:13-74
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:229:13-74
 	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:302:13-72
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:232:13-72
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:298:13-50
-activity#com.umeng.qq.tencent.AuthActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:305:9-317:20
-	android:launchMode
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:307:13-44
-	android:noHistory
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:308:13-37
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:306:13-61
-intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:309:13-316:29
-action#android.intent.action.VIEW
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:310:17-69
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:310:25-66
-category#android.intent.category.DEFAULT
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:312:17-76
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:312:27-73
-category#android.intent.category.BROWSABLE
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:313:17-78
-	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:313:27-75
-data
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:315:17-60
-	android:scheme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:315:23-57
-activity#com.umeng.qq.tencent.AssistActivity
-ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:318:9-322:75
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:228:13-50
+activity#com.hf.live.activity.WBShareActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:235:9-244:20
 	android:screenOrientation
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:321:13-49
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:238:13-49
 	android:configChanges
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:320:13-74
-	android:theme
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:322:13-72
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:237:13-63
 	android:name
-		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:319:13-63
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:236:13-53
+intent-filter#android.intent.category.DEFAULT+com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:239:13-243:29
+action#com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:240:17-92
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:240:25-89
+category#android.intent.category.DEFAULT
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:242:17-76
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:242:27-73
+activity#com.umeng.socialize.editorpage.ShareActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:247:9-250:54
+	android:excludeFromRecents
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:249:13-46
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:250:13-51
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:248:13-72
+activity#com.umeng.qq.tencent.AuthActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:253:9-265:20
+	android:launchMode
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:255:13-44
+	android:noHistory
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:256:13-37
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:254:13-61
+intent-filter#android.intent.action.VIEW+android.intent.category.BROWSABLE+android.intent.category.DEFAULT
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:257:13-264:29
+action#android.intent.action.VIEW
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:258:17-69
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:258:25-66
+category#android.intent.category.BROWSABLE
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:261:17-78
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:261:27-75
+data
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:263:17-60
+	android:scheme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:263:23-57
+activity#com.umeng.qq.tencent.AssistActivity
+ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:266:9-270:75
+	android:screenOrientation
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:269:13-49
+	android:configChanges
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:268:13-74
+	android:theme
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:270:13-72
+	android:name
+		ADDED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:267:13-63
 uses-sdk
 INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-MERGED from [LiveVideo:kiwi:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/AndroidManifest.xml:8:5-10:41
-MERGED from [com.android.support:recyclerview-v7:25.3.1] /Users/shawn/.android/build-cache/83670294e03c3797301e74364962100eb9020fb4/output/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:support-v4:25.3.1] /Users/shawn/.android/build-cache/0ae30407faa7c34c94bcf02a2a5890d8915ac998/output/AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/shawn/.android/build-cache/cef0152d07f16bc028d8876630bfc2b516ee1c2e/output/AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/shawn/.android/build-cache/6493c28d823f920c512e09faee19f8b4914a8df6/output/AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/shawn/.android/build-cache/95a9dee8e6db5c4de91d94c79535c0a13f862fd2/output/AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/shawn/.android/build-cache/638124a5b414557cc329b4c08b3ea08826e9252a/output/AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/3c05f626c692e25b5500dc14246b97df31fa3bc2/output/AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/904c82af875ad4228cc2e827dc8c7a645b99c97e/output/AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-compat:25.3.1] /Users/shawn/.android/build-cache/a60a6c8aa64e3e98aeff412989cc8ea5add03114/output/AndroidManifest.xml:21:5-23:58
-MERGED from [cn.aigestudio.downloader:Downloader:1.4.3] /Users/shawn/.android/build-cache/c20d0edbd49e1020058d49acb4e6e4ccc0ba6177/output/AndroidManifest.xml:8:5-10:41
-MERGED from [:kw-filter:] /Users/shawn/.android/build-cache/6be34209b1a9237ed1d31a198231ec8350c0b2cc/output/AndroidManifest.xml:8:5-10:41
-MERGED from [:kw-tracker:] /Users/shawn/.android/build-cache/69b0415d36604c434fd7d2443f16167516a3156e/output/AndroidManifest.xml:7:5-9:41
-MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/joevideolib/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:recyclerview-v7:25.4.0] /Users/shawn/.android/build-cache/fc28961b501da1ba5f5e15e2bf112a04da70165e/output/AndroidManifest.xml:20:5-43
+MERGED from [:LiteAVSDK_Professional:] /Users/shawn/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/AndroidManifest.xml:7:5-9:41
+MERGED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/5c511b69085cabfd6d5d635a262afdef7415aadd/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/99bf8a76dcc9d3d0ea64e70d7f671527da217e80/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:25.4.0] /Users/shawn/.android/build-cache/ba61036d0484998324d62ea0a6cf13d9f5d29a31/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/shawn/.android/build-cache/c2b87bc4cae07076335d0aef87f277c767cbba39/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/shawn/.android/build-cache/2cb058ceec288fa7b83d57de2b7ae9c83a1d4f65/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/shawn/.android/build-cache/1f5f9b5ef0ebbfa88df143c5dbfce0bdf5a75454/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/shawn/.android/build-cache/b35a2a5b9899b3738fffcdc4f0e4961968fd9d96/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.4.0] /Users/shawn/.android/build-cache/788741db946d5da1d0c985505d56e43d1ad65328/output/AndroidManifest.xml:21:5-23:58
 	tools:overrideLibrary
-		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/AndroidManifest.xml:23:9-75
+		ADDED from [com.android.support:appcompat-v7:25.4.0] /Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/AndroidManifest.xml:23:9-75
 	android:targetSdkVersion
 		INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml
@@ -596,17 +606,31 @@ MERGED from [LiveVideo:joevideolib:unspecified] /Users/shawn/AndroidStudioProjec
 		INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml
 meta-data#android.support.VERSION
-ADDED from [com.android.support:recyclerview-v7:25.3.1] /Users/shawn/.android/build-cache/83670294e03c3797301e74364962100eb9020fb4/output/AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-v4:25.3.1] /Users/shawn/.android/build-cache/0ae30407faa7c34c94bcf02a2a5890d8915ac998/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-fragment:25.3.1] /Users/shawn/.android/build-cache/cef0152d07f16bc028d8876630bfc2b516ee1c2e/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-media-compat:25.3.1] /Users/shawn/.android/build-cache/6493c28d823f920c512e09faee19f8b4914a8df6/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-ui:25.3.1] /Users/shawn/.android/build-cache/95a9dee8e6db5c4de91d94c79535c0a13f862fd2/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:support-core-utils:25.3.1] /Users/shawn/.android/build-cache/638124a5b414557cc329b4c08b3ea08826e9252a/output/AndroidManifest.xml:25:5-27:34
-MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/3c05f626c692e25b5500dc14246b97df31fa3bc2/output/AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/shawn/.android/build-cache/904c82af875ad4228cc2e827dc8c7a645b99c97e/output/AndroidManifest.xml:22:5-24:34
-MERGED from [com.android.support:support-compat:25.3.1] /Users/shawn/.android/build-cache/a60a6c8aa64e3e98aeff412989cc8ea5add03114/output/AndroidManifest.xml:25:5-27:34
+ADDED from [com.android.support:recyclerview-v7:25.4.0] /Users/shawn/.android/build-cache/fc28961b501da1ba5f5e15e2bf112a04da70165e/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:appcompat-v7:25.4.0] /Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:animated-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/5c511b69085cabfd6d5d635a262afdef7415aadd/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-vector-drawable:25.4.0] /Users/shawn/.android/build-cache/99bf8a76dcc9d3d0ea64e70d7f671527da217e80/output/AndroidManifest.xml:23:9-25:38
+MERGED from [com.android.support:support-v4:25.4.0] /Users/shawn/.android/build-cache/ba61036d0484998324d62ea0a6cf13d9f5d29a31/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-fragment:25.4.0] /Users/shawn/.android/build-cache/c2b87bc4cae07076335d0aef87f277c767cbba39/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-media-compat:25.4.0] /Users/shawn/.android/build-cache/2cb058ceec288fa7b83d57de2b7ae9c83a1d4f65/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-ui:25.4.0] /Users/shawn/.android/build-cache/1f5f9b5ef0ebbfa88df143c5dbfce0bdf5a75454/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-core-utils:25.4.0] /Users/shawn/.android/build-cache/b35a2a5b9899b3738fffcdc4f0e4961968fd9d96/output/AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:25.4.0] /Users/shawn/.android/build-cache/788741db946d5da1d0c985505d56e43d1ad65328/output/AndroidManifest.xml:26:9-28:38
 	android:value
-		ADDED from [com.android.support:recyclerview-v7:25.3.1] /Users/shawn/.android/build-cache/83670294e03c3797301e74364962100eb9020fb4/output/AndroidManifest.xml:24:9-31
+		ADDED from [com.android.support:recyclerview-v7:25.4.0] /Users/shawn/.android/build-cache/fc28961b501da1ba5f5e15e2bf112a04da70165e/output/AndroidManifest.xml:25:13-35
 	android:name
-		ADDED from [com.android.support:recyclerview-v7:25.3.1] /Users/shawn/.android/build-cache/83670294e03c3797301e74364962100eb9020fb4/output/AndroidManifest.xml:23:9-47
+		ADDED from [com.android.support:recyclerview-v7:25.4.0] /Users/shawn/.android/build-cache/fc28961b501da1ba5f5e15e2bf112a04da70165e/output/AndroidManifest.xml:24:13-51
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+IMPLIED from /Users/shawn/AndroidStudioProjects/LiveVideo/app/src/main/AndroidManifest.xml:2:1-275:12 reason: com.tencent.rtmp.liteavsdk requested WRITE_EXTERNAL_STORAGE
+activity#com.uuzuche.lib_zxing.activity.CaptureActivity
+ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:12:9-17:63
+	android:screenOrientation
+		ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:15:13-49
+	android:windowSoftInputMode
+		ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:17:13-60
+	android:configChanges
+		ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:14:13-63
+	android:theme
+		ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:16:13-63
+	android:name
+		ADDED from [LiveVideo:lib-zxing:unspecified] /Users/shawn/AndroidStudioProjects/LiveVideo/lib-zxing/build/intermediates/bundles/default/AndroidManifest.xml:13:13-74

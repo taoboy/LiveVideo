@@ -4,8 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LiveVideo.iml" filepath="$PROJECT_DIR$/LiveVideo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/joevideolib/joevideolib.iml" filepath="$PROJECT_DIR$/joevideolib/joevideolib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/kiwi/kiwi.iml" filepath="$PROJECT_DIR$/kiwi/kiwi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib-zxing/lib-zxing.iml" filepath="$PROJECT_DIR$/lib-zxing/lib-zxing.iml" />
     </modules>
   </component>
 </project>

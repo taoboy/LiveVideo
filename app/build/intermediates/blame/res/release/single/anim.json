@@ -1,15 +1,11 @@
 [
     {
-        "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/loading_animation.xml",
-        "source": "/Users/shawn/AndroidStudioProjects/LiveVideo/kiwi/build/intermediates/bundles/default/res/anim/loading_animation.xml"
-    },
-    {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_fade_in.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_fade_in.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_fade_in.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_popup_exit.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_popup_exit.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_popup_exit.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/umeng_socialize_slide_out_from_bottom.xml",
@@ -17,7 +13,7 @@
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_slide_in_bottom.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_slide_in_bottom.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_slide_in_bottom.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/anim_loading_white.xml",
@@ -41,7 +37,7 @@
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_fade_out.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_fade_out.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_fade_out.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/anim_loading_black.xml",
@@ -49,11 +45,11 @@
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_slide_in_top.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_slide_in_top.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_slide_in_top.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_popup_enter.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_popup_enter.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_popup_enter.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/umeng_socialize_shareboard_animation_out.xml",
@@ -65,18 +61,18 @@
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_slide_out_top.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_slide_out_top.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_slide_out_top.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_grow_fade_in_from_bottom.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "/Users/shawn/AndroidStudioProjects/LiveVideo/app/build/intermediates/res/merged/release/anim/abc_slide_out_bottom.xml",
-        "source": "/Users/shawn/.android/build-cache/21c0d65cb6772591eb5720fa5b4b05adb4707789/output/res/anim/abc_slide_out_bottom.xml"
+        "source": "/Users/shawn/.android/build-cache/283513723c86d7ccbcc100d7040ac49d84615e26/output/res/anim/abc_slide_out_bottom.xml"
     }
 ]

@@ -3,7 +3,7 @@
 
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/seekbar_green"/>
+        android:drawable="@drawable/seekbar_red"/>
     <item android:id="@android:id/progress">
         <clip android:drawable="@drawable/seekbar_white" />
     </item>

@@ -2,28 +2,240 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_color"
     android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/reTitle"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iv_search"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvList"
+                android:layout_width="100dp"
+                android:layout_height="26dp"
+                android:background="@drawable/btn_lb_corner_selected"
+                android:gravity="center"
+                android:text="列表"
+                android:textColor="@color/white"
+                android:textSize="@dimen/level_4" />
+
+            <TextView
+                android:id="@+id/tvMap"
+                android:layout_width="100dp"
+                android:layout_height="26dp"
+                android:background="@drawable/btn_rb_corner_unselected"
+                android:gravity="center"
+                android:text="地图"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_4" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivPerson"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iv_user"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llForecast"
+        android:layout_below="@+id/reTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2029323E"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llSelect"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textSize="@dimen/level_4"
+                android:gravity="center"
+                android:textColor="@color/text_color4"
+                android:text="今天"/>
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textSize="@dimen/level_4"
+                android:gravity="center"
+                android:textColor="@color/text_color4"
+                android:text="7天"/>
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textSize="@dimen/level_4"
+                android:gravity="center"
+                android:textColor="@color/text_color4"
+                android:text="15天"/>
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:textSize="@dimen/level_4"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="30天"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/reForecast"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivLocation"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/iv_location_red"/>
+
+            <TextView
+                android:layout_toRightOf="@+id/ivLocation"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/tvPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="定位中..."
+                android:layout_centerVertical="true"
+                android:textColor="@color/text_color4"
+                android:textSize="@dimen/level_5"/>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/llPhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvPhe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/level_5"
+                    android:textColor="@color/text_color4"/>
+
+            <TextView
+                android:id="@+id/divider2"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/level_5"
+                android:background="@color/text_color4"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/level_5"
+                android:textColor="@color/text_color4"/>
+
+            <TextView
+                android:id="@+id/divider1"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/level_5"
+                android:background="@color/text_color4"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/tvWind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/level_5"
+                android:textColor="@color/text_color4"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
     
-    <com.hf.live.view.RefreshLayout
+    <com.amap.api.maps.MapView
+        android:visibility="gone"
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llForecast"/>
+
+    <ListView
+        android:visibility="gone"
+        android:id="@+id/listView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:cacheColorHint="@color/transparent"
+        android:divider="@color/light_gray"
+        android:dividerHeight="0.5dp"
+        android:listSelector="@color/transparent"
+        android:overScrollMode="never"
+        android:scrollbars="none"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@+id/llForecast"
+        android:background="@color/main_color"
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-    
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:paddingBottom="3dp"
-        android:cacheColorHint="@color/transparent"
-        android:divider="@color/transparent"
-        android:dividerHeight="3dip"
-        android:listSelector="@color/transparent"
-        android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
-        android:scrollbarStyle="outsideOverlay" />
-    
-    </com.hf.live.view.RefreshLayout>
-    
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:paddingBottom="3dp"
+            android:cacheColorHint="@color/transparent"
+            android:divider="@color/transparent"
+            android:dividerHeight="3dip"
+            android:listSelector="@color/transparent"
+            android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+            android:scrollbarStyle="outsideOverlay" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
 </RelativeLayout>

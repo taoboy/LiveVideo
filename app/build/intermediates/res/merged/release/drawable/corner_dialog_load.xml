@@ -12,6 +12,10 @@
                 android:width="50dp"
                 android:height="50dp"/>
 
+            <stroke
+                android:width="0.1dp"
+                android:color="@color/refresh_color4"/>
+
         </shape>
     </item>
 

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: LiteAVSDK_Professional:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/a4d82f81f2e49e3419c4c055947d59f718427269/output/jars/libs/LiteAVSDK_Professional.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

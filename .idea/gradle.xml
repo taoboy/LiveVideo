@@ -9,8 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/joevideolib" />
-            <option value="$PROJECT_DIR$/kiwi" />
+            <option value="$PROJECT_DIR$/lib-zxing" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

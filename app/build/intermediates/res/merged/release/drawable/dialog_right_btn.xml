@@ -2,28 +2,28 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_focused="false" android:state_pressed="false"><shape>
-            <solid android:color="@color/white" />
+            <solid android:color="@color/refresh_color1" />
 
             <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="0dp" />
 
             <size android:height="35dp" android:width="50dp" />
         </shape></item>
     <item android:state_pressed="true"><shape>
-            <solid android:color="@color/text_color2" />
+            <solid android:color="@color/refresh_color2" />
 
             <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="0dp" />
 
             <size android:height="35dp" android:width="50dp" />
         </shape></item>
     <item android:state_focused="true"><shape>
-            <solid android:color="@color/text_color2" />
+            <solid android:color="@color/refresh_color2" />
 
             <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="0dp" />
 
             <size android:height="35dp" android:width="50dp" />
         </shape></item>
     <item><shape>
-            <solid android:color="@color/white" />
+            <solid android:color="@color/refresh_color1" />
 
             <corners android:bottomLeftRadius="0dp" android:bottomRightRadius="5dp" android:topLeftRadius="0dp" android:topRightRadius="0dp" />
 

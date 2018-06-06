@@ -10,6 +10,8 @@
                 android:width="5dp"
                 android:height="5dp"/>
 
+            <corners android:radius="5dp" />
+
         </shape>
     </item>
 

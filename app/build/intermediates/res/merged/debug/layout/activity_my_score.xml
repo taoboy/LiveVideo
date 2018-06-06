@@ -2,50 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/iv_main_bg"
+    android:background="@color/main_color"
     android:orientation="vertical" >
     
     <include
         android:id="@+id/reTitle"
         layout="@layout/layout_title" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dip" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/my_score"
-            android:textColor="@color/text_color2"
-            android:textSize="@dimen/level_4" />
-
-        <TextView
-            android:id="@+id/tvScore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/level_4" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.5dip"
-        android:background="#20ffffff" />
-
     <ListView
+        android:background="#f2f2f2"
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="@color/transparent"
-        android:divider="#20ffffff"
-        android:dividerHeight="0.5dp"
+        android:divider="@color/transparent"
+        android:dividerHeight="3dp"
+        android:padding="3dp"
         android:listSelector="@color/transparent"
-        android:overScrollMode="never"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
 

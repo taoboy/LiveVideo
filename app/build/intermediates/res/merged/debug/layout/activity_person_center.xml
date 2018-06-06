@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/iv_main_bg"
+    android:background="@color/main_color"
     android:orientation="vertical" >
 
     <include
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dip"
-                        android:textColor="@color/text_color1"
+                        android:textColor="@color/red"
                         android:textSize="@dimen/level_4" />
 
                     <ImageView
