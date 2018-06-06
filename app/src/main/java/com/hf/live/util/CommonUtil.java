@@ -730,7 +730,7 @@ public class CommonUtil {
 					dto.imageName = title;
 					dto.videoUrl = path;
 					dto.duration = duration;
-					list.add(dto);
+					list.add(0, dto);
 				}
 				cursor.close();
 			}
@@ -761,7 +761,7 @@ public class CommonUtil {
 					PhotoDto dto = new PhotoDto();
 					dto.imageName = title;
 					dto.imgUrl = path;
-					list.add(dto);
+					list.add(0, dto);
 				}
 				cursor.close();
 			}

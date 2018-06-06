@@ -170,8 +170,8 @@
     <color name="edit_green">#21AE58</color>
 
     <color name="record_progress_bg">#66000000</color> <!-- 40%不透明度 -->
-    <color name="record_progress">#00f5ac</color>
-    <color name="record_progress_pending">#10acc0</color>
+    <color name="record_progress">#AF1610</color>
+    <color name="record_progress_pending">#40AF1610</color>
 
     <color name="record_speed_text_normal">#ffffff</color>
     <color name="record_speed_text_select">#00f5ac</color>

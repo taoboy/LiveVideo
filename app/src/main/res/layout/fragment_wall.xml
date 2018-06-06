@@ -27,22 +27,22 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/tvMap"
+                android:id="@+id/tvList"
                 android:layout_width="100dp"
                 android:layout_height="26dp"
                 android:background="@drawable/btn_lb_corner_selected"
                 android:gravity="center"
-                android:text="地图"
+                android:text="列表"
                 android:textColor="@color/white"
                 android:textSize="@dimen/level_4" />
 
             <TextView
-                android:id="@+id/tvList"
+                android:id="@+id/tvMap"
                 android:layout_width="100dp"
                 android:layout_height="26dp"
                 android:background="@drawable/btn_rb_corner_unselected"
                 android:gravity="center"
-                android:text="列表"
+                android:text="地图"
                 android:textColor="@color/text_color4"
                 android:textSize="@dimen/level_4" />
 
@@ -70,6 +70,7 @@
         android:paddingRight="10dp">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/llSelect"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -115,7 +116,6 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:visibility="gone"
             android:id="@+id/reForecast"
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -194,12 +194,14 @@
     </LinearLayout>
     
     <com.amap.api.maps.MapView
+        android:visibility="gone"
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llForecast"/>
 
     <ListView
+        android:visibility="gone"
         android:id="@+id/listView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,11 +212,9 @@
         android:dividerHeight="0.5dp"
         android:listSelector="@color/transparent"
         android:overScrollMode="never"
-        android:scrollbars="none"
-        android:visibility="gone"/>
+        android:scrollbars="none"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:visibility="gone"
         android:layout_below="@+id/llForecast"
         android:background="@color/main_color"
         android:id="@+id/refreshLayout"

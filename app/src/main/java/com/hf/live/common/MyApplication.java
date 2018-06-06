@@ -78,15 +78,23 @@ public class MyApplication extends Application{
     }
 
 	//本地保存用户信息参数
-	public static String OLDUSERNAME = null;//手机号
-	public static String USERNAME = null;//手机号
-	public static String GROUPID = null;//用户组id
-	public static String TOKEN = null;//token
-	public static String POINTS = null;//积分
-	public static String PHOTO = null;//头像地址
-	public static String NICKNAME = null;//昵称
-	public static String MAIL = null;//邮箱
-	public static String UNIT = null;//单位名称
+	public static String OLDUSERNAME = "";//手机号
+	public static String USERNAME = "";//手机号
+	public static String GROUPID = "";//用户组id
+	public static String TOKEN = "";//token
+	public static String POINTS = "";//积分
+	public static String PHOTO = "";//头像地址
+	public static String NICKNAME = "";//昵称
+	public static String MAIL = "";//邮箱
+	public static String UNIT = "";//单位名称
+
+	//活动
+	public static String TYPE = "";//用户类型,1是普通用户，2是活动报名
+	public static String COLLEGE = "";//活动报名学校
+	public static String MAJOR = "";//活动报名专业
+	public static String VOTES = "";//投票数
+	public static String CODE = "";//报名人员编号
+
 	public static String USERINFO = "userInfo";//userInfo sharedPreferance名称
 	public static class UserInfo {
 		public static final String oldUserName = "oldUserName";
@@ -98,6 +106,13 @@ public class MyApplication extends Application{
 		public static final String nickName = "nickName";
 		public static final String mail = "mail";
 		public static final String unit = "unit";
+
+		//活动
+		public static final String type = "type";
+		public static final String college = "college";
+		public static final String major = "major";
+		public static final String votes = "votes";
+		public static final String code = "code";
 	}
 
 	/**
@@ -108,15 +123,22 @@ public class MyApplication extends Application{
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.clear();
 		editor.commit();
-		TOKEN = null;
-		OLDUSERNAME = null;
-		USERNAME = null;
-		NICKNAME = null;
-		GROUPID = null;
-		POINTS = null;
-		PHOTO = null;
-		MAIL = null;
-		UNIT = null;
+		TOKEN = "";
+		OLDUSERNAME = "";
+		USERNAME = "";
+		NICKNAME = "";
+		GROUPID = "";
+		POINTS = "";
+		PHOTO = "";
+		MAIL = "";
+		UNIT = "";
+
+		//活动
+		TYPE = "";
+		COLLEGE = "";
+		MAJOR = "";
+		VOTES = "";
+		CODE = "";
 	}
 
 	/**
@@ -134,6 +156,13 @@ public class MyApplication extends Application{
 		editor.putString(UserInfo.photo, PHOTO);
 		editor.putString(UserInfo.mail, MAIL);
 		editor.putString(UserInfo.unit, UNIT);
+
+		//活动
+		editor.putString(UserInfo.type, TYPE);
+		editor.putString(UserInfo.college, COLLEGE);
+		editor.putString(UserInfo.major, MAJOR);
+		editor.putString(UserInfo.votes, VOTES);
+		editor.putString(UserInfo.code, CODE);
 		editor.commit();
 	}
 
@@ -142,15 +171,22 @@ public class MyApplication extends Application{
 	 */
 	public static void getUserInfo(Context context) {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
-		TOKEN = sharedPreferences.getString(UserInfo.token, null);
-		OLDUSERNAME = sharedPreferences.getString(UserInfo.oldUserName, null);
-		USERNAME = sharedPreferences.getString(UserInfo.userName, null);
-		NICKNAME = sharedPreferences.getString(UserInfo.nickName, null);
-		GROUPID = sharedPreferences.getString(UserInfo.groupId, null);
-		POINTS = sharedPreferences.getString(UserInfo.points, null);
-		PHOTO = sharedPreferences.getString(UserInfo.photo, null);
-		MAIL = sharedPreferences.getString(UserInfo.mail, null);
-		UNIT = sharedPreferences.getString(UserInfo.unit, null);
+		TOKEN = sharedPreferences.getString(UserInfo.token, "");
+		OLDUSERNAME = sharedPreferences.getString(UserInfo.oldUserName, "");
+		USERNAME = sharedPreferences.getString(UserInfo.userName, "");
+		NICKNAME = sharedPreferences.getString(UserInfo.nickName, "");
+		GROUPID = sharedPreferences.getString(UserInfo.groupId, "");
+		POINTS = sharedPreferences.getString(UserInfo.points, "");
+		PHOTO = sharedPreferences.getString(UserInfo.photo, "");
+		MAIL = sharedPreferences.getString(UserInfo.mail, "");
+		UNIT = sharedPreferences.getString(UserInfo.unit, "");
+
+		//活动
+		TYPE = sharedPreferences.getString(UserInfo.type, "");
+		COLLEGE = sharedPreferences.getString(UserInfo.college, "");
+		MAJOR = sharedPreferences.getString(UserInfo.major, "");
+		VOTES = sharedPreferences.getString(UserInfo.votes, "");
+		CODE = sharedPreferences.getString(UserInfo.code, "");
 	}
 
 }

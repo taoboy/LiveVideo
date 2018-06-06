@@ -119,6 +119,9 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 	private List<UploadVideoDto> list2 = new ArrayList<>();
 	private String eventType = "";//事件类型
 
+	//活动
+	private TextView tvWeatherType, tvWeatherFlag;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,6 +131,26 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
         initVideoView();
 		initGridView1();
 		initGridView2();
+
+		event();
+	}
+
+	/**
+	 * 活动
+	 */
+	private void event() {
+		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动报名用户
+			tvWeatherType.setVisibility(View.GONE);
+			tvWeatherFlag.setVisibility(View.GONE);
+			gridView1.setVisibility(View.GONE);
+			gridView2.setVisibility(View.GONE);
+
+			weatherType = "wt04";
+			eventType = "et01";
+
+			etTitle.setText(MyApplication.OLDUSERNAME+"-"+MyApplication.USERNAME+"-"+MyApplication.COLLEGE+"-"+MyApplication.MAJOR);
+			etTitle.setSelection(etTitle.length());
+		}
 	}
 
 	/**
@@ -210,6 +233,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
         tvUpload.setOnClickListener(this);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 		reBottom = (RelativeLayout) findViewById(R.id.reBottom);
+		tvWeatherType = (TextView) findViewById(R.id.tvWeatherType);
+		tvWeatherFlag = (TextView) findViewById(R.id.tvWeatherFlag);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getRealMetrics(dm);
@@ -683,7 +708,11 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 		File videoFile = new File(videoPath);
 		String fileName = videoFile.getName().substring(0, videoFile.getName().length()-4);
 		FormBody.Builder builder = new FormBody.Builder();
-		builder.add("appid", CONST.APPID);
+		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动用户
+			builder.add("appid", "26");
+		}else {
+			builder.add("appid", CONST.APPID);
+		}
 		builder.add("token", MyApplication.TOKEN);
 		builder.add("workstype", "video");
 		builder.add("location", position);

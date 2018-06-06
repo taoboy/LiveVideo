@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,22 @@ import com.hf.live.common.MyApplication;
 import com.hf.live.fragment.EditVideoFragment;
 import com.hf.live.fragment.VideoWallFragment;
 import com.hf.live.util.AutoUpdateUtil;
+import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.MainViewPager;
 
+import net.tsz.afinal.FinalBitmap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 主界面
@@ -39,7 +52,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 
 	private Context mContext = null;
 	private LinearLayout llWall, llClip, llShot;
-	private ImageView ivWall, ivClip, ivShot;
+	private ImageView ivWall, ivClip, ivShot, ivEvent;
 	private TextView tvWall, tvClip, tvShot;
 	private MainViewPager viewPager = null;
 	private List<Fragment> fragments = new ArrayList<>();
@@ -73,6 +86,10 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 		tvWall = (TextView) findViewById(R.id.tvWall);
 		tvClip = (TextView) findViewById(R.id.tvClip);
 		tvShot = (TextView) findViewById(R.id.tvShot);
+		ivEvent = (ImageView) findViewById(R.id.ivEvent);
+		ivEvent.setOnClickListener(this);
+
+		OkHttpEvent("http://channellive2.tianqi.cn/weather/work/fyjp_zhubo_path");
 	}
 
 	/**
@@ -283,6 +300,63 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * 访问活动
+	 * @param url
+	 */
+	private void OkHttpEvent(final String url) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
+
+					}
+
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						final String result = response.body().string();
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									JSONObject obj = new JSONObject(result);
+									if (!obj.isNull("deadLineSatus")) {
+										String deadLineSatus = obj.getString("deadLineSatus");
+										if (!TextUtils.equals(deadLineSatus, "1")) {//活动截止，不显示入口
+											return;
+										}
+
+										if (!obj.isNull("home")) {
+											FinalBitmap finalBitmap = FinalBitmap.create(mContext);
+											finalBitmap.display(ivEvent, obj.getString("home"), null, 0);
+											ivEvent.setVisibility(View.VISIBLE);
+											final String showUrl = obj.getString("showUrl");
+											ivEvent.setOnClickListener(new OnClickListener() {
+												@Override
+												public void onClick(View v) {
+													Intent intent = new Intent(mContext, EventActivity.class);
+													intent.putExtra("showUrl", showUrl);
+													startActivity(intent);
+												}
+											});
+										}
+									}
+								} catch (JSONException e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
+			}
+		}).start();
 	}
 
 }

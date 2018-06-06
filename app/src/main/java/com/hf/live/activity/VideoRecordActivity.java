@@ -387,7 +387,7 @@ public class VideoRecordActivity extends BaseActivity implements View.OnClickLis
         }
 
         String customVideoPath = getCustomVideoOutputPath();
-        String customCoverPath = customVideoPath.replace(".mp4", ".jpg");
+        String customCoverPath = customVideoPath.replace(CONST.VIDEOTYPE, CONST.IMGTYPE);
 
         int result = mTXCameraRecord.startRecord(customVideoPath, customCoverPath);
         if (result != TXRecordCommon.START_RECORD_OK) {

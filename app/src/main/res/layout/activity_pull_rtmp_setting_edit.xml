@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="拉流地址"
+        android:text="观看地址"
         android:textColor="#99ffffff"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
@@ -24,22 +24,53 @@
         android:layout_height="0.5dp"
         android:background="#10ffffff"/>
 
-    <EditText
-        android:id="@+id/etStream"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#33080c18"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:background="#33080c18"
-        android:gravity="center_vertical"
-        android:textColor="@color/white"
-        android:textSize="@dimen/level_5"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/etStream"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="输入观看地址"
+            android:textColorHint="@color/text_color4"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="@dimen/level_5"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/ivStreamClear"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="10dp"
+            android:src="@drawable/iv_clear"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#10ffffff"/>
+
+    <TextView
+        android:id="@+id/tvScane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫一扫获取观看地址"
+        android:textColor="#99ffffff"
+        android:layout_marginLeft="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="@dimen/level_5"/>
 
 </LinearLayout>

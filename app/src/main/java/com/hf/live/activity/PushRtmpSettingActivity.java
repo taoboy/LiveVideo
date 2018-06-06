@@ -2,6 +2,7 @@ package com.hf.live.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hf.live.R;
+import com.hf.live.common.CONST;
 import com.tencent.rtmp.TXLiveConstants;
 
 /**
@@ -55,11 +57,20 @@ public class PushRtmpSettingActivity extends BaseActivity implements View.OnClic
         tvStart = (TextView) findViewById(R.id.tvStart);
         tvStart.setOnClickListener(this);
 
-        setting();
-
+        readSetting();
     }
 
-    private void setting() {
+    /**
+     * 读取推流设置
+     */
+    private void readSetting() {
+        SharedPreferences sp = getSharedPreferences("PUSHRTMPSETTING", Context.MODE_PRIVATE);
+        name = sp.getString(CONST.NAME, name);
+        stream = sp.getString(CONST.STREAM, stream);
+        orientation = sp.getBoolean(CONST.ORIENTATION, orientation);
+        isFront = sp.getBoolean(CONST.ISFRONT, isFront);
+        videoQuality = sp.getInt(CONST.VIDEOQUALITY, videoQuality);
+
         if (!TextUtils.isEmpty(name)) {
             tvName.setText(name);
         }
@@ -87,7 +98,20 @@ public class PushRtmpSettingActivity extends BaseActivity implements View.OnClic
         }else if (videoQuality == TXLiveConstants.VIDEO_QUALITY_SUPER_DEFINITION) {
             tvResolution.setText("超清（720P，25fps，600~1800kbps）");
         }
+    }
 
+    /**
+     * 保存推流设置
+     */
+    private void writeSetting() {
+        SharedPreferences sp = getSharedPreferences("RTMPSETTING", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(CONST.NAME, tvName.getText().toString());
+        editor.putString(CONST.STREAM, tvStream.getText().toString());
+        editor.putBoolean(CONST.ORIENTATION, orientation);
+        editor.putBoolean(CONST.ISFRONT, isFront);
+        editor.putInt(CONST.VIDEOQUALITY, videoQuality);
+        editor.commit();
     }
 
     @Override
@@ -102,11 +126,11 @@ public class PushRtmpSettingActivity extends BaseActivity implements View.OnClic
             case R.id.reResolution:
             case R.id.reRatio:
                 intent = new Intent(mContext, PushRtmpSettingEditActivity.class);
-                intent.putExtra("name", tvName.getText().toString());
-                intent.putExtra("stream", tvStream.getText().toString());
-                intent.putExtra("orientation", orientation);
-                intent.putExtra("isFront", isFront);
-                intent.putExtra("videoQuality", videoQuality);
+                intent.putExtra(CONST.NAME, tvName.getText().toString());
+                intent.putExtra(CONST.STREAM, tvStream.getText().toString());
+                intent.putExtra(CONST.ORIENTATION, orientation);
+                intent.putExtra(CONST.ISFRONT, isFront);
+                intent.putExtra(CONST.VIDEOQUALITY, videoQuality);
                 startActivityForResult(intent, 1001);
                 break;
             case R.id.tvStart:
@@ -114,12 +138,13 @@ public class PushRtmpSettingActivity extends BaseActivity implements View.OnClic
                     Toast.makeText(mContext, "请输入直播地址", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 intent = new Intent(mContext, PushRtmpActivity.class);
-                intent.putExtra("name", tvName.getText().toString());
-                intent.putExtra("stream", tvStream.getText().toString());
-                intent.putExtra("orientation", orientation);
-                intent.putExtra("isFront", isFront);
-                intent.putExtra("videoQuality", videoQuality);
+                intent.putExtra(CONST.NAME, tvName.getText().toString());
+                intent.putExtra(CONST.STREAM, tvStream.getText().toString());
+                intent.putExtra(CONST.ORIENTATION, orientation);
+                intent.putExtra(CONST.ISFRONT, isFront);
+                intent.putExtra(CONST.VIDEOQUALITY, videoQuality);
                 startActivity(intent);
                 break;
         }
@@ -131,17 +156,7 @@ public class PushRtmpSettingActivity extends BaseActivity implements View.OnClic
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 1001:
-                    if (data != null) {
-                        Bundle bundle = data.getExtras();
-                        if (bundle != null) {
-                            name = bundle.getString("name");
-                            stream = bundle.getString("stream");
-                            orientation = bundle.getBoolean("orientation", orientation);
-                            isFront = bundle.getBoolean("isFront", isFront);
-                            videoQuality = bundle.getInt("videoQuality", videoQuality);
-                            setting();
-                        }
-                    }
+                    readSetting();
                     break;
             }
         }

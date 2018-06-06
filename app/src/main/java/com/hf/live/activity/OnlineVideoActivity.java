@@ -703,6 +703,10 @@ public class OnlineVideoActivity extends BaseActivity implements OnClickListener
                                                     editor.putBoolean("praiseState", true);
                                                     editor.commit();
                                                     ivPraise.setImageResource(R.drawable.iv_like);
+
+                                                    if (!object.isNull("praiseNum")) {
+                                                        tvPraiseCount.setText(object.getString("praiseNum"));
+                                                    }
                                                 } else {
                                                     //失败
                                                     if (!object.isNull("msg")) {

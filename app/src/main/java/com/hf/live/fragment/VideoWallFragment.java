@@ -80,7 +80,6 @@ import okhttp3.Response;
 public class VideoWallFragment extends Fragment implements View.OnClickListener, AMapLocationListener, AMap.OnCameraChangeListener, AMap.OnMarkerClickListener,
 		AMap.OnMapClickListener, AMap.InfoWindowAdapter{
 
-	private MyDialog mDialog;
 	private ImageView ivSearch, ivPerson;
 	private AMapLocationClientOption mLocationOption = null;//声明mLocationOption对象
 	private AMapLocationClient mLocationClient = null;//声明AMapLocationClient类对象
@@ -122,19 +121,6 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 		initListView2(view);
 	}
 
-	private void showDialog() {
-		if (mDialog == null) {
-			mDialog = new MyDialog(getActivity());
-		}
-		mDialog.show();
-	}
-
-	private void cancelDialog() {
-		if (mDialog != null) {
-			mDialog.dismiss();
-		}
-	}
-
 	private void initWidget(View view) {
 		tvMap = (TextView) view.findViewById(R.id.tvMap);
 		tvMap.setOnClickListener(this);
@@ -162,7 +148,7 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 
 		startLocation();
 
-		getMapData(30);//30天
+		refresh();
 	}
 
 	/**
@@ -184,6 +170,7 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 		refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refreshLayout);
 		refreshLayout.setColorSchemeResources(CONST.color1, CONST.color2, CONST.color3, CONST.color4);
 		refreshLayout.setProgressViewEndTarget(true, 300);
+		refreshLayout.setRefreshing(true);
 		refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh() {
@@ -1063,7 +1050,6 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 														mAdapter.notifyDataSetChanged();
 													}
 													refreshLayout.setRefreshing(false);
-													cancelDialog();
 
 												}else {
 													//失败
@@ -1098,29 +1084,32 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 			case R.id.ivPerson:
 				startActivity(new Intent(getActivity(), PersonCenterActivity.class));
 				break;
-			case R.id.tvMap:
-				tvMap.setBackgroundResource(R.drawable.btn_lb_corner_selected);
-				tvList.setBackgroundResource(R.drawable.btn_rb_corner_unselected);
-				tvMap.setTextColor(getResources().getColor(R.color.white));
-				tvList.setTextColor(getResources().getColor(R.color.text_color4));
-				mapView.setVisibility(View.VISIBLE);
-				llSelect.setVisibility(View.VISIBLE);
-				reForecast.setVisibility(View.GONE);
-				refreshLayout.setVisibility(View.GONE);
-				break;
 			case R.id.tvList:
 				tvMap.setTextColor(getResources().getColor(R.color.text_color4));
 				tvList.setTextColor(getResources().getColor(R.color.white));
-				tvMap.setBackgroundResource(R.drawable.btn_lb_corner_unselected);
-				tvList.setBackgroundResource(R.drawable.btn_rb_corner_selected);
+				tvMap.setBackgroundResource(R.drawable.btn_rb_corner_unselected);
+				tvList.setBackgroundResource(R.drawable.btn_lb_corner_selected);
 				mapView.setVisibility(View.GONE);
 				llSelect.setVisibility(View.GONE);
 				reForecast.setVisibility(View.VISIBLE);
 				refreshLayout.setVisibility(View.VISIBLE);
 
 				if (mList.isEmpty()) {
-					showDialog();
 					refresh();
+				}
+				break;
+			case R.id.tvMap:
+				tvMap.setBackgroundResource(R.drawable.btn_rb_corner_selected);
+				tvList.setBackgroundResource(R.drawable.btn_lb_corner_unselected);
+				tvMap.setTextColor(getResources().getColor(R.color.white));
+				tvList.setTextColor(getResources().getColor(R.color.text_color4));
+				mapView.setVisibility(View.VISIBLE);
+				llSelect.setVisibility(View.VISIBLE);
+				reForecast.setVisibility(View.GONE);
+				refreshLayout.setVisibility(View.GONE);
+
+				if (mapList.isEmpty()) {
+					getMapData(30);//30天
 				}
 				break;
 			case R.id.tv1:

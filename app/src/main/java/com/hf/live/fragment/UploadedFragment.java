@@ -169,7 +169,11 @@ public class UploadedFragment extends Fragment{
 		builder.add("token", MyApplication.TOKEN);
 		builder.add("page", page+"");
 		builder.add("pagesize", pageSize+"");
-		builder.add("appid", CONST.APPID);
+		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动用户
+			builder.add("appid", "26");
+		}else {
+			builder.add("appid", CONST.APPID);
+		}
 		final RequestBody body = builder.build();
 		new Thread(new Runnable() {
 			@Override
@@ -350,7 +354,7 @@ public class UploadedFragment extends Fragment{
 													for (int i = 0; i < mList.size(); i++) {
 														PhotoDto dto2 = mList.get(i);
 														try {
-															String date = sdf2.format(sdf1.parse(dto2.getWorkTime()));
+															String date = sdf2.format(sdf1.parse(dto2.workTime));
 															if (!sectionMap.containsKey(date)) {
 																dto2.setSection(section);
 																sectionMap.put(date, section);

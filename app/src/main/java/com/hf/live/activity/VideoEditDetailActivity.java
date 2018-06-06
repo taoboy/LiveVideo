@@ -1,5 +1,6 @@
 package com.hf.live.activity;
 
+import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Context;
@@ -364,50 +365,51 @@ public class VideoEditDetailActivity extends FragmentActivity implements TCTools
      * 创建缩略图，并跳转至视频预览的Activity
      */
     private void createThumbFile(final TXVideoEditConstants.TXGenerateResult result) {
-        AsyncTask<Void, String, String> task = new AsyncTask<Void, String, String>() {
-            @Override
-            protected String doInBackground(Void... voids) {
-                File outputVideo = new File(mVideoOutputPath);
-                if (!outputVideo.exists())
-                    return null;
-                Bitmap bitmap = TXVideoInfoReader.getInstance().getSampleImage(0, mVideoOutputPath);
-                if (bitmap == null)
-                    return null;
-                String mediaFileName = outputVideo.getAbsolutePath();
-                if (mediaFileName.lastIndexOf(".") != -1) {
-                    mediaFileName = mediaFileName.substring(0, mediaFileName.lastIndexOf("."));
-                }
-                String folder = Environment.getExternalStorageDirectory() + File.separator + TCConstants.DEFAULT_MEDIA_PACK_FOLDER + File.separator + mediaFileName;
-                File appDir = new File(folder);
-                if (!appDir.exists()) {
-                    appDir.mkdirs();
-                }
-
-                String fileName = "thumbnail" + ".jpg";
-                File file = new File(appDir, fileName);
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    fos.flush();
-                    fos.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return file.getAbsolutePath();
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                startPreviewActivity(result, s);
-            }
-
-        };
-        task.execute();
+        startPreviewActivity(result);
+//        AsyncTask<Void, String, String> task = new AsyncTask<Void, String, String>() {
+//            @Override
+//            protected String doInBackground(Void... voids) {
+//                File outputVideo = new File(mVideoOutputPath);
+//                if (!outputVideo.exists())
+//                    return null;
+//                Bitmap bitmap = TXVideoInfoReader.getInstance().getSampleImage(0, mVideoOutputPath);
+//                if (bitmap == null)
+//                    return null;
+//                String mediaFileName = outputVideo.getAbsolutePath();
+//                if (mediaFileName.lastIndexOf(".") != -1) {
+//                    mediaFileName = mediaFileName.substring(0, mediaFileName.lastIndexOf("."));
+//                }
+//                String folder = Environment.getExternalStorageDirectory() + File.separator + TCConstants.DEFAULT_MEDIA_PACK_FOLDER + File.separator + mediaFileName;
+//                File appDir = new File(folder);
+//                if (!appDir.exists()) {
+//                    appDir.mkdirs();
+//                }
+//
+//                String fileName = "thumbnail" + ".jpg";
+//                File file = new File(appDir, fileName);
+//                try {
+//                    FileOutputStream fos = new FileOutputStream(file);
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                    fos.flush();
+//                    fos.close();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                return file.getAbsolutePath();
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String s) {
+//                startPreviewActivity(result, s);
+//            }
+//
+//        };
+//        task.execute();
     }
 
-    private void startPreviewActivity(TXVideoEditConstants.TXGenerateResult result, String thumbPath) {
+    private void startPreviewActivity(TXVideoEditConstants.TXGenerateResult result) {
 //        Intent intent = new Intent(getApplicationContext(), DisplayVideoActivity.class);
 //        intent.putExtra(TCConstants.VIDEO_RECORD_TYPE, TCConstants.VIDEO_RECORD_TYPE_EDIT);
 //        intent.putExtra(TCConstants.VIDEO_RECORD_RESULT, result.retCode);
@@ -591,7 +593,7 @@ public class VideoEditDetailActivity extends FragmentActivity implements TCTools
         if (result.retCode == TXVideoEditConstants.GENERATE_RESULT_OK) {
             // 生成成功
             cancelDialog();
-//            createThumbFile(result);
+            createThumbFile(result);
         } else {
             Toast.makeText(VideoEditDetailActivity.this, result.descMsg, Toast.LENGTH_SHORT).show();
         }

@@ -2,21 +2,29 @@ package com.hf.live.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hf.live.R;
+import com.hf.live.common.CONST;
 import com.tencent.rtmp.TXLiveConstants;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 /**
  * 推流设置-编辑界面
@@ -26,8 +34,9 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
 
     private Context mContext;
     private LinearLayout llBack;
-    private TextView tvTitle,tvControl,tvScreen,tvCamera;
+    private TextView tvTitle,tvControl,tvScreen,tvCamera,tvScane;
     private EditText etName, etStream;
+    private ImageView ivNameClear, ivStreamClear;
     private Switch swScreen,swCamera;
     private RadioGroup rgResolution;
     private RadioButton rbResolution1, rbResolution2, rbResolution3;
@@ -52,8 +61,13 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
         tvControl.setOnClickListener(this);
         tvControl.setText("确定");
         etName = (EditText) findViewById(R.id.etName);
+        etName.addTextChangedListener(nameWatcher);
         etStream = (EditText) findViewById(R.id.etStream);
-        etStream.addTextChangedListener(textWatcher);
+        etStream.addTextChangedListener(streamWatcher);
+        ivNameClear = (ImageView) findViewById(R.id.ivNameClear);
+        ivNameClear.setOnClickListener(this);
+        ivStreamClear = (ImageView) findViewById(R.id.ivStreamClear);
+        ivStreamClear.setOnClickListener(this);
         tvScreen = (TextView) findViewById(R.id.tvScreen);
         swScreen = (Switch) findViewById(R.id.swScreen);
         swScreen.setOnCheckedChangeListener(screenListener);
@@ -65,27 +79,30 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
         rbResolution1 = (RadioButton) findViewById(R.id.rbResolution1);
         rbResolution2 = (RadioButton) findViewById(R.id.rbResolution2);
         rbResolution3 = (RadioButton) findViewById(R.id.rbResolution3);
+        tvScane = (TextView) findViewById(R.id.tvScane);
+        tvScane.setOnClickListener(this);
+        tvScane.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
 
-        String name = getIntent().getStringExtra("name");
+        String name = getIntent().getStringExtra(CONST.NAME);
         if (!TextUtils.isEmpty(name)) {
             etName.setText(name);
             etName.setSelection(name.length());
         }
 
-        String stream = getIntent().getStringExtra("stream");
+        String stream = getIntent().getStringExtra(CONST.STREAM);
         if (!TextUtils.isEmpty(stream)) {
             etStream.setText(stream);
             etStream.setSelection(stream.length());
         }
 
-        orientation = getIntent().getBooleanExtra("orientation", orientation);
+        orientation = getIntent().getBooleanExtra(CONST.ORIENTATION, orientation);
         swScreen.setChecked(orientation);
 
-        isFront = getIntent().getBooleanExtra("isFront", isFront);
+        isFront = getIntent().getBooleanExtra(CONST.ISFRONT, isFront);
         swCamera.setChecked(isFront);
 
-        videoQuality = getIntent().getIntExtra("videoQuality", videoQuality);
+        videoQuality = getIntent().getIntExtra(CONST.VIDEOQUALITY, videoQuality);
         if (videoQuality == TXLiveConstants.VIDEO_QUALITY_STANDARD_DEFINITION) {
             rgResolution.check(R.id.rbResolution1);
         }else if (videoQuality == TXLiveConstants.VIDEO_QUALITY_HIGH_DEFINITION) {
@@ -96,7 +113,24 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
 
     }
 
-    private TextWatcher textWatcher = new TextWatcher() {
+    private TextWatcher nameWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (!TextUtils.isEmpty(s)) {
+                ivNameClear.setVisibility(View.VISIBLE);
+            }else {
+                ivNameClear.setVisibility(View.GONE);
+            }
+        }
+    };
+
+    private TextWatcher streamWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -107,8 +141,10 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
         public void afterTextChanged(Editable s) {
             if (!TextUtils.isEmpty(s)) {
                 tvControl.setVisibility(View.VISIBLE);
+                ivStreamClear.setVisibility(View.VISIBLE);
             }else {
                 tvControl.setVisibility(View.GONE);
+                ivStreamClear.setVisibility(View.GONE);
             }
         }
     };
@@ -163,22 +199,80 @@ public class PushRtmpSettingEditActivity extends BaseActivity implements View.On
         }
     };
 
+    /**
+     * 保存推流设置
+     */
+    private void writeSetting() {
+        SharedPreferences sp = getSharedPreferences("PUSHRTMPSETTING", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(CONST.NAME, etName.getText().toString());
+        editor.putString(CONST.STREAM, etStream.getText().toString());
+        editor.putBoolean(CONST.ORIENTATION, orientation);
+        editor.putBoolean(CONST.ISFRONT, isFront);
+        editor.putInt(CONST.VIDEOQUALITY, videoQuality);
+        editor.commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            writeSetting();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llBack:
+                writeSetting();
                 finish();
                 break;
+            case R.id.ivNameClear:
+                if (etName != null) {
+                    etName.setText("");
+                }
+                break;
+            case R.id.ivStreamClear:
+                if (etStream != null) {
+                    etStream.setText("");
+                }
+                break;
             case R.id.tvControl:
-                Intent intent = new Intent();
-                intent.putExtra("name", etName.getText().toString());
-                intent.putExtra("stream", etStream.getText().toString());
-                intent.putExtra("orientation", orientation);
-                intent.putExtra("isFront", isFront);
-                intent.putExtra("videoQuality", videoQuality);
-                setResult(RESULT_OK, intent);
+                writeSetting();
+                setResult(RESULT_OK);
                 finish();
+                break;
+            case R.id.tvScane:
+                Intent intent = new Intent(getApplication(), CaptureActivity.class);
+                startActivityForResult(intent, 100000);
                 break;
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 100000:
+                    //处理二维码扫描结果
+                    if (null != data) {
+                        Bundle bundle = data.getExtras();
+                        if (bundle == null) {
+                            return;
+                        }
+                        if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                            String result = bundle.getString(CodeUtils.RESULT_STRING);
+                            if (!TextUtils.isEmpty(result)) {
+                                etStream.setText(result);
+                            }
+                        } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                            Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    break;
+            }
+        }
+    }
+
 }

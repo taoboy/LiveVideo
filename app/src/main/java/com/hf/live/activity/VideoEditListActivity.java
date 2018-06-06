@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -26,7 +25,6 @@ import com.hf.live.dto.PhotoDto;
 import com.hf.live.qcloud.TCConstants;
 import com.hf.live.view.MyDialog;
 import com.hf.live.view.ScrollviewListview;
-import com.tencent.liteav.basic.log.TXCLog;
 import com.tencent.ugc.TXVideoEditConstants;
 import com.tencent.ugc.TXVideoJoiner;
 
@@ -53,6 +51,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
     private FrameLayout frameLayout;
     private TXVideoJoiner mTXVideoJoiner;
     private String mVideoOutputPath;                        // 视频输出路径
+    private MyDialog mergeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +61,21 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
         initBroadCast();
         initWidget();
         initListView();
+    }
+
+    private void showMergeDialog() {
+        if (mergeDialog == null) {
+            mergeDialog = new MyDialog(mContext);
+            mergeDialog.setCanceledOnTouchOutside(false);
+        }
+        mergeDialog.show();
+        mergeDialog.setPercent(0);
+    }
+
+    private void cancelMergeDialog() {
+        if (mergeDialog != null) {
+            mergeDialog.dismiss();
+        }
     }
 
     private void initWidget() {
@@ -116,6 +130,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
      */
     private void previewVideo() {
         if (dataList.size() <= 1) {
+            cancelDialog();
             return;
         }
 
@@ -137,6 +152,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
         mTXVideoJoiner.initWithPreview(param);
         // 设置待拼接的视频文件组 mVideoSourceList，也就是第一步中选择的若干个文件
         int ret = mTXVideoJoiner.setVideoPathList(videoPaths);
+        cancelDialog();
         if (ret == 0) {
             tvControl.setVisibility(View.VISIBLE);
             mTXVideoJoiner.startPlay();
@@ -174,11 +190,14 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onJoinProgress(float progress) {
+        if (mergeDialog != null) {
+            mergeDialog.setPercent((int) (progress * 100));
+        }
     }
 
     @Override
     public void onJoinComplete(TXVideoEditConstants.TXJoinerResult result) {
-        cancelDialog();
+        cancelMergeDialog();
         if (result.retCode == TXVideoEditConstants.JOIN_RESULT_OK) {
             Intent intent = new Intent(mContext, DisplayVideoActivity.class);
             intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
@@ -186,6 +205,28 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
         } else {
             TXVideoEditConstants.TXJoinerResult ret = result;
             Toast.makeText(mContext, "视频合成失败"+result.descMsg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void stopPlay() {
+        if (mTXVideoJoiner != null) {
+            mTXVideoJoiner.stopPlay();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mTXVideoJoiner != null) {
+            mTXVideoJoiner.resumePlay();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mTXVideoJoiner != null) {
+            mTXVideoJoiner.pausePlay();
         }
     }
 
@@ -204,6 +245,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            stopPlay();
             setResult(RESULT_OK);
             finish();
         }
@@ -214,6 +256,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.llBack:
+                stopPlay();
                 setResult(RESULT_OK);
                 finish();
                 break;
@@ -221,11 +264,18 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
                 startActivityForResult(new Intent(mContext, VideoSelectEditActivity.class), 1001);
                 break;
             case R.id.ivPreview:
-                previewVideo();
+                showDialog();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        previewVideo();
+                    }
+                }, 1000);
                 break;
             case R.id.tvControl:
+                stopPlay();
                 if (mTXVideoJoiner != null) {
-                    showDialog();
+                    showMergeDialog();
                     mVideoOutputPath = mergeVideoPath();
                     mTXVideoJoiner.setVideoJoinerListener(this);
                     mTXVideoJoiner.joinVideo(TXVideoEditConstants.VIDEO_COMPRESSED_720P, mVideoOutputPath);

@@ -2,6 +2,7 @@ package com.hf.live.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hf.live.R;
+import com.hf.live.common.CONST;
+import com.tencent.rtmp.TXLiveConstants;
 
 /**
  * 拉流设置
@@ -43,11 +46,17 @@ public class PullRtmpSettingActivity extends BaseActivity implements View.OnClic
         tvStart = (TextView) findViewById(R.id.tvStart);
         tvStart.setOnClickListener(this);
 
-        setting();
+        readSetting();
 
     }
 
-    private void setting() {
+    /**
+     * 读取拉流设置
+     */
+    private void readSetting() {
+        SharedPreferences sp = getSharedPreferences("PULLRTMPSETTING", Context.MODE_PRIVATE);
+        stream = sp.getString(CONST.STREAM, stream);
+
         if (!TextUtils.isEmpty(stream)) {
             tvStream.setText(stream);
         }
@@ -62,7 +71,7 @@ public class PullRtmpSettingActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.reStream:
                 intent = new Intent(mContext, PullRtmpSettingEditActivity.class);
-                intent.putExtra("stream", tvStream.getText().toString());
+                intent.putExtra(CONST.STREAM, tvStream.getText().toString());
                 startActivityForResult(intent, 1001);
                 break;
             case R.id.tvStart:
@@ -71,7 +80,7 @@ public class PullRtmpSettingActivity extends BaseActivity implements View.OnClic
                     return;
                 }
                 intent = new Intent(mContext, PullRtmpActivity.class);
-                intent.putExtra("stream", tvStream.getText().toString());
+                intent.putExtra(CONST.STREAM, tvStream.getText().toString());
                 startActivity(intent);
                 break;
         }
@@ -83,13 +92,7 @@ public class PullRtmpSettingActivity extends BaseActivity implements View.OnClic
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 1001:
-                    if (data != null) {
-                        Bundle bundle = data.getExtras();
-                        if (bundle != null) {
-                            stream = bundle.getString("stream");
-                            setting();
-                        }
-                    }
+                    readSetting();
                     break;
             }
         }

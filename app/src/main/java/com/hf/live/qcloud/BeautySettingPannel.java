@@ -64,10 +64,10 @@ public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBa
 
     static public class BeautyParams{
         public float mExposure = 0;
-        public int mBeautyLevel = 5;
-        public int mWhiteLevel = 3;
-        public int mRuddyLevel = 2;
-        public int mSharpenLevel = 3;
+        public int mBeautyLevel = 0;
+        public int mWhiteLevel = 0;
+        public int mRuddyLevel = 0;
+        public int mSharpenLevel = 0;
         public int mBeautyStyle = 0;
         public int mFilterMixLevel = 0;
         public int mBigEyeLevel;
@@ -206,13 +206,13 @@ public class BeautySettingPannel extends FrameLayout implements SeekBar.OnSeekBa
     // 新界面
     TXHorizontalPickerView mFirstGradlePicker;
     ArrayAdapter<String> mFirstGradleAdapter;
-    private final int mFilterBasicLevel = 5;
+    private final int mFilterBasicLevel = 0;
 
-    private final int mBeautyBasicLevel = 5;
-    private final int mWhiteBasicLevel = 3;
-    private final int mRuddyBasicLevel = 2;
+    private final int mBeautyBasicLevel = 0;
+    private final int mWhiteBasicLevel = 0;
+    private final int mRuddyBasicLevel = 0;
     private int mExposureLevel = -1;
-    private final int mSharpenLevel = 3;
+    private final int mSharpenLevel = 0;
 
     TXHorizontalPickerView mSecondGradlePicker;
     ArrayAdapter<String> mSecondGradleAdapter;

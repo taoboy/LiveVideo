@@ -134,6 +134,23 @@ public class WelcomeActivity extends BaseActivity{
 																}
 															}
 
+															//活动
+															if (!obj.isNull("type")) {
+																MyApplication.TYPE = obj.getString("type");
+															}
+															if (!obj.isNull("college")) {
+																MyApplication.COLLEGE = obj.getString("college");
+															}
+															if (!obj.isNull("major")) {
+																MyApplication.MAJOR = obj.getString("major");
+															}
+															if (!obj.isNull("votes")) {
+																MyApplication.VOTES = obj.getString("votes");
+															}
+															if (!obj.isNull("code")) {
+																MyApplication.CODE = obj.getString("code");
+															}
+
 															MyApplication.saveUserInfo(mContext);
 
 															startActivity(new Intent(mContext, MainActivity2.class));

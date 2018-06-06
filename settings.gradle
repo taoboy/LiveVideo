@@ -1,1 +1,1 @@
-include ':app', ':kiwi', ':joevideolib'
+include ':app', ':lib-zxing'
