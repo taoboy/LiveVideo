@@ -47,10 +47,10 @@ import com.hf.live.qcloud.TXUGCPublishTypeDef;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.ScrollviewGridview;
 import com.hf.live.view.UploadDialog;
-import com.tencent.rtmp.ITXLivePlayListener;
+import com.tencent.rtmp.ITXVodPlayListener;
 import com.tencent.rtmp.TXLiveConstants;
-import com.tencent.rtmp.TXLivePlayConfig;
-import com.tencent.rtmp.TXLivePlayer;
+import com.tencent.rtmp.TXVodPlayConfig;
+import com.tencent.rtmp.TXVodPlayer;
 import com.tencent.rtmp.ui.TXCloudVideoView;
 
 import org.json.JSONException;
@@ -82,7 +82,7 @@ import static com.tencent.rtmp.TXLiveConstants.PLAY_EVT_PLAY_PROGRESS;
  *
  */
 
-public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayListener, OnClickListener, AMapLocationListener{
+public class DisplayVideoActivity extends BaseActivity implements ITXVodPlayListener, OnClickListener, AMapLocationListener{
 	
 	private Context mContext;
     private ImageView ivBack, ivInFull, ivPlay;
@@ -101,9 +101,9 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 	private UploadDialog uploadDialog;
 	private String position = "";
 
-	private TXLivePlayer mTXLivePlayer;
-	private TXLivePlayConfig mTXPlayConfig;
 	private TXCloudVideoView mTXCloudVideoView;
+	private TXVodPlayer mTXVodPlayer;
+	private TXVodPlayConfig mTXVodPlayConfig;
 	private boolean isPlaying = true;//是否正在播放
 	private boolean isFirstPlay = true;//是否为第一次播放
 	private String txSign;//腾讯云签名
@@ -250,8 +250,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 			}
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				if (mTXLivePlayer != null) {
-					mTXLivePlayer.seek(seekBar.getProgress());
+				if (mTXVodPlayer != null) {
+					mTXVodPlayer.seek(seekBar.getProgress());
 				}
 			}
 		});
@@ -341,8 +341,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 	}
 
 	private void initVideoView() {
-        mTXLivePlayer = new TXLivePlayer(this);
-        mTXPlayConfig = new TXLivePlayConfig();
+		mTXVodPlayer = new TXVodPlayer(mContext);
+		mTXVodPlayConfig = new TXVodPlayConfig();
         mTXCloudVideoView = (TXCloudVideoView) findViewById(R.id.video_view);
         mTXCloudVideoView.disableLog(true);
 		mTXCloudVideoView.setOnClickListener(this);
@@ -358,26 +358,26 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 	private void startPlay() {
 		if (isFirstPlay) {
 			ivPlay.setImageResource(R.drawable.iv_pause);
-			mTXLivePlayer.setPlayerView(mTXCloudVideoView);
-			mTXLivePlayer.setPlayListener(this);
-			mTXLivePlayer.enableHardwareDecode(false);
-			mTXLivePlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
-			mTXLivePlayer.setRenderMode(TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION);
-			mTXLivePlayer.setConfig(mTXPlayConfig);
-			int result = mTXLivePlayer.startPlay(videoPath, TXLivePlayer.PLAY_TYPE_LOCAL_VIDEO); // result返回值：0 success;  -1 empty url; -2 invalid url; -3 invalid playType;
+			mTXVodPlayer.setPlayerView(mTXCloudVideoView);
+			mTXVodPlayer.enableHardwareDecode(false);
+			mTXVodPlayer.setRenderRotation(TXLiveConstants.RENDER_ROTATION_PORTRAIT);
+			mTXVodPlayer.setRenderMode(TXLiveConstants.RENDER_MODE_ADJUST_RESOLUTION);
+			mTXVodPlayer.setConfig(mTXVodPlayConfig);
+			mTXVodPlayer.setVodListener(this);
+			int result = mTXVodPlayer.startPlay(videoPath); // result返回值：0 success;  -1 empty url; -2 invalid url; -3 invalid playType;
 			if (result != 0) {
 				ivPlay.setImageResource(R.drawable.iv_play);
 				isPlaying = false;
 			}
 			isFirstPlay = false;
 		}else {
-			if (mTXLivePlayer.isPlaying()) {
+			if (mTXVodPlayer.isPlaying()) {
 				ivPlay.setImageResource(R.drawable.iv_play);
-				mTXLivePlayer.pause();
+				mTXVodPlayer.pause();
 				isPlaying = false;
 			}else {
 				ivPlay.setImageResource(R.drawable.iv_pause);
-				mTXLivePlayer.resume();
+				mTXVodPlayer.resume();
 				isPlaying = true;
 			}
 		}
@@ -385,7 +385,7 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 	}
 
     @Override
-    public void onPlayEvent(int event, Bundle param) {
+    public void onPlayEvent(TXVodPlayer txVodPlayer, int event, Bundle param) {
 		switch (event) {
 			case PLAY_EVT_PLAY_BEGIN:
 				hideControlLayout();
@@ -403,7 +403,7 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 				}
 				break;
 			case PLAY_EVT_PLAY_END:
-				mTXLivePlayer.pause();
+//				mTXLivePlayer.pause();
 				ivPlay.setImageResource(R.drawable.iv_play);
 				showControlLayout();
 				break;
@@ -411,7 +411,7 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
     }
 
     @Override
-    public void onNetStatus(Bundle bundle) {
+    public void onNetStatus(TXVodPlayer txVodPlayer, Bundle bundle) {
 
     }
 
@@ -859,7 +859,7 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 			}
 			break;
 		case R.id.video_view:
-			if (mTXLivePlayer != null && mTXLivePlayer.isPlaying()) {
+			if (mTXVodPlayer != null && mTXVodPlayer.isPlaying()) {
 				if (reBottom.getVisibility() == View.VISIBLE) {
 					reBottom.setVisibility(View.GONE);
 					ivPlay.setVisibility(View.GONE);
@@ -909,8 +909,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
         if (mTXCloudVideoView != null) {
 			mTXCloudVideoView.onResume();
 		}
-		if (mTXLivePlayer != null) {
-			mTXLivePlayer.resume();
+		if (mTXVodPlayer != null) {
+			mTXVodPlayer.resume();
 		}
     }
 
@@ -920,8 +920,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 		if (mTXCloudVideoView != null) {
 			mTXCloudVideoView.onPause();
 		}
-		if (mTXLivePlayer != null) {
-			mTXLivePlayer.pause();
+		if (mTXVodPlayer != null) {
+			mTXVodPlayer.pause();
 		}
     }
 
@@ -936,9 +936,9 @@ public class DisplayVideoActivity extends BaseActivity implements ITXLivePlayLis
 		if (mTXCloudVideoView != null) {
 			mTXCloudVideoView.onDestroy();
 		}
-		if (mTXLivePlayer != null) {
-			mTXLivePlayer.setPlayListener(null);
-			mTXLivePlayer.stopPlay(true);
+		if (mTXVodPlayer != null) {
+			mTXVodPlayer.setPlayListener(null);
+			mTXVodPlayer.stopPlay(true);
 		}
     }
 

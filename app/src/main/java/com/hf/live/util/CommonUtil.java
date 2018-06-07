@@ -726,11 +726,13 @@ public class CommonUtil {
 					long duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
 					long size = cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.SIZE));
 
-					PhotoDto dto = new PhotoDto();
-					dto.imageName = title;
-					dto.videoUrl = path;
-					dto.duration = duration;
-					list.add(0, dto);
+					if (mimeType.endsWith("mp4")) {
+						PhotoDto dto = new PhotoDto();
+						dto.imageName = title;
+						dto.videoUrl = path;
+						dto.duration = duration;
+						list.add(0, dto);
+					}
 				}
 				cursor.close();
 			}
