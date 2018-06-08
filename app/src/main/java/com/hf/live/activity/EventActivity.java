@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
+
+import net.tsz.afinal.FinalBitmap;
 
 /**
  * 气象活动
@@ -20,6 +23,7 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
 
     private TextView tvUpload, tvCheck;
     private LinearLayout llIntro;
+    private ImageView ivLogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,15 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
         tvCheck.setOnClickListener(this);
         llIntro = (LinearLayout) findViewById(R.id.llIntro);
         llIntro.setOnClickListener(this);
+        ivLogo = (ImageView) findViewById(R.id.ivLogo);
+
+        if (getIntent().hasExtra("logoUrl")) {
+            String logoUrl = getIntent().getStringExtra("logoUrl");
+            if (!TextUtils.isEmpty(logoUrl)) {
+                FinalBitmap finalBitmap = FinalBitmap.create(this);
+                finalBitmap.display(ivLogo, logoUrl, null, 0);
+            }
+        }
 
         if (getIntent().hasExtra("showUrl")) {
             String showUrl = getIntent().getStringExtra("showUrl");

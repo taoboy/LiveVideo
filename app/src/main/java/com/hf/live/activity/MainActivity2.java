@@ -338,11 +338,13 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 											finalBitmap.display(ivEvent, obj.getString("home"), null, 0);
 											ivEvent.setVisibility(View.VISIBLE);
 											final String showUrl = obj.getString("showUrl");
+											final String logoUrl = obj.getString("logo");
 											ivEvent.setOnClickListener(new OnClickListener() {
 												@Override
 												public void onClick(View v) {
 													Intent intent = new Intent(mContext, EventActivity.class);
 													intent.putExtra("showUrl", showUrl);
+													intent.putExtra("logoUrl", logoUrl);
 													startActivity(intent);
 												}
 											});
