@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -169,11 +168,7 @@ public class UploadedFragment extends Fragment{
 		builder.add("token", MyApplication.TOKEN);
 		builder.add("page", page+"");
 		builder.add("pagesize", pageSize+"");
-		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动用户
-			builder.add("appid", "26");
-		}else {
-			builder.add("appid", CONST.APPID);
-		}
+		builder.add("appid", CONST.APPID);
 		final RequestBody body = builder.build();
 		new Thread(new Runnable() {
 			@Override

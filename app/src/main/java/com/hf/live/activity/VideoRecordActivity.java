@@ -301,6 +301,9 @@ public class VideoRecordActivity extends BaseActivity implements View.OnClickLis
             Intent intent = new Intent(getApplicationContext(), DisplayVideoActivity.class);
             intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mTXRecordResult.videoPath);
             intent.putExtra(TCConstants.VIDEO_RECORD_COVERPATH, mTXRecordResult.coverPath);
+            if (getIntent().hasExtra("appid")) {
+                intent.putExtra("appid", "26");//活动专用频道
+            }
 //            intent.putExtra(TCConstants.VIDEO_RECORD_TYPE, TCConstants.VIDEO_RECORD_TYPE_UGC_RECORD);
 //            intent.putExtra(TCConstants.VIDEO_RECORD_RESULT, mTXRecordResult.retCode);
 //            intent.putExtra(TCConstants.VIDEO_RECORD_DESCMSG, mTXRecordResult.descMsg);

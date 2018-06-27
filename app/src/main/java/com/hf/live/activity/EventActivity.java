@@ -81,7 +81,9 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View arg0) {
                 dialog.dismiss();
-                startActivity(new Intent(EventActivity.this, VideoRecordActivity.class));
+                Intent intent = new Intent(EventActivity.this, VideoRecordActivity.class);
+                intent.putExtra("appid", "26");//活动专用频道
+                startActivity(intent);
             }
         });
 
@@ -89,7 +91,9 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onClick(View arg0) {
                 dialog.dismiss();
-                startActivity(new Intent(EventActivity.this, SelectVideoActivity.class));
+                Intent intent = new Intent(EventActivity.this, SelectVideoActivity.class);
+                intent.putExtra("appid", "26");//活动专用频道
+                startActivity(intent);
             }
         });
     }
@@ -102,12 +106,12 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
                 selectDialog();
                 break;
             case R.id.tvCheck:
-                intent = new Intent(this, WebviewActivity.class);
+                intent = new Intent(this, WebviewActivity2.class);
                 intent.putExtra("url", tvCheck.getTag()+"");
                 startActivity(intent);
                 break;
             case R.id.llIntro:
-                intent = new Intent(this, WebviewActivity.class);
+                intent = new Intent(this, WebviewActivity2.class);
                 intent.putExtra("url", "http://channellive2.tianqi.cn/Public/htmls/zhuboinfo.html");
                 startActivity(intent);
                 break;

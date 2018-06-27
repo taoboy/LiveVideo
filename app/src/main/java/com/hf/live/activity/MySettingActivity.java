@@ -250,7 +250,8 @@ public class MySettingActivity extends BaseActivity implements OnClickListener{
 			startActivityForResult(new Intent(mContext, SwitchResourceActivity.class), 2);
 			break;
 		case R.id.llVersion:
-			AutoUpdateUtil.checkUpdate(MySettingActivity.this, mContext, "51", getString(R.string.app_name), false);
+//			AutoUpdateUtil.checkUpdate(MySettingActivity.this, mContext, "51", getString(R.string.app_name), false);
+			AutoUpdateUtil.checkUpdate(MySettingActivity.this, mContext, "106", getString(R.string.app_name), false);//测试
 			break;
 		case R.id.tvLogout:
 			logoutDialog(getString(R.string.sure_logout));

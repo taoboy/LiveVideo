@@ -139,7 +139,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXVodPlayList
 	 * 活动
 	 */
 	private void event() {
-		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动报名用户
+		if (getIntent().hasExtra("appid")) {
+			String appid = getIntent().getStringExtra("appid");//活动专用频道
 			tvWeatherType.setVisibility(View.GONE);
 			tvWeatherFlag.setVisibility(View.GONE);
 			gridView1.setVisibility(View.GONE);
@@ -708,8 +709,8 @@ public class DisplayVideoActivity extends BaseActivity implements ITXVodPlayList
 		File videoFile = new File(videoPath);
 		String fileName = videoFile.getName().substring(0, videoFile.getName().length()-4);
 		FormBody.Builder builder = new FormBody.Builder();
-		if (TextUtils.equals(MyApplication.TYPE, "2")) {//活动用户
-			builder.add("appid", "26");
+		if (getIntent().hasExtra("appid")) {
+			builder.add("appid", getIntent().getStringExtra("appid"));//活动专用频道
 		}else {
 			builder.add("appid", CONST.APPID);
 		}

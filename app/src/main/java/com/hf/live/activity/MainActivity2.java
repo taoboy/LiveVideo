@@ -48,7 +48,7 @@ import okhttp3.Response;
  *
  */
 
-public class MainActivity2 extends BaseActivity implements OnClickListener{
+public class MainActivity2 extends BaseActivity implements OnClickListener, BaseActivity.NavigationListener{
 
 	private Context mContext = null;
 	private LinearLayout llWall, llClip, llShot;
@@ -66,13 +66,26 @@ public class MainActivity2 extends BaseActivity implements OnClickListener{
 		mContext = this;
 		initWidget();
 		initViewPager();
+		setNavigationListener(this);
+	}
+
+	@Override
+	public void showNavigation(boolean show) {
+//		onLayoutMeasure();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+//		onLayoutMeasure();
 	}
 
 	/**
 	 * 初始化控件
 	 */
 	private void initWidget() {
-		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "51", getString(R.string.app_name), true);
+//		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "51", getString(R.string.app_name), true);
+		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "106", getString(R.string.app_name), true);//测试版本
 
 		llWall = (LinearLayout) findViewById(R.id.llWall);
 		llWall.setOnClickListener(new MyOnClickListener(0));

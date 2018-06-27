@@ -168,6 +168,8 @@ public class WelcomeActivity extends BaseActivity{
 																Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
 															}
 														}
+														startActivity(new Intent(mContext, LoginActivity.class));
+														finish();
 													}
 												}
 											}

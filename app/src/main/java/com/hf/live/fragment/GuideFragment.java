@@ -72,7 +72,8 @@ public class GuideFragment extends Fragment implements OnClickListener{
 	/**
 	 * 获取我的信息，目的是为了验证token是否失效
 	 */
-	private void OkHttpUserinfo(final String url) {
+	private void OkHttpUserinfo() {
+		final String url = "http://channellive2.tianqi.cn/Weather/User/getUser2";//刷新token
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("token", MyApplication.TOKEN);
 		final RequestBody body = builder.build();
@@ -134,6 +135,23 @@ public class GuideFragment extends Fragment implements OnClickListener{
 															}
 														}
 
+														//活动
+														if (!obj.isNull("type")) {
+															MyApplication.TYPE = obj.getString("type");
+														}
+														if (!obj.isNull("college")) {
+															MyApplication.COLLEGE = obj.getString("college");
+														}
+														if (!obj.isNull("major")) {
+															MyApplication.MAJOR = obj.getString("major");
+														}
+														if (!obj.isNull("votes")) {
+															MyApplication.VOTES = obj.getString("votes");
+														}
+														if (!obj.isNull("code")) {
+															MyApplication.CODE = obj.getString("code");
+														}
+
 														MyApplication.saveUserInfo(getActivity());
 
 														startActivity(new Intent(getActivity(), MainActivity2.class));
@@ -151,6 +169,8 @@ public class GuideFragment extends Fragment implements OnClickListener{
 															Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
 														}
 													}
+													startActivity(new Intent(getActivity(), LoginActivity.class));
+													getActivity().finish();
 												}
 											}
 										}
@@ -177,7 +197,7 @@ public class GuideFragment extends Fragment implements OnClickListener{
 			editor.commit();
 			
 			if (!TextUtils.isEmpty(MyApplication.TOKEN)) {
-				OkHttpUserinfo("http://channellive2.tianqi.cn/Weather/User/getUser2");
+				OkHttpUserinfo();
 			}else {
 				startActivity(new Intent(getActivity(), LoginActivity.class));
 				getActivity().finish();

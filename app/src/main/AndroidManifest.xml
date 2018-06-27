@@ -159,6 +159,10 @@
             android:name="com.hf.live.activity.WebviewActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.hf.live.activity.WebviewActivity2"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
         <activity 
             android:name="com.hf.live.activity.ScoreExchangeActivity"
             android:launchMode="singleTask"

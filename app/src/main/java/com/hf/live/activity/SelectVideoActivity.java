@@ -56,6 +56,9 @@ public class SelectVideoActivity extends BaseActivity implements View.OnClickLis
                 PhotoDto dto = mList.get(position);
                 Intent intent = new Intent(mContext, DisplayVideoActivity.class);
                 intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, dto.videoUrl);
+                if (getIntent().hasExtra("appid")) {
+                    intent.putExtra("appid", "26");//活动专用频道
+                }
                 startActivity(intent);
             }
         });

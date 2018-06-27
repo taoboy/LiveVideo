@@ -4,13 +4,22 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,14 +28,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hf.live.R;
-import com.hf.live.adapter.VideoEditListAdapter;
 import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.qcloud.TCConstants;
+import com.hf.live.util.CommonUtil;
 import com.hf.live.view.MyDialog;
-import com.hf.live.view.ScrollviewListview;
 import com.tencent.ugc.TXVideoEditConstants;
 import com.tencent.ugc.TXVideoJoiner;
+import com.yydcdut.sdlv.Menu;
+import com.yydcdut.sdlv.MenuItem;
+import com.yydcdut.sdlv.SlideAndDragListView;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -43,7 +54,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
     private Context mContext;
     private LinearLayout llBack;
     private TextView tvTitle, tvControl;
-    private ScrollviewListview listView;
+    private SlideAndDragListView listView;
     private VideoEditListAdapter mAdapter;
     private List<PhotoDto> dataList = new ArrayList<>();
     private int width;
@@ -100,11 +111,28 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
         frameLayout.setLayoutParams(params);
     }
 
+    private Menu mMenu;
+    public void initMenu() {
+        mMenu = new Menu(true);
+        mMenu.addItem(new MenuItem.Builder().setWidth((int) CommonUtil.dip2px(mContext, 50))
+                .setBackground(getDrawable(R.color.red))
+//                .setText("删除")
+                .setDirection(MenuItem.DIRECTION_RIGHT)
+//                .setTextColor(Color.BLACK)
+//                .setTextSize(14)
+                .setIcon(getResources().getDrawable(R.drawable.iv_delete_white))
+                .build());
+    }
+
+    PhotoDto mDraggedEntity;
     private void initListView() {
         dataList.clear();
         dataList.addAll(getIntent().getExtras().<PhotoDto>getParcelableArrayList("dataList"));
 
-        listView = (ScrollviewListview) findViewById(R.id.listView);
+        initMenu();
+
+        listView = (SlideAndDragListView) findViewById(R.id.listView);
+        listView.setMenu(mMenu);
         mAdapter = new VideoEditListAdapter(mContext, dataList);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,10 +148,187 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
                 Intent intent = new Intent(mContext, TCVideoPreprocessActivity.class);
                 intent.putExtra(TCConstants.VIDEO_EDITER_PATH, dto.videoUrl);
                 startActivity(intent);
+            }
+        });
+        listView.setOnDragDropListener(new SlideAndDragListView.OnDragDropListener() {
+            @Override
+            public void onDragViewStart(int beginPosition) {
+                mDraggedEntity = dataList.get(beginPosition);
+            }
+
+            @Override
+            public void onDragDropViewMoved(int fromPosition, int toPosition) {
+                PhotoDto dto = dataList.remove(fromPosition);
+                dataList.add(toPosition, dto);
+            }
+
+            @Override
+            public void onDragViewDown(int finalPosition) {
+                dataList.set(finalPosition, mDraggedEntity);
+            }
+        });
+        listView.setOnSlideListener(new SlideAndDragListView.OnSlideListener() {
+            @Override
+            public void onSlideOpen(View view, View parentView, int position, int direction) {
+            }
+
+            @Override
+            public void onSlideClose(View view, View parentView, int position, int direction) {
+            }
+        });
+        listView.setOnMenuItemClickListener(new SlideAndDragListView.OnMenuItemClickListener() {
+            @Override
+            public int onMenuItemClick(View v, int itemPosition, int buttonPosition, int direction) {
+                switch (direction) {
+                    case MenuItem.DIRECTION_LEFT:
+                        switch (buttonPosition) {
+                            case 0:
+                                return Menu.ITEM_NOTHING;
+                            case 1:
+                                return Menu.ITEM_SCROLL_BACK;
+                        }
+                        break;
+                    case MenuItem.DIRECTION_RIGHT:
+                        switch (buttonPosition) {
+                            case 0:
+                                dataList.remove(itemPosition - listView.getHeaderViewsCount());
+                                mAdapter.notifyDataSetChanged();
+                                return Menu.ITEM_SCROLL_BACK;
+                            case 1:
+                                return Menu.ITEM_DELETE_FROM_BOTTOM_TO_TOP;
+                        }
+                }
+                return Menu.ITEM_NOTHING;
+            }
+        });
+        listView.setOnItemDeleteListener(new SlideAndDragListView.OnItemDeleteListener() {
+            @Override
+            public void onItemDeleteAnimationFinished(View view, int position) {
+                dataList.remove(position - listView.getHeaderViewsCount());
+                mAdapter.notifyDataSetChanged();
+            }
+
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                switch (scrollState) {
+                    case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
+                        break;
+                    case AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
+                        break;
+                    case AbsListView.OnScrollListener.SCROLL_STATE_FLING:
+                        break;
+                }
+            }
+        });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 
             }
         });
+
     }
+
+    public class VideoEditListAdapter extends BaseAdapter {
+
+        private Context mContext;
+        private LayoutInflater mInflater;
+        private List<PhotoDto> mArrayList;
+        private int width;
+        private RelativeLayout.LayoutParams params;
+
+        private final class ViewHolder{
+            ImageView imageView,ivMenu;
+            TextView tvDuration;
+        }
+
+        private ViewHolder mHolder = null;
+
+        public VideoEditListAdapter(Context context, List<PhotoDto> mArrayList) {
+            mContext = context;
+            this.mArrayList = mArrayList;
+            mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+            width = wm.getDefaultDisplay().getWidth();
+
+            params = new RelativeLayout.LayoutParams(width*2/4, width*2/4*9/16);
+        }
+
+        @Override
+        public int getCount() {
+            return mArrayList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.adapter_edit_list, null);
+                mHolder = new ViewHolder();
+                mHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
+                mHolder.ivMenu = (ImageView) convertView.findViewById(R.id.ivMenu);
+                mHolder.ivMenu.setOnTouchListener(mOnTouchListener);
+                mHolder.tvDuration = (TextView) convertView.findViewById(R.id.tvDuration);
+                convertView.setTag(mHolder);
+            }else {
+                mHolder = (ViewHolder) convertView.getTag();
+            }
+
+            try {
+                PhotoDto dto = mArrayList.get(position);
+
+                if (!TextUtils.isEmpty(dto.videoUrl)) {
+                    String imgPath = CommonUtil.getVideoThumbnail(dto.videoUrl, MediaStore.Video.Thumbnails.MINI_KIND);
+                    if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
+                        if (bitmap != null) {
+                            mHolder.imageView.setImageBitmap(bitmap);
+                        }
+                    }else {
+                        CommonUtil.videoThumbnail(dto.videoUrl, width*2/4, width*2/4*9/16, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+                    }
+                }
+                if (params != null) {
+                    mHolder.imageView.setLayoutParams(params);
+                }
+
+                mHolder.tvDuration.setText(String.format("%02d:%02d", dto.duration/1000/60, dto.duration/1000%60));
+
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+
+            return convertView;
+        }
+
+        private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Object o = v.getTag();
+                if (o != null && o instanceof Integer) {
+                    listView.startDrag(((Integer) o).intValue());
+                }
+                return false;
+            }
+        };
+
+    }
+
+
 
     /**
      * 预览合成后视频
