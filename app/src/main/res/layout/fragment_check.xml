@@ -4,11 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <com.hf.live.view.RefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
 
     <com.hf.live.swipemenulistview.SwipeMenuListView
         android:id="@+id/listView"
@@ -24,6 +19,4 @@
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb" />
     
-    </com.hf.live.view.RefreshLayout>
-
 </LinearLayout>

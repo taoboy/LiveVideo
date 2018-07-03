@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
@@ -26,9 +27,6 @@ import com.hf.live.swipemenulistview.SwipeMenuListView;
 import com.hf.live.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.hf.live.util.CommonUtil;
 import com.hf.live.util.OkHttpUtil;
-import com.hf.live.view.RefreshLayout;
-import com.hf.live.view.RefreshLayout.OnLoadListener;
-import com.hf.live.view.RefreshLayout.OnRefreshListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +49,7 @@ import okhttp3.Response;
  *
  */
 
-public class CheckHotFragment extends Fragment implements OnRefreshListener, OnLoadListener{
+public class CheckHotFragment extends Fragment {
 	
 	private SwipeMenuListView mListView = null;
 	private MyCheckAdapter mAdapter = null;
@@ -59,8 +57,7 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 	private int page = 1;
 	private int pageSize = 20;
 	private String order = "";
-	private RefreshLayout refreshLayout = null;//下拉刷新布局
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_check, null);
@@ -70,34 +67,16 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		initRefreshLayout(view);
 		initListView(view);
 
 		order = getArguments().getString("order");
 		refresh();
 	}
 	
-	/**
-	 * 初始化下拉刷新布局
-	 */
-	private void initRefreshLayout(View view) {
-		refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
-		refreshLayout.setColor(CONST.color1, CONST.color2, CONST.color3, CONST.color4);
-		refreshLayout.setMode(RefreshLayout.Mode.BOTH);
-		refreshLayout.setLoadNoFull(false);
-		refreshLayout.setOnRefreshListener(this);
-		refreshLayout.setOnLoadListener(this);
-	}
-	
-	@Override
-	public void onRefresh() {
-		refresh();
-	}
-	
-	@Override
-	public void onLoad() {
-		page += 1;
-		String url = "";
+	private void refresh() {
+		mList.clear();
+		page = 1;
+		String url;
 		if (TextUtils.equals(order, "")) {
 			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize;
 		}else {
@@ -105,11 +84,10 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 		}
 		OkHttpVideoList(url);
 	}
-	
-	private void refresh() {
-		mList.clear();
-		page = 1;
-		String url = "";
+
+	private void load() {
+		page += 1;
+		String url;
 		if (TextUtils.equals(order, "")) {
 			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize;
 		}else {
@@ -214,6 +192,19 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 				bundle.putParcelable("data", dto);
 				intent.putExtras(bundle);
 				startActivity(intent);
+			}
+		});
+
+		mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && view.getLastVisiblePosition() == view.getCount() - 1) {
+					load();
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView arg0, int arg1, int arg2, int arg3) {
 			}
 		});
 		
@@ -452,8 +443,6 @@ public class CheckHotFragment extends Fragment implements OnRefreshListener, OnL
 													if (mAdapter != null) {
 														mAdapter.notifyDataSetChanged();
 													}
-													refreshLayout.setRefreshing(false);
-													refreshLayout.setLoading(false);
 
 												}else {
 													//失败

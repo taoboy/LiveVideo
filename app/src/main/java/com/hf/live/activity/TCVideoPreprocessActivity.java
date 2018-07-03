@@ -178,8 +178,9 @@ public class TCVideoPreprocessActivity extends FragmentActivity implements TXVid
             isSuccess = true;
             Intent intent = new Intent(this, VideoEditDetailActivity.class);
             intent.putExtra(TCConstants.VIDEO_EDITER_PATH, videoPath);
-            if (intent.hasExtra("isNeedEdit")) {//是否需要编辑
-                intent.putExtra("isNeedEdit", getIntent().getBooleanExtra("isNeedEdit", false));
+            if (getIntent().hasExtra("isNeedEdit")) {//是否需要编辑
+                boolean isNeedEdit = getIntent().getBooleanExtra("isNeedEdit", false);
+                intent.putExtra("isNeedEdit", isNeedEdit);
             }
             startActivity(intent);
             finish();

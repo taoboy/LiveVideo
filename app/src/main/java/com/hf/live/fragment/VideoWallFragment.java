@@ -1046,7 +1046,7 @@ public class VideoWallFragment extends Fragment implements View.OnClickListener,
 														Toast.makeText(getActivity(), "没有符合条件的数据！", Toast.LENGTH_LONG).show();
 													}
 
-													if (mList.size() > 0 && mAdapter != null) {
+													if (mAdapter != null) {
 														mAdapter.notifyDataSetChanged();
 													}
 													refreshLayout.setRefreshing(false);

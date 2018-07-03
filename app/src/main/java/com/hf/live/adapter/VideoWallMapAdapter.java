@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +16,9 @@ import com.hf.live.dto.PhotoDto;
 
 import net.tsz.afinal.FinalBitmap;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,16 +31,11 @@ public class VideoWallMapAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;
 	private List<PhotoDto> mArrayList;
 	private Bitmap seatBitmap;
+	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private final class ViewHolder{
-		ImageView imageView;
-		ImageView ivVideo;
-		ImageView ivPortrait;
-		TextView tvTime;
-		TextView tvUserName;
-		TextView tvPraise;
-		TextView tvComment;
-		TextView tvTitle;
+		ImageView imageView,ivVideo,ivPortrait;
+		TextView tvTime,tvUserName,tvPraise,tvComment,tvTitle;
 	}
 
 	private ViewHolder mHolder = null;
@@ -130,9 +127,33 @@ public class VideoWallMapAdapter extends BaseAdapter{
 			}
 
 			if (!TextUtils.isEmpty(dto.workTime)) {
-				mHolder.tvTime.setText(dto.workTime);
+				try {
+					long second = 1, minute = 60, hour = 3600, day = 86400, week = 604800, month = 2592000, year = 31530000;
+					long currentTime = new Date().getTime();
+					long workTime = sdf1.parse(dto.workTime).getTime();
+					long time = (currentTime-workTime)/1000;//单位秒
+					String timeString = "";
+					if (time <= minute) {
+						timeString = time/second+"秒前";
+					}else if (time > minute && time <= hour) {
+						timeString = time/minute+"分钟前";
+					}else if (time > hour && time <= day) {
+						timeString = time/hour+"小时前";
+					}else if (time > day && time <= week) {
+						timeString = time/day+"天前";
+					}else if (time > week && time <= month) {
+						timeString = time/week+"几星期前";
+					}else if (time > month && time <= year) {
+						timeString = time/month+"几个月前";
+					}else if (time > year) {
+						timeString = time/year+"几年前";
+					}
+					mHolder.tvTime.setText(timeString);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}else {
-				mHolder.tvTime.setText("--");
+				mHolder.tvTime.setText("");
 			}
 
 			if (dto.getWorkstype().equals("imgs")) {

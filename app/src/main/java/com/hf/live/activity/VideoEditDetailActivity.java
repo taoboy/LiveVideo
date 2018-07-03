@@ -418,13 +418,16 @@ public class VideoEditDetailActivity extends FragmentActivity implements TCTools
 
 
 
-        if (getIntent().hasExtra("isNeedEdit") && getIntent().getBooleanExtra("isNeedEdit", false) == false) {//是否需要编辑
-            //发送广播，刷新视频编辑列表
-            Intent intent = new Intent();
-            intent.setAction("refresh_edit_list");
-            intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
-            sendBroadcast(intent);
-            finish();
+        if (getIntent().hasExtra("isNeedEdit")) {//是否需要编辑
+            boolean isNeedEdit = getIntent().getBooleanExtra("isNeedEdit", false);
+            if (!isNeedEdit) {
+                //发送广播，刷新视频编辑列表
+                Intent intent = new Intent();
+                intent.setAction("refresh_edit_list");
+                intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
+                sendBroadcast(intent);
+                finish();
+            }
         }else {
             Intent intent = new Intent(mContext, DisplayVideoActivity.class);
             intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
