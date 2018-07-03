@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -718,6 +719,7 @@ public class DisplayVideoActivity extends BaseActivity implements ITXVodPlayList
 		builder.add("workstype", "video");
 		builder.add("location", position);
 		builder.add("title", etTitle.getText().toString());
+		builder.add("work_time", sdf2.format(new Date()));
 		if (fileName.length() == 14) {
 			try {
 				builder.add("work_time", sdf2.format(sdf3.parse(fileName)));
