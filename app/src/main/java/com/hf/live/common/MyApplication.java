@@ -5,9 +5,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.umeng.socialize.Config;
+import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,15 +16,14 @@ public class MyApplication extends Application{
 
 	private static MyApplication instance;
 	private static Map<String,Activity> destoryMap = new HashMap<>();
+	private static String appKey = "55a136d967e58e167a0019c3", msgSecret = "";
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
 
-		//在application中初始化sdk，这个初始化最好放在application的程序入口中，防止意外发生：
-		UMShareAPI.get(this);
-
+		initUmeng();
 		getVideoWallResource();
 	}
 
@@ -33,12 +31,16 @@ public class MyApplication extends Application{
 		return instance;
 	}
 
-	{
-		//umeng分享的平台注册
+	/**
+	 * 初始化umeng
+	 */
+	private void initUmeng() {
+		//umeng分享
+		UMConfigure.init(this, appKey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, msgSecret);
 		PlatformConfig.setWeixin("wxde36f1bc838263b2", "29e733030c77dbda77784fc7d880dff5");
 		PlatformConfig.setQQZone("1104765826", "diELThajoUq2TWUa");
 		PlatformConfig.setSinaWeibo("3038972811", "fee238ac7337be352aac2042a3bb017b", "http://sns.whalecloud.com/sina2/callback");
-		Config.DEBUG = false;
+		UMConfigure.setLogEnabled(false);
 	}
 
 	/**

@@ -20,18 +20,54 @@ import android.widget.TextView;
 
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
+import com.hf.live.stickygridheaders.StickyGridHeadersSimpleAdapter;
 import com.hf.live.util.CommonUtil;
 
+import net.tsz.afinal.FinalBitmap;
+
 import java.io.File;
+import java.text.ParseException;
 import java.util.List;
 
-public class SelectVideoAdapter extends BaseAdapter {
+public class SelectVideoAdapter extends BaseAdapter implements StickyGridHeadersSimpleAdapter {
 
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<PhotoDto> mArrayList;
 	private int imageWidth;
 	private RelativeLayout.LayoutParams params;
+
+	private HeaderViewHolder mHeaderHolder = null;
+
+	private class HeaderViewHolder {
+		TextView tvSection;
+	}
+
+	@Override
+	public long getHeaderId(int position) {
+		return mArrayList.get(position).getSection();
+	}
+
+	@Override
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			mHeaderHolder = new HeaderViewHolder();
+			convertView = mInflater.inflate(R.layout.adapter_select_video_title, null);
+			mHeaderHolder.tvSection = (TextView) convertView.findViewById(R.id.tvSection);
+			convertView.setTag(mHeaderHolder);
+		} else {
+			mHeaderHolder = (HeaderViewHolder) convertView.getTag();
+		}
+
+		PhotoDto dto = mArrayList.get(position);
+
+		if (!TextUtils.isEmpty(dto.sectionName)) {
+			mHeaderHolder.tvSection.setText(dto.sectionName);
+		}
+
+		return convertView;
+	}
+
 
 	private final class ViewHolder{
 		ImageView imageView;
@@ -69,7 +105,7 @@ public class SelectVideoAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.adapter_select_video, null);
+			convertView = mInflater.inflate(R.layout.adapter_select_video_content, null);
 			mHolder = new ViewHolder();
 			mHolder.imageView = (ImageView) convertView.findViewById(R.id.imageView);
 			mHolder.imageView1 = (ImageView) convertView.findViewById(R.id.imageView1);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/main_color"
-                android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/main_color"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/reTitle"
@@ -20,48 +20,56 @@
             android:textSize="@dimen/level_3"/>
 
         <TextView
-            android:visibility="invisible"
             android:id="@+id/tvControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="确认"
             android:padding="10dp"
+            android:text="确认"
             android:textColor="@color/white"
-            android:textSize="@dimen/level_4"/>
+            android:textSize="@dimen/level_4"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.2dp"
-        android:background="#15ffffff" />
+        android:background="#15ffffff"/>
 
     <TextView
         android:id="@+id/tvPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:gravity="center"
+        android:padding="5dp"
         android:text="点击选择要剪辑的视频文件"
         android:textColor="@color/text_color2"
-        android:gravity="center"
         android:textSize="@dimen/level_4"/>
 
-    <GridView
-        android:id="@+id/gridView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="@color/transparent"
-        android:fadingEdge="none"
-        android:gravity="center"
-        android:horizontalSpacing="2dp"
-        android:listSelector="@color/transparent"
-        android:numColumns="4"
-        android:overScrollMode="never"
-        android:padding="2dp"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.hf.live.stickygridheaders.StickyGridHeadersGridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@color/transparent"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:overScrollMode="never"
+            android:padding="2dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

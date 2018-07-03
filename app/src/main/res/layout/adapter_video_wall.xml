@@ -46,7 +46,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:singleLine="true"
-            android:text="北京  东城"
             android:textColor="#b2ffffff"
             android:textSize="@dimen/level_5" />
     </LinearLayout>
@@ -59,7 +58,6 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:singleLine="true"
-        android:text="测试标题"
         android:textColor="@color/white"
         android:textSize="@dimen/level_4" />
 
@@ -84,14 +82,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:text="王文博"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:textColor="@color/text_color4"
             android:textSize="@dimen/level_5" />
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/ivTime"
             android:layout_width="15dp"
             android:layout_height="15dp"
@@ -101,11 +97,9 @@
             android:layout_marginRight="5dp"/>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123"
             android:textSize="@dimen/level_5"
             android:textColor="@color/text_color4"
             android:layout_centerVertical="true"
@@ -125,7 +119,6 @@
             android:id="@+id/tvPraise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123"
             android:textSize="@dimen/level_4"
             android:textColor="@color/text_color4"
             android:layout_centerVertical="true"
@@ -145,7 +138,6 @@
             android:id="@+id/tvComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="123"
             android:textSize="@dimen/level_4"
             android:textColor="@color/text_color4"
             android:layout_centerVertical="true"

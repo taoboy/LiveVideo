@@ -253,8 +253,8 @@ public class VideoRecordActivity extends BaseActivity implements View.OnClickLis
             if (mTXCameraRecord != null) {
                 mTXCameraRecord.getPartsManager().deleteAllParts();
             }
-            startPreview(txRecordResult);
-//            dialogEdit("是否要进行编辑？", txRecordResult);
+//            startPreview(txRecordResult);
+            dialogEdit("是否要进行编辑？", txRecordResult);
         }
     }
 
@@ -286,7 +286,10 @@ public class VideoRecordActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onClick(View arg0) {
                 dialog.dismiss();
-//                startEditVideo();
+
+                Intent intent = new Intent(getApplicationContext(), TCVideoPreprocessActivity.class);
+                intent.putExtra(TCConstants.VIDEO_EDITER_PATH, txRecordResult.videoPath);
+                startActivity(intent);
             }
         });
     }

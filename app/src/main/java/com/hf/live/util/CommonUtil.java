@@ -27,7 +27,6 @@ import android.media.ThumbnailUtils;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Surface;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -46,6 +45,7 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -731,14 +731,91 @@ public class CommonUtil {
 						dto.imageName = title;
 						dto.videoUrl = path;
 						dto.duration = duration;
+						dto.section = 0;
+						dto.sectionName = "其它";
 						list.add(0, dto);
 					}
 				}
 				cursor.close();
 			}
 		}
-
 		return list;
+	}
+
+	/**
+	 * 获取指定路径下的视频文件
+	 * @param list
+	 */
+	public static void getAllLocalVideos(final List<PhotoDto> list, File files, final int section) {
+//		File files = null;
+//		if (section == 1) {//拍摄
+//			files = new File(CONST.VIDEO_ADDR);
+//		}else if (section == 2) {//编辑
+//			files = new File(CONST.TRIMPATH);
+//		}else if (section == 3) {//合并
+//			files = new File(CONST.MERGEPATH);
+//		}else if (section == 4) {//下载
+//			files = new File(CONST.DOWNLOAD_ADDR);
+//		}
+		files.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				String name = file.getName();
+				int i = name.indexOf('.');
+				if (i != -1) {
+					name = name.substring(i);
+					if (name.equalsIgnoreCase(".mp4")
+//							|| name.equalsIgnoreCase(".3gp")
+//							|| name.equalsIgnoreCase(".wmv")
+//							|| name.equalsIgnoreCase(".ts")
+//							|| name.equalsIgnoreCase(".rmvb")
+//							|| name.equalsIgnoreCase(".mov")
+//							|| name.equalsIgnoreCase(".m4v")
+//							|| name.equalsIgnoreCase(".avi")
+//							|| name.equalsIgnoreCase(".m3u8")
+//							|| name.equalsIgnoreCase(".3gpp")
+//							|| name.equalsIgnoreCase(".3gpp2")
+//							|| name.equalsIgnoreCase(".mkv")
+//							|| name.equalsIgnoreCase(".flv")
+//							|| name.equalsIgnoreCase(".divx")
+//							|| name.equalsIgnoreCase(".f4v")
+//							|| name.equalsIgnoreCase(".rm")
+//							|| name.equalsIgnoreCase(".asf")
+//							|| name.equalsIgnoreCase(".ram")
+//							|| name.equalsIgnoreCase(".mpg")
+//							|| name.equalsIgnoreCase(".v8")
+//							|| name.equalsIgnoreCase(".swf")
+//							|| name.equalsIgnoreCase(".m2v")
+//							|| name.equalsIgnoreCase(".asx")
+//							|| name.equalsIgnoreCase(".ra")
+//							|| name.equalsIgnoreCase(".ndivx")
+//							|| name.equalsIgnoreCase(".xvid")
+                            ) {
+						PhotoDto dto = new PhotoDto();
+						dto.imageName = file.getName();
+						dto.videoUrl = file.getAbsolutePath();
+						dto.section = section;
+						String sectionName = "";
+						if (section == 1) {
+							sectionName = "拍摄";
+						}else if (section == 2) {
+							sectionName = "剪辑";
+						}else if (section == 3) {
+							sectionName = "合成";
+						}else if (section == 4) {
+							sectionName = "下载";
+						}
+						dto.sectionName = "风云即拍"+" - "+sectionName;
+						list.add(0, dto);
+						return true;
+					}
+				} else if (file.isDirectory()) {
+					getAllLocalVideos(list, file, section);
+				}
+
+				return false;
+			}
+		});
 	}
 
 	/**

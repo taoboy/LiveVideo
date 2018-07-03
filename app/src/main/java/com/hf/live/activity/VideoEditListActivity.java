@@ -96,7 +96,6 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
         tvTitle.setText("视频剪辑");
         tvControl = (TextView) findViewById(R.id.tvControl);
         tvControl.setOnClickListener(this);
-        tvControl.setText("合成");
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         ivAdd = (ImageView) findViewById(R.id.ivAdd);
         ivAdd.setOnClickListener(this);
@@ -147,6 +146,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
 
                 Intent intent = new Intent(mContext, TCVideoPreprocessActivity.class);
                 intent.putExtra(TCConstants.VIDEO_EDITER_PATH, dto.videoUrl);
+                intent.putExtra("isNeedEdit", false);//是否需要编辑
                 startActivity(intent);
             }
         });
@@ -335,35 +335,38 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
      */
     private void previewVideo() {
         if (dataList.size() <= 1) {
-            cancelDialog();
-            return;
-        }
-
-        List<String> videoPaths = new ArrayList<>();
-        for (int i = 0; i < dataList.size(); i++) {
-            videoPaths.add(dataList.get(i).videoUrl);
-        }
-
-        //准备预览 View
-        TXVideoEditConstants.TXPreviewParam param = new TXVideoEditConstants.TXPreviewParam();
-        param.videoView = frameLayout;
-        param.renderMode = TXVideoEditConstants.PREVIEW_RENDER_MODE_FILL_EDGE;
-
-        // 创建 TXUGCJoiner 对象并设置预览 view
-        if (mTXVideoJoiner == null) {
-            mTXVideoJoiner = new TXVideoJoiner(this);
-            mTXVideoJoiner.setTXVideoPreviewListener(this);
-        }
-        mTXVideoJoiner.initWithPreview(param);
-        // 设置待拼接的视频文件组 mVideoSourceList，也就是第一步中选择的若干个文件
-        int ret = mTXVideoJoiner.setVideoPathList(videoPaths);
-        cancelDialog();
-        if (ret == 0) {
+            tvControl.setText("上传");
             tvControl.setVisibility(View.VISIBLE);
-            mTXVideoJoiner.startPlay();
-        } else if (ret == TXVideoEditConstants.ERR_UNSUPPORT_VIDEO_FORMAT) {
-            Toast.makeText(mContext, "视频合成失败，本机型暂不支持此视频格式", Toast.LENGTH_SHORT).show();
+            cancelMergeDialog();
+        }else {
+            tvControl.setText("合成");
+            List<String> videoPaths = new ArrayList<>();
+            for (int i = 0; i < dataList.size(); i++) {
+                videoPaths.add(dataList.get(i).videoUrl);
+            }
+
+            //准备预览 View
+            TXVideoEditConstants.TXPreviewParam param = new TXVideoEditConstants.TXPreviewParam();
+            param.videoView = frameLayout;
+            param.renderMode = TXVideoEditConstants.PREVIEW_RENDER_MODE_FILL_EDGE;
+
+            // 创建 TXUGCJoiner 对象并设置预览 view
+            if (mTXVideoJoiner == null) {
+                mTXVideoJoiner = new TXVideoJoiner(this);
+                mTXVideoJoiner.setTXVideoPreviewListener(this);
+            }
+            mTXVideoJoiner.initWithPreview(param);
+            // 设置待拼接的视频文件组 mVideoSourceList，也就是第一步中选择的若干个文件
+            int ret = mTXVideoJoiner.setVideoPathList(videoPaths);
+            cancelMergeDialog();
+            if (ret == 0) {
+                tvControl.setVisibility(View.VISIBLE);
+                mTXVideoJoiner.startPlay();
+            } else if (ret == TXVideoEditConstants.ERR_UNSUPPORT_VIDEO_FORMAT) {
+                Toast.makeText(mContext, "视频合成失败，本机型暂不支持此视频格式", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     @Override
@@ -469,7 +472,7 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
                 startActivityForResult(new Intent(mContext, VideoSelectEditActivity.class), 1001);
                 break;
             case R.id.ivPreview:
-                showDialog();
+                showMergeDialog();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -479,11 +482,17 @@ public class VideoEditListActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.tvControl:
                 stopPlay();
-                if (mTXVideoJoiner != null) {
-                    showMergeDialog();
-                    mVideoOutputPath = mergeVideoPath();
-                    mTXVideoJoiner.setVideoJoinerListener(this);
-                    mTXVideoJoiner.joinVideo(TXVideoEditConstants.VIDEO_COMPRESSED_720P, mVideoOutputPath);
+                if (dataList.size() <= 1) {//单个视频上传
+                    Intent intent = new Intent(mContext, DisplayVideoActivity.class);
+                    intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, dataList.get(0).videoUrl);
+                    startActivity(intent);
+                }else {//视频合成
+                    if (mTXVideoJoiner != null) {
+                        showMergeDialog();
+                        mVideoOutputPath = mergeVideoPath();
+                        mTXVideoJoiner.setVideoJoinerListener(this);
+                        mTXVideoJoiner.joinVideo(TXVideoEditConstants.VIDEO_COMPRESSED_720P, mVideoOutputPath);
+                    }
                 }
                 break;
         }

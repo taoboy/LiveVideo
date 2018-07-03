@@ -14,7 +14,7 @@
         android:id="@+id/imageView1"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/iv_grid_select"
+        android:src="@drawable/iv_grid_unselect"
         android:layout_alignParentRight="true"
         android:layout_margin="5dp" />
 

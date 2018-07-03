@@ -13,26 +13,34 @@
         android:id="@+id/tvPrompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:padding="5dp"
         android:text="点击选择要剪辑的视频文件"
         android:textColor="@color/text_color2"
         android:gravity="center"
         android:textSize="@dimen/level_4"/>
 
-    <GridView
-        android:id="@+id/gridView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="@color/transparent"
-        android:fadingEdge="none"
-        android:gravity="center"
-        android:horizontalSpacing="2dp"
-        android:listSelector="@color/transparent"
-        android:numColumns="4"
-        android:overScrollMode="never"
-        android:padding="2dp"
-        android:scrollbars="none"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="2dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.hf.live.stickygridheaders.StickyGridHeadersGridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@color/transparent"
+            android:fadingEdge="none"
+            android:gravity="center"
+            android:horizontalSpacing="2dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:overScrollMode="never"
+            android:padding="2dp"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="2dp"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.hf.live.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -10,13 +11,17 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +53,7 @@ import okhttp3.Response;
  *
  */
 
-public class MainActivity2 extends BaseActivity implements OnClickListener, BaseActivity.NavigationListener{
+public class MainActivity2 extends BaseActivity implements OnClickListener {
 
 	private Context mContext = null;
 	private LinearLayout llWall, llClip, llShot;
@@ -57,6 +62,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 	private MainViewPager viewPager = null;
 	private List<Fragment> fragments = new ArrayList<>();
 	private long mExitTime;//记录点击完返回按钮后的long型时间
+	private int screenWidth, screenHeight;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,26 +72,13 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 		mContext = this;
 		initWidget();
 		initViewPager();
-		setNavigationListener(this);
-	}
-
-	@Override
-	public void showNavigation(boolean show) {
-//		onLayoutMeasure();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-//		onLayoutMeasure();
 	}
 
 	/**
 	 * 初始化控件
 	 */
 	private void initWidget() {
-//		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "51", getString(R.string.app_name), true);
-		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "106", getString(R.string.app_name), true);//测试版本
+		AutoUpdateUtil.checkUpdate(MainActivity2.this, mContext, "51", getString(R.string.app_name), true);
 
 		llWall = (LinearLayout) findViewById(R.id.llWall);
 		llWall.setOnClickListener(new MyOnClickListener(0));
@@ -100,7 +93,11 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 		tvClip = (TextView) findViewById(R.id.tvClip);
 		tvShot = (TextView) findViewById(R.id.tvShot);
 		ivEvent = (ImageView) findViewById(R.id.ivEvent);
-		ivEvent.setOnClickListener(this);
+
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		screenWidth = dm.widthPixels;
+		screenHeight = dm.heightPixels;
 
 		OkHttpEvent("http://channellive2.tianqi.cn/weather/work/fyjp_zhubo_path");
 	}
@@ -223,6 +220,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 	private void shotDialog1() {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View view = inflater.inflate(R.layout.dialog_shot1, null);
+
 		ImageView ivClose = (ImageView) view.findViewById(R.id.ivClose);
 		LinearLayout ll1 = (LinearLayout) view.findViewById(R.id.ll1);
 		LinearLayout ll2 = (LinearLayout) view.findViewById(R.id.ll2);
@@ -232,6 +230,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 		LinearLayout ll6 = (LinearLayout) view.findViewById(R.id.ll6);
 
 		final Dialog dialog = new Dialog(mContext, R.style.CustomProgressDialog);
+		dialog.getWindow().setGravity(Gravity.BOTTOM);
 		dialog.setContentView(view);
 		dialog.show();
 
@@ -319,6 +318,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 	 * 访问活动
 	 * @param url
 	 */
+	@SuppressLint("ClickableViewAccessibility")
 	private void OkHttpEvent(final String url) {
 		new Thread(new Runnable() {
 			@Override
@@ -352,15 +352,77 @@ public class MainActivity2 extends BaseActivity implements OnClickListener, Base
 											ivEvent.setVisibility(View.VISIBLE);
 											final String showUrl = obj.getString("showUrl");
 											final String logoUrl = obj.getString("logo");
-											ivEvent.setOnClickListener(new OnClickListener() {
+//											ivEvent.setOnClickListener(new OnClickListener() {
+//												@Override
+//												public void onClick(View v) {
+//													Intent intent = new Intent(mContext, EventActivity.class);
+//													intent.putExtra("showUrl", showUrl);
+//													intent.putExtra("logoUrl", logoUrl);
+//													startActivity(intent);
+//												}
+//											});
+
+											ivEvent.setOnTouchListener(new View.OnTouchListener() {
+												int lastX, lastY;
+                                                int dx, dy;
 												@Override
-												public void onClick(View v) {
-													Intent intent = new Intent(mContext, EventActivity.class);
-													intent.putExtra("showUrl", showUrl);
-													intent.putExtra("logoUrl", logoUrl);
-													startActivity(intent);
+												public boolean onTouch(View v, MotionEvent event) {
+													int ea = event.getAction();
+													switch (ea) {
+														case MotionEvent.ACTION_DOWN:
+															lastX = (int) event.getRawX();// 获取触摸事件触摸位置的原始X坐标
+															lastY = (int) event.getRawY();
+															break;
+														case MotionEvent.ACTION_MOVE:
+															dx = (int) event.getRawX() - lastX;
+															dy = (int) event.getRawY() - lastY;
+															int l = v.getLeft() + dx;
+															int b = v.getBottom() + dy;
+															int r = v.getRight() + dx;
+															int t = v.getTop() + dy;
+															// 下面判断移动是否超出屏幕
+															if (l < 0) {
+																l = 0;
+																r = l + v.getWidth();
+															}
+															if (t < 0) {
+																t = 0;
+																b = t + v.getHeight();
+															}
+															if (r > screenWidth) {
+																r = screenWidth;
+																l = r - v.getWidth();
+															}
+															if (b > screenHeight) {
+																b = screenHeight;
+																t = b - v.getHeight();
+															}
+															v.layout(l, t, r, b);
+															lastX = (int) event.getRawX();
+															lastY = (int) event.getRawY();
+															v.postInvalidate();
+															break;
+														case MotionEvent.ACTION_UP:
+															if (Math.abs(dx) == 0 && Math.abs(dy) == 0) {
+																Intent intent = new Intent(mContext, EventActivity.class);
+																intent.putExtra("showUrl", showUrl);
+																intent.putExtra("logoUrl", logoUrl);
+																startActivity(intent);
+															}
+
+															// 每次移动都要设置其layout，不然由于父布局可能嵌套listview，当父布局发生改变冲毁（如下拉刷新时）则移动的view会回到原来的位置
+															RelativeLayout.LayoutParams lpFeedback = new RelativeLayout.LayoutParams(
+																	RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+															lpFeedback.leftMargin = v.getLeft();
+															lpFeedback.topMargin = v.getTop();
+															lpFeedback.setMargins(v.getLeft(), v.getTop(), 0, 0);
+															v.setLayoutParams(lpFeedback);
+															break;
+													}
+													return true;
 												}
 											});
+
 										}
 									}
 								} catch (JSONException e) {

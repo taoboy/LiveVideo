@@ -33,15 +33,8 @@ public class VideoWallAdapter extends BaseAdapter{
 	private Bitmap seatBitmap;
 	
 	private final class ViewHolder{
-		ImageView imageView;
-		ImageView ivVideo;
-		ImageView ivPortrait;
-		TextView tvAddress;
-		TextView tvTime;
-		TextView tvUserName;
-		TextView tvPraise;
-		TextView tvComment;
-		TextView tvTitle;
+		ImageView imageView,ivVideo,ivPortrait;
+		TextView tvAddress,tvTime,tvUserName,tvPraise,tvComment,tvTitle;
 	}
 	
 	private ViewHolder mHolder = null;

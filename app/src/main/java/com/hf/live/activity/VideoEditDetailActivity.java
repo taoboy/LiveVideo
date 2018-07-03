@@ -1,6 +1,5 @@
 package com.hf.live.activity;
 
-import android.annotation.SuppressLint;
 import android.app.KeyguardManager;
 import android.app.Service;
 import android.content.Context;
@@ -8,9 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -41,12 +38,8 @@ import com.hf.live.qcloud.VideoProgressView;
 import com.hf.live.view.MyDialog;
 import com.tencent.ugc.TXVideoEditConstants;
 import com.tencent.ugc.TXVideoEditer;
-import com.tencent.ugc.TXVideoInfoReader;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -422,16 +415,24 @@ public class VideoEditDetailActivity extends FragmentActivity implements TCTools
 //        finish();
 
 
-//        Intent intent = new Intent(mContext, DisplayVideoActivity.class);
-//        intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
-//        startActivity(intent);
 
-        //发送广播，刷新视频编辑列表
-        Intent intent = new Intent();
-        intent.setAction("refresh_edit_list");
-        intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
-        sendBroadcast(intent);
-        finish();
+
+
+        if (getIntent().hasExtra("isNeedEdit") && getIntent().getBooleanExtra("isNeedEdit", false) == false) {//是否需要编辑
+            //发送广播，刷新视频编辑列表
+            Intent intent = new Intent();
+            intent.setAction("refresh_edit_list");
+            intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
+            sendBroadcast(intent);
+            finish();
+        }else {
+            Intent intent = new Intent(mContext, DisplayVideoActivity.class);
+            intent.putExtra(TCConstants.VIDEO_RECORD_VIDEPATH, mVideoOutputPath);
+            if (getIntent().hasExtra("appid")) {
+                intent.putExtra("appid", "26");//活动专用频道
+            }
+            startActivity(intent);
+        }
 
     }
 

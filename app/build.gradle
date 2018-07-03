@@ -12,18 +12,35 @@ android {
         applicationId "com.hf.live"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 1421
-        versionName "2.0.8"
+        versionCode 1422
+        versionName "2.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
             abiFilters "armeabi", "armeabi-v7a"
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('/Users/shawn/Desktop/打包/风云即拍/live_video_keystore.keystore')
+            storePassword "123456"
+            keyAlias "live_video"
+            keyPassword "123456"
         }
     }
 
@@ -64,23 +81,20 @@ dependencies {
     compile files('libs/scene-final.jar')
     compile files('libs/uk-co-senab-photoview.jar')
     compile files('libs/xstream-1.4.7.jar')
-    compile files('libs/umeng_social_tool.jar')
-    compile files('libs/umeng_social_shareboard.jar')
-    compile files('libs/umeng_social_net.jar')
-    compile files('libs/umeng_social_api.jar')
-    compile files('libs/umeng_shareboard_widget.jar')
-    compile files('libs/SocialSDK_WeChat_Simplify.jar')
-    compile files('libs/SocialSDK_QQ_Simplify.jar')
     compile files('libs/okhttp-3.8.1.jar')
     compile files('libs/okio-1.13.0.jar')
     compile files('libs/cos-xml-android-sdk.1.2.3.1.jar')
     compile files('libs/qcloud-core-1.2.1.2.jar')
     compile(name: 'LiteAVSDK_Professional', ext: 'aar')
-    compile files('libs/SocialSDK_Sina_Simplify.jar')
-    compile files('libs/umeng_social_shareview.jar')
-    compile files('libs/AMap_Location_V3.4.1_20170629.jar')
-    compile files('libs/AMap_Search_V5.2.1_20170630.jar')
-    compile files('libs/Android_Map3D_SDK_V5.2.1_20170630.jar')
     compile project(':lib-zxing')
     compile files('libs/sdlv.jar')
+    compile files('libs/umeng-common-1.5.3.jar')
+    compile files('libs/umeng-share-core-6.9.2.jar')
+    compile files('libs/umeng-share-QQ-simplify-6.9.2.jar')
+    compile files('libs/umeng-share-sina-simplify-6.9.2.jar')
+    compile files('libs/umeng-share-wechat-simplify-6.9.2.jar')
+    compile files('libs/umeng-shareboard-widget-6.9.2.jar')
+    compile files('libs/umeng-sharetool-6.9.2.jar')
+    compile files('libs/AMap_Location_V3.4.1_20170629.jar')
+    compile files('libs/Android_Map3D_SDK_V5.2.1_20170630.jar')
 }

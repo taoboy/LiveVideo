@@ -17,7 +17,8 @@ public class PhotoDto implements Parcelable {
 	public String videoUrl;// 视频路径
 	public String sd, hd, fhd;//视频的表情、高清、超清格式
 	public String createTime;// 上传视频或图片的时间
-	public int section;
+	public int section = 1;
+	public String sectionName;
 	public String location;// 地址信息
 	public String workstype;// 区分imgs或者video
 	public List<String> urlList = new ArrayList<>();
@@ -243,6 +244,7 @@ public class PhotoDto implements Parcelable {
 		dest.writeString(this.fhd);
 		dest.writeString(this.createTime);
 		dest.writeInt(this.section);
+		dest.writeString(this.sectionName);
 		dest.writeString(this.location);
 		dest.writeString(this.workstype);
 		dest.writeStringList(this.urlList);
@@ -297,6 +299,7 @@ public class PhotoDto implements Parcelable {
 		this.fhd = in.readString();
 		this.createTime = in.readString();
 		this.section = in.readInt();
+		this.sectionName = in.readString();
 		this.location = in.readString();
 		this.workstype = in.readString();
 		this.urlList = in.createStringArrayList();
