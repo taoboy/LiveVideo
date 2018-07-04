@@ -896,4 +896,36 @@ public class CommonUtil {
 		}).start();
 	}
 
+	/**
+	 * 获取状态栏高度
+	 * @param context
+	 * @return
+	 */
+	public static int statusBarHeight(Context context) {
+		int statusBarHeight = -1;//状态栏高度
+		//获取status_bar_height资源的ID
+		int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			//根据资源ID获取响应的尺寸值
+			statusBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+		}
+		return statusBarHeight;
+	}
+
+	/**
+	 * 获取底部导航栏高度
+	 * @param context
+	 * @return
+	 */
+	public static int navigationBarHeight(Context context) {
+		int navigationBarHeight = -1;//状态栏高度
+		//获取status_bar_height资源的ID
+		int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			//根据资源ID获取响应的尺寸值
+			navigationBarHeight = context.getResources().getDimensionPixelSize(resourceId);
+		}
+		return navigationBarHeight;
+	}
+
 }
