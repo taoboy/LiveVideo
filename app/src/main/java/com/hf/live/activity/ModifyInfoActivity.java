@@ -1,8 +1,6 @@
 package com.hf.live.activity;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -175,19 +173,7 @@ public class ModifyInfoActivity extends BaseActivity implements OnClickListener{
 															MyApplication.POINTS = obj.getString("points");
 														}
 
-														//把用户信息保存在sharedPreferance里
-														SharedPreferences sharedPreferences = getSharedPreferences(MyApplication.USERINFO, Context.MODE_PRIVATE);
-														Editor editor = sharedPreferences.edit();
-														editor.putString(MyApplication.UserInfo.oldUserName, MyApplication.OLDUSERNAME);
-														editor.putString(MyApplication.UserInfo.userName, MyApplication.USERNAME);
-														editor.putString(MyApplication.UserInfo.groupId, MyApplication.GROUPID);
-														editor.putString(MyApplication.UserInfo.token, MyApplication.TOKEN);
-														editor.putString(MyApplication.UserInfo.points, MyApplication.POINTS);
-														editor.putString(MyApplication.UserInfo.photo, MyApplication.PHOTO);
-														editor.putString(MyApplication.UserInfo.nickName, MyApplication.NICKNAME);
-														editor.putString(MyApplication.UserInfo.mail, MyApplication.MAIL);
-														editor.putString(MyApplication.UserInfo.unit, MyApplication.UNIT);
-														editor.commit();
+														MyApplication.saveUserInfo(mContext);
 
 														setResult(RESULT_OK);
 														finish();
