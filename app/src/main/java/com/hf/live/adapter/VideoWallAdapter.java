@@ -35,6 +35,7 @@ public class VideoWallAdapter extends BaseAdapter{
 	private int width;
 	private Bitmap seatBitmap;
 	private SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private RelativeLayout.LayoutParams params;
 	
 	private final class ViewHolder{
 		ImageView imageView,ivVideo,ivPortrait;
@@ -52,6 +53,7 @@ public class VideoWallAdapter extends BaseAdapter{
 		width = wm.getDefaultDisplay().getWidth();
 
 		seatBitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.iv_seat_bitmap);
+		params = new RelativeLayout.LayoutParams(width, width*9/16);
 	}
 
 	@Override
@@ -92,13 +94,8 @@ public class VideoWallAdapter extends BaseAdapter{
 			PhotoDto dto = mArrayList.get(position);
 
 			if (!TextUtils.isEmpty(dto.imgUrl)) {
-				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, width*9/16);
 				FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-				if (seatBitmap != null) {
-					finalBitmap.display(mHolder.imageView, dto.imgUrl, seatBitmap, seatBitmap, null, 0);
-				}else {
-					finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-				}
+				finalBitmap.display(mHolder.imageView, dto.imgUrl, seatBitmap, seatBitmap, null, 0);
 				mHolder.imageView.setLayoutParams(params);
 			}
 
@@ -157,11 +154,11 @@ public class VideoWallAdapter extends BaseAdapter{
 					}else if (time > day && time <= week) {
 						timeString = time/day+"天前";
 					}else if (time > week && time <= month) {
-						timeString = time/week+"几星期前";
+						timeString = time/week+"星期前";
 					}else if (time > month && time <= year) {
-						timeString = time/month+"几个月前";
+						timeString = time/month+"个月前";
 					}else if (time > year) {
-						timeString = time/year+"几年前";
+						timeString = time/year+"年前";
 					}
 					mHolder.tvTime.setText(timeString);
 				} catch (ParseException e) {

@@ -41,8 +41,7 @@ import com.hf.live.util.CommonUtil;
 import com.hf.live.util.EmojiMapUtil;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.PhotoView;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -272,8 +271,7 @@ public class OnlinePictureActivity extends BaseActivity implements OnClickListen
 		imageArray = new ImageView[urlList.size()];
 		for (int i = 0; i < urlList.size(); i++) {
 			ImageView image = new ImageView(mContext);
-			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-			finalBitmap.display(image, urlList.get(i), null, 0);
+			Picasso.with(mContext).load(urlList.get(i)).into(image);
 			imageArray[i] = image;
 		}
 		

@@ -103,35 +103,36 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 25 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:appcompat-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-fragment-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-annotations:25.3.1@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/okio-1.13.0.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/picasso-2.5.2.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:appcompat-v7-25.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-fragment-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-share-QQ-simplify-6.9.2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/okhttp-3.8.1.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-common-1.5.3.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/cos-xml-android-sdk.1.2.3.1.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-media-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-media-compat-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-share-sina-simplify-6.9.2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:animated-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-compat-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.squareup.okio:okio:1.14.1@jar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:animated-vector-drawable-25.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-compat-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-share-core-6.9.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-share-wechat-simplify-6.9.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/ChinaWeatherAPI.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: LiteAVSDK_Professional:@aar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/uk-co-senab-photoview.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-v4-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-v4-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/AMap_Location_V3.4.1_20170629.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-core-ui-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-core-ui-25.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-annotations:25.4.0@jar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.squareup.okhttp3:okhttp:3.10.0@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/xstream-1.4.7.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/qcloud-core-1.2.1.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-sharetool-6.9.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/umeng-shareboard-widget-6.9.2.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:recyclerview-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-vector-drawable-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:recyclerview-v7-25.4.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-vector-drawable-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/Android_Map3D_SDK_V5.2.1_20170630.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.umeng.sdk:common:1.5.3@jar" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/scene-final.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-core-utils-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: com.android.support:support-core-utils-25.4.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: __local_jars__:/Users/shawn/AndroidStudioProjects/LiveVideo/app/libs/sdlv.jar:unspecified@jar" level="project" />
     <orderEntry type="module" module-name="lib-zxing" exported="" />
     <orderEntry type="library" exported="" name="Gradle: org.apache.http.legacy-android-25" level="project" />

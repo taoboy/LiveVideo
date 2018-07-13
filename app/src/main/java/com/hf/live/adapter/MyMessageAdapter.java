@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
+import com.squareup.picasso.Picasso;
 
 import net.tsz.afinal.FinalBitmap;
 
@@ -139,8 +140,9 @@ public class MyMessageAdapter extends BaseAdapter{
 		}
 
 		if (!TextUtils.isEmpty(dto.imgUrl)) {
-			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
+			Picasso.with(mContext).load(dto.imgUrl).centerCrop().resize(360, 240).into(mHolder.imageView);
+		}else {
+			mHolder.imageView.setImageResource(R.drawable.iv_seat_bitmap);
 		}
 
 		return convertView;

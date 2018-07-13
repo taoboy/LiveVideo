@@ -12,8 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hf.live.R;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 /**
  * 气象活动
@@ -44,8 +43,7 @@ public class EventActivity extends BaseActivity implements View.OnClickListener 
         if (getIntent().hasExtra("logoUrl")) {
             String logoUrl = getIntent().getStringExtra("logoUrl");
             if (!TextUtils.isEmpty(logoUrl)) {
-                FinalBitmap finalBitmap = FinalBitmap.create(this);
-                finalBitmap.display(ivLogo, logoUrl, null, 0);
+                Picasso.with(this).load(logoUrl).into(ivLogo);
             }
         }
 

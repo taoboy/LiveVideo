@@ -14,8 +14,7 @@ import android.widget.TextView;
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.stickygridheaders.StickyGridHeadersSimpleAdapter;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,7 +41,7 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 		
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
-		params = new RelativeLayout.LayoutParams(width/4, width/4-10);
+		params = new RelativeLayout.LayoutParams(width/4, width/4);
 	}
 
 	private HeaderViewHolder mHeaderHolder = null;
@@ -117,12 +116,12 @@ public class MyUploadedAdapter extends BaseAdapter implements StickyGridHeadersS
 
 		PhotoDto dto = mArrayList.get(position);
 		if (!TextUtils.isEmpty(dto.imgUrl)) {
-			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-			if (params != null) {
-				mHolder.imageView.setLayoutParams(params);
-			}
+			Picasso.with(mContext).load(dto.imgUrl).error(R.drawable.iv_seat_bitmap).centerCrop().resize(200, 200).into(mHolder.imageView);
+		}else {
+			mHolder.imageView.setImageResource(R.drawable.iv_seat_bitmap);
 		}
+		mHolder.imageView.setLayoutParams(params);
+
 		if (dto.getWorkstype().equals("imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);
 		}else {

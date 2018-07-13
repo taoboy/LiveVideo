@@ -11,8 +11,7 @@ import android.widget.TextView;
 
 import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -90,8 +89,9 @@ public class MyScoreAdapter extends BaseAdapter{
 			mHolder.tvPosition.setText(mContext.getString(R.string.no_location));
 		}
 		if (!TextUtils.isEmpty(dto.imgUrl)) {
-			FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-			finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
+			Picasso.with(mContext).load(dto.imgUrl).centerCrop().resize(360, 240).error(R.drawable.iv_seat_bitmap).into(mHolder.imageView);
+		}else {
+			mHolder.imageView.setImageResource(R.drawable.iv_seat_bitmap);
 		}
 		if (dto.getWorkstype().equals("imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);

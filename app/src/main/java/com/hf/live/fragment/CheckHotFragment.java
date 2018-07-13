@@ -213,40 +213,45 @@ public class CheckHotFragment extends Fragment {
 	/**
 	 * 视频审核
 	 */
-	private void OkHttpCheck(String url, String id, String status) {
+	private void OkHttpCheck(final String url, String id, String status) {
 		FormBody.Builder builder = new FormBody.Builder();
 		builder.add("wid", id);
 		builder.add("status", status);
-		RequestBody body = builder.build();
-		OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+		final RequestBody body = builder.build();
+		new Thread(new Runnable() {
 			@Override
-			public void onFailure(Call call, IOException e) {
+			public void run() {
+				OkHttpUtil.enqueue(new Request.Builder().post(body).url(url).build(), new Callback() {
+					@Override
+					public void onFailure(Call call, IOException e) {
 
-			}
+					}
 
-			@Override
-			public void onResponse(Call call, Response response) throws IOException {
-				if (!response.isSuccessful()) {
-					return;
-				}
-				String result = response.body().string();
-				if (result != null) {
-					try {
-						JSONObject object = new JSONObject(result);
-						if (object != null) {
-							if (!object.isNull("status")) {
-								int status  = object.getInt("status");
-								if (status == 1) {//审核成功
+					@Override
+					public void onResponse(Call call, Response response) throws IOException {
+						if (!response.isSuccessful()) {
+							return;
+						}
+						String result = response.body().string();
+						if (result != null) {
+							try {
+								JSONObject object = new JSONObject(result);
+								if (object != null) {
+									if (!object.isNull("status")) {
+										int status  = object.getInt("status");
+										if (status == 1) {//审核成功
 
+										}
+									}
 								}
+							} catch (JSONException e) {
+								e.printStackTrace();
 							}
 						}
-					} catch (JSONException e) {
-						e.printStackTrace();
 					}
-				}
+				});
 			}
-		});
+		}).start();
 	}
 
 	/**

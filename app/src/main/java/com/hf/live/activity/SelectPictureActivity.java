@@ -53,6 +53,8 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
         tvControl.setOnClickListener(this);
         tvControl.setText("确定");
         tvControl.setVisibility(View.VISIBLE);
+
+        loadImages();
     }
 
     private void initGridView() {
@@ -81,8 +83,6 @@ public class SelectPictureActivity extends BaseActivity implements View.OnClickL
                 tvTitle.setText("已选中"+selectCount+"张（最多9张）");
             }
         });
-
-        loadImages();
     }
 
     /**

@@ -24,6 +24,7 @@ import com.hf.live.common.CONST;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.stickygridheaders.StickyGridHeadersSimpleAdapter;
 import com.hf.live.util.CommonUtil;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -82,7 +83,7 @@ public class EditVideoFragmentAdapter extends BaseAdapter implements StickyGridH
 
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		imageWidth = wm.getDefaultDisplay().getWidth();
-		params = new RelativeLayout.LayoutParams(imageWidth/4, imageWidth/4-10);
+		params = new RelativeLayout.LayoutParams(imageWidth/4, imageWidth/4);
 	}
 
 	@Override
@@ -116,18 +117,16 @@ public class EditVideoFragmentAdapter extends BaseAdapter implements StickyGridH
 		PhotoDto dto = mArrayList.get(position);
 		if (!TextUtils.isEmpty(dto.videoUrl)) {
 			String imgPath = CommonUtil.getVideoThumbnail(dto.videoUrl, MediaStore.Video.Thumbnails.MINI_KIND);
-			if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
-				Bitmap bitmap = BitmapFactory.decodeFile(imgPath);
-				if (bitmap != null) {
-					mHolder.imageView.setImageBitmap(bitmap);
+			if (!TextUtils.isEmpty(imgPath)) {
+				File file = new File(imgPath);
+				if (file.exists()) {
+					Picasso.with(mContext).load(file).centerCrop().resize(200, 200).into(mHolder.imageView);
 				}
 			}else {
-				CommonUtil.videoThumbnail(dto.videoUrl, imageWidth/4, imageWidth/4-10, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
+				CommonUtil.videoThumbnail(dto.videoUrl, imageWidth/4, imageWidth/4, MediaStore.Video.Thumbnails.MINI_KIND, mHolder.imageView);
 			}
 		}
-		if (params != null) {
-			mHolder.imageView.setLayoutParams(params);
-		}
+		mHolder.imageView.setLayoutParams(params);
 
 		if (dto.isSelected) {
 			mHolder.imageView1.setImageResource(R.drawable.iv_grid_select);

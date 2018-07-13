@@ -1,8 +1,6 @@
 package com.hf.live.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,8 +16,7 @@ import com.hf.live.R;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.stickygridheaders.StickyGridHeadersSimpleAdapter;
 import com.hf.live.util.CommonUtil;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.text.ParseException;
@@ -47,7 +44,7 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 		
 		WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
 		width = wm.getDefaultDisplay().getWidth();
-		params = new RelativeLayout.LayoutParams(width/4, width/4-10);
+		params = new RelativeLayout.LayoutParams(width/4, width/4);
 	}
 
 	private HeaderViewHolder mHeaderHolder = null;
@@ -125,9 +122,9 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 		if (TextUtils.equals(dto.workstype, "imgs")) {
 			mHolder.ivVideo.setVisibility(View.INVISIBLE);
 			if (!TextUtils.isEmpty(dto.imgUrl)) {
-				FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-				finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-				if (params != null) {
+				File file = new File(dto.imgUrl);
+				if (file.exists()) {
+					Picasso.with(mContext).load(file).centerCrop().resize(200, 200).into(mHolder.imageView);
 					mHolder.imageView.setLayoutParams(params);
 				}
 			}
@@ -136,13 +133,8 @@ public class MyNotUploadAdapter extends BaseAdapter implements StickyGridHeaders
 			if (!TextUtils.isEmpty(dto.videoUrl)) {
 				File file = CommonUtil.getLocalThumbnail(dto.workTime);
 				if (file != null && file.exists()) {//本地缩略图存在就使用本地
-					Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
-					if (bitmap != null) {
-						mHolder.imageView.setImageBitmap(bitmap);
-						if (params != null) {
-							mHolder.imageView.setLayoutParams(params);
-						}
-					}
+					Picasso.with(mContext).load(file).centerCrop().resize(200, 200).into(mHolder.imageView);
+					mHolder.imageView.setLayoutParams(params);
 				}else {//本地缩略图呗删除就根据视频获取缩略图
 					CommonUtil.videoThumbnail(dto.videoUrl, width/4, width/4, MediaStore.Video.Thumbnails.MICRO_KIND, mHolder.imageView);
 					if (params != null) {

@@ -86,11 +86,7 @@ public class VideoWallMapAdapter extends BaseAdapter{
 
 			if (!TextUtils.isEmpty(dto.imgUrl)) {
 				FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-				if (seatBitmap != null) {
-					finalBitmap.display(mHolder.imageView, dto.imgUrl, seatBitmap, seatBitmap, null, 0);
-				}else {
-					finalBitmap.display(mHolder.imageView, dto.imgUrl, null, 0);
-				}
+				finalBitmap.display(mHolder.imageView, dto.imgUrl, 360, 240, seatBitmap, seatBitmap, null, 0);
 			}
 
 			if (!TextUtils.isEmpty(dto.portraitUrl)) {

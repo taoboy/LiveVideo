@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.hf.live.R;
 import com.hf.live.qcloud.BeautySettingPannel;
+import com.tencent.rtmp.ITXLivePushListener;
 import com.tencent.rtmp.TXLiveConstants;
 import com.tencent.rtmp.TXLivePushConfig;
 import com.tencent.rtmp.TXLivePusher;
@@ -29,7 +31,7 @@ import static android.view.View.GONE;
  * rtmp推流
  */
 
-public class PushRtmpActivity extends BaseActivity implements View.OnClickListener, BeautySettingPannel.IOnBeautyParamsChangeListener {
+public class PushRtmpActivity extends BaseActivity implements View.OnClickListener, ITXLivePushListener, BeautySettingPannel.IOnBeautyParamsChangeListener {
 
     private TXLivePushConfig mLivePushConfig;
     private TXLivePusher mLivePusher;
@@ -42,7 +44,7 @@ public class PushRtmpActivity extends BaseActivity implements View.OnClickListen
     private boolean isFlashOn = false;//是否打开闪光灯
     private boolean isShowLog = false, isHard = false;//是否显示日志、软硬件解码
     private ImageView ivBack, ivStart, ivSwitch, ivFlash, ivBeauty;
-    private TextView tvLog, tvHard;
+    private TextView tvSpeed, tvLog, tvHard;
     private RelativeLayout reBottom;
 
     private BeautySettingPannel mBeautyPannelView;//美颜面板
@@ -76,6 +78,7 @@ public class PushRtmpActivity extends BaseActivity implements View.OnClickListen
         ivSwitch.setOnClickListener(this);
         ivFlash = (ImageView) findViewById(R.id.ivFlash);
         ivFlash.setOnClickListener(this);
+        tvSpeed = (TextView) findViewById(R.id.tvSpeed);
         tvLog = (TextView) findViewById(R.id.tvLog);
         tvLog.setOnClickListener(this);
         tvHard = (TextView) findViewById(R.id.tvHard);
@@ -95,6 +98,7 @@ public class PushRtmpActivity extends BaseActivity implements View.OnClickListen
      */
     private void initPusher() {
         mLivePusher = new TXLivePusher(this);
+        mLivePusher.setPushListener(this);
         mLivePusher.setVideoQuality(videoQuality, mAutoBitrate, mAutoResolution);
         mLivePushConfig = new TXLivePushConfig();
         mLivePushConfig.setFrontCamera(isFront);//默认前置摄像头
@@ -244,6 +248,24 @@ public class PushRtmpActivity extends BaseActivity implements View.OnClickListen
                 mLivePusher.setConfig(mLivePushConfig);
             }
         }
+    }
+
+    @Override
+    public void onPushEvent(int event, Bundle param) {
+
+    }
+
+    @Override
+    public void onNetStatus(Bundle status) {
+        String onNetStatus =
+//                "Current status, CPU:"+status.getString(TXLiveConstants.NET_STATUS_CPU_USAGE)+
+                "RES:"+status.getInt(TXLiveConstants.NET_STATUS_VIDEO_WIDTH)+"*"+status.getInt(TXLiveConstants.NET_STATUS_VIDEO_HEIGHT)+
+                        "  SPD:"+status.getInt(TXLiveConstants.NET_STATUS_NET_SPEED)+"Kbps"+
+                        "  FPS:"+status.getInt(TXLiveConstants.NET_STATUS_VIDEO_FPS);
+//                ", ARA:"+status.getInt(TXLiveConstants.NET_STATUS_AUDIO_BITRATE)+"Kbps"+
+//                ", VRA:"+status.getInt(TXLiveConstants.NET_STATUS_VIDEO_BITRATE)+"Kbps";
+        Log.e("onNetStatus", onNetStatus);
+        tvSpeed.setText(onNetStatus);
     }
 
     /**

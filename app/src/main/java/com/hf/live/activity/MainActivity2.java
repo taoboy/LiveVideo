@@ -32,8 +32,7 @@ import com.hf.live.fragment.VideoWallFragment;
 import com.hf.live.util.AutoUpdateUtil;
 import com.hf.live.util.OkHttpUtil;
 import com.hf.live.view.MainViewPager;
-
-import net.tsz.afinal.FinalBitmap;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -347,8 +346,7 @@ public class MainActivity2 extends BaseActivity implements OnClickListener {
 										}
 
 										if (!obj.isNull("home")) {
-											FinalBitmap finalBitmap = FinalBitmap.create(mContext);
-											finalBitmap.display(ivEvent, obj.getString("home"), null, 0);
+											Picasso.with(mContext).load(obj.getString("home")).into(ivEvent);
 											ivEvent.setVisibility(View.VISIBLE);
 											final String showUrl = obj.getString("showUrl");
 											final String logoUrl = obj.getString("logo");
