@@ -157,6 +157,9 @@ public class WelcomeActivity extends BaseActivity{
 															if (!obj.isNull("token")) {
 																MyApplication.TOKEN = obj.getString("token");
 															}
+															if (!obj.isNull("uid")) {
+																MyApplication.UID = obj.getString("uid");
+															}
 															if (!obj.isNull("phonenumber")) {
 																MyApplication.USERNAME = obj.getString("phonenumber");
 															}

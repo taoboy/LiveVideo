@@ -19,6 +19,7 @@ import com.hf.live.activity.OnlinePictureActivity;
 import com.hf.live.activity.OnlineVideoActivity;
 import com.hf.live.adapter.MyCheckAdapter;
 import com.hf.live.common.CONST;
+import com.hf.live.common.MyApplication;
 import com.hf.live.dto.PhotoDto;
 import com.hf.live.swipemenulistview.SwipeMenu;
 import com.hf.live.swipemenulistview.SwipeMenuCreator;
@@ -51,7 +52,6 @@ import okhttp3.Response;
 
 public class CheckHotFragment extends Fragment {
 	
-	private SwipeMenuListView mListView = null;
 	private MyCheckAdapter mAdapter = null;
 	private List<PhotoDto> mList = new ArrayList<>();
 	private int page = 1;
@@ -78,9 +78,9 @@ public class CheckHotFragment extends Fragment {
 		page = 1;
 		String url;
 		if (TextUtils.equals(order, "")) {
-			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize;
+			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&appid="+CONST.APPID+"&uid="+MyApplication.UID;
 		}else {
-			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&order="+order;
+			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&order="+order+"&appid="+CONST.APPID+"&uid="+MyApplication.UID;
 		}
 		OkHttpVideoList(url);
 	}
@@ -89,9 +89,9 @@ public class CheckHotFragment extends Fragment {
 		page += 1;
 		String url;
 		if (TextUtils.equals(order, "")) {
-			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize;
+			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&appid="+CONST.APPID+"&uid="+MyApplication.UID;
 		}else {
-			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&order="+order;
+			url = CONST.GET_CHECK_LIST+"?"+"page="+page+"&pagesize="+pageSize+"&order="+order+"&appid="+CONST.APPID+"&uid="+MyApplication.UID;
 		}
 		OkHttpVideoList(url);
 	}
@@ -100,7 +100,7 @@ public class CheckHotFragment extends Fragment {
 	 * 初始化listview
 	 */
 	private void initListView(View view) {
-		mListView = (SwipeMenuListView) view.findViewById(R.id.listView);
+		SwipeMenuListView mListView = (SwipeMenuListView) view.findViewById(R.id.listView);
 		mAdapter = new MyCheckAdapter(getActivity(), mList);
 		mListView.setAdapter(mAdapter);
 		

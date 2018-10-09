@@ -105,7 +105,9 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
 		if (!TextUtils.isEmpty(MyApplication.POINTS)) {
 			tvScore.setText(MyApplication.POINTS);
 		}
-		if (TextUtils.equals(MyApplication.GROUPID, "100")) {
+
+		//100是超级，101是地方
+		if (TextUtils.equals(MyApplication.GROUPID, "100") || TextUtils.equals(MyApplication.GROUPID, "101")) {
 			llCheck.setVisibility(View.VISIBLE);
 		}else {
 			llCheck.setVisibility(View.GONE);

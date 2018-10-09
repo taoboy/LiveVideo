@@ -16,7 +16,6 @@ public class MyApplication extends Application{
 
 	private static MyApplication instance;
 	private static Map<String,Activity> destoryMap = new HashMap<>();
-	private static String appKey = "55a136d967e58e167a0019c3", msgSecret = "";
 
 	@Override
 	public void onCreate() {
@@ -36,7 +35,7 @@ public class MyApplication extends Application{
 	 */
 	private void initUmeng() {
 		//umeng分享
-		UMConfigure.init(this, appKey, "umeng", UMConfigure.DEVICE_TYPE_PHONE, msgSecret);
+		UMConfigure.init(this, "55a136d967e58e167a0019c3", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");
 		PlatformConfig.setWeixin("wxde36f1bc838263b2", "29e733030c77dbda77784fc7d880dff5");
 		PlatformConfig.setQQZone("1104765826", "diELThajoUq2TWUa");
 		PlatformConfig.setSinaWeibo("3038972811", "fee238ac7337be352aac2042a3bb017b", "http://sns.whalecloud.com/sina2/callback");
@@ -84,6 +83,7 @@ public class MyApplication extends Application{
 	public static String USERNAME = "";//手机号
 	public static String GROUPID = "";//用户组id
 	public static String TOKEN = "";//token
+	public static String UID = "";
 	public static String POINTS = "";//积分
 	public static String PHOTO = "";//头像地址
 	public static String NICKNAME = "";//昵称
@@ -103,6 +103,7 @@ public class MyApplication extends Application{
 		public static final String userName = "uName";
 		public static final String groupId = "groupId";
 		public static final String token = "token";
+		public static final String uid = "uid";
 		public static final String points = "points";
 		public static final String photo = "photo";
 		public static final String nickName = "nickName";
@@ -124,8 +125,9 @@ public class MyApplication extends Application{
 		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.clear();
-		editor.commit();
+		editor.apply();
 		TOKEN = "";
+		UID = "";
 		OLDUSERNAME = "";
 		USERNAME = "";
 		NICKNAME = "";
@@ -150,6 +152,7 @@ public class MyApplication extends Application{
 		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.putString(UserInfo.token, TOKEN);
+		editor.putString(UserInfo.uid, UID);
 		editor.putString(UserInfo.oldUserName, OLDUSERNAME);
 		editor.putString(UserInfo.userName, USERNAME);
 		editor.putString(UserInfo.nickName, NICKNAME);
@@ -165,7 +168,7 @@ public class MyApplication extends Application{
 		editor.putString(UserInfo.major, MAJOR);
 		editor.putString(UserInfo.votes, VOTES);
 		editor.putString(UserInfo.code, CODE);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -174,6 +177,7 @@ public class MyApplication extends Application{
 	public static void getUserInfo(Context context) {
 		SharedPreferences sharedPreferences = context.getSharedPreferences(USERINFO, Context.MODE_PRIVATE);
 		TOKEN = sharedPreferences.getString(UserInfo.token, "");
+		UID = sharedPreferences.getString(UserInfo.uid, "");
 		OLDUSERNAME = sharedPreferences.getString(UserInfo.oldUserName, "");
 		USERNAME = sharedPreferences.getString(UserInfo.userName, "");
 		NICKNAME = sharedPreferences.getString(UserInfo.nickName, "");
