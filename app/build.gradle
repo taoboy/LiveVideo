@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
     //png图片命名带有数字则编译不通过使用一下声明
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
@@ -47,17 +46,10 @@ android {
     //打包，自动追加版本号、名称
     android.applicationVariants.all {
         variant ->
-            variant.outputs.each {
-                output -> output.outputFile = new File(output.outputFile.parent, "LiveVideo" + "_" + defaultConfig.versionCode + "_V" + defaultConfig.versionName + "_" + buildType.name + ".apk");
+            variant.outputs.all {
+                outputFileName = "LiveVideo" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
             }
     }
-    //打包，自动追加版本号、名称
-//    android.applicationVariants.all {
-//        variant ->
-//            variant.outputs.all {
-//                outputFileName = "LiveVideo" + "_" + "${defaultConfig.versionCode}" + "_V" + "${defaultConfig.versionName}" + "_" + buildType.name + ".apk"
-//            }
-//    }
 
     //aar引用
     repositories {
@@ -74,28 +66,28 @@ android {
 }
 
 dependencies {
-    //    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.+'
-    compile 'com.android.support:recyclerview-v7:25.+'
-    compile files('libs/ChinaWeatherAPI.jar')
-    compile files('libs/scene-final.jar')
-    compile files('libs/uk-co-senab-photoview.jar')
-    compile files('libs/xstream-1.4.7.jar')
-    compile files('libs/cos-xml-android-sdk.1.2.3.1.jar')
-    compile files('libs/qcloud-core-1.2.1.2.jar')
-    compile(name: 'LiteAVSDK_Professional', ext: 'aar')
-    compile project(':lib-zxing')
-    compile files('libs/sdlv.jar')
-    compile files('libs/umeng-share-core-6.9.2.jar')
-    compile files('libs/umeng-share-QQ-simplify-6.9.2.jar')
-    compile files('libs/umeng-share-sina-simplify-6.9.2.jar')
-    compile files('libs/umeng-share-wechat-simplify-6.9.2.jar')
-    compile files('libs/umeng-shareboard-widget-6.9.2.jar')
-    compile files('libs/umeng-sharetool-6.9.2.jar')
-    compile files('libs/AMap_Location_V3.4.1_20170629.jar')
-    compile files('libs/Android_Map3D_SDK_V5.2.1_20170630.jar')
-    compile files('libs/picasso-2.5.2.jar')
-    compile 'com.squareup.okhttp3:okhttp:3.10.0'
-    compile 'com.squareup.okio:okio:1.14.1'
-    compile 'com.umeng.sdk:common:1.5.3'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation files('libs/ChinaWeatherAPI.jar')
+    implementation files('libs/scene-final.jar')
+    implementation files('libs/uk-co-senab-photoview.jar')
+    implementation files('libs/xstream-1.4.7.jar')
+    implementation files('libs/cos-xml-android-sdk.1.2.3.1.jar')
+    implementation files('libs/qcloud-core-1.2.1.2.jar')
+    implementation(name: 'LiteAVSDK_Professional', ext: 'aar')
+    implementation project(':lib-zxing')
+    implementation files('libs/sdlv.jar')
+    implementation files('libs/umeng-share-core-6.9.2.jar')
+    implementation files('libs/umeng-share-QQ-simplify-6.9.2.jar')
+    implementation files('libs/umeng-share-sina-simplify-6.9.2.jar')
+    implementation files('libs/umeng-share-wechat-simplify-6.9.2.jar')
+    implementation files('libs/umeng-shareboard-widget-6.9.2.jar')
+    implementation files('libs/umeng-sharetool-6.9.2.jar')
+    implementation 'com.umeng.sdk:common:1.5.3'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    implementation 'com.squareup.okio:okio:1.14.1'
+    implementation 'com.amap.api:3dmap:5.7.0'
+    implementation 'com.amap.api:search:5.7.0'
+    implementation 'com.amap.api:location:3.7.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
